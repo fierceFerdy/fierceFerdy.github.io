@@ -115,3 +115,19 @@ txt{
 		margin-right: .6rem;
 	}
 }
+
+cmd{
+	background-color: var(--dark00);
+	color: white;
+	padding: 4px;
+	font-family: Inconsolata, monospace;
+	position: relative;
+	user-select: none;
+
+	&:before{
+		content: "> ";
+		font-size: .9em;
+		color: var(--lime);
+		margin-right: .6rem;
+	}
+}

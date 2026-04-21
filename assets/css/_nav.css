@@ -6,6 +6,7 @@ nav{
 	position: fixed;
 	min-width: 200px;
 	max-width: 200px;
+	width: 200px;
 	transition: all 0.3s ease-in-out;
 	/* shadow to the right */
 	box-shadow: 2px 0 10px rgba(0,0,0,0.2);
@@ -52,7 +53,7 @@ nav{
 			}
 
 			.dropdown{
-				max-height: 50vh;
+				max-height: 400px;
 				transition: max-height 0.5s ease-in-out;
 			}
 		}
@@ -65,7 +66,7 @@ nav{
 
 		a{
 			background-color:rgb(22, 27, 31);
-			padding: 8px 10px 8px 24px;
+			padding: 6px 10px 6px 20px;
 			border-bottom: 1px solid var(--dark3);
 
 			&:hover, &.active{

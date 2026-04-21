@@ -103,7 +103,7 @@ ul{
 	padding-left: 1rem;
 
 	li{
-		margin-bottom: .7rem;
+		margin-bottom: .4rem;
 
 		input[type="checkbox"]{
 			margin-right: .5rem;
@@ -155,9 +155,10 @@ ul{
 
 p, li{
 	font-size: 1.6rem;
-	line-height: 1.4em;
+	line-height: 1.5em;
 	color: rgb(221, 221, 221);
 	transition: all .3s ease-in-out;
+	/* letter-spacing: .05rem; */
 
 	&:hover{
 		color: white;
@@ -186,5 +187,9 @@ p{
 
 	+ p{
 		margin-top: 1rem;
+	}
+
+	+ ul{
+		margin-top: .6rem;
 	}
 }

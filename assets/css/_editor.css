@@ -1,0 +1,110 @@
+.js-editor{
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	height: 300px;
+	border: 6px solid #3e474f;
+	font-size: 1.3rem;
+	font-family: Inconsolata, monospace;
+	position: relative;
+
+	header p{
+		background-color: #3e474f;
+		padding-bottom: 4px;
+	}
+
+	button{
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		background-color: #3e474f;
+		color: white;
+		border: none;
+		padding: 0.8rem 1rem;
+		border-radius: 0;
+		cursor: pointer;
+
+		&:hover{
+			background-color: #e06c75;
+		}
+
+		&:after{
+			content: "\f105" !important;
+			font-family: "FontAwesome";
+			font-size: .8em;
+			margin-left: .5rem;
+		}
+	}
+}
+
+.terminal{
+	margin-top: 2rem;
+	background-color: var(--dark00);
+	height: 300px;
+	padding: 1rem;
+	color: #c9d1d9;
+	overflow: auto;
+	white-space: pre-wrap;
+	position: relative;
+
+	.terminal-line{
+		display: block;
+
+		&:last-of-type{
+			&:before{
+				content: '> ' !important;
+				color: var(--lime);
+			}
+			&:after{
+				content: "▍";
+				animation: blink 1s infinite;
+			}
+		}
+	}
+
+	.clearTerminal{
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 30px;
+		height: 30px;
+
+		background-color: transparent;
+		border: none;
+		font-size: 1.2rem;
+		color: var(--lime);
+		cursor: pointer;
+
+		&:after{
+			content: "\f2ed" !important;
+			font-family: "FontAwesome";
+		}
+
+		&:hover{
+			background-color: var(--dark01);
+		}
+	}
+}
+
+@keyframes blink{
+	0%,50%{opacity:1;}
+	51%,100%{opacity:0;}
+}
+
+
+
+.cm-tooltip-autocomplete li{
+	&::before{
+		content: none !important;
+	}
+	
+}
+
+.cm-tooltip-autocomplete li[aria-selected="true"]{
+	background-color: var(--dark00) !important;
+	color: white !important;
+	padding: 5px 0 !important;
+}
+
+/* .cm-completionIcon {
+	display: none !important;
+} */

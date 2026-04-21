@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The manual.</title>
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<!-- <link rel="stylesheet" href="https://unpkg.com/@codemirror/view@6.0.1/dist/style.css"> -->
+	<script src="/assets/js/main.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+</head>
+
+<body id="jsAboutPage">
+	
+	<div class="content">
+		<h1>JavaScript 101 <small>/about js</small></h1>
+		<p>JavaScript is a programming language primarily used for developing interactive and dynamic elements on websites. It is one of the three core technologies of the web, alongside HTML and CSS.</p>
+		<p>JavaScript allows developers to add functionality to web pages, such as:
+			<ul>
+				<li>responding to user interactions</li>
+				<li>manipulating page content</li>
+				<li>communicating with servers</li>
+			</ul>
+		</p>
+		<p>JavaScript is supported by all modern web browsers and can be used both on the client side (in the browser) and on the server side (using platforms like Node.js). It is a versatile language with a wide range of applications, from simple scripts to complex web applications.</p>
+		<p>It can also be used for native apps, games, and more.</p>
+
+		<p>As you might know, programming languages are written in English-like syntax to make them easier to read and understand. This is why we will use a lot of English in order to make the learning process smoother and more intuitive.</p>
+
+		<ul>
+			<li>Language is a means of communication. A tool.</li>
+			<li>Languages are not always easy and logical. They evolve through use and history.</li>
+			<li>Programming languages are also languages for communication. Only not with people but with computers.</li>
+		</ul>
+
+
+		<p><strong>TODO: Expand on this, GREATLY</strong></p>
+
+		<div class="gridCorrector">
+
+			<!-- Editor with terminal -->
+			<div class="js-editor w-3/5" 
+				data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+				data-run="true"
+				data-readonly="false">
+				<textarea class="js-editor-doc" hidden>
+console.log("Hello world");
+var x = y;
+
+function greet(name) {
+	return "Hello " + name;
+}
+				</textarea>
+			</div>
+			
+		</div>
+
+	<!-- When students submit their code (run) save it and keep a log of every save  -->
+
+		<!-- <a href="/pages/intro/vsc.html" class="nextPageTeaser">Next: Visual Studio Code <i class="fa-solid fa-arrow-right-long"></i></a> -->
+	</div>
+
+</body>
+
+</html>

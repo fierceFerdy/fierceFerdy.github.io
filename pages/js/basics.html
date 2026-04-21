@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The manual.</title>
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<script src="/assets/js/main.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+</head>
+<body>
+	
+	<div class="content">
+		
+		<h1>JavaScript 101 <small>/basics</small></h1>
+
+		<p>When working with JavaScript, the console is just as important as the editor. It allows you to see the output of your code, debug errors, and interact with your program in real-time. The console is your friend, don't forget that.</p>
+
+		<ul>
+			<li>As a first exercise, log something in the console: <cmd>console.log("Hello, world!");</cmd></li>
+			<li>Press <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>Enter</kbd> to run your code.</li>
+		</ul>
+
+		<div class="gridCorrector">
+			<div class="js-editor w-3/5" 
+				data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+				data-run="true" 
+				data-readonly="false" 
+				data-height="200" 
+			>
+				<textarea class="js-editor-doc" hidden></textarea>
+			</div>
+		</div>
+
+		<h2>Variables</h2>
+		<p>Variables are like containers for storing data. They allow you to give a name to a value and use that name to refer to the value later in your code. In JavaScript, you can declare a variable using the "var", "let" and "const" keywords. But, in class we will only use <cmd>var</cmd> in order to keep it easier.</p>
+		<p>Now, <em>try</em> to make a variable and then read it out in the console:</p>
+
+		<div class="gridCorrector">
+			<div class="js-editor w-3/5" 
+				data-title="<p>Make a variable and log it in the console</p>"
+				data-run="true" 
+				data-readonly="false" 
+				data-height="200" 
+			>
+				<textarea class="js-editor-doc" hidden></textarea>
+			</div>
+		</div>
+
+<!-- function insertWithCursor(text,cursorOffset){
+	return (view, completion, from, to) => {
+		view.dispatch({
+			changes:{from,to,insert:text},
+			selection:{anchor:from+cursorOffset}
+		});
+	};
+} -->
+
+	<!-- When students submit their code (run) save it and keep a log of every save  -->
+
+		<!-- <a href="/pages/intro/vsc.html" class="nextPageTeaser">Next: Visual Studio Code <i class="fa-solid fa-arrow-right-long"></i></a> -->
+	</div>
+
+</body>
+</html>

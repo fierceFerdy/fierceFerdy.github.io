@@ -6,12 +6,14 @@
 @import url('_typo.css');
 @import url('_classes.css');
 @import url('_lightMode.css');
+@import url('_editor.css');
 
 :root {
 	--padding: 20px;
 	--radius: 4px; 
 	--accent: #03d6cb;
 	--red: #aa1717;
+	--lime: greenyellow;
 	--dark00: #0a0d10;
 	--dark0: #1a1a1a;
 	--dark1: #191d21;

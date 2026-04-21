@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		<div class="dropdownWrapper">
 			<a class="navParent" href="#">Intro</a>
 			<div class="dropdown">
-				<a class="nested" href="/pages/intro/intro.html">Intro</a>
+				<a class="nested" href="/pages/intro/overview.html">Overview</a>
 				<a class="nested" href="/pages/intro/klasregels.html">Klasregels</a>
 				<a class="nested" href="/pages/intro/initial-configuration.html">Initial configuration</a>
 				<a class="nested" href="/pages/intro/typing-lessons.html">Typing lessons</a>
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		<div class="dropdownWrapper">
 			<a class="navParent" href="#">HTML</a>
 			<div class="dropdown">
-				<a class="nested" href="/pages/html/intro.html">Intro</a>
+				<a class="nested" href="/pages/html/overview.html">Overview</a>
 				<a class="nested" href="/pages/html/basics.html">Basics</a>
 			</div>
 		</div>
@@ -41,27 +41,30 @@ document.addEventListener("DOMContentLoaded", function() {
 		<div class="dropdownWrapper">
 			<a class="navParent" href="#">CSS</a>
 			<div class="dropdown">
-				<a class="nested" href="/pages/css/intro.html">Intro</a>
+				<a class="nested" href="/pages/css/overview.html">Overview</a>
 				<a class="nested" href="/pages/css/selectors.html">Selectors</a>
 				<a class="nested" href="/pages/css/box-model.html">Box Model</a>
 			</div>
 		</div>
 
 		<div class="dropdownWrapper">
-			<a class="navParent" href="#">PHP</a>
+			<a class="navParent" href="#">JavaScript</a>
 			<div class="dropdown">
-				<a class="nested" href="/pages/php/intro.html">Intro</a>
-				<a class="nested" href="/pages/php/crud.html">CRUD</a>
-				<a class="nested" href="/pages/php/local-server.html">Local server</a>
-				<a class="nested" href="/pages/php/mvc.html">MVC</a>
+				<a class="nested" href="/pages/js/overview.html">Overview</a>
+				<a class="nested" href="/pages/js/about.html">About</a>
+				<a class="nested" href="/pages/js/basics.html">Basics</a>
+				<a class="nested" href="/pages/js/common-errors.html">Common Errors</a>
+				<a class="nested" href="/pages/js/neutralino.html">Neutralino</a>
 			</div>
 		</div>
 
 		<div class="dropdownWrapper">
-			<a class="navParent" href="#">JavaScript</a>
+			<a class="navParent" href="#">PHP</a>
 			<div class="dropdown">
-				<a class="nested" href="/pages/js/intro.html">Intro</a>
-				<a class="nested" href="/pages/js/neutralino.html">Neutralino</a>
+				<a class="nested" href="/pages/php/overview.html">Overview</a>
+				<a class="nested" href="/pages/php/crud.html">CRUD</a>
+				<a class="nested" href="/pages/php/local-server.html">Local server</a>
+				<a class="nested" href="/pages/php/mvc.html">MVC</a>
 			</div>
 		</div>
 
@@ -267,14 +270,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 
 
+	
 
-	/**
-	* Keyboard Shortcuts page
-	*
-	* @version 21/04/2026
-	* @author Ferdy <ferdy.fiers@gmail.com>
-	* @return 
-	*/
+
+
+
+	//=================================================
+	// ------------ Keyboard Shortcuts page
+	// @version 21/04/2026
+	// @author Ferdy <ferdy.fiers@gmail.com>
+	//=================================================
 	
 	if(document.body.id === "keyboardShortcutsPage"){
 		const basicShortcutPool = [
@@ -503,6 +508,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			if(event.cancelable) event.preventDefault();
 			event.stopPropagation();
 			event.stopImmediatePropagation();
+
 			return false;
 		}
 
@@ -540,7 +546,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 
-	
+
 	function startTimer() {
 		const startTime = Date.now();
 		timerInterval = window.setInterval(() => {

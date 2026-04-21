@@ -1,0 +1,154 @@
+@import url('_reset.css');
+@import url('_fontawesome.css');
+@import url('_fonts.css');
+@import url('_grid.css');
+@import url('_nav.css');
+@import url('_typo.css');
+@import url('_classes.css');
+@import url('_lightMode.css');
+
+:root {
+	--padding: 20px;
+	--radius: 4px; 
+	--accent: #03d6cb;
+	--red: #aa1717;
+	--dark00: #0a0d10;
+	--dark0: #1a1a1a;
+	--dark1: #191d21;
+	--dark2: #24292e;
+	--dark3: #3c444c;
+}
+
+
+*::selection {
+	background: var(--accent);
+	color: black;
+}
+*::-moz-selection {
+	background: var(--accent);
+	color: black;
+}
+*::-webkit-selection {
+	background: var(--accent);
+	color: black;
+}
+
+html{
+	font-size: 10px !important;
+}
+
+body{
+	font-family: 'Roboto', Helvetica, Arial, sans-serif;
+	background-color: var(--dark1);
+	/* display: flex; */
+}
+
+.content{
+	padding: calc(var(--padding)*2) var(--padding);
+	width: calc(100% - 200px);
+	margin-left: 200px;
+	transition: all 0.3s ease-in-out;
+}
+
+
+.cards{
+	display: block;
+	font-size: 0;
+}
+
+.card{
+	background-color: var(--dark2);
+	border-radius: 8px;
+	padding: 3rem 2rem 2.8rem;
+	transition: all .3s ease-in-out;
+	max-width: 190px;
+
+	i{
+		font-size: 3rem;
+		color: #fff;
+		display: block;
+		margin: 0 auto;
+		transition: all .3s ease-in-out;
+	}
+
+	h2{
+		font-size: 2rem;
+		text-transform: none;
+		text-align: center;
+		margin-top: 1.5rem;
+		margin-bottom: 0;
+
+		&::before{
+			content: none;
+		}
+	}
+
+	&:hover{
+		background-color: var(--dark3);
+		i{
+			transform: scale(1.3);
+		}
+	}
+}
+
+
+#shortcutQuiz{
+	max-width: 560px;
+
+	#quizIntro .hint{
+		margin-bottom: 1.5rem;
+	}
+
+	#quizDifficulty{
+		display: inline-block;
+		background-color: var(--dark0);
+		border: 2px solid var(--dark3);
+		border-radius: var(--radius);
+		color: #fff;
+		padding: 1rem 1rem;
+		margin-right: 1rem;
+		margin-top: 0;
+		vertical-align: top;
+	}
+
+	select{
+		margin-bottom: 0;
+	}
+
+	button{
+		display: inline-block;
+	}
+
+	#quizFeedback{
+		
+	}
+}
+
+
+.nextPageTeaser{
+	display: table;
+	float: right;
+	margin-top: 2rem;
+	margin-bottom: 3rem;
+	background-color: var(--dark0);
+	border-radius: var(--radius);
+	border: 2px solid var(--dark3);
+	color: white;
+	padding: 1rem 1.5rem 1.1rem;
+	font-size: 1.5rem;
+
+	&:hover{
+		background-color: var(--dark3);
+
+		i{
+			padding-left: 10px;
+			padding-right: 0;
+		}
+	}
+
+	i{
+		transition: all .3s ease-in-out;
+			padding-left: 5px;
+			padding-right: 5px;
+	}
+}

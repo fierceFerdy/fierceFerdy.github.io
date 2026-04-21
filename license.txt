@@ -1,0 +1,24 @@
+**Educational Use License (Restricted, Non-Transferable)**
+
+Copyright (c) 2026 Fiers Ferdy
+
+Permission is hereby granted to teachers, students, and educational institutions to use this software and its associated materials (the "Software") solely for educational purposes within their current institution.
+
+**Allowed:**
+
+* Use of the Software for teaching, learning, and internal school activities
+* Installation and execution within the institution
+* Modification for internal educational use
+
+**Restrictions:**
+
+* The Software may not be reproduced, distributed, sublicensed, or shared outside the institution
+* Users may not take, reuse, or continue using the Software after leaving the institution
+* The Software may not be used for commercial purposes or outside an educational context
+* Public redistribution (including uploading to repositories or sharing externally) is prohibited
+
+**Termination:**
+All rights granted under this license terminate immediately when a user is no longer affiliated with the educational institution.
+
+**Disclaimer:**
+The Software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the author be liable for any claim, damages, or other liability arising from the use of the Software.

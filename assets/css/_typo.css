@@ -1,0 +1,190 @@
+h1{
+	position: relative;
+	text-transform: uppercase;
+	color: white;
+	font-size: 4rem;
+	font-weight: bold;
+	line-height: 3rem;
+	display: block;
+	margin-bottom: 3rem;
+	/* margin-left: 2rem; */
+
+	/* &:before{
+		content: '';
+		position: absolute;
+		display: inline-block;
+		top: -4%;
+		left: -2rem;
+		height: 90%;
+		width: 1rem;
+		background-color: #ffffff;
+	} */
+}
+
+
+
+h2{
+	position: relative;
+	color: rgb(219, 219, 219);
+	font-size: 3rem;
+	font-weight: bold;
+	display: block;
+
+	margin-bottom: 2rem;
+	margin-top: 8rem;
+
+	&:before{
+		content: '';
+		position: absolute;
+		display: inline-block;
+		font-size: inherit;
+		/* top: 100%; */
+		top: -3.5rem;
+		left: 0;
+		height: .15em;
+		width: 1.5em;
+		background-color: #ffffff;
+		transition: all .3s ease-in-out;
+	}
+
+	&:hover:before{
+		background-color: var(--accent);
+	}
+}
+
+
+
+h3{
+	position: relative;
+	/* text-transform: uppercase; */
+	color: #fff;
+	font-size: 2rem;
+	font-weight: bold;
+	display: block;
+
+	margin-bottom: 1rem;
+	margin-top: 3.5rem;
+
+	&:after{
+		content: "\e097";
+		font-family: "FontAwesome";
+		font-size: 1em;
+		margin-left: 1rem;
+		position: relative;
+		top: 3px;
+	}
+}
+
+
+
+small{
+	font-size: .6em;
+}
+
+strong{
+	font-weight: 700;
+	color: white;
+}
+
+
+a{
+	text-decoration: none;
+	color: inherit;
+}
+
+img{
+	max-width: 100%;
+}
+
+ul{
+	/* margin-left: 1rem; */
+	list-style: none;
+	/* border-left: 3px solid #262c32; */
+	padding-left: 1rem;
+
+	li{
+		margin-bottom: .7rem;
+
+		input[type="checkbox"]{
+			margin-right: .5rem;
+			transform: scale(1.2);
+			vertical-align: middle;
+
+			&:checked + label{
+				text-decoration: line-through;
+			}
+		}
+
+		a{
+		}
+
+		&::before{
+			content: "\f00c";
+			font-family: "FontAwesome";
+			font-size: .8em;
+			margin-right: .8rem;
+		}
+
+		&.link{
+			&::before{
+				content: "\f0c1" !important;
+			}
+		}
+
+		ul{
+			padding-left: 2rem;
+			margin-bottom: 2rem;
+			margin-top: .5rem;
+			border-left: 3px solid #262c32;
+
+			li{
+				
+			}
+		}
+	}
+
+	&.checklist{
+		li::before{
+			content: "\f054";
+			/* font-family: "FontAwesome";
+			font-size: .8em;
+			margin-right: .8rem; */
+		}
+	}
+}
+
+p, li{
+	font-size: 1.6rem;
+	line-height: 1.4em;
+	color: rgb(221, 221, 221);
+	transition: all .3s ease-in-out;
+
+	&:hover{
+		color: white;
+	}
+
+	a{
+		text-decoration: underline;
+		position: relative;
+
+		&:hover{
+			color: var(--accent);
+		}
+
+		&::after{
+			content: "\f0c1" !important;
+			font-family: "FontAwesome";
+			font-size: .6em;
+			padding-left: .4rem;
+			position: absolute;
+			top: 1px;
+		}
+	}
+}
+
+p{
+
+	+ p{
+		margin-top: 1rem;
+	}
+}

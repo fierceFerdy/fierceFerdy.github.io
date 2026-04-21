@@ -1,0 +1,133 @@
+
+nav{
+	flex-shrink: 0;
+	height: 100vh;
+	background-color: #111518;
+	position: fixed;
+	min-width: 200px;
+	max-width: 200px;
+	transition: all 0.3s ease-in-out;
+	/* shadow to the right */
+	box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+
+	a, .dropdownWrapper{
+		display: block;
+	}
+
+	a{
+		text-decoration: none;
+		font-family: 'Roboto', Helvetica, Arial, sans-serif;
+		padding: 10px;
+		/* border-bottom: 1px solid #333d44; */
+		border-bottom: 1px solid var(--dark2);
+		color: #b2b2b2;
+		font-size: 14px;
+		transition: all .3s ease-in-out;
+
+		&:hover, &.active{
+			background-color: var(--dark00);
+			color: #eee;
+		}
+	}
+
+	.dropdownWrapper {
+
+		a.navParent::after{
+			content: "\f054";
+			font-family: "FontAwesome";
+			float: right;
+			color: inherit;
+			font-size: 12px;
+			margin-top: 2px;
+			transition: all 0.15s ease-out;
+		}
+
+		&.open{
+			a.navParent{
+				color: #eee;
+
+				&::after{
+					transform: rotate(90deg);
+				}
+			}
+
+			.dropdown{
+				max-height: 50vh;
+				transition: max-height 0.5s ease-in-out;
+			}
+		}
+	}
+
+	.dropdown{
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.2s ease-out;
+
+		a{
+			background-color:rgb(22, 27, 31);
+			padding: 8px 10px 8px 24px;
+			border-bottom: 1px solid var(--dark3);
+
+			&:hover, &.active{
+				background-color: var(--dark00);
+				color: #eee;
+			}
+		}
+	}
+
+
+	#lightMode, #hideNav, #plebMode{
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		height: 40px;
+		width: 40px;
+		border: none;
+		background-color: transparent;
+		transition: all 0.3s ease-in-out;
+
+		i{
+			font-size: 20px;
+		}
+
+		&:hover{
+			background-color: #0a0d10;
+			color: #eee;
+		}
+	}
+	#lightMode{
+		right: 40px;
+	}
+	#plebMode{
+		right: 80px;
+	}
+	#hideNav{
+		i{
+			transform: rotate(-90deg);
+		}
+	}
+}
+
+
+
+.hiddenNav {
+	nav{
+		min-width: 40px;
+		max-width: 40px;
+		overflow: hidden;
+		a{
+			opacity: 0;
+		}
+
+		#hideNav{
+			i{
+				transform: rotate(90deg);
+			}
+		}
+	}
+
+	.content{
+		width: calc(100% - 40px);
+		margin-left: 40px;
+	}
+}

@@ -1,0 +1,48 @@
+{
+	// YES:
+	"editor.fontFamily": "Inconsolata", 
+	// Inconsolata is a monospace font that improves readability and helps with dyslexia. Alternative fonts are available as well. Fonts are in assets/fonts/
+
+	"editor.fontSize": 14,
+    "editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
+	"git.confirmSync": false,
+	"editor.glyphMargin": false, // undo this if you want to use the debugger
+	"editor.wordWrap": "on",
+	"liveSassCompile.settings.showOutputWindowOn": "Error",
+	"editor.minimap.enabled": false,
+	"editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?", // also select $ with double click
+	"liveServer.settings.CustomBrowser": "chrome",
+	"workbench.externalBrowser": "chrome",
+	"workbench.colorTheme": "Dark Modern",
+	"workbench.preferredDarkColorTheme": "Dark Modern",
+	// "workbench.preferredLightColorTheme": "Dark Modern", // maybe
+	"workbench.colorCustomizations": {
+		"[Default Dark Modern]": {
+			"editor.background": "#191d21",
+			"tab.inactiveBackground": "#191d21",
+			"sideBar.background": "#111518",
+			"editorGroupHeader.tabsBackground": "#111518",
+			"statusBar.background": "#111518",
+			"tab.activeBackground": "#0a0d10",
+			"activityBar.background": "#0a0d10",
+			"titleBar.activeBackground": "#0a0d10"
+		}
+	},
+	"files.exclude": {
+		".gitattributes": true,
+		// ".vscode": true,
+		"package-lock.json": true
+	},
+	"beautify.options": {
+		"space_before_conditional?": false,
+	},
+	// Loop up AI in settings and do some stuff there, maybe
+
+	// MAYBE
+	"workbench.sideBar.location": "right",
+	"editor.folding": false,
+	"breadcrumbs.enabled": false
+}

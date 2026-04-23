@@ -14,7 +14,7 @@
 	display: table;
 }
 
-.hint, question{
+.hint, question, .task{
 	display: table;
 	background-color: var(--dark3);
 	color: white;
@@ -45,6 +45,21 @@
 		font-size: .9em;
 		color: #838d94;
 		margin-right: .6rem;
+	}
+}
+
+.task{
+	background-color: var(--red);
+	background-color: var(--accent);
+
+	&:before{
+		content: "\f46c";
+		font-family: FontAwesome;
+		margin-right: .6rem;
+	}
+
+	a:hover{
+		color: black;
 	}
 }
 

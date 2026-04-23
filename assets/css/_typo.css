@@ -95,7 +95,6 @@ strong{
 	color: white;
 }
 
-
 a{
 	text-decoration: none;
 	color: inherit;
@@ -123,9 +122,6 @@ ul{
 			&:checked + label{
 				text-decoration: line-through;
 			}
-		}
-
-		a{
 		}
 
 		&::before{
@@ -187,8 +183,7 @@ p, li{
 			font-family: "FontAwesome";
 			font-size: .6em;
 			padding-left: .4rem;
-			position: absolute;
-			top: 1px;
+			top: -2px;
 		}
 	}
 }

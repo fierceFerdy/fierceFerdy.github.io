@@ -19,7 +19,7 @@
 
 <div class="content">
 	
-	<h1>JavaScript 101 <small>/basics</small></h1>
+	<h1>JavaScript 101 <small>/data</small></h1>
 
 	<p>When working with JavaScript, the console is just as important as the editor. It allows you to see the output of your code, debug errors, and interact with your program in real-time. The console is your friend, don't forget that.</p>
 
@@ -44,6 +44,8 @@
 	<p>Variables are like boxes for storing data. You slap a big label on them to know what's inside and that's that.</p>
 
 	<p>Variables allow you to give a name to a value and use that name to refer to the value later in your code. In JavaScript, you can declare a variable using the "var", "let" and "const" keywords. But, in class we will only use <cmd>var</cmd> in order to keep it easier.</p>
+	<p>You create a variable like so: <cmd>var myNum = 2;</cmd>. If you then want to either read or change the content of the variable you can just type the name, without writing 'var' again.</p>
+
 	<p>Now, <em>try</em> to make a variable and then read it out in the console:</p>
 
 	<div class="gridCorrector">
@@ -61,7 +63,7 @@
 	<p>There are several basic "datatypes" in JavaScript. In most cases you don't have to tell the computer what type of data you're using, it figures it out for you.</p>
 
 	<div class="gridCorrector">
-		<div class="js-editor w-3/5" 
+		<div class="js-editor w-full" 
 			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
 			data-run="false" 
 			data-readonly="false" 
@@ -91,7 +93,9 @@ var undefinedValue = undefined; // undefined is a special value that represents 
 	</ul>
 	<p>By following these conventions, you can make your code easier to understand for yourself and others who may read it in the future.</p>
 
-	<h2>Conclusion</h2>
+	<p class="task">Now make assignments 0, 1 and 1a (which you'll find in assignments.js). Submit your solution on <a href="https://athenea.smartschool.be/" target="_blank">Smartschool</a> after completion, then ask for feedback after each task.</p>
+
+	<h2>Conclusion/recap</h2>
 
 	<div class="quiz" id="#quiz">
 		<script type="application/json" class="quiz-data">
@@ -123,11 +127,21 @@ var undefinedValue = undefined; // undefined is a special value that represents 
 					"question": "How do you save a string in a variable?",
 					"options": [
 						"var myString = 'Hello, world!';",
-						"let myString = (Hello, world!);",
+						"let myString(Hello, world!);",
 						"const myString: 'Hello, world!';"
 					],
 					"answer": 0,
-					"explanation": "We will declare a variable using the var keyword, followed by the name of the variable, an equals sign, and then the value we want to store in the variable. So it looks like this: var myString = 'Hello, world!';"
+					"explanation": "We will declare a variable using the var keyword, followed by the name of the variable, the assignment operator, and then the value we want to store in the variable. So it looks like this: var myString = 'Hello, world!';"
+				},
+				{
+					"question": "How do you change the value of an existing variable?",
+					"options": [
+						"x = 3;",
+						"var x = 3;",
+						"x:3;"
+					],
+					"answer": 1,
+					"explanation": "You just write the name of the variable, then the assignment operator and lastly the new value. <cmd>x = 3;</cmd>"
 				},
 				{
 					"question": "How do you structure your variable names?",
@@ -156,7 +170,7 @@ var undefinedValue = undefined; // undefined is a special value that represents 
 
 	<!-- When students submit their code (run) save it and keep a log of every save  -->
 
-	<a href="/pages/intro/vsc.html" class="nextPageTeaser">Next: Visual Studio Code <i class="fa-solid fa-arrow-right-long"></i></a>
+	<a href="/pages/js/math.html" class="nextPageTeaser">Next: Basics - math <i class="fa-solid fa-arrow-right-long"></i></a>
 </div>
 
 

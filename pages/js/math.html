@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The manual.</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<script src="/assets/js/main.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+</head>
+
+<body>
+	
+
+
+<div class="content">
+	
+	<h1>JavaScript 101 <small>/math</small></h1>
+
+	<h2>Arithmetic operators</h2>
+	<p>The most commonly used arithmetic operators are +, -, * and /. Can you name other ones as well?</p>
+
+	<div class="gridCorrector">
+		<div class="js-editor w-3/5" 
+			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+			data-run="true" 
+			data-readonly="false" 
+			data-height="160">
+			<textarea class="js-editor-doc" hidden>
+// As with almost anything, you can either save the data in a variable or execute it locally.
+var calculation = 1 + 2;
+console.log(calculation)
+console.log(1 + 5);
+			</textarea>
+		</div>
+	</div>
+
+	<p class="task">Now make assignment 2. Submit your solution on <a href="https://athenea.smartschool.be/" target="_blank">Smartschool</a> after completion, then ask for feedback after each task.</p>
+
+    <h2>Calculating with variables</h2>
+
+	<div class="gridCorrector">
+		<div class="js-editor w-3/5" 
+			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+			data-run="true" 
+			data-readonly="false" 
+			data-height="160">
+			<textarea class="js-editor-doc" hidden>
+var b = 3;
+var c = 3 + b; // you can mix variables with raw data
+
+// But what if you want to add data to itself?
+c = c + 2; // Add 2 to itself
+c += 2; // This does exactly the same as the line above
+c++; // This adds one
+c--; // This substracts one
+			</textarea>
+		</div>
+	</div>
+
+    <h2>Connecting data</h2>
+    <p>The + operator doubles as a way to connect data to eachother.</p>
+
+	<div class="gridCorrector">
+		<div class="js-editor w-3/5" 
+			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+			data-run="true" 
+			data-readonly="false" 
+			data-height="160">
+			<textarea class="js-editor-doc" hidden>
+console.log(1 + 2); // When used only with numbers it will always add them to eachother
+console.log("1" + 2); // The classic "one and two equals 12"
+console.log("My number is: " + 3);
+console.log("My number is:", 3); // An alternative is using the comma. Notice how we don't have to add an extra space in this case.
+			</textarea>
+		</div>
+	</div>
+
+    <h2>Math functions</h2>
+    <p>We won't be using these for a little while but do know that there are several useful math <em>functions</em>. Functions are types of code that do things. Here are the most common ones that will be useful in the future:</p>
+
+	<div class="gridCorrector">
+		<div class="js-editor w-3/5" 
+			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+			data-run="true" 
+			data-readonly="false" 
+			data-height="160">
+			<textarea class="js-editor-doc" hidden>
+var rand = Math.random(); // This generates a number between 0 and 1.
+var ceil = Math.ceil(rand); // This rounds the number upwards.
+var floor = Math.floor(rand); // This rounds the number downwards.
+var round = Math.round(rand); // This rounds the number to whatever's closer.
+console.log("rand:", rand, "ceil:", ceil, "floor:", floor, "round:", round); 
+			</textarea>
+		</div>
+	</div>
+
+
+
+
+	<h2>Conclusion/recap</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS Math Quiz",
+			"questions": [
+				{
+					"question": "What is an arithmetic operator?",
+					"options": [
+						"d",
+						"d"
+					],
+					"answer": 0,
+					"explanation": "It's a type of symbol(operator) that's used to do mathematical stuff. And things."
+				},
+				{
+					"question": "What happens when you add a string to a number? <cmd>'2' + 1</cmd>",
+					"options": [
+						"They just add to eachother and you get 3.",
+                        "You get an error.",
+                        "You get 21."
+					],
+					"answer": 2,
+					"explanation": "Since a string and a number are being combined they are being 'glued' to eachother. '2' + 1 = 21."
+				},
+				{
+					"question": "How do you round up a number?",
+					"options": [
+						"Math.up(0.5)",
+						"Math.ceil(0.5)",
+						"ceil(0.5)",
+						"round(0.5)"
+					],
+					"answer": 1,
+					"explanation": "Math.ceil() will always round up the passed data."
+				}
+			]
+		}
+		</script>
+	</div>
+
+	<!-- function insertWithCursor(text,cursorOffset){
+		return (view, completion, from, to) => {
+			view.dispatch({
+				changes:{from,to,insert:text},
+				selection:{anchor:from+cursorOffset}
+			});
+		};
+	} -->
+
+	<!-- When students submit their code (run) save it and keep a log of every save  -->
+
+	<a href="/pages/intro/vsc.html" class="nextPageTeaser">Next: Visual Studio Code <i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
+
+</body>
+</html>

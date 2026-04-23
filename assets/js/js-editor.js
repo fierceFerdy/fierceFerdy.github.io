@@ -178,7 +178,7 @@ function formatStudentError(error) {
     return `${message}\n    at student-code.js:${line}:${match[2]}`;
 }
 
-function printLine(terminal, text, speed = 70) {
+function printLine(terminal, text, speed = 55) {
     return new Promise(resolve => {
         const line = document.createElement("div");
         line.className = "terminal-line";

@@ -5,8 +5,10 @@
 @import url('_nav.css');
 @import url('_typo.css');
 @import url('_classes.css');
+@import url('_forms.css');
 @import url('_lightMode.css');
 @import url('_editor.css');
+@import url('_quiz.css');
 
 :root {
 	--padding: 20px;

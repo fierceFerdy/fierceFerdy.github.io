@@ -50,6 +50,10 @@ h2{
 	&:hover:before{
 		background-color: var(--accent);
 	}
+
+	/* & + question{
+		margin-bottom: 1rem;
+	} */
 }
 
 
@@ -81,6 +85,11 @@ small{
 	font-size: .6em;
 }
 
+em{
+	font-weight: inherit;
+	color: var(--accent);
+}
+
 strong{
 	font-weight: 700;
 	color: white;
@@ -101,6 +110,7 @@ ul{
 	list-style: none;
 	/* border-left: 3px solid #262c32; */
 	padding-left: 1rem;
+	margin-bottom: 1rem;
 
 	li{
 		margin-bottom: .4rem;

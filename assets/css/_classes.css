@@ -14,7 +14,7 @@
 	display: table;
 }
 
-.hint{
+.hint, question{
 	display: table;
 	background-color: var(--dark3);
 	color: white;
@@ -22,7 +22,9 @@
 	margin-top: 2rem;
 	margin-bottom: 2rem;
 	border-radius: var(--radius);
+}
 
+.hint{
 	&.small{
 		padding: .6rem .8rem;
 		margin-top: 1rem;
@@ -43,6 +45,27 @@
 		font-size: .9em;
 		color: #838d94;
 		margin-right: .6rem;
+	}
+}
+
+question{
+	font-size: 1.6rem;
+
+	&:after{
+		content: "\f059";
+		font-family: "FontAwesome";
+		font-size: .9em;
+		color: var(--accent);
+		margin-right: .6rem;
+		float: left;
+		position: relative;
+		top: 2px;
+	}
+
+	&:before{
+		content: 'Question: ';
+		font-weight: bold;
+		color: var(--accent);
 	}
 }
 
@@ -129,5 +152,13 @@ cmd{
 		font-size: .9em;
 		color: var(--lime);
 		margin-right: .6rem;
+	}
+}
+
+
+.blur{
+	.content, nav{
+		filter: blur(10px);
+		pointer-events: none;
 	}
 }

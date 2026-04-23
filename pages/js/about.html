@@ -5,62 +5,193 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>The manual.</title>
+
 	<link rel="stylesheet" href="/assets/css/style.css">
 	<!-- <link rel="stylesheet" href="https://unpkg.com/@codemirror/view@6.0.1/dist/style.css"> -->
-	<script src="/assets/js/main.js" defer></script>
+	
+	<script type="module" src="/assets/js/main.js" defer></script>
 	<script type="module" src="/assets/js/js-editor.js" defer></script>
+	<script type="module" src="/assets/js/quiz.js" defer></script>
 </head>
 
 <body id="jsAboutPage">
+
+
+
+<div class="content">
+	<h1>JavaScript 101 <small>/about js</small></h1>
+
+	<p class="hint">We won’t cover much theory, so please don’t skip the small amount there is 😊</p>
 	
-	<div class="content">
-		<h1>JavaScript 101 <small>/about js</small></h1>
-		<p>JavaScript is a programming language primarily used for developing interactive and dynamic elements on websites. It is one of the three core technologies of the web, alongside HTML and CSS.</p>
-		<p>JavaScript allows developers to add functionality to web pages, such as:
-			<ul>
-				<li>responding to user interactions</li>
-				<li>manipulating page content</li>
-				<li>communicating with servers</li>
-			</ul>
-		</p>
-		<p>JavaScript is supported by all modern web browsers and can be used both on the client side (in the browser) and on the server side (using platforms like Node.js). It is a versatile language with a wide range of applications, from simple scripts to complex web applications.</p>
-		<p>It can also be used for native apps, games, and more.</p>
-
-		<p>As you might know, programming languages are written in English-like syntax to make them easier to read and understand. This is why we will use a lot of English in order to make the learning process smoother and more intuitive.</p>
-
+	<p>JavaScript is a programming language primarily used for developing interactive and dynamic elements on websites. It is one of the three core technologies of the web, alongside HTML and CSS.</p>
+	<p>JavaScript allows developers to add functionality to web pages, such as:
 		<ul>
-			<li>Language is a means of communication. A tool.</li>
-			<li>Languages are not always easy and logical. They evolve through use and history.</li>
-			<li>Programming languages are also languages for communication. Only not with people but with computers.</li>
+			<li>responding to user interactions</li>
+			<li>manipulating page content</li>
+			<li>communicating with servers</li>
 		</ul>
+	</p>
+	<p>JavaScript is supported by all modern web browsers and can be used both on the client side (in the browser) and on the server side (using platforms like Node.js). It is a versatile language with a wide range of applications, from simple scripts to complex web applications.</p>
+	<p>It can be used for native apps, games, and more.</p>
+	
+	<h2>Programming uses language</h2>
+	<question>In what language do people in Belgium, Germany, Japan and France program? </question>
+	
+	<h3>Let's watch a short video about language...</h3>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/uy2LRxdlgWA?si=0VjP25crkNYDxCHE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+	<question>Did you learn something about <em>language</em>?</question>
+	
+	<p>As you might know, programming languages are written in English-like syntax to make them easier to read and understand. This is why we will use a lot of English in order to make the learning process smoother and more intuitive.</p>
 
-		<p><strong>TODO: Expand on this, GREATLY</strong></p>
+	<ul>
+		<li>Language is a means of communication. <strong>A tool</strong>.</li>
+		<li>Languages are not always easy and logical. They evolve through use and history.</li>
+		<li>Programming languages are also languages for communication. Only not with people but with computers.</li>
+	</ul>
 
-		<div class="gridCorrector">
+	<p>Programming languages use English words because English has become the "standard" in the technology world. Nevertheless, they are harder to understand than English because they are more abstract.</p>
 
-			<!-- Editor with terminal -->
-			<div class="js-editor w-3/5" 
-				data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
-				data-run="true"
-				data-readonly="false">
-				<textarea class="js-editor-doc" hidden>
-console.log("Hello world");
-var x = y;
+	<h2>Telling the computer what to do</h2>
+
+	<p>Programming is the process of giving  <strong>precise</strong> instructions to a computer to perform specific tasks. These instructions are written in a programming language, such as JavaScript, which the computer can understand and execute.</p>
+
+	<p>When you write code, you are essentially telling the computer what to do step by step. The computer follows these instructions in a specific order to achieve the desired outcome.</p>
+
+	<p>Some examples of instructions you might give a computer include:</p>
+
+	<ul>
+		<li>Performing calculations</li>
+		<li>Displaying information on the screen</li>
+		<li>Responding to user input</li>
+		<li>Storing and retrieving data</li>
+	</ul>
+
+	<p>To do any of these you need to learn a programming language, such as JavaScript.</p>
+
+	<h3>Look! A wild programming language has appeared!</h3>
+	<div class="gridCorrector">
+
+		<!-- Editor with terminal -->
+		<div class="js-editor w-3/5" 
+			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+			data-run="true"
+			data-readonly="false"
+			data-height="248">
+			<textarea class="js-editor-doc" hidden>
+var pokemon = new Array('Pikachu', 'Charmander', 'Bulbasaur', 'Squirtle');
+
+function choosePokemon(pokemon) {
+	// Generate a random index based on the length of the pokemon array (0-3)
+	var randomIndex = Math.floor(Math.random() * pokemon.length);
+
+	return pokemon[randomIndex] + "... I choose you!";
+}
+
+console.log(choosePokemon(pokemon));
+			</textarea>
+<!-- var name = "Alice";
 
 function greet(name) {
-	return "Hello " + name;
+for(var i = 3; i > 0; i--) {
+	console.log(i + "...");
 }
-				</textarea>
-			</div>
-			
+
+return "Hello " + name + "............:)";
+}
+
+console.log(greet(name)); -->
 		</div>
+	</div>
+
+	<p>As mentioned earlier, a programming language allows you to interact with the web page and perform various tasks. Do know that a programming language is unlike English or Dutch. The computer does not think. <strong>The computer does <em>exactly</em> what you tell it to do.</strong></p>
+
+	<p>You can't just say "Draw me a circle".</p>
+
+	<p>Which circle? Where?? Which colour??? How big????</p>
+
+	<h3>The computer needs precise instructions</h3>
+
+	<p>It <em>may</em> look like this:</p>
+
+	<div class="gridCorrector">
+
+		<!-- Editor with terminal -->
+		<div class="js-editor w-3/5" 
+			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+			data-run="true"
+			data-readonly="false"
+			data-height="248"> <!-- 18px per line-->
+			<textarea class="js-editor-doc" hidden>
+const canvas = document.getElementById("circleCanvas");
+canvas.width = 200;
+canvas.height = 150;
+
+const context = canvas.getContext("2d");
+context.beginPath();
+context.arc(100, 75, 50, 0, 2 * Math.PI); // x, y, radius, startAngle, endAngle
+context.stroke();
+context.fillStyle = "rgba(255, 0, 0, 0.5)"; // red, green, blue, alpha
+context.fill();
+			</textarea>
+		</div>
+	</div>
+
+	<canvas id="circleCanvas"></canvas>
+
+	<h2>Conclusion</h2>
+	<p>Do know that <strong>everything</strong> matters. Every letter, parenthesis, semicolon, capital letter, period and space. The computer blindly follows every instruction.</p>
+
+	<h3>Quiz time!</h3>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS About Quiz",
+			"questions": [
+				{
+					"question": "How do you give instructions to a computer?",
+					"options": [
+						"Using a programming language with precise instructions",
+						"By speaking to it in English",
+						"By sending it cute cat pictures"
+					],
+					"answer": 0,
+					"explanation": "Programming languages allow you to give precise instructions to a computer, which it can understand and execute."
+				},
+				{
+					"question": "Are programming languages all completely different?",
+					"options": [
+						"Yes, each language is completely unique",
+						"No, they have a lot of similarities and shared concepts"
+					],
+					"answer": 1,
+					"explanation": "Most programming languages share common concepts and structures, making it easier to learn new languages once you understand the basics of programming. Whilst they may have different syntax and features, the underlying principles of programming often remain consistent across languages."
+				},
+				{
+					"question": "What's your favourite Pokémon?",
+					"options": [
+						"Pikachu",
+						"Charmander",
+						"Bulbasaur",
+						"Squirtle"
+					],
+					"answer": 1,
+					"explanation": "Charmander is the best Pokémon. It is a fire type, has a cool design and evolves into Charizard, which is one of the most iconic Pokémon of all time."
+				}
+			]
+		}
+		</script>
+	</div>
+
+	
 
 	<!-- When students submit their code (run) save it and keep a log of every save  -->
 
-		<!-- <a href="/pages/intro/vsc.html" class="nextPageTeaser">Next: Visual Studio Code <i class="fa-solid fa-arrow-right-long"></i></a> -->
-	</div>
+	<a href="/pages/js/basics.html" class="nextPageTeaser">Next: JS Basics <i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
 
 </body>
-
 </html>

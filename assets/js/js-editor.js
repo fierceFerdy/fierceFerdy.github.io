@@ -8,7 +8,7 @@ import {EditorView, basicSetup} from "https://esm.sh/codemirror";
 import {javascript} from "https://esm.sh/@codemirror/lang-javascript";
 import {oneDark} from "https://esm.sh/@codemirror/theme-one-dark";
 import {autocompletion, completeFromList} from "https://esm.sh/@codemirror/autocomplete";
-import {keymap, EditorView as EV} from "https://esm.sh/@codemirror/view";
+import {keymap} from "https://esm.sh/@codemirror/view";
 import {defaultKeymap, historyKeymap, indentWithTab} from "https://esm.sh/@codemirror/commands";
 import {EditorState} from "https://esm.sh/@codemirror/state";
 
@@ -26,6 +26,7 @@ const extensions = [
 	basicSetup,
 	javascript({typescript: false, jsx: false}),
 	oneDark,
+    EditorView.lineWrapping,
 	autocompletion({override: [globalCompletions]}),
 	keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab])
 ];
@@ -43,7 +44,7 @@ document.querySelectorAll(".js-editor").forEach(createEditor);
 function createEditor(container) {
 
     // Build DOM
-	container.style.height = container.dataset.height + "px";
+	container.style.minHeight = container.dataset.height + "px";
     const header = document.createElement("header");
     header.innerHTML = container.dataset.title;
     container.appendChild(header);
@@ -73,12 +74,13 @@ function createEditor(container) {
 		container.appendChild(runBtn);
 		
 		// add event listener
-		runBtn.addEventListener("click", async () => runCode(view.state.doc.toString(), terminal));
+        runBtn.addEventListener("click", async () => runCode(view.state.doc.toString(), terminal, container));
+		
 		// also run on ctrl+shift+enter
 		view.dom.addEventListener("keydown", async (e) => {
 			if(e.key === "Enter" && e.shiftKey && e.ctrlKey){
 				e.preventDefault();
-				await runCode(view.state.doc.toString(), terminal);
+                await runCode(view.state.doc.toString(), terminal, container);
 			}
 		});
     }
@@ -86,21 +88,32 @@ function createEditor(container) {
     return view;
 }
 
-async function runCode(code, terminal) {
+async function runCode(code, terminal, container) {
 	var logs = [];
 	const fakeConsole = { log: (...args) => logs.push( args.join(" ") ) };
+    let runStatus = "success";
+    let runError = null;
 
 	try {
 		// Execute user code
 		const wrapped = `"use strict";\n${code}\n//# sourceURL=student-code.js`;
 		new Function("console", wrapped)(fakeConsole);
-
-		if (logs.length === 0) await printLine(terminal, "Done");
-		else for (const entry of logs) await printLine(terminal, entry);
-
 	} catch (e) {
-		await printLine(terminal, formatStudentError(e));
+        runStatus = "error";
+        runError = e;
 	}
+
+    if (container?.dataset?.store === "true") {
+        saveEditorAttempt(container, runStatus, code, logs.length);
+    }
+
+    if (runStatus === "error") {
+        await printLine(terminal, formatStudentError(runError));
+        return;
+    }
+
+    if (logs.length === 0) await printLine(terminal, "Done");
+    else for (const entry of logs) await printLine(terminal, entry);
 }
 
 function getInitialDoc(container) {
@@ -112,24 +125,32 @@ function getInitialDoc(container) {
 }
 
 function drawTerminal(container) {
+    var terminal = document.createElement("pre");
+    terminal.style.minHeight = container.dataset.height + "px";
+    terminal.className = "terminal w-2/5";
+    container.after(terminal);
 
-	var terminal = document.createElement("pre");
-	terminal.style.height = container.dataset.height + "px";
-	terminal.className = "terminal w-2/5";
-	container.after(terminal);
-	const line = document.createElement("div");
-	line.className = "terminal-line";
-	terminal.appendChild(line);
+    const line = document.createElement("div");
+    line.className = "terminal-line";
+    terminal.appendChild(line);
 
-	// add clear btn	
-	const clearTerminal = document.createElement("button");
-	clearTerminal.className = "clearTerminal";
-	clearTerminal.addEventListener("click", () => {
-		drawTerminal(container);
-	});
-	terminal.appendChild(clearTerminal);
+    // add clear btn	
+    const clearTerminal = document.createElement("button");
+    clearTerminal.className = "clearTerminal";
+    clearTerminal.type = "button";
+    clearTerminal.addEventListener("click", () => {
+        terminal.innerHTML = "";
 
-	return terminal;
+        // optional: recreate first line so styling stays consistent
+        const freshLine = document.createElement("div");
+        freshLine.className = "terminal-line";
+        terminal.appendChild(freshLine);
+
+        terminal.appendChild(clearTerminal);
+    });
+    terminal.appendChild(clearTerminal);
+
+    return terminal;
 }
 
 function insertWithCursor(text, cursorOffset) {
@@ -176,4 +197,49 @@ function printLine(terminal, text, speed = 70) {
             terminal.scrollTop = terminal.scrollHeight;
         }, speed);
     });
+}
+
+function saveEditorAttempt(container, status, code, logCount) {
+    const storageKey = "manual.editorAttempts";
+    const records = readRecords(storageKey);
+    const editorName = getEditorName(container);
+    const now = new Date();
+    const tries = records.filter(record => record.editorName === editorName).length + 1;
+
+    records.push({
+        editorName,
+        score: status === "success" ? "1/1" : "0/1",
+        status,
+        logCount,
+        code,
+        tries,
+        date: now.toLocaleDateString(),
+        time: now.toLocaleTimeString()
+    });
+
+    try {
+        localStorage.setItem(storageKey, JSON.stringify(records));
+    } catch (error) {
+        console.warn("Could not save editor attempt.", error);
+    }
+}
+
+function getEditorName(container) {
+    const rawTitle = container.dataset.title || "JavaScript Editor";
+    const titleHolder = document.createElement("div");
+    titleHolder.innerHTML = rawTitle;
+    const titleText = (titleHolder.textContent || "").trim();
+    return titleText || "JavaScript Editor";
+}
+
+function readRecords(storageKey) {
+    try {
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+        console.warn("Could not read saved records.", error);
+        return [];
+    }
 }

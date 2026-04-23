@@ -1,65 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>The manual.</title>
+
 	<link rel="stylesheet" href="/assets/css/style.css">
+
 	<script src="/assets/js/main.js" defer></script>
 	<script type="module" src="/assets/js/js-editor.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
 </head>
+
 <body>
 	
-	<div class="content">
-		
-		<h1>JavaScript 101 <small>/basics</small></h1>
 
-		<p>When working with JavaScript, the console is just as important as the editor. It allows you to see the output of your code, debug errors, and interact with your program in real-time. The console is your friend, don't forget that.</p>
 
-		<ul>
-			<li>As a first exercise, log something in the console: <cmd>console.log("Hello, world!");</cmd></li>
-			<li>Press <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>Enter</kbd> to run your code.</li>
-		</ul>
+<div class="content">
+	
+	<h1>JavaScript 101 <small>/basics</small></h1>
 
-		<div class="gridCorrector">
-			<div class="js-editor w-3/5" 
-				data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
-				data-run="true" 
-				data-readonly="false" 
-				data-height="200" 
-			>
-				<textarea class="js-editor-doc" hidden></textarea>
-			</div>
+	<p>When working with JavaScript, the console is just as important as the editor. It allows you to see the output of your code, debug errors, and interact with your program in real-time. The console is your friend, don't forget that.</p>
+
+	<ul>
+		<li>As a first exercise, log something in the console: <cmd>console.log("Hello, world!");</cmd></li>
+		<li>Press <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>enter</kbd> to run your code.</li>
+	</ul>
+
+	<div class="gridCorrector">
+		<div class="js-editor w-3/5" 
+			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+			data-run="true" 
+			data-store="true" 
+			data-readonly="false" 
+			data-height="150">
+			<textarea class="js-editor-doc" hidden></textarea>
 		</div>
+	</div>
 
-		<h2>Variables</h2>
-		<p>Variables are like containers for storing data. They allow you to give a name to a value and use that name to refer to the value later in your code. In JavaScript, you can declare a variable using the "var", "let" and "const" keywords. But, in class we will only use <cmd>var</cmd> in order to keep it easier.</p>
-		<p>Now, <em>try</em> to make a variable and then read it out in the console:</p>
+	<h2>Variables</h2>
+	<img src="/assets/img/variableBox.png" alt="" style="width: 300px; float: right;">
+	<p>Variables are like boxes for storing data. You slap a big label on them to know what's inside and that's that.</p>
 
-		<div class="gridCorrector">
-			<div class="js-editor w-3/5" 
-				data-title="<p>Make a variable and log it in the console</p>"
-				data-run="true" 
-				data-readonly="false" 
-				data-height="200" 
-			>
-				<textarea class="js-editor-doc" hidden></textarea>
-			</div>
+	<p>Variables allow you to give a name to a value and use that name to refer to the value later in your code. In JavaScript, you can declare a variable using the "var", "let" and "const" keywords. But, in class we will only use <cmd>var</cmd> in order to keep it easier.</p>
+	<p>Now, <em>try</em> to make a variable and then read it out in the console:</p>
+
+	<div class="gridCorrector">
+		<div class="js-editor w-3/5" 
+			data-title="<p>Make a variable and log it in the console</p>"
+			data-run="true" 
+			data-store="true" 
+			data-readonly="false" 
+			data-height="150">
+			<textarea class="js-editor-doc" hidden></textarea>
 		</div>
+	</div>
 
-<!-- function insertWithCursor(text,cursorOffset){
-	return (view, completion, from, to) => {
-		view.dispatch({
-			changes:{from,to,insert:text},
-			selection:{anchor:from+cursorOffset}
-		});
-	};
-} -->
+	<h2>Datatypes</h2>
+	<p>There are several basic "datatypes" in JavaScript. In most cases you don't have to tell the computer what type of data you're using, it figures it out for you.</p>
+
+	<div class="gridCorrector">
+		<div class="js-editor w-3/5" 
+			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+			data-run="false" 
+			data-readonly="false" 
+			data-height="300">
+			<textarea class="js-editor-doc" hidden>
+// The most common ones we will use:
+var string = "This is a string";
+var number = 42;
+var boolean = true;
+var array = new Array(); // Empty array
+var array = new Array('value1', 'value2', 'value3');
+var object = new Object(); // We will only start using these in a few months
+
+// We won't create these types of data, but it's REALLY IMPORTANT to know what these mean.
+var nullValue = null; // null is a special value that represents "no value" or "empty". It's like an empty box but different than "", which is an empty string.
+var undefinedValue = undefined; // undefined is a special value that represents "not defined". It's like a box that hasn't been labeled yet. You might be talking about a box that hasn't been created yet.
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Naming conventions</h2>
+	<p>Now that we've started naming <em>things</em>, it's important to follow certain conventions/rules to make your code more readable and maintainable. Here are some common guidelines:</p>
+	<ul>
+		<li>Use <strong>camelCasing</strong>  (e.g., <cmd>myVariableName</cmd>) - easier to read than <cmd>myvariablename</cmd>.</li>
+		<li>Choose descriptive names that convey the purpose.</li>
+		<li>Avoid using special characters.</li>
+	</ul>
+	<p>By following these conventions, you can make your code easier to understand for yourself and others who may read it in the future.</p>
+
+	<h2>Conclusion</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS Basics Quiz",
+			"questions": [
+				{
+					"question": "How do you show a message in the console?",
+					"options": [
+						"print('hi there...')",
+						"console.log('excuse me what the-')",
+						"terminal.print('now what is go-')",
+						"echo('ok this is just g-')"
+					],
+					"answer": 1,
+					"explanation": "You first tell the console to do something. And that something is to log() a message. So you write console.log('your message here');"
+				},
+				{
+					"question": "What is a variable?",
+					"options": [
+						"A container for storing data",
+						"Data when you don't know what it is yet",
+						"It depends"
+					],
+					"answer": 0,
+					"explanation": "A variable is a container for storing data. You can put any type of data in a variable, and you can change the value of a variable at any time."
+				},
+				{
+					"question": "How do you save a string in a variable?",
+					"options": [
+						"var myString = 'Hello, world!';",
+						"let myString = (Hello, world!);",
+						"const myString: 'Hello, world!';"
+					],
+					"answer": 0,
+					"explanation": "We will declare a variable using the var keyword, followed by the name of the variable, an equals sign, and then the value we want to store in the variable. So it looks like this: var myString = 'Hello, world!';"
+				},
+				{
+					"question": "How do you structure your variable names?",
+					"options": [
+						"Use lowercase: myvariablename",
+						"Use snake_case: my_variable_name",
+						"Use PascalCase: MyVariableName",
+						"Use camelCasing: myVariableName"
+					],
+					"answer": 3,
+					"explanation": "We use camelCasing for variable names to make them easier to read. For example, myVariableName is easier to read than myvariablename."
+				}
+			]
+		}
+		</script>
+	</div>
+
+	<!-- function insertWithCursor(text,cursorOffset){
+		return (view, completion, from, to) => {
+			view.dispatch({
+				changes:{from,to,insert:text},
+				selection:{anchor:from+cursorOffset}
+			});
+		};
+	} -->
 
 	<!-- When students submit their code (run) save it and keep a log of every save  -->
 
-		<!-- <a href="/pages/intro/vsc.html" class="nextPageTeaser">Next: Visual Studio Code <i class="fa-solid fa-arrow-right-long"></i></a> -->
-	</div>
+	<a href="/pages/intro/vsc.html" class="nextPageTeaser">Next: Visual Studio Code <i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
 
 </body>
 </html>

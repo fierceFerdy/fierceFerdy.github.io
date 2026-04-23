@@ -1,11 +1,16 @@
 .js-editor{
 	margin-top: 2rem;
 	margin-bottom: 2rem;
-	height: 300px;
+	min-height: 300px;
 	border: 6px solid #3e474f;
 	font-size: 1.3rem;
 	font-family: Inconsolata, monospace;
 	position: relative;
+
+	.cm-editor{
+		height: 100%;
+		overflow-y: scroll;
+	}
 
 	header p{
 		background-color: #3e474f;
@@ -39,7 +44,7 @@
 .terminal{
 	margin-top: 2rem;
 	background-color: var(--dark00);
-	height: 300px;
+	min-height: 300px;
 	padding: 1rem;
 	color: #c9d1d9;
 	overflow: auto;

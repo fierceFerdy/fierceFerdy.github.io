@@ -1,0 +1,8 @@
+input{
+	padding: .6rem .8rem .6rem;
+	font-size: 1.4rem;
+
+	&:focus{
+		outline: none;
+	}
+}

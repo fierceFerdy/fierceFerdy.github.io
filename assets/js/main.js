@@ -1,6 +1,58 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
 
+	// Upon visiting prompt the visitor for their full name and save it in localStorage, so we can use it to save the student their scores. 
+	if(!localStorage.getItem("visitorName")){
+		let name = await customPrompt("<strong>Welcome, Human!</strong><br>  Please enter your full (and real) name:", "Use your actual name - this will be used for scoring");
+		
+		if(name){
+			name = name.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim(); // basic sanitization
+			localStorage.setItem("visitorName", name);
+			alert(`Thanks! ${name} will get all the points you're scoring today!`);
+		}else{
+			// redo
+		}
+	}
 
+	async function customPrompt(message, defaultValue = "") {
+		return new Promise((resolve) => {
+			document.body.classList.add("blur");
+
+			const overlay = document.createElement("div");
+			overlay.className = "customPromptOverlay";
+			
+			const promptBox = document.createElement("div");
+			promptBox.className = "customPromptBox";
+			promptBox.innerHTML = `
+				<p>${message}</p>
+				<input type="text" placeholder="${defaultValue}">
+				<button id="ok">Here, you can have it!</button>
+			`;
+			overlay.appendChild(promptBox);
+			document.body.appendChild(overlay);
+
+			const input = promptBox.querySelector("input");
+			const okBtn = promptBox.querySelector("#ok");
+			const cancelBtn = promptBox.querySelector("#customPromptCancel");
+
+			okBtn.addEventListener("click", () => closePrompt(input.value));
+			input.addEventListener("keydown", (event) => {
+				if (event.key === "Enter") closePrompt(input.value);
+				if (event.key === "Escape") closePrompt(null);
+			});
+
+			function closePrompt(value) {
+				if(!input.value.trim() || !input.value.includes(" ")){
+					promptBox.classList.add("shake", "error");
+					// promptBox.classList.add("error");
+					setTimeout(() => promptBox.classList.remove("shake"), 500);
+				}else{
+					document.body.classList.remove("blur");
+					overlay.remove();
+					resolve(value);
+				}
+			}
+		});
+	}
 	
 
 	/**
@@ -68,6 +120,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			</div>
 		</div>
 
+		<button id="downloadUserData"><i class="fa-solid fa-user"></i></button>
+		<button id="reportBug"><i class="fa-solid fa-bug"></i></button>
 		<button id="plebMode"><i class="fa-solid fa-language"></i></button>
 		<button id="lightMode"><i class="fa-regular fa-lightbulb"></i></button>
 		<button id="hideNav"><i class="fa-solid fa-chevron-up"></i></button>
@@ -135,6 +189,17 @@ document.addEventListener("DOMContentLoaded", function() {
 	hideNavButton.addEventListener("click", function() {
 		document.body.classList.toggle("hiddenNav");
 	});
+
+
+	const downloadUserDataButton = document.getElementById("downloadUserData");
+	if (downloadUserDataButton) {
+		downloadUserDataButton.addEventListener("click", function() {
+			const exportData = getAllLocalStorageData();
+			const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+			const fileName = `manual-user-data-${stamp}.json`;
+			downloadJsonFile(exportData, fileName);
+		});
+	}
 
 
 
@@ -230,6 +295,81 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 	});
+
+	function getAllLocalStorageData() {
+		const data = {};
+
+		for (let i = 0; i < localStorage.length; i++) {
+			const key = localStorage.key(i);
+			const rawValue = localStorage.getItem(key);
+			data[key] = tryParseJson(rawValue);
+		}
+
+		const groupedAttempts = groupAttemptsByType(data);
+		const userName = localStorage.getItem("visitorName") || "Unknown visitor";
+
+		return {
+			exportedAt: new Date().toISOString(),
+			page: window.location.href,
+			userName,
+			groupedAttempts
+		};
+	}
+
+	function groupAttemptsByType(data) {
+		const grouped = {
+			quizzes: {},
+			editors: {}
+		};
+		const quizAttempts = Array.isArray(data["manual.quizAttempts"]) ? data["manual.quizAttempts"] : [];
+		const editorAttempts = Array.isArray(data["manual.editorAttempts"]) ? data["manual.editorAttempts"] : [];
+
+		quizAttempts.forEach((attempt) => {
+			const quizName = attempt?.quizName || "Unnamed Quiz";
+			if (!grouped.quizzes[quizName]) grouped.quizzes[quizName] = [];
+			grouped.quizzes[quizName].push(stripVisitorName(attempt));
+		});
+
+		editorAttempts.forEach((attempt) => {
+			const editorName = attempt?.editorName || "Unnamed Editor";
+			if (!grouped.editors[editorName]) grouped.editors[editorName] = [];
+			grouped.editors[editorName].push(stripVisitorName(attempt));
+		});
+
+		return grouped;
+	}
+
+	function stripVisitorName(attempt) {
+		if (!attempt || typeof attempt !== "object") return attempt;
+		const sanitizedAttempt = { ...attempt };
+		delete sanitizedAttempt.visitorName;
+		return sanitizedAttempt;
+	}
+
+	function tryParseJson(value) {
+		if (typeof value !== "string") return value;
+
+		try {
+			return JSON.parse(value);
+		} catch (error) {
+			return value;
+		}
+	}
+
+	function downloadJsonFile(payload, fileName) {
+		const json = JSON.stringify(payload, null, 2);
+		const blob = new Blob([json], { type: "application/json" });
+		const url = URL.createObjectURL(blob);
+
+		const link = document.createElement("a");
+		link.href = url;
+		link.download = fileName;
+		document.body.appendChild(link);
+		link.click();
+		link.remove();
+
+		URL.revokeObjectURL(url);
+	}
 
 
 
@@ -564,4 +704,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		return `${mins > 0 ? mins + "m " : ""}${secs}.${mills}s`;
 	}
 
+
+
+	
 });

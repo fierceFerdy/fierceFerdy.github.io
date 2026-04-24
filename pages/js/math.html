@@ -26,10 +26,10 @@
 
 	<div class="gridCorrector">
 		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
 			data-run="true" 
 			data-readonly="false" 
 			data-height="160">
+			<textarea class="title" hidden></textarea>
 			<textarea class="js-editor-doc" hidden>
 // As with almost anything, you can either save the data in a variable or execute it locally.
 var calculation = 1 + 2;
@@ -41,14 +41,15 @@ console.log(1 + 5);
 
 	<p class="task">Now make assignment 2. Submit your solution on <a href="https://athenea.smartschool.be/" target="_blank">Smartschool</a> after completion, then ask for feedback after each task.</p>
 
+
     <h2>Calculating with variables</h2>
 
 	<div class="gridCorrector">
 		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
 			data-run="true" 
 			data-readonly="false" 
 			data-height="160">
+			<textarea class="title" hidden></textarea>
 			<textarea class="js-editor-doc" hidden>
 var b = 3;
 var c = 3 + b; // you can mix variables with raw data
@@ -67,10 +68,10 @@ c--; // This substracts one
 
 	<div class="gridCorrector">
 		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
 			data-run="true" 
 			data-readonly="false" 
 			data-height="160">
+			<textarea class="title" hidden></textarea>
 			<textarea class="js-editor-doc" hidden>
 console.log(1 + 2); // When used only with numbers it will always add them to eachother
 console.log("1" + 2); // The classic "one and two equals 12"
@@ -85,10 +86,10 @@ console.log("My number is:", 3); // An alternative is using the comma. Notice ho
 
 	<div class="gridCorrector">
 		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
 			data-run="true" 
 			data-readonly="false" 
 			data-height="160">
+			<textarea class="title" hidden></textarea>
 			<textarea class="js-editor-doc" hidden>
 var rand = Math.random(); // This generates a number between 0 and 1.
 var ceil = Math.ceil(rand); // This rounds the number upwards.
@@ -120,7 +121,7 @@ console.log("rand:", rand, "ceil:", ceil, "floor:", floor, "round:", round);
 					"explanation": "It's a type of symbol(operator) that's used to do mathematical stuff. And things."
 				},
 				{
-					"question": "What happens when you add a string to a number? <cmd>'2' + 1</cmd>",
+					"question": "What happens when you add a string to a number? <br><cmd>'2' + 1</cmd>",
 					"options": [
 						"They just add to eachother and you get 3.",
                         "You get an error.",

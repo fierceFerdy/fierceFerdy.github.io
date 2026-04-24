@@ -52,9 +52,9 @@ function renderCurrentQuestion(body, footer, state) {
     questionText.className = "quiz-question";
 
 	if(state.questions.length > 1){
-		questionText.textContent = `${state.currentIndex + 1}. ${questionData.question}`;
+		questionText.innerHTML = `${state.currentIndex + 1}. ${questionData.question}`;
 	} else {
-		questionText.textContent = questionData.question;
+		questionText.innerHTML = questionData.question;
 	}
     body.appendChild(questionText);
 

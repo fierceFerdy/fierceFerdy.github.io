@@ -43,7 +43,7 @@ html{
 
 body{
 	font-family: 'Roboto', Helvetica, Arial, sans-serif;
-	background-color: var(--dark2);
+	background-color: var(--dark1);
 	/* display: flex; */
 }
 

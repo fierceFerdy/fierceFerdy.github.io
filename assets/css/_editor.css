@@ -1,3 +1,87 @@
+.editorWrapper{
+	position: relative;
+
+	button{
+		padding: 0.8rem 1rem;
+		border: none;
+
+		&.start{
+			background-color: var(--lime);
+			color: black;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		&:after{
+			content: "\f105" !important;
+			font-family: "FontAwesome";
+			font-size: .8em;
+			margin-left: .5rem;
+		}
+
+		&:hover{
+			background-color: var(--accent);
+			color: black;
+		}
+	}
+
+	.allowed{
+		position: absolute;
+		bottom: -.5rem;
+		left: 0;
+		font-size: 1.4rem;
+		font-weight: normal;
+		color: white;
+		margin-left: 1rem;
+
+		span{
+			margin-right: 10px;
+			position: relative;
+
+			&.check, &.xmark{
+				display: inline-block;
+				&::before{
+					content: "";
+					font-family: "FontAwesome";
+				}
+			}
+
+			&.check{
+				font-size: .85em;
+				top: 2px;
+				&::before{
+					content: "\f00c";
+					color: var(--lime);
+				}
+			}
+
+			&.xmark{
+				font-size: .9em;
+				top: 2px;
+				&::before{
+					content: "\f00d";
+					color: var(--red);
+				}
+			}
+		}
+	}
+
+	&.blurChildren{
+		.js-editor, .terminal, .allowed{
+			filter: blur(10px);
+			pointer-events: none;
+			user-select: none;
+
+			button{
+				filter: blur(0);
+			}
+		}
+	}
+}
+
+
 .js-editor{
 	margin-top: 2rem;
 	margin-bottom: 2rem;
@@ -12,9 +96,23 @@
 		/* overflow-y: scroll; */
 	}
 
-	header p{
+	header{
 		background-color: #3e474f;
-		padding-bottom: 4px;
+		padding-bottom: 6px;
+
+		ul{
+			padding-left: 0;
+			margin-bottom: 0;
+
+			li{
+				margin-bottom: 0;
+				line-height: 1.2em;
+			}
+		}
+
+		p{
+			line-height: 1.3em;
+		}
 	}
 
 	button{
@@ -23,8 +121,6 @@
 		right: 0;
 		background-color: #3e474f;
 		color: white;
-		border: none;
-		padding: 0.8rem 1rem;
 		border-radius: 0;
 		cursor: pointer;
 
@@ -32,11 +128,12 @@
 			background-color: #e06c75;
 		}
 
-		&:after{
-			content: "\f105" !important;
-			font-family: "FontAwesome";
-			font-size: .8em;
-			margin-left: .5rem;
+		&.finish{
+			right: 64px;
+			&:hover{
+				background-color: var(--lime);
+				color: black;
+			}
 		}
 	}
 }
@@ -53,6 +150,14 @@
 
 	.terminal-line{
 		display: block;
+
+		&.error{
+			color: var(--red);
+		}
+
+		&.success{
+			color: var(--lime);
+		}
 
 		&:last-of-type{
 			&:before{

@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 			<div class="dropdown">
 				<a class="nested" href="/pages/js/overview.html">Overview</a>
 				<a class="nested" href="/pages/js/about.html">About</a>
-				<a class="nested" href="/pages/js/basics.html">Basics: data</a>
+				<a class="nested" href="/pages/js/data.html">Basics: data</a>
 				<a class="nested" href="/pages/js/math.html">Basics: math</a>
 				<a class="nested" href="/pages/js/loops.html">Basics: loops</a>
 				<a class="nested" href="/pages/js/if-else.html">Basics: if...else</a>
@@ -192,7 +192,16 @@ document.addEventListener("DOMContentLoaded", async function() {
 	* @author Ferdy <ferdy.fiers@gmail.com>
 	*/
 	const hideNavButton = document.getElementById("hideNav");
+	// check if nav is hidden in localStorage
+	if(localStorage.getItem("navHidden") === "true"){
+		document.body.classList.add("hiddenNav");
+	}
 	hideNavButton.addEventListener("click", function() {
+		if(document.body.classList.contains("hiddenNav")){
+			localStorage.setItem("navHidden", "false");
+		}else{
+			localStorage.setItem("navHidden", "true");
+		}
 		document.body.classList.toggle("hiddenNav");
 	});
 

@@ -46,7 +46,10 @@ function createEditor(container) {
     // Build DOM
 	container.style.minHeight = container.dataset.height + "px";
     const header = document.createElement("header");
-    header.innerHTML = container.dataset.title;
+	const title = container.querySelector(".title");
+	if(title && title.value != '') header.innerHTML = title.value;
+	else header.innerHTML = "<p>JavaScript Editor <small>by yours truly</small></p>";
+
     container.appendChild(header);
 
     const editorHost = document.createElement("div");
@@ -62,6 +65,57 @@ function createEditor(container) {
         parent: editorHost
     });
 
+
+
+	// It's a task
+	if(container.dataset.taskNumber && container.dataset.taskNumber != ''){
+
+		container.parentElement.classList.add("blurChildren");
+
+		// Show what's allowed
+		var allowed = document.createElement('div');
+		allowed.className = "allowed";
+		allowed.innerHTML = 
+			"docs <span class='" + (container.dataset.taskDocs === "true" ? "check" : "xmark") + "'></span> " +
+			"internet <span class='" + (container.dataset.taskInternet === "true" ? "check" : "xmark") + "'></span> " +
+			"teamwork <span class='" + (container.dataset.taskTeam === "true" ? "check" : "xmark") + "'></span> " +
+			"questions <span class='" + (container.dataset.taskQuestions === "true" ? "check" : "xmark") + "'></span>";
+		container.parentElement.appendChild(allowed);
+
+		// Add start button
+		var startBtn = document.createElement("button");
+		startBtn.textContent = "Start assignment" + (container.dataset.taskNumber ? ` ${container.dataset.taskNumber}` : "");
+		startBtn.classList.add("start");
+		container.parentElement.appendChild(startBtn);
+
+		startBtn.addEventListener("click", () => {
+			startBtn.remove();
+			container.parentElement.classList.remove("blurChildren");
+
+			document.body.classList.add("blur");
+			container.parentElement.classList.add("activeTask");
+		});
+		
+
+		// add finish btn
+		var finishBtn = document.createElement("button");
+		finishBtn.textContent = "Finish assignment";
+		finishBtn.classList.add("finish");
+		container.appendChild(finishBtn);
+
+		finishBtn.addEventListener("click", () => {
+			document.body.classList.remove("blur");
+			container.parentElement.classList.remove("activeTask");
+			finishBtn.remove();
+
+			(async () => {
+				await runCode(view.state.doc.toString(), terminal, container, 'finish');
+			})();
+		});
+	}
+
+
+
 	// Terminal and run button
     if(container.dataset.run === "true"){
 
@@ -71,6 +125,7 @@ function createEditor(container) {
 		// add btn
 		var runBtn = document.createElement("button");
 		runBtn.textContent = "\\\\ Run";
+		runBtn.classList.add("run");
 		container.appendChild(runBtn);
 		
 		// add event listener
@@ -80,7 +135,7 @@ function createEditor(container) {
 		view.dom.addEventListener("keydown", async (e) => {
 			if(e.key === "Enter" && e.shiftKey && e.ctrlKey){
 				e.preventDefault();
-                await runCode(view.state.doc.toString(), terminal, container);
+                await runCode(view.state.doc.toString(), terminal, container, 'run');
 			}
 		});
     }
@@ -88,7 +143,7 @@ function createEditor(container) {
     return view;
 }
 
-async function runCode(code, terminal, container) {
+async function runCode(code, terminal, container, action = 'run') {
 	var logs = [];
 	const fakeConsole = { log: (...args) => logs.push( args.join(" ") ) };
     let runStatus = "success";
@@ -103,17 +158,28 @@ async function runCode(code, terminal, container) {
         runError = e;
 	}
 
-    if (container?.dataset?.store === "true") {
-        saveEditorAttempt(container, runStatus, code, logs.length);
+    if (container?.dataset?.store === "true"){
+		if(action === 'run' || action === 'finish' && container.dataset.taskNumber && container.dataset.taskNumber != '') {
+        	saveEditorAttempt(container, runStatus, code, logs.length);
+		}
     }
 
-    if (runStatus === "error") {
-        await printLine(terminal, formatStudentError(runError));
-        return;
+	
+
+	if (action === 'finish') {
+        printLine(terminal, 'Assignment has been submitted. Please ask your teacher for feedback.', 'success');
+
+	} else {
+
+		if (runStatus === "error") {
+			await printLine(terminal, formatStudentError(runError), 'error');
+			return;
+		}
+		
+		if (logs.length === 0) await printLine(terminal, "Done");
+		else for (const entry of logs) await printLine(terminal, entry);
     }
 
-    if (logs.length === 0) await printLine(terminal, "Done");
-    else for (const entry of logs) await printLine(terminal, entry);
 }
 
 function getInitialDoc(container) {
@@ -178,10 +244,10 @@ function formatStudentError(error) {
     return `${message}\n    at student-code.js:${line}:${match[2]}`;
 }
 
-function printLine(terminal, text, speed = 55) {
+function printLine(terminal, text, type = "default", speed = 45) {
     return new Promise(resolve => {
         const line = document.createElement("div");
-        line.className = "terminal-line";
+        line.className = "terminal-line "+type;
         terminal.appendChild(line);
         let i = 0;
 

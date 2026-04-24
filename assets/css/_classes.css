@@ -172,8 +172,24 @@ cmd{
 
 
 .blur{
-	.content, nav{
-		filter: blur(10px);
+	&::before{
+		content: "";
+		position: fixed;
+		inset: 0;
+		backdrop-filter: blur(8px);
+		background: rgba(0,0,0,0.2); /* optional dim */
+		z-index: 10;
 		pointer-events: none;
+	}
+
+	.content, nav{
+		user-select: none;
+		pointer-events: none;
+	}
+
+	.activeTask{
+		position: relative;
+		z-index: 20; 
+		pointer-events: all;
 	}
 }

@@ -70,14 +70,12 @@
 	<p>To do any of these you need to learn a programming language, such as JavaScript.</p>
 
 	<h3>Look! A wild programming language has appeared!</h3>
-	<div class="gridCorrector">
-
-		<!-- Editor with terminal -->
+	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
 			data-run="true"
 			data-readonly="false"
 			data-height="248">
+			<textarea class="title" hidden></textarea>
 			<textarea class="js-editor-doc" hidden>
 var pokemon = new Array('Pikachu', 'Charmander', 'Bulbasaur', 'Squirtle');
 
@@ -114,14 +112,12 @@ console.log(greet(name)); -->
 
 	<p>It <em>may</em> look like this:</p>
 
-	<div class="gridCorrector">
-
-		<!-- Editor with terminal -->
+	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
 			data-run="true"
 			data-readonly="false"
 			data-height="248"> <!-- 18px per line-->
+			<textarea class="title" hidden></textarea>
 			<textarea class="js-editor-doc" hidden>
 const canvas = document.getElementById("circleCanvas");
 canvas.width = 200;
@@ -188,7 +184,7 @@ context.fill();
 
 	<!-- When students submit their code (run) save it and keep a log of every save  -->
 
-	<a href="/pages/js/basics.html" class="nextPageTeaser">Next: JS Basics <i class="fa-solid fa-arrow-right-long"></i></a>
+	<a href="/pages/js/basics.html" class="nextPageTeaser">Next: JS Basics - data <i class="fa-solid fa-arrow-right-long"></i></a>
 </div>
 
 

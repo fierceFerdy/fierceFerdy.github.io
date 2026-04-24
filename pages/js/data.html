@@ -28,9 +28,9 @@
 		<li>Press <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>enter</kbd> to run your code.</li>
 	</ul>
 
-	<div class="gridCorrector">
+	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+			data-title=""
 			data-run="true" 
 			data-store="true" 
 			data-readonly="false" 
@@ -48,13 +48,15 @@
 
 	<p>Now, <em>try</em> to make a variable and then read it out in the console:</p>
 
-	<div class="gridCorrector">
+	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
-			data-title="<p>Make a variable and log it in the console</p>"
 			data-run="true" 
 			data-store="true" 
 			data-readonly="false" 
 			data-height="150">
+			<textarea class="title" hidden>
+				<p>Make a variable and log it in the console</p>
+			</textarea>
 			<textarea class="js-editor-doc" hidden></textarea>
 		</div>
 	</div>
@@ -62,15 +64,15 @@
 	<h2>Datatypes</h2>
 	<p>There are several basic "datatypes" in JavaScript. In most cases you don't have to tell the computer what type of data you're using, it figures it out for you.</p>
 
-	<div class="gridCorrector">
+	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-full" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
 			data-run="false" 
 			data-readonly="false" 
 			data-height="300">
+			<textarea class="title" hidden></textarea>
 			<textarea class="js-editor-doc" hidden>
 // The most common ones we will use:
-var string = "This is a string";
+var string = "This is a string"; // You can use both double and single quotes
 var number = 42;
 var boolean = true;
 var array = new Array(); // Empty array
@@ -93,9 +95,76 @@ var undefinedValue = undefined; // undefined is a special value that represents 
 	</ul>
 	<p>By following these conventions, you can make your code easier to understand for yourself and others who may read it in the future.</p>
 
-	<p class="task">Now make assignments 0, 1 and 1a (which you'll find in assignments.js). Submit your solution on <a href="https://athenea.smartschool.be/" target="_blank">Smartschool</a> after completion, then ask for feedback after each task.</p>
+	<p class="task">Now make assignments 0, 1 and 1a (which you'll find in assignments.js). After completing every assignment, upload that assignment to <a href="https://athenea.smartschool.be/" target="_blank">Smartschool</a>, then ask for feedback.</p>
 
-	<h2>Conclusion/recap</h2>
+	<h2>Tasks</h2>
+	<p>Now and then you will get some tasks which will <em>really</em> test your knowledge. Sometimes these tasks will forbid you from peeking at the documentation. This is a real test after all!</p>
+	<p>When you complete a task, make sure to submit it by pressing the "Finish assignment" button. Then, ask the teacher for feedback.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="1a" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="180">
+			<textarea class="title" hidden>
+				<p>Make a variable that contains your name. Then show it in the console.</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="1b" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="180">
+			<textarea class="title" hidden>
+				<ul>
+					<li>Make a variable for each of the different datatypes (6).</li>
+					<li>Make sure you describe them correctly.</li>
+					<li>Finally, show one of them in the console.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="1c" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="180">
+			<textarea class="title" hidden>
+				<ul>
+					<li>Create a variable for each of two made up numbers.</li>
+					<li>Add them together.</li>
+					<li>Finally, show the result in the console.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+	<h2>Conclusion</h2>
+
+	<p>At the end of every chapter will be a quick quiz to test your understanding of the material. Good luck!</p>
+
+	<p></p>
 
 	<div class="quiz" id="#quiz">
 		<script type="application/json" class="quiz-data">
@@ -170,7 +239,7 @@ var undefinedValue = undefined; // undefined is a special value that represents 
 
 	<!-- When students submit their code (run) save it and keep a log of every save  -->
 
-	<a href="/pages/js/math.html" class="nextPageTeaser">Next: Basics - math <i class="fa-solid fa-arrow-right-long"></i></a>
+	<a href="/pages/js/math.html" class="nextPageTeaser">Next: JS Basics - math <i class="fa-solid fa-arrow-right-long"></i></a>
 </div>
 
 

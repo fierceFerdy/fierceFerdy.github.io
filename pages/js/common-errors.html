@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The manual.</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<script src="/assets/js/main.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+</head>
+
+<body>
+	
+
+
+<div class="content">
+	
+	<h1>JavaScript 101 <small>/errors</small></h1>
+
+	<p>By now you have probably run into errors once or twice. It is important to understand that errors aren't bad. They are not the enemy. In fact, they are your "friend". A good error (sadly not every error's good) gives a good explanation of exactly what's going wrong <em>and even where</em>.</p>
+
+    <h3>A few examples</h3>
+    
+    <editorlite>var x = y;</editorlite> 
+    <p><cmd>ReferenceError: y is not defined at student-code.js:1:9</cmd></p>
+    <p class="descriptor">In this case you're trying to get a value of something that doesn't exist. 'y' is not defined. You have not made a variable called 'y'.</p>
+    <p class="descriptor">The error line also tells you that in this case the error's on line 1, position 9.</p>
+
+    <editorlite>var x: 4;</editorlite>
+    <p><cmd>SyntaxError: Unexpected token ':'</cmd></p>
+    <p class="descriptor">You have a ':' in a place where it doesn't belong. It didn't expect that.. :)</p>
+
+    <editorlite>var result = "hello" * 2;</editorlite> 
+    <p><cmd>NaN</cmd></p>
+    <p class="descriptor">You're trying to do something mathematical with something that's NaN. Not a Number.</p>
+
+    <h3>Some more that you'll start to run into soon..</h3>
+    <editorlite>if(true { console.log("hi"); }</editorlite> 
+    <p><cmd>SyntaxError: Unexpected token '{'</cmd></p>
+    <p class="descriptor">Again, it didn't expect a certain character. In this case it doesn't mean that the character is bad, it just didn't expect that yet. It needed something else first.</p>
+
+    <editorlite>var x = null; x.toUpperCase();</editorlite>
+    <p><cmd>TypeError: Cannot read properties of null</cmd></p>
+    <p class="descriptor">You're trying to interpret data that's "null", which is impossible. You can't do something with nothing. </p>
+
+    <editorlite>var obj = {}; console.log(obj.name.length);</editorlite>
+    <p><cmd>TypeError: Cannot read properties of undefined</cmd></p>
+    <p class="descriptor">You're trying to read data of something that has not been defined. The object is empty, it has no name and yet you're trying to access that.</p>
+
+    <editorlite>var num = 5; num();</editorlite>
+    <p><cmd>TypeError: num is not a function</cmd></p>
+    <p class="descriptor">You're trying to execute something as a function which is not one.</p>
+
+    <editorlite>var obj = { name: x }; obj.name();</editorlite>
+    <p><cmd>TypeError: obj.name is not a function</cmd></p>
+    <p class="descriptor">Of course it says that! It's a property.</p>
+
+    
+    
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="2" 
+			data-task-docs="true"
+			data-task-internet="true"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+                <p>Fix ALL the errors! You will notice that you only get one error. You see the next error once you've fixed the previous one. That's called progress!</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var x = y;
+var x: 4;
+if(true { console.log("hi"); }
+var result="hello"*2;
+var x=null; x.toUpperCase();
+var obj={}; console.log(obj.name.length);
+var num=5; num();
+var obj={ name:x }; obj.name();
+            </textarea>
+		</div>
+	</div>
+
+
+	<h2>Code layout</h2>
+
+    <p>You want clean code for many reasons. When it's easier to read you save time, stress and energy now and even more when you have to check on it later. Also, other people won't get mad at you for having horrible code. Clean code is just as important as writing working code.</p>
+    
+    <h3>What's considered clean?</h3>
+    <ul>
+        <li>Breathing room. Don't let everything stick to eachother.</li>
+        <li>Not enough spaces.</li>
+        <li>Too many spaces.</li>
+        <li>Clear, logical names. With camelCasing.</li>
+        <li>Properly indented code (using tab).</li>
+        <li>Comments to describe functionality that's not easily scanned.</li>
+    </ul>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-2/4" 
+			data-run="false" 
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+                <p>Bad example</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+function dosomething(text,cursordiff){
+    return(view,completion,from,to)=>{
+        view.dispatch({
+            changes:{from,to,insert:text},
+            selection:{anchor:from+cursordiff}
+        });
+    };
+}
+            </textarea>
+		</div>
+
+		<div class="js-editor w-2/4" 
+			data-run="false" 
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+                <p>Clean example</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+function insertWithCursor(text, cursorOffset){
+    return (view, completion, from, to) => {
+        view.dispatch({
+            changes: { from, to, insert:text },
+            selection: { anchor:from+cursorOffset }
+        });
+    };
+}
+            </textarea>
+		</div>
+	</div>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-2/4" 
+			data-run="false" 
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+                <p>Bad example</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var price=20;
+var quantity=2;
+var discount=10;
+var discount2=5;
+
+var total=price*quantity-discount/100*price*quantity;
+
+if(total>50){total=total-extraDiscount;}
+
+console.log("Total price is:"+total.toFixed(2));
+            </textarea>
+		</div>
+
+		<div class="js-editor w-2/4" 
+			data-run="false" 
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+                <p>Clean example</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var price = 20;
+var quantity = 2;
+var discountPercent = 10;
+
+var extraDiscountThreshold = 50;
+var extraDiscount = 5;
+
+var subtotal = price * quantity;
+var discountAmount = (discountPercent / 100) * subtotal;
+
+var total = subtotal - discountAmount;
+
+// Apply extra discount for large orders
+if (total > extraDiscountThreshold) {
+    total -= extraDiscount;
+}
+
+console.log("Total price is:", total.toFixed(2));
+console.log(`Total price is: ${total.toFixed(2)}`);
+            </textarea>
+		</div>
+	</div>
+
+
+    <h2>Some more rookie mistakes => solutions:</h2>
+
+    <ul>
+        <li>When working in VSC, always open the project <strong>folder</strong>, not just a file.</li>
+        <li>Save <strong>all</strong> your files in the cloud. Let this be the first thing you do, don't postpone it.</li>
+        <li>When you have an error, don't panic. <strong>Read</strong> the error message for it will be thy salvation.</li>
+        <li>Don't just copy-paste code... Best case you have something you don't understand and can't adapt now.</li>
+        <li>Not making use of your new best friend - the console.</li>
+        <li><kbd>CTRL</kbd> + <kbd>S</kbd></li>
+        <li>Got more ideas? Let me know!</li>
+    </ul>
+
+	
+
+	<h2>Quiz time!</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS Basics Quiz",
+			"questions": [
+				{
+					"question": "How do you show a message in the console?",
+					"options": [
+						"print('hi there...')",
+						"console.log('excuse me what the-')",
+						"terminal.print('now what is go-')",
+						"echo('ok this is just g-')"
+					],
+					"answer": 1,
+					"explanation": "You first tell the console to do something. And that something is to log() a message. So you write console.log('your message here');"
+				}
+			]
+		}
+		</script>
+	</div>
+
+	<a href="/pages/js/math.html" class="nextPageTeaser">Next: JS Basics - math <i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
+
+</body>
+</html>

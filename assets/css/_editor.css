@@ -143,6 +143,25 @@
 	}
 }
 
+
+editorlite{
+	display: inline-block;
+	margin-right: 20px;
+	font-size: 0;
+	vertical-align: top;
+
+	.cm-content{
+		background-color: var(--dark2);
+		/* background-color: var(--lime); */
+		padding: 2px !important;
+	}
+
+	.cm-editor{
+		font-size: 1.5rem;
+	}
+}
+
+
 .terminal{
 	margin-top: 2rem;
 	background-color: var(--dark00);
@@ -223,3 +242,12 @@
 /* .cm-completionIcon {
 	display: none !important;
 } */
+
+
+editorlite{
+	margin-top: 3rem;
+
+	& + p{
+		margin-left: 3.1rem;
+	}
+}

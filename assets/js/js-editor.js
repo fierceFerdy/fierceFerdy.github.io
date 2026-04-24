@@ -33,6 +33,7 @@ const extensions = [
 
 // Init all editors on the page
 document.querySelectorAll(".js-editor").forEach(createEditor);
+document.querySelectorAll('editorlite').forEach(createLiteEditor);
 
 // If there's an active task in localStorage, re-activate it (e.g. after page refresh)
 const activeTask = localStorage.getItem("activeTask");
@@ -62,6 +63,23 @@ document.addEventListener("click", (e) => {
 //=================================================
 // ------------ Functions
 //=================================================
+
+
+
+function createLiteEditor(container) {
+    // Build DOM
+    extensions.push(EditorState.readOnly.of(true));
+    var content = container.innerHTML;
+    container.innerHTML = '';
+
+    const view = new EditorView({
+        doc: content,
+        extensions,
+        parent: container
+    });
+
+    return view;
+}
 
 function createEditor(container) {
 
@@ -174,6 +192,8 @@ function createEditor(container) {
     return view;
 }
 
+
+
 async function runCode(code, terminal, container, action = 'run') {
 	var logs = [];
 	const fakeConsole = { log: (...args) => logs.push( args.join(" ") ) };
@@ -213,7 +233,7 @@ async function runCode(code, terminal, container, action = 'run') {
 
 }
 
-function getInitialDoc(container) {
+function getInitialDoc(container, type = 'normal') {
     const textareaDoc = container.querySelector(".js-editor-doc");
 	
 	return textareaDoc.value

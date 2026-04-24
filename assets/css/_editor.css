@@ -107,6 +107,11 @@
 			li{
 				margin-bottom: 0;
 				line-height: 1.2em;
+				cursor: pointer;
+
+				&.check{
+					color: var(--lime);
+				}
 			}
 		}
 

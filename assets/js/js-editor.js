@@ -34,6 +34,28 @@ const extensions = [
 // Init all editors on the page
 document.querySelectorAll(".js-editor").forEach(createEditor);
 
+// If there's an active task in localStorage, re-activate it (e.g. after page refresh)
+const activeTask = localStorage.getItem("activeTask");
+if (activeTask) {
+	const targetEditor = document.querySelector(`.js-editor[data-task-number="${activeTask}"]`);
+
+	if (targetEditor) {
+		targetEditor.parentElement.querySelector(".start")?.remove();
+		targetEditor.parentElement.classList.remove("blurChildren");
+
+		targetEditor.parentElement.classList.add("activeTask");
+		document.body.classList.add("blur");
+		targetEditor.scrollIntoView({behavior: "smooth", block: "center"});
+	}
+}
+
+// Toggle checkmarks
+document.addEventListener("click", (e) => {
+	if(e.target.parentElement.parentElement.parentElement.classList.contains("js-editor")){
+		e.target.classList.toggle("check");
+	}
+});
+
 
 
 
@@ -92,8 +114,16 @@ function createEditor(container) {
 			startBtn.remove();
 			container.parentElement.classList.remove("blurChildren");
 
-			document.body.classList.add("blur");
-			container.parentElement.classList.add("activeTask");
+			if(container.dataset.taskDocs == "false"){
+				document.body.classList.add("blur");
+				container.parentElement.classList.add("activeTask");
+			}
+
+			container.scrollIntoView({behavior: "smooth", block: "center"});
+
+			// Save to localstorage to avoid refreshing the page and losing data
+			localStorage.setItem("activeTask", container.dataset.taskNumber);
+			// localStorage.setItem("activeTaskStartTime", new Date().toISOString());
 		});
 		
 
@@ -107,6 +137,7 @@ function createEditor(container) {
 			document.body.classList.remove("blur");
 			container.parentElement.classList.remove("activeTask");
 			finishBtn.remove();
+			localStorage.removeItem("activeTask");
 
 			(async () => {
 				await runCode(view.state.doc.toString(), terminal, container, 'finish');

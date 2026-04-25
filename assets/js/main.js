@@ -719,7 +719,5 @@ document.addEventListener("DOMContentLoaded", async function() {
 		return `${mins > 0 ? mins + "m " : ""}${secs}.${mills}s`;
 	}
 
-
-
 	
 });

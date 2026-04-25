@@ -139,9 +139,10 @@ function createEditor(container) {
 
 			container.scrollIntoView({behavior: "smooth", block: "center"});
 
-			// Save to localstorage to avoid refreshing the page and losing data
-			localStorage.setItem("activeTask", container.dataset.taskNumber);
-			// localStorage.setItem("activeTaskStartTime", new Date().toISOString());
+			// Save to localstorage to avoid refreshing the page and losing data.
+			if(container.dataset.taskDocs == "false"){
+				localStorage.setItem("activeTask", container.dataset.taskNumber);
+			}
 		});
 		
 

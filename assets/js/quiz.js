@@ -148,6 +148,14 @@ function renderFinishedState(body, footer, state) {
 	// Show visual result
 	if(state.correctCount === state.questions.length){
 		body.parentElement.classList.add("correct");
+
+		// Show party GIF
+		var randomNum = Math.floor(Math.random() * 31) + 1;
+		const partyImage = document.createElement("img");
+		partyImage.src = `/assets/img/party${randomNum}.gif`;
+		partyImage.className = "party";
+		body.appendChild(partyImage);
+		
 	} else{
 		body.parentElement.classList.add("wrong");
 	}

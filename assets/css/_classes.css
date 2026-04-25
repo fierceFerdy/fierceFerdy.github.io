@@ -170,6 +170,27 @@ cmd{
 	}
 }
 
+.descriptor{
+	&::before{
+		display: inline-block;
+		content: "\f148";
+
+		--_fa-family: var(--fa-family, var(--fa-style-family, 'Font Awesome 7 Free'));
+		font-family: var(--_fa-family);
+		-webkit-font-smoothing: antialiased;
+		
+		font-weight: var(--fa-style, 900);
+		transform: rotate(90deg);
+		margin-right: 8px;
+		margin-left: 2px;
+		/* font-weight: 400; */
+	}
+
+	& + .descriptor{
+		margin-top: 0;
+	}
+}
+
 
 .blur{
 	&::before{

@@ -105,13 +105,13 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/overview.html">Overview</a>
 				<a class="nested" href="/pages/js/about.html">About</a>
 				<a class="nested" href="/pages/js/data.html">Basics: data</a>
+				<a class="nested" href="/pages/js/common-errors.html">Common Errors</a>
 				<a class="nested" href="/pages/js/math.html">Basics: math</a>
 				<a class="nested" href="/pages/js/loops.html">Basics: loops</a>
 				<a class="nested" href="/pages/js/if-else.html">Basics: if...else</a>
 				<a class="nested" href="/pages/js/functions.html">Basics: functions</a>
 				<a class="nested" href="/pages/js/arrays.html">Basics: arrays</a>
 				<a class="nested" href="/pages/js/visualisation.html">Visualisation</a>
-				<a class="nested" href="/pages/js/common-errors.html">Common Errors</a>
 				<a class="nested" href="/pages/js/neutralino.html">Neutralino</a>
 			</div>
 		</div>

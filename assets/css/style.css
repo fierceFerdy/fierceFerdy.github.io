@@ -16,11 +16,16 @@
 	--accent: #03d6cb;
 	--red: #aa1717;
 	--lime: greenyellow;
-	--dark00: #0a0d10;
+	/* --dark00: #0a0d10;
 	--dark0: #1a1a1a;
 	--dark1: #191d21;
 	--dark2: #24292e;
-	--dark3: #3c444c;
+	--dark3: #3c444c; */
+	--dark00: #0a0d10;
+	--dark0: #1a1a1a;
+	--dark1: #23282e;
+	--dark2: #2e353b;
+	--dark3: #49525c;
 }
 
 

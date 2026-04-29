@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function() {
 
-	// Upon visiting prompt the visitor for their full name and save it in localStorage, so we can use it to save the student their scores. 
+	// Save visitor's name in localStorage
 	if(!localStorage.getItem("visitorName")){
 		let name = await customPrompt("<strong>Welcome, Human!</strong><br>  Please enter your full (and real) name:", "Use your actual name - this will be used for scoring");
 		
@@ -12,6 +12,12 @@ document.addEventListener("DOMContentLoaded", async function() {
 			// redo
 		}
 	}
+
+	// Inject visitor's name here and there
+	const visitorName = localStorage.getItem("visitorName").split(" ")[0] || "Boo";
+	document.querySelectorAll(".yourname").forEach(el => el.textContent = visitorName);
+
+
 
 	async function customPrompt(message, defaultValue = "") {
 		return new Promise((resolve) => {
@@ -104,13 +110,13 @@ document.addEventListener("DOMContentLoaded", async function() {
 			<div class="dropdown">
 				<a class="nested" href="/pages/js/overview.html">Overview</a>
 				<a class="nested" href="/pages/js/about.html">About</a>
-				<a class="nested" href="/pages/js/data.html">Basics: data</a>
+				<a class="nested" href="/pages/js/data.html">Data</a>
 				<a class="nested" href="/pages/js/common-errors.html">Common Errors</a>
-				<a class="nested" href="/pages/js/math.html">Basics: math</a>
-				<a class="nested" href="/pages/js/loops.html">Basics: loops</a>
-				<a class="nested" href="/pages/js/if-else.html">Basics: if...else</a>
-				<a class="nested" href="/pages/js/functions.html">Basics: functions</a>
-				<a class="nested" href="/pages/js/arrays.html">Basics: arrays</a>
+				<a class="nested" href="/pages/js/math.html">Math</a>
+				<a class="nested" href="/pages/js/loops.html">Loops</a>
+				<a class="nested" href="/pages/js/if-else.html">If...Else</a>
+				<a class="nested" href="/pages/js/functions.html">Functions</a>
+				<a class="nested" href="/pages/js/arrays.html">Arrays</a>
 				<a class="nested" href="/pages/js/visualisation.html">Visualisation</a>
 				<a class="nested" href="/pages/js/neutralino.html">Neutralino</a>
 			</div>

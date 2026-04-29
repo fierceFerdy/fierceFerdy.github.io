@@ -244,7 +244,7 @@ function getInitialDoc(container, type = 'normal') {
 
 function drawTerminal(container) {
     var terminal = document.createElement("pre");
-    terminal.style.minHeight = container.dataset.height + "px";
+    // terminal.style.minHeight = container.dataset.height + "px";
     terminal.className = "terminal w-2/5";
     container.after(terminal);
 

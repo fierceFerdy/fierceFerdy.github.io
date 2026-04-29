@@ -154,7 +154,7 @@ txt{
 	}
 }
 
-cmd{
+cmd, code{
 	background-color: var(--dark00);
 	color: white;
 	padding: 4px;
@@ -212,5 +212,44 @@ cmd{
 		position: relative;
 		z-index: 20; 
 		pointer-events: all;
+	}
+}
+
+.spacer{
+	height: 2rem;
+}
+
+/* p > span + p > span{
+	margin-top: .5rem;
+} */
+
+span{
+	position: relative;
+
+	&.check, &.xmark{
+		display: inline-block;
+		margin-right: 4px;
+		&::before{
+			content: "";
+			font-family: "FontAwesome";
+		}
+	}
+
+	&.check{
+		font-size: .9em;
+		top: 0;
+		&::before{
+			content: "\f00c";
+			color: var(--lime);
+		}
+	}
+
+	&.xmark{
+		font-size: .95em;
+		top: 1px;
+		&::before{
+			content: "\f00d";
+			color: var(--red);
+		}
 	}
 }

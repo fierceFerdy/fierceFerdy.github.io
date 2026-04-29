@@ -1,5 +1,7 @@
 .editorWrapper{
 	position: relative;
+	display: flex;
+	margin-bottom: 2rem;
 
 	button{
 		padding: 0.8rem 1rem;
@@ -38,32 +40,15 @@
 
 		span{
 			margin-right: 10px;
-			position: relative;
-
-			&.check, &.xmark{
-				display: inline-block;
-				&::before{
-					content: "";
-					font-family: "FontAwesome";
-				}
-			}
 
 			&.check{
 				font-size: .85em;
 				top: 2px;
-				&::before{
-					content: "\f00c";
-					color: var(--lime);
-				}
 			}
 
 			&.xmark{
 				font-size: .9em;
 				top: 2px;
-				&::before{
-					content: "\f00d";
-					color: var(--red);
-				}
 			}
 		}
 	}
@@ -84,16 +69,22 @@
 
 .js-editor{
 	margin-top: 2rem;
-	margin-bottom: 2rem;
-	min-height: 300px;
+	min-height: 200px;
 	border: 6px solid #3e474f;
 	font-size: 1.3rem;
 	font-family: Inconsolata, monospace;
 	position: relative;
+	background-color: #282c34;
 
 	.cm-editor{
 		height: 100%;
 		/* overflow-y: scroll; */
+	}
+
+	.cm-line{
+		&.cm-activeLine{
+			background-color: #333943;
+		}
 	}
 
 	header{
@@ -165,7 +156,7 @@ editorlite{
 .terminal{
 	margin-top: 2rem;
 	background-color: var(--dark00);
-	min-height: 300px;
+	min-height: 200px;
 	padding: 1rem;
 	color: #c9d1d9;
 	overflow: auto;

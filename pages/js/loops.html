@@ -19,87 +19,196 @@
 
 <div class="content">
 	
-	<h1>JavaScript 101 <small>/math</small></h1>
+	<h1>JavaScript 101 <small>/loops</small></h1>
 
-	<h2>Arithmetic operators</h2>
-	<p>The most commonly used arithmetic operators are +, -, * and /. Can you name other ones as well?</p>
+	<h2>Arrays</h2>
+	<p>Before we start with loops, let's quickly learn a bit more about arrays.</p>
 
-	<div class="gridCorrector">
-		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
-			data-run="true" 
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="false" 
 			data-readonly="false" 
 			data-height="160">
+			<textarea class="title" hidden><p>You can create arrays in several ways.</p></textarea>
 			<textarea class="js-editor-doc" hidden>
-// As with almost anything, you can either save the data in a variable or execute it locally.
-var calculation = 1 + 2;
-console.log(calculation)
-console.log(1 + 5);
+var brands = new Array('hp', 'dell', 'asus');
+var brands2 = ['hp', 'dell', 'asus']; // Does exactly the same as above
+var brands3 = [ // Does the same but is cleaner when we have more data.
+    'hp',
+    'dell', 
+    'asus',
+    'packard bell',
+    'apple',
+    'alienware'
+];
 			</textarea>
 		</div>
 	</div>
 
-	<p class="task">Now make assignment 2. Submit your solution on <a href="https://athenea.smartschool.be/" target="_blank">Smartschool</a> after completion, then ask for feedback after each task.</p>
+	<p>An important thing about arrays is that every element has an index. The <em>index is the position of the element</em> in the array. And, arrays are zero-indexed, meaning the first element is at index 0. If you would like to access the first element, you would use <code>array[0]</code>.</p>
 
-    <h2>Calculating with variables</h2>
 
-	<div class="gridCorrector">
+	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
+			data-run="true" 
+			data-task-number="4a" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<ul>
+					<li>Create an array that has 4 different fruits.</li>
+					<li>Show the third fruit in the console.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+	<h2>Pseudocode</h2>
+
+	<p>Pseudocode is a way to write down logic in a more human way. If you struggle with writing code directly, pseudocode can help you. It helps you think through the logic and structure of your program without worrying about syntax (how the code looks).</p>
+
+	
+
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
 			data-run="true" 
 			data-readonly="false" 
-			data-height="160">
+			data-height="300">
+			<textarea class="title" hidden><p>Pseudocode - an example: count the number of elements in a list.</p></textarea>
 			<textarea class="js-editor-doc" hidden>
-var b = 3;
-var c = 3 + b; // you can mix variables with raw data
+// ============ Nederlands
+// SLA getallen OP ALS [1,2,3,4]
+// SLA geteldeGetallen OP ALS 0
 
-// But what if you want to add data to itself?
-c = c + 2; // Add 2 to itself
-c += 2; // This does exactly the same as the line above
-c++; // This adds one
-c--; // This substracts one
+// VOOR ELK getal IN getallen
+//     VERHOOG geteldeGetallen MET 1
+
+//============ English 
+// SET numbers TO [1,2,3,4]
+// SET countedNumbers TO 0
+
+// FOR EACH number IN numbers
+//    INCREASE countedNumbers WITH 1
 			</textarea>
 		</div>
 	</div>
 
-    <h2>Connecting data</h2>
-    <p>The + operator doubles as a way to connect data to eachother.</p>
+	<h2>Loopin' time</h2>
 
-	<div class="gridCorrector">
+	<h3>For...of loop</h3>
+	<p><span class="check"></span> The cleanest and shortest way to iterate over existing arrays.</p>
+	<p><span class="xmark"></span> No index available automatically.</p>
+
+	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
 			data-run="true" 
 			data-readonly="false" 
-			data-height="160">
+			data-height="230">
+			<textarea class="title" hidden><p>For...of loop</p></textarea>
 			<textarea class="js-editor-doc" hidden>
-console.log(1 + 2); // When used only with numbers it will always add them to eachother
-console.log("1" + 2); // The classic "one and two equals 12"
-console.log("My number is: " + 3);
-console.log("My number is:", 3); // An alternative is using the comma. Notice how we don't have to add an extra space in this case.
+var numbers = [1,2,3,4];
+var countedNumbers = 0;
+
+for(var number of numbers){
+    // De eerste keer dat dit uitgevoerd wordt, is 'number' gelijk aan '1'.
+    // Dit wordt 4x uitgevoerd, 1x voor elk element in de 'numbers' array.
+    countedNumbers++; // Tel 1 keer op
+    console.log('counted numbers:', countedNumbers);
+}
 			</textarea>
 		</div>
 	</div>
 
-    <h2>Math functions</h2>
-    <p>We won't be using these for a little while but do know that there are several useful math <em>functions</em>. Functions are types of code that do things. Here are the most common ones that will be useful in the future:</p>
-
-	<div class="gridCorrector">
+	<h3>For loop</h3>
+	<p><span class="check"></span> You can set the boundaries yourself.</p>
+	<p><span class="xmark"></span> More complex syntax, more room for errors. Not as clean.</p>
+	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
-			data-title="<p>JavaScript Editor <small>by yours truly</small></p>"
 			data-run="true" 
 			data-readonly="false" 
-			data-height="160">
+			data-height="230">
+			<textarea class="title" hidden><p>For loop</p></textarea>
 			<textarea class="js-editor-doc" hidden>
-var rand = Math.random(); // This generates a number between 0 and 1.
-var ceil = Math.ceil(rand); // This rounds the number upwards.
-var floor = Math.floor(rand); // This rounds the number downwards.
-var round = Math.round(rand); // This rounds the number to whatever's closer.
-console.log("rand:", rand, "ceil:", ceil, "floor:", floor, "round:", round); 
+// Detailed				
+for(var index = 0; index < 10; index++){ // For of loops automatically iterate through an array. For loops through what you provide.
+    // This goes from 0 to 9
+}
+
+// Compact - this is the most common way to write a for loop
+for(var i = 0; i < 10; i++){ }
+
+// You set the rules. You can also count down, for example
+for(var i = 10; i > 0; i--){ }
 			</textarea>
 		</div>
 	</div>
 
+	<h3>For loop - for arrays</h3>
+	<p>Want to loop through an array and have access to the index? Use a traditional for loop.</p>
 
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-readonly="false" 
+			data-height="210">
+			<textarea class="title" hidden><p>For loop</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var stopAt = brands3.length; // .length (a property of an array) gets the number of elements in the array (6).
+for(var i = 0; i < stopAt; i++){  // The for loops starts at 0 and stops at 5, in this case.
+    console.log(brands3[i]); // Using i, we can access the elements in the array, one by one.
+	
+	return; // Want to stop the loop early? This is the way. If this is executed, the loop will stop immediately, even if it hasn't finished yet.
+}
+
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Some tasks...</h2>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="4a" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="true"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<ul>
+					<li>In pseudo code; Create a simple for loop that goes from 1 to 12.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="4b" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<ul>
+					<li>Now, create a simple for loop that goes from 1 to 12.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
 
 
 	<h2>Conclusion/recap</h2>
@@ -112,8 +221,9 @@ console.log("rand:", rand, "ceil:", ceil, "floor:", floor, "round:", round);
 				{
 					"question": "What is an arithmetic operator?",
 					"options": [
-						"d",
-						"d"
+						"It's a type of symbol that's used to do mathematical stuff. ",
+						"It's a type of variable that stores numbers.",
+						"It's a type of function that does math."
 					],
 					"answer": 0,
 					"explanation": "It's a type of symbol(operator) that's used to do mathematical stuff. And things."
@@ -122,15 +232,6 @@ console.log("rand:", rand, "ceil:", ceil, "floor:", floor, "round:", round);
 		}
 		</script>
 	</div>
-
-	<!-- function insertWithCursor(text,cursorOffset){
-		return (view, completion, from, to) => {
-			view.dispatch({
-				changes:{from,to,insert:text},
-				selection:{anchor:from+cursorOffset}
-			});
-		};
-	} -->
 
 	<a href="/pages/js/loops.html" class="nextPageTeaser">Next: JS Basics - loops <i class="fa-solid fa-arrow-right-long"></i></a>
 </div>

@@ -27,7 +27,7 @@
     
     <editorlite>var x = y;</editorlite> 
     <p><cmd>ReferenceError: y is not defined at student-code.js:1:9</cmd></p>
-    <p class="descriptor">In this case you're trying to get a value of something that doesn't exist. 'y' is not defined. You have not made a variable called 'y'.</p>
+    <p class="descriptor">In this case you're trying to get a value of something that doesn't exist. 'y' is not defined. You have not made a variable called 'y'. Or maybe you just want 'y' to be a string?</p>
     <p class="descriptor">The error line also tells you that in this case the error's on line 1, position 9.</p>
 
     <editorlite>var x: 4;</editorlite>
@@ -37,6 +37,18 @@
     <editorlite>var result = "hello" * 2;</editorlite> 
     <p><cmd>NaN</cmd></p>
     <p class="descriptor">You're trying to do something mathematical with something that's NaN. Not a Number.</p>
+
+    <editorlite>console.log;</editorlite> 
+    <p><cmd>TypeError: console.log is not a function</cmd></p>
+    <p class="descriptor">You're trying to call something as a function which is not a function. In this case, console.log is a function, but you're not calling it as one. A function <strong>always</strong> needs parentheses () to be called.</p>
+
+    <editorlite>document.getElementById("exampleId").innerHTML = "Hi";</editorlite> 
+    <p><cmd>TypeError: Cannot set properties of null (setting 'innerHTML')</cmd></p>
+    <p class="descriptor">You're trying to access an element that doesn't exist in the DOM. Make sure the element with the specified ID exists before trying to manipulate it.</p>
+
+    <editorlite>Console.log("hi");</editorlite> 
+    <p><cmd>ReferenceError: Console is not defined</cmd></p>
+		<p class="descriptor">You might think that something's wrong with the console but JavaScript is <em>case-sensitive</em>. 'Console' is not the same as 'console'.</p>
 
     <h3>Some more that you'll start to run into soon..</h3>
     <editorlite>if(true { console.log("hi"); }</editorlite> 
@@ -53,11 +65,15 @@
 
     <editorlite>var num = 5; num();</editorlite>
     <p><cmd>TypeError: num is not a function</cmd></p>
-    <p class="descriptor">You're trying to execute something as a function which is not one.</p>
+    <p class="descriptor">You're trying to execute something as a function which is not one. Notice that the error message says exactly the same as with console.log but the case is different. log() is an actual function which you're calling wrong (as a property). num is just a number, not a function and you're trying to call it as a function.</p>
 
     <editorlite>var obj = { name: x }; obj.name();</editorlite>
     <p><cmd>TypeError: obj.name is not a function</cmd></p>
     <p class="descriptor">Of course it says that! It's a property.</p>
+
+    <editorlite>if(x = 5){ console.log("hi"); }</editorlite>
+    <p><cmd></cmd></p>
+    <p class="descriptor">A very common mistake that will throw you off. In this case, you're using a single equals sign '=' which is an assignment operator, instead of '==' or '===' which are comparison operators. So you're not checking if x is equal to 5, you're actually changing x to 5.</p>
 
     
     
@@ -65,7 +81,7 @@
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
 			data-run="true" 
-			data-task-number="2" 
+			data-task-number="2a - easy" 
 			data-task-docs="true"
 			data-task-internet="true"
 			data-task-team="false"
@@ -76,14 +92,36 @@
                 <p>Fix ALL the errors! You will notice that you only get one error. You see the next error once you've fixed the previous one. That's called progress!</p>
 			</textarea>
 			<textarea class="js-editor-doc" hidden>
-var x = y;
 var x: 4;
+var result = "hello" * 2;
+Console.log("hi");
+var x = y;
+console.log;
 if(true { console.log("hi"); }
-var result="hello"*2;
-var x=null; x.toUpperCase();
-var obj={}; console.log(obj.name.length);
-var num=5; num();
-var obj={ name:x }; obj.name();
+            </textarea>
+		</div>
+	</div>
+    
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="2b - medium" 
+			data-task-docs="true"
+			data-task-internet="true"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+                <p>Just like before, but way harder! Way more fun, yay!</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var x = null; x.toUpperCase(); // What do you think toUppercase() does?
+var obj = {}; console.log(obj.name.length);
+var num = 5; num();
+var obj = { name: x }; obj.name();
+document.getElementById("exampleId").innerHTML = "Hi"; // This requires a creative solution in this scenario.
             </textarea>
 		</div>
 	</div>
@@ -103,6 +141,8 @@ var obj={ name:x }; obj.name();
         <li>Comments to describe functionality that's not easily scanned.</li>
     </ul>
 
+	<p class="hint">You can comment out a line by pressing <kbd>CTRL</kbd> + <kbd>/</kbd> (works in every language) or by simply typing <cmd>//</cmd> in front of your comment</p>
+
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-2/4" 
 			data-run="false" 
@@ -113,10 +153,10 @@ var obj={ name:x }; obj.name();
 			</textarea>
 			<textarea class="js-editor-doc" hidden>
 function dosomething(text,cursordiff){
-    return(view,completion,from,to)=>{
+    return(view,completion,pos1,pos2)=>{
         view.dispatch({
-            changes:{from,to,insert:text},
-            selection:{anchor:from+cursordiff}
+            changes:{pos1,pos2,insert:text},
+            selection:{anchor:pos1+cursordiff}
         });
     };
 }
@@ -191,7 +231,7 @@ if (total > extraDiscountThreshold) {
 }
 
 console.log("Total price is:", total.toFixed(2));
-console.log(`Total price is: ${total.toFixed(2)}`);
+console.log(`Total price is: ${total.toFixed(2)}`); //alt
             </textarea>
 		</div>
 	</div>
@@ -214,22 +254,120 @@ console.log(`Total price is: ${total.toFixed(2)}`);
 	<h2>Quiz time!</h2>
 
 	<div class="quiz" id="#quiz">
-		<script type="application/json" class="quiz-data">
-		{
-			"name": "JS Basics Quiz",
-			"questions": [
-				{
-					"question": "How do you show a message in the console?",
-					"options": [
-						"print('hi there...')",
-						"console.log('excuse me what the-')",
-						"terminal.print('now what is go-')",
-						"echo('ok this is just g-')"
-					],
-					"answer": 1,
-					"explanation": "You first tell the console to do something. And that something is to log() a message. So you write console.log('your message here');"
-				}
-			]
+		<script type="application/json" class="quiz-data">{
+		"name": "JS Errors Quiz",
+		"questions": [
+			{
+			"question": "What kind of error is this?\n\nvar x = y;",
+			"options": [
+				"SyntaxError",
+				"ReferenceError",
+				"TypeError",
+				"NaN"
+			],
+			"answer": 1,
+			"explanation": "You're using a variable that does not exist. JavaScript throws a ReferenceError."
+			},
+			{
+			"question": "What is the problem here?\n\nvar x: 4;",
+			"options": [
+				"Wrong variable name",
+				"Missing quotes",
+				"Invalid syntax",
+				"x is not defined"
+			],
+			"answer": 2,
+			"explanation": "The ':' does not belong there. JavaScript doesn't understand this syntax."
+			},
+			{
+			"question": "What will this output?\n\nvar result = \"hello\" * 2;",
+			"options": [
+				"hellohello",
+				"2",
+				"NaN",
+				"Error"
+			],
+			"answer": 2,
+			"explanation": "You can't multiply a string. JavaScript gives NaN (Not a Number)."
+			},
+			{
+			"question": "What is wrong here?\n\nconsole.log;",
+			"options": [
+				"console does not exist",
+				"log is not defined",
+				"The function is not being called",
+				"Syntax error"
+			],
+			"answer": 2,
+			"explanation": "You're referencing the function, not calling it. You need ()."
+			},
+			{
+			"question": "Why does this fail?\n\nConsole.log(\"hi\");",
+			"options": [
+				"Missing quotes",
+				"Wrong function",
+				"Case sensitivity issue",
+				"Console is not loaded"
+			],
+			"answer": 2,
+			"explanation": "JavaScript is case-sensitive. 'Console' is not the same as 'console'."
+			},
+			{
+			"question": "What error will this cause?\n\nvar x = null;\nx.toUpperCase();",
+			"options": [
+				"ReferenceError",
+				"SyntaxError",
+				"TypeError",
+				"No error"
+			],
+			"answer": 2,
+			"explanation": "You can't call methods on null. That's a TypeError."
+			},
+			{
+			"question": "What is the issue here?\n\nvar num = 5;\nnum();",
+			"options": [
+				"num is undefined",
+				"num is not a function",
+				"Syntax error",
+				"Missing return"
+			],
+			"answer": 1,
+			"explanation": "You're trying to call a number like a function."
+			},
+			{
+			"question": "What happens here?\n\nif(x = 5){ console.log(\"hi\"); }",
+			"options": [
+				"SyntaxError",
+				"Nothing happens",
+				"It always logs 'hi'",
+				"ReferenceError"
+			],
+			"answer": 2,
+			"explanation": "You're assigning 5 to x, not comparing. The condition is always truthy."
+			},
+			{
+			"question": "What error will this cause?\n\nvar obj = {};\nconsole.log(obj.name.length);",
+			"options": [
+				"ReferenceError",
+				"TypeError",
+				"SyntaxError",
+				"No error"
+			],
+			"answer": 1,
+			"explanation": "obj.name is undefined, and you can't read .length of undefined."
+			},
+			{
+			"question": "Why might this fail?\n\ndocument.getElementById(\"exampleId\").innerHTML = \"Hi\";",
+			"options": [
+				"innerHTML is not valid",
+				"The element might not exist",
+				"getElementById is wrong",
+				"Syntax error"
+			],
+			"answer": 1,
+			"explanation": "If the element doesn't exist, getElementById returns null."
+			}
+		]
 		}
 		</script>
 	</div>

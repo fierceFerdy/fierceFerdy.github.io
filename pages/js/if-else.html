@@ -149,7 +149,7 @@ if(weekday == 'monday' || weekday == 'tuesday' || weekday == 'thursday' || weekd
 		</div>
 	</div>
 
-	<h2>The order of things</h2>
+	<h2>The order of things (and operators)</h2>
 	<p>We can check multiple conditions in a specific order using if...else...elseif statements. In each statement you can also use <em>logical operators like && (and) and || (or) to combine conditions</em>. Maybe you need multiple conditions to be true at the same time? You could of course nest multiple if...else statements in each other but it can quickly become hard to read and maintain.</p>
 	<p>Also, do not forgot that everything's being executed in order, from top to bottom. In the following example, the second condition will never be reached because the first condition is already true.</p>
 
@@ -179,22 +179,30 @@ if(weekday == 'monday'){
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
 			data-run="true" 
-			data-task-number="6b" 
-			data-task-docs="false"
+			data-task-number="6b - difficult" 
+			data-task-docs="true"
 			data-task-internet="false"
-			data-task-team="false"
+			data-task-team="true"
 			data-task-questions="true"
 			data-readonly="false" 
 			data-height="200">
 			<textarea class="title" hidden>
+				<p>You can use the docs or do teamwork. BUT it is highly recommended to try it yourself first! This will help you understand the logic better. Also, this (kind of) assignment will be on the test next lesson.</p>
 				<ul>
-					<li>Create a if-statement that does the following:</li>
-					<li>If myFavouriteNumber is - whatever your favourite number is - log a celebration</li>
-					<li>If not, log a consolation message</li>
+					<li>Create a "wake-up assistant":</li>
+					
+					<li>If it's a weekday (mon–fri) → log: "07:00 - Wake up!"</li>
+					<li>But if it's wednesday → log: "09:00 - Wake up!"</li>
+					<li>If it's weekend → log: "No alarm 🎉"</li>
+					<li>If it is a holiday → log: "Sleep all day 😴"</li>
+					<li>If you're sick → log: "Stay in bed 🤒"</li>
+					<li>Make sure you test the different scenarios</li>
 				</ul>
 			</textarea>
 			<textarea class="js-editor-doc" hidden>
-var myFavouriteNumber = 6;
+var weekday = 'monday';
+var isHoliday = false;
+var isSick = false;
 			</textarea>
 		</div>
 	</div>
@@ -205,18 +213,108 @@ var myFavouriteNumber = 6;
 	<div class="quiz" id="#quiz">
 		<script type="application/json" class="quiz-data">
 		{
-			"name": "JS Loops & Arrays Quiz",
+			"name": "JS If...Else Quiz",
 			"questions": [
 				{
-					"question": "What is the index of the first element in an array?",
+					"question": "What does an if-statement do?",
 					"options": [
-						"0",
-						"1",
-						"-1"
+						"It repeats code multiple times",
+						"It runs code based on a condition",
+						"It stores data"
+					],
+					"answer": 1,
+					"explanation": "An if-statement checks a condition and runs code if that condition is true."
+				},
+				{
+					"question": "What is the difference between '=' and '=='?",
+					"options": [
+						"No difference",
+						"'=' compares values, '==' assigns values",
+						"'=' assigns values, '==' compares values"
+					],
+					"answer": 2,
+					"explanation": "'=' is used to assign a value. '==' is used to compare values."
+				},
+				{
+					"question": "What happens when an if condition is false?",
+					"options": [
+						"The code inside the if still runs",
+						"The code is skipped",
+						"The program crashes"
+					],
+					"answer": 1,
+					"explanation": "If the condition is false, the code inside the if block is skipped."
+				},
+				{
+					"question": "What is the purpose of 'else if'?",
+					"options": [
+						"To repeat the same condition",
+						"To check another condition if the previous one was false",
+						"To stop the program"
+					],
+					"answer": 1,
+					"explanation": "else if allows you to check multiple conditions in order."
+				},
+				{
+					"question": "Why is using multiple separate 'if' statements sometimes a bad idea?",
+					"options": [
+						"They run too fast",
+						"They can all execute instead of just one",
+						"They don't work with variables"
+					],
+					"answer": 1,
+					"explanation": "Separate if statements all run independently, which can lead to multiple outputs instead of one."
+				},
+				{
+					"question": "What does '||' mean?",
+					"options": [
+						"AND",
+						"OR",
+						"NOT"
+					],
+					"answer": 1,
+					"explanation": "|| means OR — only one condition needs to be true."
+				},
+				{
+					"question": "What does '&&' mean?",
+					"options": [
+						"AND",
+						"OR",
+						"NOT"
 					],
 					"answer": 0,
-					"explanation": "JavaScript arrays are zero-indexed, so the first element is at index 0."
+					"explanation": "&& means AND — both conditions must be true."
 				},
+				{
+					"question": "What will this code log?\nvar x = 5;\nif(x == 5){ console.log('A'); } else { console.log('B'); }",
+					"options": [
+						"A",
+						"B",
+						"Nothing"
+					],
+					"answer": 0,
+					"explanation": "x equals 5, so the if condition is true and 'A' is logged."
+				},
+				{
+					"question": "What will this code log?\nvar x = 5;\nif(x == 3){ console.log('A'); } else { console.log('B'); }",
+					"options": [
+						"A",
+						"B",
+						"Nothing"
+					],
+					"answer": 1,
+					"explanation": "x is not 3, so the else block runs."
+				},
+				{
+					"question": "Why does order matter in if...else if statements?",
+					"options": [
+						"Because JavaScript reads from bottom to top",
+						"Because the first true condition stops the rest",
+						"Because else if always runs last"
+					],
+					"answer": 1,
+					"explanation": "Once a condition is true, the rest of the chain is ignored."
+				}
 			]
 		}
 		</script>

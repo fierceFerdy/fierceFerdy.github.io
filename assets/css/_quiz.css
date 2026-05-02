@@ -158,6 +158,20 @@
 		}
     }
 
+	.quiz-start{
+		border: none;
+		padding: 1rem 1.5rem;
+		background-color: var(--lime);
+		color: black;
+		font-weight: bold;
+		cursor: pointer;
+		border-radius: var(--radius);
+		margin-bottom: 1.5rem;
+		&::before{
+			content: none;
+		}
+	}
+
 	.quiz-retry{
 		margin-bottom: 2rem;
 		&::before{
@@ -180,6 +194,63 @@
 		font-size: 1.6rem;
 		margin-bottom: 1rem;
 		font-weight: normal;
+	}
+
+	.quiz-result-meta{
+		font-size: 1.4rem;
+		opacity: 0.9;
+		margin-bottom: 1.5rem;
+	}
+
+	.quiz-highscores{
+		padding-top: 2rem;
+
+		h3{
+			margin: 0 0 2rem;
+		}
+
+		.quiz-highscores-filters{
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1.25rem;
+			margin-bottom: 1rem;
+
+			label{
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				font-size: 1.4rem;
+				font-weight: normal;
+				color: white;
+			}
+
+			input{
+				margin: 0;
+			}
+		}
+
+		.quiz-highscores-list{
+			margin: 0 0 1rem;
+			padding-left: 2rem;
+			font-size: 1.4rem;
+
+			li{
+				margin-bottom: 0.5rem;
+
+				&.current{
+					font-weight: bold;
+					color: var(--lime);
+				}
+			}
+		}
+
+		.quiz-highscores-current{
+			margin-top: -.6rem;
+			margin-left: -.6rem;
+			
+			font-weight: bold;
+			color: var(--lime);
+		}
 	}
 
 	&.correct{

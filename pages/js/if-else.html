@@ -20,16 +20,47 @@
 <div class="content">
 	
 	<h1>JavaScript 101 <small>/if...else</small></h1>
-
+	
 	<h2>If...else</h2>
+	<p>If...else statements allow you to execute different code based on a condition. Let's have a look:</p>
 
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-full" 
 			data-run="false" 
 			data-readonly="false" 
 			data-height="160">
-			<textarea class="title" hidden><p>You can create arrays in several ways.</p></textarea>
+			<textarea class="title" hidden><p>Pseudocode example</p></textarea>
 			<textarea class="js-editor-doc" hidden>
+// SET isItFun TO false
+
+// IF isItFun IS false THEN
+//     LOG 'ow snaps'
+//     SET isItFun TO true // More fun is always better, right?
+// ELSE
+//     LOG 'yay'
+// END IF
+			</textarea>
+		</div>
+	</div>
+
+	<h3>How it looks like in JS</h3>
+	<p>Feel free to play around with the code below</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="true" 
+			data-readonly="false" 
+			data-height="160">
+			<textarea class="title" hidden><p>If...else example in JavaScript</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var isItFun = false; // "=" x 1, is to change data
+
+if(isItFun == false){ // "=" x 2, is to compare data - are they the same?
+    console.log('awwww :c');
+    isItFun = true;
+}else{
+    console.log('yay! :D');
+}
 			</textarea>
 		</div>
 	</div>
@@ -37,7 +68,7 @@
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
 			data-run="true" 
-			data-task-number="4a" 
+			data-task-number="6" 
 			data-task-docs="false"
 			data-task-internet="false"
 			data-task-team="false"
@@ -46,11 +77,125 @@
 			data-height="200">
 			<textarea class="title" hidden>
 				<ul>
-					<li>Create an array that has 4 different fruits.</li>
-					<li>Show the third fruit in the console.</li>
+					<li>Create a if-statement that does the following:</li>
+					<li>If myFavouriteNumber is - whatever your favourite number is - log a celebration</li>
+					<li>If not, log a consolation message</li>
 				</ul>
 			</textarea>
-			<textarea class="js-editor-doc" hidden></textarea>
+			<textarea class="js-editor-doc" hidden>
+var myFavouriteNumber = 6;
+			</textarea>
+		</div>
+	</div>
+
+	<h2>If...else...and more?</h2>
+
+	<p>As you can see, If...else statements allow you to execute different code based on a condition.</p>
+	<p>You too do things differently based on certain conditions. You probably wake up earlier on weekdays than on weekends, right?</p>
+
+	<h3>Let's have a look at how that would work</h3>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="true" 
+			data-readonly="false" 
+			data-height="160">
+			<textarea class="title" hidden><p>If...else...elseif</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var weekday = 'friday'; 
+var naughtyName = '***';
+
+if(weekday == 'monday'){ 
+	console.log('7:00 - time to wake up, '+naughtyName+'!');
+}else if(weekday == 'tuesday'){ 
+	console.log('7:00 - time to wake up, '+naughtyName+'!');
+}else if(weekday == 'wednesday'){ 
+	console.log('9:00 - time to wake up, '+naughtyName+'!');
+}else if(weekday == 'thursday'){ 
+	console.log('7:00 - time to wake up, '+naughtyName+'!');
+}else if(weekday == 'friday'){ 
+	console.log('7:00 - time to wake up, '+naughtyName+'!');
+}else{
+    console.log('Ahhhhhh');
+}
+			</textarea>
+		</div>
+	</div>
+
+	<p>As you can see you check multiple conditions using else if statements. Once one of the conditions is met, the corresponding block of code is executed, and the rest are ignored.</p>
+	<p>Make sure you don't write multiple if-statements for what could be handled with else if statements.</p>
+	<p>And still, that code has a lot of repetition. We can do WAY better!</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="false" 
+			data-readonly="false" 
+			data-height="160">
+			<textarea class="title" hidden><p>Logical operators</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var weekday = 'friday'; 
+var naughtyName = '***';
+
+if(weekday == 'monday' || weekday == 'tuesday' || weekday == 'thursday' || weekday == 'friday'){ 
+	console.log('7:00 - time to wake up, '+naughtyName+'!');
+
+}else if(weekday == 'wednesday'){ 
+	console.log('9:00 - time to wake up, '+naughtyName+'!');
+
+}else{
+    console.log('Ahhhhhh');
+}
+			</textarea>
+		</div>
+	</div>
+
+	<h2>The order of things</h2>
+	<p>We can check multiple conditions in a specific order using if...else...elseif statements. In each statement you can also use <em>logical operators like && (and) and || (or) to combine conditions</em>. Maybe you need multiple conditions to be true at the same time? You could of course nest multiple if...else statements in each other but it can quickly become hard to read and maintain.</p>
+	<p>Also, do not forgot that everything's being executed in order, from top to bottom. In the following example, the second condition will never be reached because the first condition is already true.</p>
+
+	
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="false" 
+			data-readonly="false" 
+			data-height="160">
+			<textarea class="title" hidden><p>A poorly ordered if...else...elseif example</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var weekday = 'monday'; 
+var naughtyName = '***';
+
+if(weekday == 'monday'){ 
+	console.log('Good of you to not use naughty names, '+naughtyName+'! You can sleep in today :)');
+
+}else if(weekday == 'monday' && naughtyName == '***'){ 
+	console.log('6:00 - time to wake up, you scoundrel!');
+
+}
+// Switch the statements around and the second condition (now the first) will suddenly be reached.
+			</textarea>
+		</div>
+	</div>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="6b" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<ul>
+					<li>Create a if-statement that does the following:</li>
+					<li>If myFavouriteNumber is - whatever your favourite number is - log a celebration</li>
+					<li>If not, log a consolation message</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var myFavouriteNumber = 6;
+			</textarea>
 		</div>
 	</div>
 

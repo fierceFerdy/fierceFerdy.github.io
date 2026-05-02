@@ -1,210 +1,428 @@
+//=================================================
+// ------------ Quiz
+// @version 02/05/2026
+// @author Ferdy <ferdy.fiers@gmail.com>
+//=================================================
+
+var QUIZ_TARGET_SECONDS_PER_QUESTION = 15;
+var QUIZ_SCORE_API_URL = `${window.location.protocol}//${window.location.hostname}:3030/api/quiz-scores`;
+
 document.querySelectorAll(".quiz").forEach(initQuizBlock);
 
+
+
+//=================================================
+// ------------ Init
+//=================================================
+
 function initQuizBlock(block) {
-    const dataScript = block.querySelector(".quiz-data");
-    if (!dataScript) return;
-    var quizData;
+	var dataScript = block.querySelector(".quiz-data");
+	if (!dataScript) return;
 
-    try {
-        quizData = JSON.parse(dataScript.textContent);
-    } catch (error) {
-        block.innerHTML = "<p>Quiz data is invalid.</p>";
-        return;
-    }
+	var quizData;
+	try {
+		quizData = JSON.parse(dataScript.textContent);
+	} catch {
+		block.innerHTML = "<p>Quiz data is invalid.</p>";
+		return;
+	}
 
-    const state = {
-        currentIndex: 0,
-        answeredCount: 0,
-        correctCount: 0,
-		questions: quizData.questions || [],
-		quizName: quizData.name || "Unnamed Quiz"
-    };
+	var state = {
+		currentIndex:    0,
+		answeredCount:   0,
+		correctCount:    0,
+		started:         false,
+		startedAt:       null,
+		finishedAt:      null,
+		elapsedMs:       0,
+		timeMultiplier:  1,
+		finalScore:      0,
+		playerName:      "",
+		savedAttemptId:  null,
+		questions:       quizData.questions || [],
+		quizName:        quizData.name || "Unnamed Quiz"
+	};
 
-    renderQuiz(block, quizData, state);
+	// Prevent quiz clicks from bubbling outside the block
+	block.addEventListener("click", (e) => e.stopPropagation());
+
+	renderQuiz(block, state);
 }
 
-function renderQuiz(block, quizData, state) {
-    block.innerHTML = "";
 
-    const section = document.createElement("section");
-    block.appendChild(section);
 
-    const footer = document.createElement("footer");
-    block.appendChild(footer);
+//=================================================
+// ------------ Render
+//=================================================
 
-    renderCurrentQuestion(section, footer, state);
+function renderQuiz(block, state) {
+	block.innerHTML = "";
+
+	var section = document.createElement("section");
+	var footer  = document.createElement("footer");
+	block.appendChild(section);
+	block.appendChild(footer);
+
+	if (!state.started) {
+		renderStartState(section, footer, state);
+	} else {
+		renderCurrentQuestion(section, footer, state);
+	}
 }
 
-function renderCurrentQuestion(body, footer, state) {
-    body.innerHTML = "";
-    footer.innerHTML = "";
+
+
+function renderStartState(body, footer, state) {
 	body.parentElement.classList.remove("correct", "wrong");
 
-    if (state.currentIndex >= state.questions.length) {
-        renderFinishedState(body, footer, state);
-        return;
-    }
+	var intro = document.createElement("p");
+	intro.className = "quiz-question";
+	intro.textContent = `Ready? This quiz has ${state.questions.length} question${state.questions.length === 1 ? "" : "s"}.`;
+	body.appendChild(intro);
 
-    const questionData = state.questions[state.currentIndex];
+	var startButton = document.createElement("button");
+	startButton.className = "quiz-start";
+	startButton.type = "button";
+	startButton.textContent = "Start quiz";
+	body.appendChild(startButton);
 
-	// Show question
-    const questionText = document.createElement("p");
-    questionText.className = "quiz-question";
+	startButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		state.playerName = String(localStorage.getItem("visitorName") || "").trim();
+		state.started    = true;
+		state.startedAt  = Date.now();
+		renderCurrentQuestion(body, footer, state);
+	});
 
-	if(state.questions.length > 1){
-		questionText.innerHTML = `${state.currentIndex + 1}. ${questionData.question}`;
-	} else {
-		questionText.innerHTML = questionData.question;
+	renderFooter(footer, state, false, true);
+}
+
+
+
+function renderCurrentQuestion(body, footer, state) {
+	body.innerHTML   = "";
+	footer.innerHTML = "";
+	body.parentElement.classList.remove("correct", "wrong");
+
+	if (state.currentIndex >= state.questions.length) {
+		renderFinishedState(body, footer, state);
+		return;
 	}
-    body.appendChild(questionText);
 
-	// Show options
-    const optionsWrap = document.createElement("div");
-    optionsWrap.className = "quiz-options";
-    body.appendChild(optionsWrap);
+	var questionData = state.questions[state.currentIndex];
 
-    questionData.options.forEach((option, optionIndex) => {
-        const button = document.createElement("button");
-        button.textContent = option;
+	// Question text
+	var questionText = document.createElement("p");
+	questionText.className = "quiz-question";
+	questionText.innerHTML = state.questions.length > 1
+		? `${state.currentIndex + 1}. ${questionData.question}`
+		: questionData.question;
+	body.appendChild(questionText);
 
-        button.addEventListener("click", () => {
-            const isCorrect = optionIndex === questionData.answer;
-            state.answeredCount++;
+	// Answer options
+	var optionsWrap = document.createElement("div");
+	optionsWrap.className = "quiz-options";
+	body.appendChild(optionsWrap);
 
-			// Show explanation
+	questionData.options.forEach((option, optionIndex) => {
+		var button = document.createElement("button");
+		button.type = "button";
+		button.textContent = option;
+
+		button.addEventListener("click", (e) => {
+			e.preventDefault();
+			var isCorrect = optionIndex === questionData.answer;
+			state.answeredCount++;
+
 			body.innerHTML = "";
-            const title = document.createElement("h2");
-            const explanation = document.createElement("p");
+
+			var title       = document.createElement("h2");
+			var explanation = document.createElement("p");
 
 			if (isCorrect) {
 				state.correctCount++;
-
 				body.parentElement.classList.add("correct");
-				title.textContent = "Correct! 🎉";
+				title.textContent       = "Correct! 🎉";
 				explanation.textContent = questionData.explanation;
-
 			} else {
 				body.parentElement.classList.add("wrong");
-				title.textContent = "No, you dummy! 😭";
+				title.textContent       = "No, you dummy! 😭";
 				explanation.textContent = questionData.explanation;
 			}
-            body.appendChild(title);
-            body.appendChild(explanation);
 
-            renderFooter(footer, state, true);
-        });
+			body.appendChild(title);
+			body.appendChild(explanation);
+			renderFooter(footer, state, true);
+		});
 
-        optionsWrap.appendChild(button);
-    });
+		optionsWrap.appendChild(button);
+	});
 
-    renderFooter(footer, state, false);
+	renderFooter(footer, state, false);
 }
 
-function renderFooter(footer, state, showNextButton) {
+
+
+function renderFooter(footer, state, showNextButton, hideProgress = false) {
 	footer.innerHTML = "";
 
-	// Next button
-    if (showNextButton) {
-		const nextButton = document.createElement("button");
-		nextButton.className = "quiz-next";
+	if (showNextButton) {
+		var nextButton = document.createElement("button");
+		nextButton.className   = "quiz-next";
+		nextButton.type        = "button";
 		nextButton.textContent = state.currentIndex === state.questions.length - 1 ? "Finish quiz" : "Next question";
 		footer.appendChild(nextButton);
 
-		nextButton.addEventListener("click", () => {
+		nextButton.addEventListener("click", (e) => {
+			e.preventDefault();
+			e.stopPropagation();
 			state.currentIndex++;
-			renderCurrentQuestion(
-				footer.parentElement.querySelector("section"),
-				footer,
-				state
-			);
+			renderCurrentQuestion(footer.parentElement.querySelector("section"), footer, state);
 		});
 	}
 
-	// Show progress
-    const progress = document.createElement("div");
-    progress.className = "quiz-progress";
-    progress.textContent = `Answered: ${state.answeredCount}/${state.questions.length} · Correct: ${state.correctCount}`;
-    footer.appendChild(progress);
+	if (hideProgress) return;
 
-	// Show a line which fills up more and more based on the progress
-	const progressBar = document.createElement("div");
-	progressBar.className = "quiz-progress-bar";
-	const progressFill = document.createElement("div");
-	progressFill.className = "quiz-progress-fill";
+	var progress = document.createElement("div");
+	progress.className   = "quiz-progress";
+	progress.textContent = `Answered: ${state.answeredCount}/${state.questions.length} · Correct: ${state.correctCount}`;
+	footer.appendChild(progress);
+
+	var progressBar  = document.createElement("div");
+	var progressFill = document.createElement("div");
+	progressBar.className    = "quiz-progress-bar";
+	progressFill.className   = "quiz-progress-fill";
 	progressFill.style.width = `${(state.answeredCount / state.questions.length) * 100}%`;
 	progressBar.appendChild(progressFill);
 	footer.appendChild(progressBar);
 }
 
+
+
 function renderFinishedState(body, footer, state) {
-    const message = document.createElement("p");
-    message.className = "quiz-question";
-    message.textContent = `Finished. Score: ${state.correctCount}/${state.questions.length}`;
-	if(state.correctCount === state.questions.length) message.textContent += " 🎉";
-    body.appendChild(message);
+	state.finishedAt     = Date.now();
+	state.elapsedMs      = Math.max(0, state.finishedAt - (state.startedAt ?? state.finishedAt));
+	state.timeMultiplier = roundScore(getTimeMultiplier(state.elapsedMs, state.questions.length));
+	state.finalScore     = roundScore(state.correctCount * state.timeMultiplier);
 
-	saveQuizAttempt(state.quizName, state.correctCount, state.questions.length);
+	// Result summary
+	var message = document.createElement("p");
+	message.className   = "quiz-question";
+	message.textContent = `Finished. Correct answers: ${state.correctCount}/${state.questions.length}`;
+	if (state.correctCount === state.questions.length) message.textContent += " 🎉";
+	body.appendChild(message);
 
-	// Show visual result
-	if(state.correctCount === state.questions.length){
+	// var scoreMeta = document.createElement("p");
+	// scoreMeta.className   = "quiz-result-meta";
+	// scoreMeta.textContent = `Time: ${formatDuration(state.elapsedMs)} · Multiplier: x${state.timeMultiplier.toFixed(4)} · Final score: ${state.finalScore.toFixed(4)}`;
+	// body.appendChild(scoreMeta);
+
+	// Correct/wrong border + party GIF
+	if (state.correctCount === state.questions.length) {
 		body.parentElement.classList.add("correct");
-
-		// Show party GIF
-		var randomNum = Math.floor(Math.random() * 31) + 1;
-		const partyImage = document.createElement("img");
-		partyImage.src = `/assets/img/party${randomNum}.gif`;
+		var partyImage = document.createElement("img");
+		partyImage.src       = `/assets/img/party${Math.floor(Math.random() * 31) + 1}.gif`;
 		partyImage.className = "party";
 		body.appendChild(partyImage);
-		
-	} else{
+	} else {
 		body.parentElement.classList.add("wrong");
 	}
 
-	// Add retry button
-	const retryButton = document.createElement("button");
+	// Leaderboard (loaded async)
+	var leaderboardWrap = document.createElement("div");
+	leaderboardWrap.className = "quiz-highscores";
+	body.appendChild(leaderboardWrap);
+	renderHighscoreLoading(leaderboardWrap);
+
+	// Retry button
+	var retryButton = document.createElement("button");
 	retryButton.textContent = "Retry quiz";
-	retryButton.className = "quiz-retry";
+	retryButton.className   = "quiz-retry";
+	retryButton.type        = "button";
 	footer.appendChild(retryButton);
 
-	retryButton.addEventListener("click", () => {
-		state.currentIndex = 0;
-		state.answeredCount = 0;
-		state.correctCount = 0;
-		renderQuiz(footer.parentElement, { questions: state.questions }, state);
+	retryButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		Object.assign(state, {
+			currentIndex: 0, answeredCount: 0, correctCount: 0,
+			started: false, startedAt: null, finishedAt: null,
+			elapsedMs: 0, timeMultiplier: 1, finalScore: 0, savedAttemptId: null
+		});
+		renderQuiz(footer.parentElement, state);
 	});
+
+	saveAndLoadHighscores(leaderboardWrap, state);
 }
 
-function saveQuizAttempt(quizName, correctCount, totalQuestions) {
-	const storageKey = "manual.quizAttempts";
-	const records = readRecords(storageKey);
-	const tries = records.filter(record => record.quizName === quizName).length + 1;
-	const now = new Date();
 
-	records.push({
-		quizName,
-		score: `${correctCount}/${totalQuestions}`,
-		correctCount,
-		totalQuestions,
-		tries,
-		date: now.toLocaleDateString(),
-		time: now.toLocaleTimeString()
-	});
 
+
+
+//=================================================
+// ------------ Highscores
+//=================================================
+
+async function saveAndLoadHighscores(container, state) {
 	try {
-		localStorage.setItem(storageKey, JSON.stringify(records));
+		var saved = await saveQuizAttempt(state);
+		state.savedAttemptId = saved.id ?? null;
+
+		var scores = await getQuizScores(state.quizName);
+		renderHighscores(container, scores, state);
 	} catch (error) {
-		console.warn("Could not save quiz attempt.", error);
+		console.warn("Highscore error:", error);
+		renderHighscoreError(container, error);
 	}
 }
 
-function readRecords(storageKey) {
-	try {
-		const raw = localStorage.getItem(storageKey);
-		if (!raw) return [];
-		const parsed = JSON.parse(raw);
-		return Array.isArray(parsed) ? parsed : [];
-	} catch (error) {
-		console.warn("Could not read saved records.", error);
-		return [];
-	}
+async function saveQuizAttempt(state) {
+	var response = await fetch(QUIZ_SCORE_API_URL, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({
+			quizName:       state.quizName,
+			playerName:     state.playerName,
+			correctCount:   state.correctCount,
+			totalQuestions: state.questions.length,
+			elapsedMs:      state.elapsedMs,
+			timeMultiplier: state.timeMultiplier,
+			finalScore:     state.finalScore
+		})
+	});
+
+	if (!response.ok) throw new Error(`Save failed (${response.status})`);
+	var data = await response.json();
+	if (!data?.success || !data?.record) throw new Error("Invalid save response");
+	return data.record;
+}
+
+async function getQuizScores(quizName) {
+	var response = await fetch(`${QUIZ_SCORE_API_URL}?quizName=${encodeURIComponent(quizName)}`);
+	if (!response.ok) throw new Error(`Load failed (${response.status})`);
+	var data = await response.json();
+	if (!data?.success || !Array.isArray(data?.scores)) throw new Error("Invalid scores response");
+	return data.scores;
+}
+
+function renderHighscoreLoading(container) {
+	container.innerHTML = `<p class="quiz-result-meta">Saving score and loading highscores...</p>`;
+}
+
+function renderHighscoreError(container, error) {
+	container.innerHTML = `
+		<p class="quiz-result-meta">Could not load highscores. ${error?.message ?? ""}</p>
+		<p class="quiz-result-meta">Make sure the highscore server is running at ${QUIZ_SCORE_API_URL}.</p>
+	`;
+}
+
+function renderHighscores(container, scores, state) {
+	var filters = { firstTriesOnly: false, perfectOnly: false };
+
+	var draw = () => {
+		container.innerHTML = "";
+
+		var title = document.createElement("h3");
+		title.textContent = "Top 10 Highscores";
+		container.appendChild(title);
+
+		var filterRow = document.createElement("div");
+		filterRow.className = "quiz-highscores-filters";
+		filterRow.appendChild(makeCheckbox("First tries only", filters.firstTriesOnly, (v) => { 
+			filters.firstTriesOnly = v; draw(); 
+		}));
+		filterRow.appendChild(makeCheckbox("Perfect scores only", filters.perfectOnly, (v) => { 
+			filters.perfectOnly = v; draw(); 
+		}));
+		container.appendChild(filterRow);
+
+		var top10 = scores
+			.filter((e) => !filters.firstTriesOnly || Number(e.attemptNumber) === 1)
+			.filter((e) => !filters.perfectOnly    || Number(e.correctCount) === Number(e.totalQuestions))
+			.sort((a, b) => {
+				if (Number(b.finalScore) !== Number(a.finalScore)) return Number(b.finalScore) - Number(a.finalScore);
+				if (Number(a.elapsedMs)  !== Number(b.elapsedMs))  return Number(a.elapsedMs)  - Number(b.elapsedMs);
+				return String(a.createdAt ?? "").localeCompare(String(b.createdAt ?? ""));
+			})
+			.slice(0, 10);
+
+		if (top10.length === 0) {
+			var empty = document.createElement("p");
+			empty.className   = "quiz-result-meta";
+			empty.textContent = "No highscores found for this filter.";
+			container.appendChild(empty);
+			return;
+		}
+
+		var list = document.createElement("ol");
+		list.className = "quiz-highscores-list";
+
+		var madeTop10 = false;
+
+		top10.forEach((entry) => {
+			var isCurrent = state.savedAttemptId && entry.id === state.savedAttemptId;
+			if (isCurrent) madeTop10 = true;
+
+			var item = document.createElement("li");
+			item.className = isCurrent ? "current" : "";
+			item.append(`${entry.playerName} · score ${Number(entry.finalScore || 0).toFixed(4)} · ${entry.correctCount}/${entry.totalQuestions} · ${formatDuration(entry.elapsedMs)} · try #${entry.attemptNumber}`);
+			list.appendChild(item);
+		});
+
+		container.appendChild(list);
+
+		// If the current attempt didn't make the top 10, show it separately at the bottom with its rank
+		if (state.savedAttemptId && !madeTop10) {
+			var cEntry = scores.find((e) => e.id === state.savedAttemptId); //currentEntry
+			if (cEntry) {
+				var rank = scores
+					.filter((e) => Number(e.finalScore) > Number(cEntry.finalScore))
+					.filter((e) => !(filters.firstTriesOnly && Number(e.attemptNumber) !== 1))
+					.filter((e) => !(filters.perfectOnly    && Number(e.correctCount) !== Number(e.totalQuestions)))
+					.length + 1;
+
+				var current = document.createElement("p");
+				current.className = "quiz-highscores-current";
+				current.textContent = `${rank}. ${cEntry.playerName} · score ${Number(cEntry.finalScore || 0).toFixed(4)} · ${cEntry.correctCount}/${cEntry.totalQuestions} · ${formatDuration(cEntry.elapsedMs)} · try #${cEntry.attemptNumber}`;
+				container.appendChild(current);
+			}
+
+		}
+	};
+
+	draw();
+}
+
+
+
+//=================================================
+// ------------ Helpers
+//=================================================
+
+function makeCheckbox(label, checked, onChange) {
+	var labelEl = document.createElement("label");
+	var input   = document.createElement("input");
+	input.type    = "checkbox";
+	input.checked = checked;
+	input.addEventListener("change", () => onChange(input.checked));
+	labelEl.appendChild(input);
+	labelEl.append(` ${label}`);
+	return labelEl;
+}
+
+function getTimeMultiplier(elapsedMs, questionCount) {
+	var targetMs = Math.max(1, questionCount) * QUIZ_TARGET_SECONDS_PER_QUESTION * 1000;
+	return targetMs / Math.max(1, elapsedMs);
+}
+
+function formatDuration(ms) {
+	var total   = Math.max(0, Math.floor(ms || 0));
+	var minutes = Math.floor(total / 60000);
+	var seconds = Math.floor((total % 60000) / 1000);
+	var millis  = total % 1000;
+	return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${String(millis).padStart(3, "0")}`;
+}
+
+function roundScore(value, decimals = 6) {
+	var factor = 10 ** decimals;
+	return Math.round((Number(value) + Number.EPSILON) * factor) / factor;
 }

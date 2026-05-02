@@ -52,7 +52,8 @@ if (activeTask) {
 
 // Toggle checkmarks
 document.addEventListener("click", (e) => {
-	if(e.target.parentElement.parentElement.parentElement.classList.contains("js-editor")){
+	const grandparent = e.target?.parentElement?.parentElement?.parentElement;
+	if(grandparent?.classList.contains("js-editor")){
 		e.target.classList.toggle("check");
 	}
 });

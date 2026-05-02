@@ -150,7 +150,8 @@ document.addEventListener("DOMContentLoaded", async function() {
 	*/
 	const navItems = document.querySelectorAll(".navParent");
 	navItems.forEach(item => {
-		item.addEventListener("click", function() {
+		item.addEventListener("click", function(e) {
+			e.preventDefault();
 			// remove all previous open classes from .dropdownWrapper
 			const dropdownWrappers = document.querySelectorAll(".dropdownWrapper");
 			dropdownWrappers.forEach(wrapper => {
@@ -428,6 +429,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 	
 	const plebModeButton = document.getElementById("plebMode");
 	plebModeButton.addEventListener("click", function() {
+
 	});
 
 

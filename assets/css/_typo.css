@@ -197,6 +197,39 @@ p, li{
 
 p{
 
+	&.check, &.xmark{
+		&::before{
+			content: "";
+			display: inline-block;
+			margin-right: 8px;
+			font-family: "FontAwesome";
+		}
+	}
+
+	&.check{
+		top: 0;
+
+		&::before{
+			font-size: .9em;
+			content: "\f00c";
+			color: var(--lime);
+		}
+
+		& + .xmark{
+			margin-top: 0;
+		}
+	}
+
+	&.xmark{
+		top: 1px;
+
+		&::before{
+			font-size: .95em;
+			content: "\f00d";
+			color: var(--red);
+		}
+	}
+
 	+ p{
 		margin-top: 1rem;
 	}

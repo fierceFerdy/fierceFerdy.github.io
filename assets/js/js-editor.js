@@ -84,7 +84,8 @@ function createLiteEditor(container) {
 function createEditor(container) {
 
     // Build DOM
-	container.style.minHeight = container.dataset.height + "px";
+	// if(container.dataset.height) container.style.minHeight = container.dataset.height + "px";
+	if(container.dataset.height) container.style.height = container.dataset.height + "px";
     const header = document.createElement("header");
 	const title = container.querySelector(".title");
 	if(title && title.value != '') header.innerHTML = title.value;
@@ -234,13 +235,18 @@ async function runCode(code, terminal, container, action = 'run') {
 
 }
 
+
+
 function getInitialDoc(container, type = 'normal') {
     const textareaDoc = container.querySelector(".js-editor-doc");
 	
 	return textareaDoc.value
 		.replace(/\r\n/g, "\n")
-		.replace(/^\n/, ""); // optional: remove first blank line from formatting
+		.replace(/^\n/, "") // optional: remove first blank line from formatting
+		.replace(/\s+$/, ""); // Remove trailing whitespace/newlines if needed:
 }
+
+
 
 function drawTerminal(container) {
     var terminal = document.createElement("pre");
@@ -270,6 +276,8 @@ function drawTerminal(container) {
 
     return terminal;
 }
+
+
 
 function insertWithCursor(text, cursorOffset) {
     return (view, completion, from, to) => {

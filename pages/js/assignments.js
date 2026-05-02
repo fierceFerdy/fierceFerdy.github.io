@@ -221,8 +221,8 @@
 //= DOCS V ===== INTERNET V ===== TEAM X ===== QUESTIONS V =============================
 //======================================================================================
 //== ASSIGNMENT 5 ====================================================================/6
-// [] Zoek minstens 3 andere loop-functies op (schrijf de benaming neer). 
-// [] Vervolgens, doe een poging om er zoveel mogelijk te laten werken
+// [] 
+// [] 
 
 
 

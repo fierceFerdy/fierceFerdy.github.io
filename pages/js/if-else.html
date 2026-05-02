@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The manual.</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<script src="/assets/js/main.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+</head>
+
+<body>
+	
+
+
+<div class="content">
+	
+	<h1>JavaScript 101 <small>/if...else</small></h1>
+
+	<h2>If...else</h2>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="false" 
+			data-readonly="false" 
+			data-height="160">
+			<textarea class="title" hidden><p>You can create arrays in several ways.</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+			</textarea>
+		</div>
+	</div>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="4a" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<ul>
+					<li>Create an array that has 4 different fruits.</li>
+					<li>Show the third fruit in the console.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+
+	<h2>Conclusion/recap</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS Loops & Arrays Quiz",
+			"questions": [
+				{
+					"question": "What is the index of the first element in an array?",
+					"options": [
+						"0",
+						"1",
+						"-1"
+					],
+					"answer": 0,
+					"explanation": "JavaScript arrays are zero-indexed, so the first element is at index 0."
+				},
+			]
+		}
+		</script>
+	</div>
+
+	<a href="/pages/js/loops.html" class="nextPageTeaser">Next: JS Basics - loops <i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
+
+</body>
+</html>

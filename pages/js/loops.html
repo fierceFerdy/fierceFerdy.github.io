@@ -102,8 +102,8 @@ var brands3 = [ // Does the same but is cleaner when we have more data.
 	<h2>Loopin' time</h2>
 
 	<h3>For...of loop</h3>
-	<p><span class="check"></span> The cleanest and shortest way to iterate over existing arrays.</p>
-	<p><span class="xmark"></span> No index available automatically.</p>
+	<p class="check">The cleanest and shortest way to iterate over existing arrays.</p>
+	<p class="xmark">No index available automatically.</p>
 
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
@@ -126,8 +126,8 @@ for(var number of numbers){
 	</div>
 
 	<h3>For loop</h3>
-	<p><span class="check"></span> You can set the boundaries yourself.</p>
-	<p><span class="xmark"></span> More complex syntax, more room for errors. Not as clean.</p>
+	<p class="check">You can set the boundaries yourself.</p>
+	<p class="xmark">More complex syntax, more room for errors. Not as clean.</p>
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
 			data-run="true" 
@@ -149,33 +149,12 @@ for(var i = 10; i > 0; i--){ }
 		</div>
 	</div>
 
-	<h3>For loop - for arrays</h3>
-	<p>Want to loop through an array and have access to the index? Use a traditional for loop.</p>
-
-	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-3/5" 
-			data-run="true" 
-			data-readonly="false" 
-			data-height="210">
-			<textarea class="title" hidden><p>For loop</p></textarea>
-			<textarea class="js-editor-doc" hidden>
-var stopAt = brands3.length; // .length (a property of an array) gets the number of elements in the array (6).
-for(var i = 0; i < stopAt; i++){  // The for loops starts at 0 and stops at 5, in this case.
-    console.log(brands3[i]); // Using i, we can access the elements in the array, one by one.
 	
-	return; // Want to stop the loop early? This is the way. If this is executed, the loop will stop immediately, even if it hasn't finished yet.
-}
-
-			</textarea>
-		</div>
-	</div>
-
-	<h2>Some tasks...</h2>
 
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
 			data-run="true" 
-			data-task-number="4a" 
+			data-task-number="5a" 
 			data-task-docs="false"
 			data-task-internet="false"
 			data-task-team="true"
@@ -194,7 +173,7 @@ for(var i = 0; i < stopAt; i++){  // The for loops starts at 0 and stops at 5, i
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
 			data-run="true" 
-			data-task-number="4b" 
+			data-task-number="5b" 
 			data-task-docs="true"
 			data-task-internet="false"
 			data-task-team="false"
@@ -210,30 +189,168 @@ for(var i = 0; i < stopAt; i++){  // The for loops starts at 0 and stops at 5, i
 		</div>
 	</div>
 
+	
 
-	<h2>Conclusion/recap</h2>
+	<h3>For loop - for arrays</h3>
+	<p>Want to loop through an array and have access to the index? Use a traditional for loop.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-readonly="false" 
+			data-height="210">
+			<textarea class="title" hidden><p>For loop</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var brands2 = ['hp', 'dell', 'asus']; 
+var stopAt = brands2.length; // .length (a property of an array) gets the number of elements in the array (6).
+for(var i = 0; i < stopAt; i++){  // The for loops starts at 0 and stops at 5, in this case.
+    console.log(brands2[i]); // Using i, we can access the elements in the array, one by one.
+	
+	return; // Want to stop the loop early? This is the way. If this is executed, the loop will stop immediately, even if it hasn't finished yet.
+}
+			</textarea>
+		</div>
+	</div>
+
+	<h2>A final assignment for this chapter</h2>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="5c" 
+			data-task-docs="true"
+			data-task-internet="true"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<ul>
+					<li>Search for at least 3 other loop functions (write down their names).</li>
+					<li>Then, try to make as many of them work as possible.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+
+	<h2>Conclusion</h2>
+
+	<p>Many other methods exist, some of them we will look at later. You don't need to know all of them. Some (perhaps with little experience) swear by them, but honestly, you can do everything with these two.</p>
+	<p>A small tip: Use a for loop if you need the index. Use a for...of loop if you only need the data.</p>
 
 	<div class="quiz" id="#quiz">
 		<script type="application/json" class="quiz-data">
 		{
-			"name": "JS Math Quiz",
+			"name": "JS Loops & Arrays Quiz",
 			"questions": [
 				{
-					"question": "What is an arithmetic operator?",
+					"question": "What is the index of the first element in an array?",
 					"options": [
-						"It's a type of symbol that's used to do mathematical stuff. ",
-						"It's a type of variable that stores numbers.",
-						"It's a type of function that does math."
+						"0",
+						"1",
+						"-1"
 					],
 					"answer": 0,
-					"explanation": "It's a type of symbol(operator) that's used to do mathematical stuff. And things."
+					"explanation": "JavaScript arrays are zero-indexed, so the first element is at index 0."
 				},
+				{
+					"question": "How do you access the third element of an array called 'fruits'?",
+					"options": [
+						"fruits[3]",
+						"fruits[2]",
+						"fruits[1]"
+					],
+					"answer": 1,
+					"explanation": "Indexing starts at 0, so the third element is at index 2."
+				},
+				{
+					"question": "What does .length return on an array?",
+					"options": [
+						"The last index",
+						"The number of elements",
+						"The first element"
+					],
+					"answer": 1,
+					"explanation": ".length gives the total number of elements in the array."
+				},
+				{
+					"question": "What is pseudocode mainly used for?",
+					"options": [
+						"Writing perfect JavaScript syntax",
+						"Planning logic in a human-readable way",
+						"Executing code faster"
+					],
+					"answer": 1,
+					"explanation": "Pseudocode helps you think through logic without worrying about syntax."
+				},
+				{
+					"question": "Which loop is best for looping over an existing array in a clean way?",
+					"options": [
+						"for loop",
+						"for...of loop",
+						"while loop"
+					],
+					"answer": 1,
+					"explanation": "for...of is the cleanest and simplest way to iterate over arrays."
+				},
+				{
+					"question": "What is a limitation of a for...of loop?",
+					"options": [
+						"It doesn't work with arrays",
+						"It doesn't give you the index automatically",
+						"It runs only once"
+					],
+					"answer": 1,
+					"explanation": "for...of gives values, not indexes."
+				},
+				{
+					"question": "What does this loop do?\nfor(var i = 0; i < 10; i++)",
+					"options": [
+						"Runs 10 times",
+						"Runs 9 times",
+						"Runs forever"
+					],
+					"answer": 0,
+					"explanation": "It runs from 0 up to 9, which is 10 iterations."
+				},
+				{
+					"question": "When would you use a traditional for loop instead of for...of?",
+					"options": [
+						"When you need the index",
+						"When you want cleaner code",
+						"When working with strings only"
+					],
+					"answer": 0,
+					"explanation": "A traditional for loop gives you full control, including access to the index."
+				},
+				{
+					"question": "What happens when 'return' is used inside a loop?",
+					"options": [
+						"It skips one iteration",
+						"It stops the loop immediately",
+						"It restarts the loop"
+					],
+					"answer": 1,
+					"explanation": "return exits the function entirely, stopping the loop instantly."
+				},
+				{
+					"question": "What will this code log?\nvar arr = ['a','b','c'];\nconsole.log(arr[0]);",
+					"options": [
+						"'a'",
+						"'b'",
+						"'c'"
+					],
+					"answer": 0,
+					"explanation": "Index 0 is the first element, which is 'a'."
+				}
 			]
 		}
 		</script>
 	</div>
 
-	<a href="/pages/js/loops.html" class="nextPageTeaser">Next: JS Basics - loops <i class="fa-solid fa-arrow-right-long"></i></a>
+	<a href="/pages/js/if-else.html" class="nextPageTeaser">Next: JS Basics - If...else <i class="fa-solid fa-arrow-right-long"></i></a>
 </div>
 
 

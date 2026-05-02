@@ -67,9 +67,8 @@
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-full" 
 			data-run="false" 
-			data-readonly="false" 
-			data-height="300">
-			<textarea class="title" hidden></textarea>
+			data-readonly="false">
+			<textarea class="title" hidden><p>JS Datatypes</p></textarea>
 			<textarea class="js-editor-doc" hidden>
 // The most common ones we will use:
 var string = "This is a string"; // You can use both double and single quotes
@@ -77,7 +76,8 @@ var number = 42;
 var boolean = true;
 var array = new Array(); // Empty array
 var array2 = new Array('value1', 'value2', 'value3');
-var object = new Object(); // We will only start using these in a few months
+var object = new Object(); // Empty object
+var object2 = { name: "Alice", age: 30 }; // You can assign properties (name, age, ..) and give those values 
 
 // We won't create these types of data, but it's REALLY IMPORTANT to know what these mean.
 var nullValue = null; // null is a special value that represents "no value" or "empty". It's like an empty box but different than "", which is an empty string.

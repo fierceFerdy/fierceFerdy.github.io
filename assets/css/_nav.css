@@ -2,7 +2,7 @@
 nav{
 	flex-shrink: 0;
 	height: 100vh;
-	background-color: #111518;
+	background-color: var(--sidebar);
 	position: fixed;
 	min-width: 200px;
 	max-width: 200px;

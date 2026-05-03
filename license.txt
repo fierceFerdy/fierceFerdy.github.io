@@ -2,7 +2,7 @@
 
 Copyright (c) 2026 Fiers Ferdy
 
-Permission is hereby granted to teachers, students, and educational institutions to use this software and its associated materials (the "Software") solely for educational purposes within their current institution.
+Permission is hereby granted to teachers, students, and educational institutions to use this software and its associated materials (the "Software") solely for educational purposes within their current institution (GO! Talent).
 
 **Allowed:**
 
@@ -13,7 +13,7 @@ Permission is hereby granted to teachers, students, and educational institutions
 **Restrictions:**
 
 * The Software may not be reproduced, distributed, sublicensed, or shared outside the institution
-* Users may not take, reuse, or continue using the Software after leaving the institution
+* Users may not take, reuse, or continue using the Software after leaving the institution (GO! Talent)
 * The Software may not be used for commercial purposes or outside an educational context
 * Public redistribution (including uploading to repositories or sharing externally) is prohibited
 

@@ -6,6 +6,8 @@
 
 var QUIZ_TARGET_SECONDS_PER_QUESTION = 15;
 var QUIZ_SCORE_API_URL = `${window.location.protocol}//${window.location.hostname}:3030/api/quiz-scores`;
+var QUIZ_LOCAL_ATTEMPTS_KEY = "manual.quizAttempts";
+var QUIZ_ACCURACY_WEIGHT_POWER = 8;
 
 document.querySelectorAll(".quiz").forEach(initQuizBlock);
 
@@ -203,7 +205,8 @@ function renderFinishedState(body, footer, state) {
 	state.finishedAt     = Date.now();
 	state.elapsedMs      = Math.max(0, state.finishedAt - (state.startedAt ?? state.finishedAt));
 	state.timeMultiplier = roundScore(getTimeMultiplier(state.elapsedMs, state.questions.length));
-	state.finalScore     = roundScore(state.correctCount * state.timeMultiplier);
+	var accuracyWeight   = getAccuracyWeight(state.correctCount, state.questions.length);
+	state.finalScore     = roundScore(state.correctCount * state.timeMultiplier * accuracyWeight);
 
 	// Result summary
 	var message = document.createElement("p");
@@ -250,6 +253,9 @@ function renderFinishedState(body, footer, state) {
 		});
 		renderQuiz(footer.parentElement, state);
 	});
+
+	// Keep per-user history for exports and offline fallback
+	saveQuizAttemptLocal(state);
 
 	saveAndLoadHighscores(leaderboardWrap, state);
 }
@@ -425,4 +431,41 @@ function formatDuration(ms) {
 function roundScore(value, decimals = 6) {
 	var factor = 10 ** decimals;
 	return Math.round((Number(value) + Number.EPSILON) * factor) / factor;
+}
+
+function getAccuracyWeight(correctCount, totalQuestions) {
+	var safeTotal = Math.max(1, Number(totalQuestions) || 1);
+	var accuracy = Math.max(0, Math.min(1, (Number(correctCount) || 0) / safeTotal));
+	return accuracy ** QUIZ_ACCURACY_WEIGHT_POWER;
+}
+
+function saveQuizAttemptLocal(state) {
+	try {
+		var raw = localStorage.getItem(QUIZ_LOCAL_ATTEMPTS_KEY);
+		var records = raw ? JSON.parse(raw) : [];
+		if (!Array.isArray(records)) records = [];
+
+		var tries = records
+			.filter((record) => record && record.quizName === state.quizName)
+			.length + 1;
+
+		records.push({
+			quizName: state.quizName,
+			playerName: state.playerName || "",
+			score: `${state.correctCount}/${state.questions.length}`,
+			finalScore: state.finalScore,
+			correctCount: state.correctCount,
+			totalQuestions: state.questions.length,
+			timeMultiplier: state.timeMultiplier,
+			elapsedMs: state.elapsedMs,
+			duration: formatDuration(state.elapsedMs),
+			tries: tries,
+			date: new Date().toLocaleDateString(),
+			time: new Date().toLocaleTimeString()
+		});
+
+		localStorage.setItem(QUIZ_LOCAL_ATTEMPTS_KEY, JSON.stringify(records));
+	} catch (error) {
+		console.warn("Could not save quiz attempt locally.", error);
+	}
 }

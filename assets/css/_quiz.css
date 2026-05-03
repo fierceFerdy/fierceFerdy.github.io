@@ -98,6 +98,11 @@
         font-weight: bold;
         font-size: 2rem;
         margin-bottom: 1.5rem;
+
+		editorlite{
+			display: block;
+			margin-top: .5rem;
+		}
     }
 
 	cmd{

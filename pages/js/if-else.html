@@ -9,8 +9,8 @@
 	<link rel="stylesheet" href="/assets/css/style.css">
 
 	<script src="/assets/js/main.js" defer></script>
-	<script type="module" src="/assets/js/js-editor.js" defer></script>
 	<script src="/assets/js/quiz.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
 </head>
 
 <body>
@@ -22,8 +22,9 @@
 	<h1>JavaScript 101 <small>/if...else</small></h1>
 	
 	<h2>If...else</h2>
-	<p>If...else statements allow you to execute different code based on a condition. Let's have a look:</p>
+	<p>If...else statements<span class="tooltip"><span><strong>Statement</strong>: the instruction that tells the computer to perform a specific action</span></span> allow you to execute different code based on a condition. Let's have a look:</p>
 
+	<i class="fa-solid fa-caret-down"></i>
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-full" 
 			data-run="false" 
@@ -44,6 +45,7 @@
 	</div>
 
 	<h3>How it looks like in JS</h3>
+	<p>You start every if-statement with "if", of course. Between the parentheses <code>()</code>, you put the condition you want to check. Then, outside the parentheses you put the statement that will be executed if the condition is true, between curly braces <code>{}</code>.</p>
 	<p>Feel free to play around with the code below</p>
 
 	<div class="gridCorrector editorWrapper">
@@ -76,10 +78,10 @@ if(isItFun == false){ // "=" x 2, is to compare data - are they the same?
 			data-readonly="false" 
 			data-height="200">
 			<textarea class="title" hidden>
+				<p>Create an if-statement that does the following:</p>
 				<ul>
-					<li>Create a if-statement that does the following:</li>
-					<li>If myFavouriteNumber is - whatever your favourite number is - log a celebration</li>
-					<li>If not, log a consolation message</li>
+					<li>If myFavouriteNumber is <em>your favourite number</em> → log a celebration</li>
+					<li>If not → log a consolation message</li>
 				</ul>
 			</textarea>
 			<textarea class="js-editor-doc" hidden>
@@ -87,6 +89,46 @@ var myFavouriteNumber = 6;
 			</textarea>
 		</div>
 	</div>
+
+	<h2>Comparison operators</h2>
+	<p>In the example above, we used the "==" operator to compare the value of isItFun to false. This is called a comparison operator. There are many different comparison operators in JavaScript, such as:</p> 
+	<ul>
+		<li><code>==</code> (equal to)</li>
+		<li><code>!=</code> (not equal to)</li>
+		<li><code>&gt;</code> (greater than)</li>
+		<li><code>&lt;</code> (less than)</li>
+		<li><code>&gt;=</code> (greater than or equal to)</li>
+		<li><code>&lt;=</code> (less than or equal to)</li>
+	</ul>
+
+	<p class="hint">Hint: If you want to check if a <code>value == true</code> or if the <code>value == false</code> you can use this shorter way instead: <code>if(value)</code> or <code>if(!value)</code></p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="6b" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="360">
+			<textarea class="title" hidden>
+				<p>Let's make some logic happen!</p>
+				<ul>
+					<li>If someone's 15 → log: "Almost..."</li>
+					<li>If someone's younger than 16 → log: "you're not allowed to do this!"</li>
+					<li>If someone's 16 or older but under 18 → log: "yay, you have some rights!"</li>
+					<li>If someone's 18 or older → log: "you have ALL the rights! (and duties...)"</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var age = 16;
+			</textarea>
+		</div>
+	</div>
+
+
 
 	<h2>If...else...and more?</h2>
 
@@ -121,6 +163,8 @@ if(weekday == 'monday'){
 			</textarea>
 		</div>
 	</div>
+
+
 
 	<p>As you can see you check multiple conditions using else if statements. Once one of the conditions is met, the corresponding block of code is executed, and the rest are ignored.</p>
 	<p>Make sure you don't write multiple if-statements for what could be handled with else if statements.</p>
@@ -179,18 +223,17 @@ if(weekday == 'monday'){
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-3/5" 
 			data-run="true" 
-			data-task-number="6b - difficult" 
+			data-task-number="6c" 
 			data-task-docs="true"
 			data-task-internet="false"
 			data-task-team="true"
 			data-task-questions="true"
 			data-readonly="false" 
-			data-height="200">
+			data-height="460">
 			<textarea class="title" hidden>
 				<p>You can use the docs or do teamwork. BUT it is highly recommended to try it yourself first! This will help you understand the logic better. Also, this (kind of) assignment will be on the test next lesson.</p>
+				<p><strong>Create a "wake-up assistant":</strong></p>
 				<ul>
-					<li>Create a "wake-up assistant":</li>
-					
 					<li>If it's a weekday (mon–fri) → log: "07:00 - Wake up!"</li>
 					<li>But if it's wednesday → log: "09:00 - Wake up!"</li>
 					<li>If it's weekend → log: "No alarm 🎉"</li>
@@ -206,6 +249,120 @@ var isSick = false;
 			</textarea>
 		</div>
 	</div>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="7" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="360">
+			<textarea class="title" hidden>
+				<p><strong>Note: just using if...else statements won't be enough.</strong></p>
+				<ul>
+					<li>Store 5 different scores out of 100 (store the data in a way that makes it easy to process)</li>
+					<li>We need to check the different scores one by one, and then:</li>
+					<li>If the score is higher than 50, give a nice message</li>
+					<li>If the score is between 20 and 50, give an extra chance</li>
+					<li>Make sure you test the different scenarios</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+			</textarea>
+		</div>
+	</div>
+
+
+
+
+	<!-- Advanced Topics -->
+	<!-- Advanced Topics -->
+	<!-- Advanced Topics -->
+	<div class="advancedWrapper">
+		<h2>Advanced Topics <button class="toggle"></button></h2>
+
+		<div class="advancedContent">
+			<h3>Ternary Operator</h3>
+			<p>The ternary operator is a <em>shorthand</em> way of writing an if...else statement. It takes three operands: a condition, a value if the condition is true, and a value if the condition is false. For example: <code>var result = condition ? valueIfTrue : valueIfFalse;</code></p>
+			<p>It's possible to write really compact conditional expressions using the ternary operator. Test it out:</p>
+
+
+			<div class="gridCorrector editorWrapper">
+				<div class="js-editor w-full" 
+					data-run="true" 
+					data-readonly="false" 
+					data-height="120">
+					<textarea class="title" hidden><p>If...else example in JavaScript</p></textarea>
+					<textarea class="js-editor-doc" hidden>
+var condition = true;
+var number = 7;
+var result = condition ? "it's true!" : "it's false!";
+var result2 = number == 8 ? "it's true!" : "it's false!";
+console.log(result);
+console.log(result2);
+					</textarea>
+				</div>
+			</div>
+
+
+
+			<h3>Skipping curly braces</h3>
+			<p>In JavaScript, if a block contains a short (so it stays readable) one-line statement, you can omit the curly braces.</p>
+
+			<div class="gridCorrector editorWrapper">
+				<div class="js-editor w-full" 
+					data-run="true" 
+					data-readonly="false">
+					<textarea class="title" hidden><p>If...else example in JavaScript</p></textarea>
+					<textarea class="js-editor-doc" hidden>
+var x = 10;
+if(x > 5) console.log('x is greater than 5');
+else console.log('x is not greater than 5');
+					</textarea>
+				</div>
+			</div>
+
+
+
+			<h3>Switch Statements</h3>
+			<p>Some people swear by these but you honestly don't need these. You can do everything and more with if...else statements. There is <em>only one case</em> where a switch statement might be more readable: when you have multiple values to check against the same variable.</p>
+
+			<div class="gridCorrector editorWrapper">
+				<div class="js-editor w-full" 
+					data-run="true" 
+					data-readonly="false" 
+					data-height="160">
+					<textarea class="title" hidden><p>If...else example in JavaScript</p></textarea>
+					<textarea class="js-editor-doc" hidden>
+var weekday = 'thursday';
+
+switch(weekday){
+	case 'monday':
+	case 'tuesday':
+	case 'thursday':
+	case 'friday':
+		console.log('7:00 - time to wake up!');
+		break; // This is much like "return" where it stops the execution 
+			// (it doesn't send data back though)
+	case 'wednesday':
+		console.log('9:00 - time to wake up!');
+		break;
+	default:
+		console.log('Ahhhhhh');
+}
+					</textarea>
+				</div>
+			</div>
+
+
+			<p>There are a lot of more advanced topics related to if...else statements, such as the ternary operator and switch statements. We won't cover those in this course, but feel free to check them out on your own!</p>
+		</div>
+	</div>
+
+
 
 
 	<h2>Conclusion/recap</h2>
@@ -236,6 +393,16 @@ var isSick = false;
 					"explanation": "'=' is used to assign a value. '==' is used to compare values."
 				},
 				{
+					"question": "Which operator means 'not equal to'?",
+					"options": [
+						"!=",
+						"==",
+						">="
+					],
+					"answer": 0,
+					"explanation": "!= checks if two values are NOT equal."
+				},
+				{
 					"question": "What happens when an if condition is false?",
 					"options": [
 						"The code inside the if still runs",
@@ -246,24 +413,14 @@ var isSick = false;
 					"explanation": "If the condition is false, the code inside the if block is skipped."
 				},
 				{
-					"question": "What is the purpose of 'else if'?",
+					"question": "What does this mean?\nif(value)",
 					"options": [
-						"To repeat the same condition",
-						"To check another condition if the previous one was false",
-						"To stop the program"
+						"Runs only if value is false",
+						"Runs if value is true",
+						"It causes an error"
 					],
 					"answer": 1,
-					"explanation": "else if allows you to check multiple conditions in order."
-				},
-				{
-					"question": "Why is using multiple separate 'if' statements sometimes a bad idea?",
-					"options": [
-						"They run too fast",
-						"They can all execute instead of just one",
-						"They don't work with variables"
-					],
-					"answer": 1,
-					"explanation": "Separate if statements all run independently, which can lead to multiple outputs instead of one."
+					"explanation": "This is shorthand for checking if value == true."
 				},
 				{
 					"question": "What does '||' mean?",
@@ -276,6 +433,36 @@ var isSick = false;
 					"explanation": "|| means OR — only one condition needs to be true."
 				},
 				{
+					"question": "What is the purpose of 'else if'?",
+					"options": [
+						"To repeat the same condition",
+						"To check another condition if the previous one was false",
+						"To stop the program"
+					],
+					"answer": 1,
+					"explanation": "else if allows you to check multiple conditions in order."
+				},
+				{
+					"question": "What does this mean?\nif(!value)",
+					"options": [
+						"Runs if value is true",
+						"Runs if value is false",
+						"It skips the if-statement"
+					],
+					"answer": 1,
+					"explanation": "!value means 'not value', so it runs when value is false."
+				},
+				{
+					"question": "Why is using multiple separate 'if' statements sometimes a bad idea?",
+					"options": [
+						"They run too fast",
+						"They can all execute instead of just one",
+						"They don't work with variables"
+					],
+					"answer": 1,
+					"explanation": "Separate if statements all run independently, which can lead to multiple outputs instead of one."
+				},
+				{
 					"question": "What does '&&' mean?",
 					"options": [
 						"AND",
@@ -286,7 +473,27 @@ var isSick = false;
 					"explanation": "&& means AND — both conditions must be true."
 				},
 				{
-					"question": "What will this code log?\nvar x = 5;\nif(x == 5){ console.log('A'); } else { console.log('B'); }",
+					"question": "What will this code log?<editorlite>var age = 17;\n\nif(age >= 18){\n\tconsole.log('Adult');\n}else if(age >= 16){\n\tconsole.log('Almost adult');\n}</editorlite>",
+					"options": [
+						"Adult",
+						"Almost adult",
+						"Nothing"
+					],
+					"answer": 1,
+					"explanation": "17 is not >= 18, but it is >= 16, so the second condition runs."
+				},
+				{
+					"question": "What will this code log?<editorlite>var x = 10;\n\nif(x > 5){\n\tconsole.log('A');\n}\nif(x > 8){\n\tconsole.log('B');\n}</editorlite>",
+					"options": [
+						"A",
+						"B",
+						"A and B"
+					],
+					"answer": 2,
+					"explanation": "These are two separate if statements, so both run."
+				},
+				{
+					"question": "What will this code log?<editorlite>var x = 5;\n\nif(x == 5) {\n\tconsole.log('A');\n} else {\n\tconsole.log('B');\n}</editorlite>",
 					"options": [
 						"A",
 						"B",
@@ -294,16 +501,6 @@ var isSick = false;
 					],
 					"answer": 0,
 					"explanation": "x equals 5, so the if condition is true and 'A' is logged."
-				},
-				{
-					"question": "What will this code log?\nvar x = 5;\nif(x == 3){ console.log('A'); } else { console.log('B'); }",
-					"options": [
-						"A",
-						"B",
-						"Nothing"
-					],
-					"answer": 1,
-					"explanation": "x is not 3, so the else block runs."
 				},
 				{
 					"question": "Why does order matter in if...else if statements?",
@@ -320,7 +517,7 @@ var isSick = false;
 		</script>
 	</div>
 
-	<a href="/pages/js/loops.html" class="nextPageTeaser">Next: JS Basics - loops <i class="fa-solid fa-arrow-right-long"></i></a>
+	<a href="/pages/js/functions.html" class="nextPageTeaser">Next: JS Basics - functions <i class="fa-solid fa-arrow-right-long"></i></a>
 </div>
 
 

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The manual.</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<script src="/assets/js/main.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+</head>
+
+<body>
+	
+
+
+<div class="content">
+	
+	<h1>JavaScript 101 <small>/arrays</small></h1>
+	
+	<h2>If...else</h2>
+	<p>If...else statements<span class="tooltip"><span><strong>Statement</strong>: the instruction that tells the computer to perform a specific action</span></span> allow you to execute different code based on a condition. Let's have a look:</p>
+
+	<i class="fa-solid fa-caret-down"></i>
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="false" 
+			data-readonly="false" 
+			data-height="160">
+			<textarea class="title" hidden><p>Pseudocode example</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+// SET isItFun TO false
+
+// IF isItFun IS false THEN
+//     LOG 'ow snaps'
+//     SET isItFun TO true // More fun is always better, right?
+// ELSE
+//     LOG 'yay'
+// END IF
+			</textarea>
+		</div>
+	</div>
+
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="7" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<p>Create an if-statement that does the following:</p>
+				<ul>
+					<li>If myFavouriteNumber is <em>your favourite number</em> → log a celebration</li>
+					<li>If not → log a consolation message</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var myFavouriteNumber = 6;
+			</textarea>
+		</div>
+	</div>
+
+
+
+	<h2>Conclusion/recap</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS If...Else Quiz",
+			"questions": [
+				{
+					"question": "What does an if-statement do?",
+					"options": [
+						"It repeats code multiple times",
+						"It runs code based on a condition",
+						"It stores data"
+					],
+					"answer": 1,
+					"explanation": "An if-statement checks a condition and runs code if that condition is true."
+				}
+			]
+		}
+		</script>
+	</div>
+
+	<a href="/pages/js/arrays.html" class="nextPageTeaser">Next: Arrays - complete <i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
+
+</body>
+</html>

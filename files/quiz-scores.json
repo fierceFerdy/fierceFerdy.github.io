@@ -1,0 +1,44 @@
+[
+  {
+    "id": "score_1777751080670_063cc3bd71a74",
+    "quizName": "JS If...Else Quiz",
+    "playerName": "Ferdy Fiers",
+    "correctCount": 10,
+    "totalQuestions": 10,
+    "elapsedMs": 109310,
+    "timeMultiplier": 1.372244,
+    "finalScore": 13.72244,
+    "attemptNumber": 1,
+    "createdAt": "2026-05-02T19:44:40.670Z",
+    "date": "02/05/2026",
+    "time": "21:44:40"
+  },
+  {
+    "id": "score_1777802982346_6ef1b63c6997a",
+    "quizName": "JS If...Else Quiz",
+    "playerName": "Ferdy Fiers",
+    "correctCount": 8,
+    "totalQuestions": 10,
+    "elapsedMs": 22604,
+    "timeMultiplier": 6.635994,
+    "finalScore": 53.087952,
+    "attemptNumber": 2,
+    "createdAt": "2026-05-03T10:09:42.346Z",
+    "date": "03/05/2026",
+    "time": "12:09:42"
+  },
+  {
+    "id": "score_1777810488976_a69f6c7144135",
+    "quizName": "JS If...Else Quiz",
+    "playerName": "Ferdy Fiers",
+    "correctCount": 12,
+    "totalQuestions": 14,
+    "elapsedMs": 191963,
+    "timeMultiplier": 1.093961,
+    "finalScore": 3.8248,
+    "attemptNumber": 3,
+    "createdAt": "2026-05-03T12:14:48.976Z",
+    "date": "03/05/2026",
+    "time": "14:14:48"
+  }
+]

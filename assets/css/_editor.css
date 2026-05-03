@@ -100,8 +100,24 @@
 				line-height: 1.2em;
 				cursor: pointer;
 
+				&::before{
+					content: "\f111";
+					font-family: "Font Awesome 7 Free";
+					font-size: .8em;
+					padding-left: 1px;
+					line-height: 1.3em;
+				}
+
 				&.check{
 					color: var(--lime);
+
+					&::before{
+						content: "\f00c";
+						font-family: "FontAwesome";
+						font-size: 1em;
+						padding-left: 0;
+						line-height: 1.1em;
+					}
 				}
 			}
 		}
@@ -156,7 +172,6 @@ editorlite{
 .terminal{
 	margin-top: 2rem;
 	background-color: var(--dark00);
-	min-height: 200px;
 	padding: 1rem;
 	color: #c9d1d9;
 	overflow: auto;

@@ -11,6 +11,7 @@ import {autocompletion, completeFromList} from "https://esm.sh/@codemirror/autoc
 import {keymap} from "https://esm.sh/@codemirror/view";
 import {defaultKeymap, historyKeymap, indentWithTab} from "https://esm.sh/@codemirror/commands";
 import {EditorState} from "https://esm.sh/@codemirror/state";
+import {parse} from "https://esm.sh/acorn";
 
 const STUDENT_LINE_OFFSET = 3;
 const globalCompletions = completeFromList([
@@ -34,6 +35,23 @@ const extensions = [
 // Init all editors on the page
 document.querySelectorAll(".js-editor").forEach(createEditor);
 document.querySelectorAll('editorlite').forEach(createLiteEditor);
+
+// Watch for dynamically injected <editorlite> nodes (e.g. quiz questions)
+const liteObserver = new MutationObserver((mutations) => {
+	for (const mutation of mutations) {
+		for (const node of mutation.addedNodes) {
+			if (node.nodeType !== Node.ELEMENT_NODE) continue;
+			
+			if (node.tagName === 'EDITORLITE') {
+				createLiteEditor(node);
+			} else {
+				node.querySelectorAll?.('editorlite').forEach(createLiteEditor);
+			}
+		}
+	}
+});
+liteObserver.observe(document.body, { childList: true, subtree: true });
+
 
 // If there's an active task in localStorage, re-activate it (e.g. after page refresh)
 const activeTask = localStorage.getItem("activeTask");
@@ -68,14 +86,16 @@ document.addEventListener("click", (e) => {
 
 
 function createLiteEditor(container) {
-    // Build DOM
-    extensions.push(EditorState.readOnly.of(true));
-    var content = container.innerHTML;
+    if (container.dataset.editorliteInit) return;
+    container.dataset.editorliteInit = 'true';
+
+    const liteExtensions = [...extensions, EditorState.readOnly.of(true)];
+    const content = container.textContent;
     container.innerHTML = '';
 
     const view = new EditorView({
         doc: content,
-        extensions,
+        extensions: liteExtensions,
         parent: container
     });
 
@@ -203,10 +223,18 @@ async function runCode(code, terminal, container, action = 'run') {
     let runStatus = "success";
     let runError = null;
 
+    const syntaxError = getSyntaxErrorWithLocation(code);
+    if (syntaxError) {
+        runStatus = "error";
+        runError = syntaxError;
+    }
+
 	try {
-		// Execute user code
-		const wrapped = `"use strict";\n${code}\n//# sourceURL=student-code.js`;
-		new Function("console", wrapped)(fakeConsole);
+        if (!runError) {
+            // Execute user code
+            const wrapped = `"use strict";\n${code}\n//# sourceURL=student-code.js`;
+            new Function("console", wrapped)(fakeConsole);
+        }
 	} catch (e) {
         runStatus = "error";
         runError = e;
@@ -297,12 +325,60 @@ function insertWithCursor(text, cursorOffset) {
 
 function formatStudentError(error) {
     const message = `${error?.name || "Error"}: ${error?.message || String(error)}`;
-    const stack = String(error?.stack || "");
-    const match = stack.match(/student-code\.js:(\d+):(\d+)/);
-    if (!match) return message;
-    const line = Math.max(1, Number(match[1]) - STUDENT_LINE_OFFSET);
+    const location = extractStudentLocation(error);
+    if (!location) return message;
 
-    return `${message}\n    at student-code.js:${line}:${match[2]}`;
+    return `${message}\n    at student-code.js:${location.line}:${location.column}`;
+}
+
+function extractStudentLocation(error) {
+    const lineNumber = Number(error?.lineNumber);
+    const columnNumber = Number(error?.columnNumber);
+    if (Number.isFinite(lineNumber) && lineNumber > 0) {
+        const lineOffset = error?.studentLineResolved === true ? 0 : STUDENT_LINE_OFFSET;
+        return {
+            line: Math.max(1, lineNumber - lineOffset),
+            column: Number.isFinite(columnNumber) && columnNumber > 0 ? columnNumber : 1
+        };
+    }
+
+    const stack = String(error?.stack || "");
+
+    const studentMatch = stack.match(/student-code\.js:(\d+):(\d+)/);
+    if (studentMatch) {
+        return {
+            line: Math.max(1, Number(studentMatch[1]) - STUDENT_LINE_OFFSET),
+            column: Number(studentMatch[2])
+        };
+    }
+
+    // Syntax errors from Function(...) often point to <anonymous> instead of sourceURL.
+    const anonymousMatch = stack.match(/<anonymous>:(\d+):(\d+)/) || stack.match(/anonymous:(\d+):(\d+)/);
+    if (anonymousMatch) {
+        return {
+            line: Math.max(1, Number(anonymousMatch[1]) - STUDENT_LINE_OFFSET),
+            column: Number(anonymousMatch[2])
+        };
+    }
+
+    return null;
+}
+
+function getSyntaxErrorWithLocation(code) {
+    try {
+        parse(code, {ecmaVersion: "latest"});
+        return null;
+    } catch (error) {
+        if (error && error.loc) {
+            const syntaxError = new SyntaxError(error.message);
+            syntaxError.lineNumber = Number(error.loc.line);
+            syntaxError.columnNumber = Number(error.loc.column) + 1;
+            syntaxError.studentLineResolved = true;
+            return syntaxError;
+        }
+
+        return error;
+    }
 }
 
 function printLine(terminal, text, type = "default", speed = 45) {

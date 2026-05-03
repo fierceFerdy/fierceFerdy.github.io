@@ -19,6 +19,17 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 
 
+	// button.toggle handler
+	document.querySelectorAll("button.toggle").forEach(button => {
+		button.addEventListener("click", function() {
+			this.classList.toggle("active");
+			const content = this.parentElement.parentElement.querySelector(".advancedContent");
+			content.classList.toggle("active");
+		});
+	});
+
+
+
 	async function customPrompt(message, defaultValue = "") {
 		return new Promise((resolve) => {
 			document.body.classList.add("blur");
@@ -116,7 +127,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/loops.html">Loops</a>
 				<a class="nested" href="/pages/js/if-else.html">If...Else</a>
 				<a class="nested" href="/pages/js/functions.html">Functions</a>
-				<a class="nested" href="/pages/js/arrays.html">Arrays</a>
+				<a class="nested" href="/pages/js/arrays.html">Arrays (complete)</a>
 				<a class="nested" href="/pages/js/visualisation.html">Visualisation</a>
 				<a class="nested" href="/pages/js/neutralino.html">Neutralino</a>
 			</div>

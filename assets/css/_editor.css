@@ -85,6 +85,12 @@
 		&.cm-activeLine{
 			background-color: #333943;
 		}
+
+		/* style selected text */
+		&.cm-selectionBackground{
+			background-color: var(--accent) !important;
+			 /* override default selection color */
+		}
 	}
 
 	header{
@@ -142,6 +148,16 @@
 
 		&.finish{
 			right: 64px;
+
+			&:hover{
+				background-color: var(--lime);
+				color: black;
+			}
+		}
+
+		&.showSolution{
+			right: 64px;
+
 			&:hover{
 				background-color: var(--lime);
 				color: black;

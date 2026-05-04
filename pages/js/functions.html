@@ -19,36 +19,207 @@
 
 <div class="content">
 	
-	<h1>JavaScript 101 <small>/arrays</small></h1>
+	<h1>JavaScript 101 <small>/functions</small></h1>
 	
-	<h2>If...else</h2>
-	<p>If...else statements<span class="tooltip"><span><strong>Statement</strong>: the instruction that tells the computer to perform a specific action</span></span> allow you to execute different code based on a condition. Let's have a look:</p>
+	<h2>Functions</h2>
+	<p>Functions allow you to wrap code for <em>reuse and better organization</em>. A function is like a recipe: you define the steps once, and then you can use it whenever you need it.</p>
+	<p>You create a function by first typing the <code>function</code> keyword, followed by a name for your function (make sure it's descriptive and follows naming conventions). Then you type parentheses <code>()</code>, and curly braces <code>{}</code>. Inside the curly braces, you write the code that you want the function to execute. Lastly, you have to call the function to run the code inside of it! So go ahead and try it!</p>
 
-	<i class="fa-solid fa-caret-down"></i>
+
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-full" 
-			data-run="false" 
-			data-readonly="false" 
-			data-height="160">
-			<textarea class="title" hidden><p>Pseudocode example</p></textarea>
-			<textarea class="js-editor-doc" hidden>
-// SET isItFun TO false
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false"
+			data-task-number="8" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-height="200">
+			<textarea class="title" hidden>
+			<p>Create a function that says hello.</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+			<textarea class="solution" hidden>
+function sayHello(){ // Give the function a clear name that describes what it does
+	console.log('Hello!');
+}
+sayHello(); // You need to call the function to run the code inside of it
+sayHello(); // And you can call it as many times as you want!
+			</textarea>
+		</div>
+	</div>
 
-// IF isItFun IS false THEN
-//     LOG 'ow snaps'
-//     SET isItFun TO true // More fun is always better, right?
-// ELSE
-//     LOG 'yay'
-// END IF
+	
+	<h3>Returning data</h3>
+
+	<p>Functions can also return data. This means that instead of just performing an action, a function can give back a value that can be used elsewhere in your code. You use the <code>return</code> keyword to specify what value should be returned.</p>
+	<p><code>return</code> also doubles as a way to exit a function early. Use this wisely!</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false"
+			data-blurred="true"
+			data-height="200">
+			<textarea class="title" hidden>
+			<p>Create a function that says hello.</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+function getMyName(){ // Give the function a clear name that describes what it does
+	return 'Francis';
+}
+
+var name = getMyName(); // Call the function and store the returned value in a variable
+console.log(name); // Use the returned value
+			</textarea>
+			<textarea class="solution" hidden>
 			</textarea>
 		</div>
 	</div>
 
 
+	<h2>Scope</h2>
+	<p>Please analyze the code below and try to understand what is going on. Then try to deduct what "scope"<span class="tooltip"><span>Sniper scope?</span></span> could mean and how it works in JavaScript. Write your answer on the bottom. You have 5 minutes.</p>
+
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-3/5" 
+		<div class="js-editor" 
 			data-run="true" 
-			data-task-number="7" 
+			data-readonly="false"
+			data-task-number="8b - just some analysis" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="false"
+			data-height="540">
+			<textarea class="title" hidden>
+				<p>Please analyze the code and try to understand what is going on. Then try to deduct what "scope" could mean and how it works in JavaScript (it has something to do with the error we're encountering). Write your answer on the bottom. You have 5 minutes.</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var day = new Date().toLocaleDateString('nl-BE', { weekday: 'long' });
+
+sayHello();
+
+function sayHello(){
+	var name = 'Miguel';
+	console.log('Hello ' + name + '!');
+	console.log(day + ' is a great day!');
+	showRandomMessage();
+}
+
+function showRandomMessage(){
+	var arrRandomMessages = ['You are doing great', 'Keep it up', 'You can do it'];
+	var randomIndex = Math.floor(Math.random() * arrRandomMessages.length);
+	
+	console.log(arrRandomMessages[randomIndex] + ' ' + name + '!');
+}
+
+// What is scope?:
+			</textarea>
+			<textarea class="solution" hidden>
+var day = new Date().toLocaleDateString('nl-BE', { weekday: 'long' });
+
+sayHello();
+
+function sayHello(){
+	var name = 'Miguel';
+	console.log('Hello ' + name + '!');
+	console.log(day + ' is a great day!');
+	showRandomMessage();
+}
+
+function showRandomMessage(){
+	var arrRandomMessages = ['You are doing great', 'Keep it up', 'You can do it'];
+	var randomIndex = Math.floor(Math.random() * arrRandomMessages.length);
+
+	// check if name is defined before using it, because it's not defined in this scope
+	if(typeof name !== 'undefined'){
+		console.log(arrRandomMessages[randomIndex] + ' ' + name + '!');
+	}else{
+		console.log(arrRandomMessages[randomIndex] + ', stranger!');
+	}
+}
+			</textarea>
+		</div>
+	</div>
+
+	<h3>The definition of scope</h3>
+	<p>Scope determines where a variable can be used. In the example above, the  <code>var name</code> is defined inside the function <code>sayHello()</code>, so it can only be accessed within that function. The <code>var day</code>, however, is defined outside of any function, so it has global scope and can be accessed from anywhere in the code.</p>
+	<p>As you might've noticed, you can  also call (other) functions from within a function, as long as they are defined in the same scope or a parent scope, just like with the variables.</p>
+
+	<h3>Passing parameters</h3>
+	<p>In the next assignment <em>(go ahead and start it now)</em> we again encounter a scope problem. <code>dealDamage()</code> can't reach the variables defined inside <code>setup()</code>. There's a potentially better solution than moving everything to global scope: passing parameters to functions.</p>
+	<p>Did you ever notice those parentheses and think, "what are these for?"? Well, that's where you can pass parameters(data)! I'll be a bit obscure. You need to pass data and then you need to receive it. Can you figure it out? DBZ Narrator voice: "Let's find out n... ow".</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false"
+			data-task-number="8c" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-height="200">
+			<textarea class="title" hidden>
+			<p>Pass the necessary data through the function</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+setup();
+
+function setup(){
+	// Not a good place for these variables, but it's just for demonstration purposes
+	var damageAmount = 10;
+	var playerHealth = 100;
+	var enemyHealth = 100;
+
+	dealDamage();
+	dealDamage();
+    console.log('playerHealth from setup: ' + playerHealth);
+    console.log('enemyHealth from setup: ' + enemyHealth);
+}
+
+function dealDamage(){
+    characterHealth -= damageAmount;
+    console.log('characterHealth from dealDamage: ' + characterHealth);
+
+    return characterHealth;
+}
+			</textarea>
+			<textarea class="solution" hidden>
+setup();
+
+function setup(){
+	// Not a good place for these variables, but it's just for demonstration purposes
+	var damageAmount = 10;
+	var playerHealth = 100;
+	var enemyHealth = 100;
+
+	playerHealth = dealDamage(playerHealth, damageAmount);
+	playerHealth = dealDamage(playerHealth, damageAmount);
+	enemyHealth = dealDamage(enemyHealth, damageAmount);
+    console.log('playerHealth from setup: ' + playerHealth);
+    console.log('enemyHealth from setup: ' + enemyHealth);
+}
+
+function dealDamage(characterHealth, damageAmount){
+    characterHealth -= damageAmount;
+    console.log('characterHealth from dealDamage: ' + characterHealth);
+
+    return characterHealth;
+}
+			</textarea>
+		</div>
+	</div>
+
+	<h3>The limitations of passing parameters</h3>
+	<p>When you pass data through a function as a parameter, it makes a copy of the original value. This can cause the values of the original variables to remain unchanged where you don't always want that (see example in the previous assignment). A possible solution is to return the modified value and reassign it to the original variable, as we did with <code>playerHealth</code> and <code>enemyHealth</code> in the solution.</p>
+	<p>Furthermore, it can get messy if you have a lot of data to pass around. It can make your code less readable if you have to pass the same data through multiple functions. That being said it's still a <em>very useful technique in many situations</em>.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-task-number="8d - easy" 
 			data-task-docs="false"
 			data-task-internet="false"
 			data-task-team="false"
@@ -56,16 +227,167 @@
 			data-readonly="false" 
 			data-height="200">
 			<textarea class="title" hidden>
-				<p>Create an if-statement that does the following:</p>
-				<ul>
-					<li>If myFavouriteNumber is <em>your favourite number</em> → log a celebration</li>
-					<li>If not → log a consolation message</li>
-				</ul>
+				<p>Let's reinforce our knowledge. <strong>Fix the scope problem</strong></p>
+				<p><strong>Rules:</strong> Do NOT move everything to global scope and keep the structure in 2 functions</p>
 			</textarea>
 			<textarea class="js-editor-doc" hidden>
-var myFavouriteNumber = 6;
+sayHello();
+
+function sayHello(){
+	var name = 'Alex';
+	printName();
+}
+
+function printName(){
+	console.log('Hello ' + name + '!');
+}
 			</textarea>
 		</div>
+	</div>
+
+
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-task-number="8e" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<p>Let's adapt assignment 7 so it works with a function instead. Imagine we have to comment scores in multiple locations, sometimes it's just one score, other times it's multiple like now. A function would be quite useful, wouldn't it?</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var scores = [90, 45, 10, 75, 30];
+
+for(score of scores){
+	if(score > 50){
+		console.log('Great job!');
+	}else if(score >= 20 && score <= 50){
+		console.log('Not bad, but you can do better! Here is an extra chance!');
+	}else{
+		console.log('Unfortunately, you did not pass. Better luck next time!');
+	}
+}
+			</textarea>
+		</div>
+	</div>
+
+	<!-- Advanced Topics -->
+	<!-- Advanced Topics -->
+	<!-- Advanced Topics -->
+	<div class="advancedWrapper">
+		<h2>Advanced Topics <button class="toggle"></button></h2>
+
+		<div class="advancedContent">
+
+			<h3>Recursion</h3>
+			<p>Recursion is a programming technique where a function calls itself in order to solve a problem. A recursive function typically has a base case that stops the recursion and a recursive case that breaks the problem into smaller subproblems. Recursion can be a powerful tool for solving problems that can be broken down into similar subproblems, such as traversing a tree structure or calculating factorials.</p>
+
+			<div class="gridCorrector editorWrapper">
+				<div class="js-editor" 
+					data-run="true" 
+					data-readonly="false">
+					<textarea class="title" hidden><p>A factorial uses recursion.</p></textarea>
+					<textarea class="js-editor-doc" hidden>
+function factorial(n){
+	if(n === 0) return 1; // base case
+	else return n * factorial(n - 1); // recursive case
+}
+
+console.log(factorial(5)); // logs 120
+					</textarea>
+				</div>
+			</div>
+
+
+
+			<h3>Callbacks</h3>
+			<p>Some functions will have the option to accept another function as an argument. These are called callbacks. Callbacks are useful for asynchronous<span class="tooltip"><span><strong>Asynchronous:</strong> not happening at the same time</span></span> operations, such as reading files or making network requests, where you want to execute some code only after the operation is complete.</p>
+			<p>This might be a great time to explain the order of execution in JavaScript;</p>
+			<p>JavaScript is single-threaded, which means it can only execute one piece of code at a time. When you call a function, JavaScript will execute the code inside that function before moving on to the next line of code. However, when you use asynchronous functions with callbacks, JavaScript can continue executing other code while waiting for the asynchronous operation to complete. Once the operation is complete, the callback function will be added to the event queue and executed when the main thread is free.</p>
+
+			<div class="gridCorrector editorWrapper">
+				<div class="js-editor" 
+					data-run="false" 
+					data-readonly="false">
+					<textarea class="title" hidden><p>Examples of callback functions that you WILL see appear during this course</p></textarea>
+					<textarea class="js-editor-doc" hidden>
+setTimeout(function(){
+	console.log('This will log after 1 second');
+}, 1000);
+
+document.body.addEventListener('click', function(){
+	console.log('A thing was clicked!');
+});
+					</textarea>
+				</div>
+			</div>
+
+
+
+			<h3>Asynchronous Functions</h3>
+			<p>Asynchronous<span class="tooltip"><span><strong>Asynchronous:</strong> not happening at the same time</span></span> functions are functions that allow you to perform tasks without blocking the main thread of execution. They are often used for tasks that take a long time to complete, such as fetching data from an API or reading a file. Asynchronous functions can be implemented using callbacks, promises, or async/await syntax.</p>
+			<p>When using async functions, the code execution will wait for the asynchronous operation to complete before moving on to the next line.</p>
+			<p>We will make use of async functions later in the course.</p>
+
+			<div class="gridCorrector editorWrapper">
+				<div class="js-editor" 
+					data-run="false" 
+					data-readonly="false">
+					<textarea class="title" hidden><p>Asynchronous Functions</p></textarea>
+					<textarea class="js-editor-doc" hidden>
+async function fetchData(){
+	try{
+		var response = await fetch('https://api.example.com/data'); // waits for the fetch to complete before moving on to the next line
+		var data = await response.json();
+		console.log(data);
+	}catch(error){
+		console.error('Error fetching data:', error);
+	}
+}
+
+					</textarea>
+				</div>
+			</div>
+
+
+
+			<h3>Closures</h3>
+			<p>A closure is a function that has access to its own scope, the outer function's scope, and the global scope. This means that a closure can remember and access variables from its outer function even after the outer function has finished executing. Closures are often used for data privacy and to create functions with persistent state.</p>
+			<p>I'm sure it has multiple perfect use cases but I personally tend to stick to simpler methods.</p>
+
+			<div class="gridCorrector editorWrapper">
+				<div class="js-editor" 
+					data-run="true" 
+					data-readonly="false">
+					<textarea class="title" hidden><p>A closure example.</p></textarea>
+					<textarea class="js-editor-doc" hidden>
+function createCounter(){
+	var count = 0;
+
+	return function(){
+		count++;
+		console.log(count);
+	};
+}
+
+var counter = createCounter();
+counter(); // logs 1
+counter(); // logs 2
+					</textarea>
+				</div>
+			</div>
+
+
+
+			<h3>Function expressions and arrow functions</h3>
+			<p>You won’t need these for now. Or maybe ever.</p>
+		</div>
+
 	</div>
 
 
@@ -75,17 +397,117 @@ var myFavouriteNumber = 6;
 	<div class="quiz" id="#quiz">
 		<script type="application/json" class="quiz-data">
 		{
-			"name": "JS If...Else Quiz",
+			"name": "JS Functions & Scope Quiz",
 			"questions": [
 				{
-					"question": "What does an if-statement do?",
+					"question": "What is a function?",
 					"options": [
-						"It repeats code multiple times",
-						"It runs code based on a condition",
-						"It stores data"
+						"A variable that stores numbers",
+						"A reusable block of code",
+						"A type of loop"
 					],
 					"answer": 1,
-					"explanation": "An if-statement checks a condition and runs code if that condition is true."
+					"explanation": "Functions allow you to reuse code instead of repeating it."
+				},
+				{
+					"question": "What do you need to do to run a function?",
+					"options": [
+						"Define it",
+						"Call it",
+						"Import it"
+					],
+					"answer": 1,
+					"explanation": "A function only runs when you call it."
+				},
+				{
+					"question": "What does 'return' do?",
+					"options": [
+						"Stops the program and goes back to the start",
+						"Sends a value back from a function and exits the function",
+						"Repeats the function until a condition is met"
+					],
+					"answer": 1,
+					"explanation": "<code>return</code> gives back a value and exits the function."
+				},
+				{
+					"question": "What will this code log?<editorlite>function getNumber(){\n\treturn 5;\n}\n\nconsole.log(getNumber());</editorlite>",
+					"options": [
+						"5",
+						"undefined",
+						"Nothing"
+					],
+					"answer": 0,
+					"explanation": "The function returns 5, which gets logged."
+				},
+				{
+					"question": "What is scope?",
+					"options": [
+						"The speed of a function",
+						"Where variables can be accessed",
+						"The number of functions"
+					],
+					"answer": 1,
+					"explanation": "Scope defines where variables are available."
+				},
+				{
+					"question": "Where can a variable defined inside a function be used?",
+					"options": [
+						"Anywhere",
+						"Only inside that function",
+						"Only outside the function"
+					],
+					"answer": 1,
+					"explanation": "Variables inside a function are local to that function."
+				},
+				{
+					"question": "What will this code do?<editorlite>function test(){\n\tvar x = 5;\n}\n\nconsole.log(x);</editorlite>",
+					"options": [
+						"Logs 5",
+						"Logs undefined",
+						"Throws an error"
+					],
+					"answer": 2,
+					"explanation": "x is inside the function and not accessible outside."
+				},
+				{
+					"question": "What are parameters?",
+					"options": [
+						"Values returned from a function",
+						"Inputs passed into a function",
+						"Variables that are always global"
+					],
+					"answer": 1,
+					"explanation": "Parameters allow you to pass data into functions."
+				},
+				{
+					"question": "What will this code log?<editorlite>function greet(name){\n\tconsole.log('Hi ' + name);\n}\n\ngreet('Alex');</editorlite>",
+					"options": [
+						"Hi Alex",
+						"Hi name",
+						"Nothing"
+					],
+					"answer": 0,
+					"explanation": "The parameter 'name' receives 'Alex'."
+				},
+				{
+					"question": "What is the best way to fix a scope problem?",
+					"options": [
+						"Make everything global",
+						"Use typeof everywhere",
+						"Pass the data as a parameter"
+					],
+					"answer": 2,
+					"explanation": "Passing data keeps your code clean and predictable."
+				},
+				{
+					"question": "What is the difference between <code>console.log()</code> and <code>return</code>?",
+					"options": [
+						"No difference",
+						"<code>console.log()</code> shows output, <code>return</code> gives a value back",
+						"<code>return</code> prints to the console"
+					],
+					"answer": 1,
+					"explanation": "<code>console.log()</code> displays something. <code>return</code> sends a value back from a function."
 				}
 			]
 		}

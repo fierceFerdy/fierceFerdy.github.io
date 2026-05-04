@@ -116,9 +116,12 @@ function renderCurrentQuestion(body, footer, state) {
 	// Question text
 	var questionText = document.createElement("p");
 	questionText.className = "quiz-question";
-	questionText.innerHTML = state.questions.length > 1
-		? `${state.currentIndex + 1}. ${questionData.question}`
-		: questionData.question;
+	setAllowedQuestionMarkup(
+		questionText,
+		state.questions.length > 1
+			? `${state.currentIndex + 1}. ${questionData.question}`
+			: questionData.question
+	);
 	body.appendChild(questionText);
 
 	// Answer options
@@ -129,7 +132,7 @@ function renderCurrentQuestion(body, footer, state) {
 	questionData.options.forEach((option, optionIndex) => {
 		var button = document.createElement("button");
 		button.type = "button";
-		button.textContent = option;
+		setAllowedInlineMarkup(button, option);
 
 		button.addEventListener("click", (e) => {
 			e.preventDefault();
@@ -145,11 +148,11 @@ function renderCurrentQuestion(body, footer, state) {
 				state.correctCount++;
 				body.parentElement.classList.add("correct");
 				title.textContent       = "Correct! 🎉";
-				explanation.textContent = questionData.explanation;
+				setAllowedInlineMarkup(explanation, questionData.explanation);
 			} else {
 				body.parentElement.classList.add("wrong");
 				title.textContent       = "No, you dummy! 😭";
-				explanation.textContent = questionData.explanation;
+				setAllowedInlineMarkup(explanation, questionData.explanation);
 			}
 
 			body.appendChild(title);
@@ -197,6 +200,86 @@ function renderFooter(footer, state, showNextButton, hideProgress = false) {
 	progressFill.style.width = `${(state.answeredCount / state.questions.length) * 100}%`;
 	progressBar.appendChild(progressFill);
 	footer.appendChild(progressBar);
+}
+
+function setAllowedQuestionMarkup(target, rawText) {
+	var decoded = decodeHtmlEntities(String(rawText ?? ""));
+	var parserContainer = document.createElement("div");
+	parserContainer.innerHTML = decoded;
+
+	target.textContent = "";
+	appendAllowedQuestionNodes(parserContainer, target);
+}
+
+function appendAllowedQuestionNodes(sourceNode, targetNode) {
+	for (var child of sourceNode.childNodes) {
+		if (child.nodeType === Node.TEXT_NODE) {
+			targetNode.appendChild(document.createTextNode(child.textContent || ""));
+			continue;
+		}
+
+		if (child.nodeType === Node.ELEMENT_NODE && child.tagName === "CODE") {
+			var code = document.createElement("code");
+			code.textContent = child.textContent || "";
+			targetNode.appendChild(code);
+			continue;
+		}
+
+		if (child.nodeType === Node.ELEMENT_NODE && child.tagName === "EDITORLITE") {
+			var editorLite = document.createElement("editorlite");
+			editorLite.textContent = child.textContent || "";
+			targetNode.appendChild(editorLite);
+			continue;
+		}
+
+		if (child.nodeType === Node.ELEMENT_NODE) {
+			appendAllowedQuestionNodes(child, targetNode);
+		}
+	}
+}
+
+function decodeHtmlEntities(value) {
+	var decoded = String(value ?? "");
+	var textarea = document.createElement("textarea");
+
+	// Decode repeatedly to support content that was escaped more than once.
+	for (var i = 0; i < 5; i++) {
+		textarea.innerHTML = decoded;
+		var next = textarea.value;
+		if (next === decoded) break;
+		decoded = next;
+	}
+
+	return decoded;
+}
+
+function setAllowedInlineMarkup(target, rawText) {
+	var decoded = decodeHtmlEntities(String(rawText ?? ""));
+	var parserContainer = document.createElement("div");
+	parserContainer.innerHTML = decoded;
+
+	target.textContent = "";
+	appendAllowedInlineNodes(parserContainer, target);
+}
+
+function appendAllowedInlineNodes(sourceNode, targetNode) {
+	for (var child of sourceNode.childNodes) {
+		if (child.nodeType === Node.TEXT_NODE) {
+			targetNode.appendChild(document.createTextNode(child.textContent || ""));
+			continue;
+		}
+
+		if (child.nodeType === Node.ELEMENT_NODE && child.tagName === "CODE") {
+			var code = document.createElement("code");
+			code.textContent = child.textContent || "";
+			targetNode.appendChild(code);
+			continue;
+		}
+
+		if (child.nodeType === Node.ELEMENT_NODE) {
+			appendAllowedInlineNodes(child, targetNode);
+		}
+	}
 }
 
 

@@ -49,7 +49,7 @@
 	<p>Feel free to play around with the code below</p>
 
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-full" 
+		<div class="js-editor" 
 			data-run="true" 
 			data-readonly="false" 
 			data-height="160">
@@ -68,7 +68,7 @@ if(isItFun == false){ // "=" x 2, is to compare data - are they the same?
 	</div>
 
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-3/5" 
+		<div class="js-editor" 
 			data-run="true" 
 			data-task-number="6" 
 			data-task-docs="false"
@@ -90,6 +90,11 @@ var myFavouriteNumber = 6;
 		</div>
 	</div>
 
+
+
+	<!-- Comparison operators -->
+	<!-- Comparison operators -->
+	<!-- Comparison operators -->
 	<h2>Comparison operators</h2>
 	<p>In the example above, we used the "==" operator to compare the value of isItFun to false. This is called a comparison operator. There are many different comparison operators in JavaScript, such as:</p> 
 	<ul>
@@ -104,7 +109,7 @@ var myFavouriteNumber = 6;
 	<p class="hint">Hint: If you want to check if a <code>value == true</code> or if the <code>value == false</code> you can use this shorter way instead: <code>if(value)</code> or <code>if(!value)</code></p>
 
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-3/5" 
+		<div class="js-editor" 
 			data-run="true" 
 			data-task-number="6b" 
 			data-task-docs="true"
@@ -129,7 +134,10 @@ var age = 16;
 	</div>
 
 
-
+	
+	<!-- If...else...and more? -->
+	<!-- If...else...and more? -->
+	<!-- If...else...and more? -->
 	<h2>If...else...and more?</h2>
 
 	<p>As you can see, If...else statements allow you to execute different code based on a condition.</p>
@@ -138,7 +146,7 @@ var age = 16;
 	<h3>Let's have a look at how that would work</h3>
 
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-full" 
+		<div class="js-editor" 
 			data-run="true" 
 			data-readonly="false" 
 			data-height="160">
@@ -193,6 +201,11 @@ if(weekday == 'monday' || weekday == 'tuesday' || weekday == 'thursday' || weekd
 		</div>
 	</div>
 
+
+
+	<!-- The order of things (and operators) -->
+	<!-- The order of things (and operators) -->
+	<!-- The order of things (and operators) -->
 	<h2>The order of things (and operators)</h2>
 	<p>We can check multiple conditions in a specific order using if...else...elseif statements. In each statement you can also use <em>logical operators like && (and) and || (or) to combine conditions</em>. Maybe you need multiple conditions to be true at the same time? You could of course nest multiple if...else statements in each other but it can quickly become hard to read and maintain.</p>
 	<p>Also, do not forgot that everything's being executed in order, from top to bottom. In the following example, the second condition will never be reached because the first condition is already true.</p>
@@ -221,7 +234,7 @@ if(weekday == 'monday'){
 	</div>
 
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-3/5" 
+		<div class="js-editor" 
 			data-run="true" 
 			data-task-number="6c" 
 			data-task-docs="true"
@@ -251,7 +264,7 @@ var isSick = false;
 	</div>
 
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-3/5" 
+		<div class="js-editor" 
 			data-run="true" 
 			data-task-number="7" 
 			data-task-docs="false"
@@ -269,8 +282,21 @@ var isSick = false;
 					<li>If the score is between 20 and 50, give an extra chance</li>
 					<li>Make sure you test the different scenarios</li>
 				</ul>
+
 			</textarea>
-			<textarea class="js-editor-doc" hidden>
+			<textarea class="js-editor-doc" hidden></textarea>
+			<textarea class="solution" hidden>
+var scores = [90, 45, 10, 75, 30];
+
+for(score of scores){
+	if(score > 50){
+		console.log('Great job!');
+	}else if(score >= 20 && score <= 50){
+		console.log('Not bad, but you can do better! Here is an extra chance!');
+	}else{
+		console.log('Unfortunately, you did not pass. Better luck next time!');
+	}
+}
 			</textarea>
 		</div>
 	</div>
@@ -364,7 +390,9 @@ switch(weekday){
 
 
 
-
+	<!-- Conclusion/recap -->
+	<!-- Conclusion/recap -->
+	<!-- Conclusion/recap -->
 	<h2>Conclusion/recap</h2>
 
 	<div class="quiz" id="#quiz">

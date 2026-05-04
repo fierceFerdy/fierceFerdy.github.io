@@ -13,8 +13,8 @@ import {defaultKeymap, historyKeymap, indentWithTab} from "https://esm.sh/@codem
 import {EditorState} from "https://esm.sh/@codemirror/state";
 import {parse} from "https://esm.sh/acorn";
 
-const STUDENT_LINE_OFFSET = 3;
-const globalCompletions = completeFromList([
+var STUDENT_LINE_OFFSET = 3;
+var globalCompletions = completeFromList([
     {label: "console", 		type: "variable"},
     {label: "console.log", 	type: "function", apply: insertWithCursor("console.log();", 12)},
     {label: "document",		type: "variable"},
@@ -23,7 +23,7 @@ const globalCompletions = completeFromList([
     {label: "window", 		type: "variable"},
     {label: "setTimeout", 	type: "function", apply: insertWithCursor("setTimeout(()=>{},1000)", 16)}
 ]);
-const extensions = [
+var extensions = [
 	basicSetup,
 	javascript({typescript: false, jsx: false}),
 	oneDark,
@@ -37,9 +37,9 @@ document.querySelectorAll(".js-editor").forEach(createEditor);
 document.querySelectorAll('editorlite').forEach(createLiteEditor);
 
 // Watch for dynamically injected <editorlite> nodes (e.g. quiz questions)
-const liteObserver = new MutationObserver((mutations) => {
-	for (const mutation of mutations) {
-		for (const node of mutation.addedNodes) {
+var liteObserver = new MutationObserver((mutations) => {
+	for (var mutation of mutations) {
+		for (var node of mutation.addedNodes) {
 			if (node.nodeType !== Node.ELEMENT_NODE) continue;
 			
 			if (node.tagName === 'EDITORLITE') {
@@ -54,9 +54,9 @@ liteObserver.observe(document.body, { childList: true, subtree: true });
 
 
 // If there's an active task in localStorage, re-activate it (e.g. after page refresh)
-const activeTask = localStorage.getItem("activeTask");
+var activeTask = localStorage.getItem("activeTask");
 if (activeTask) {
-	const targetEditor = document.querySelector(`.js-editor[data-task-number="${activeTask}"]`);
+	var targetEditor = document.querySelector(`.js-editor[data-task-number="${activeTask}"]`);
 
 	if (targetEditor) {
 		targetEditor.parentElement.querySelector(".start")?.remove();
@@ -70,7 +70,7 @@ if (activeTask) {
 
 // Toggle checkmarks
 document.addEventListener("click", (e) => {
-	const grandparent = e.target?.parentElement?.parentElement?.parentElement;
+	var grandparent = e.target?.parentElement?.parentElement?.parentElement;
 	if(grandparent?.classList.contains("js-editor")){
 		e.target.classList.toggle("check");
 	}
@@ -89,11 +89,11 @@ function createLiteEditor(container) {
     if (container.dataset.editorliteInit) return;
     container.dataset.editorliteInit = 'true';
 
-    const liteExtensions = [...extensions, EditorState.readOnly.of(true)];
-    const content = container.textContent;
+    var liteExtensions = [...extensions, EditorState.readOnly.of(true)];
+    var content = container.textContent;
     container.innerHTML = '';
 
-    const view = new EditorView({
+    var view = new EditorView({
         doc: content,
         extensions: liteExtensions,
         parent: container
@@ -107,21 +107,21 @@ function createEditor(container) {
     // Build DOM
 	// if(container.dataset.height) container.style.minHeight = container.dataset.height + "px";
 	if(container.dataset.height) container.style.height = container.dataset.height + "px";
-    const header = document.createElement("header");
-	const title = container.querySelector(".title");
+    var header = document.createElement("header");
+	var title = container.querySelector(".title");
 	if(title && title.value != '') header.innerHTML = title.value;
 	else header.innerHTML = "<p>JavaScript Editor <small>by yours truly</small></p>";
 
     container.appendChild(header);
 
-    const editorHost = document.createElement("div");
+    var editorHost = document.createElement("div");
     container.appendChild(editorHost);
 
 	if(container.dataset.readonly === "true"){
 		extensions.push(EditorState.readOnly.of(true));
 	}
 
-    const view = new EditorView({
+    var view = new EditorView({
         doc: getInitialDoc(container),
         extensions,
         parent: editorHost
@@ -129,8 +129,8 @@ function createEditor(container) {
 
 
 
-	// It's a task
-	if(container.dataset.taskNumber && container.dataset.taskNumber != ''){
+    // It's a task
+    if(container.dataset.taskNumber && container.dataset.taskNumber != ''){
 
 		container.parentElement.classList.add("blurChildren");
 
@@ -180,16 +180,36 @@ function createEditor(container) {
 			finishBtn.remove();
 			localStorage.removeItem("activeTask");
 
+            addShowSolutionButton(container, editorHost);
+
 			(async () => {
 				await runCode(view.state.doc.toString(), terminal, container, 'finish');
 			})();
 		});
 	}
 
+    // Manually blurred editor (same unlock pattern as tasks, without task state tracking)
+    if((!container.dataset.taskNumber || container.dataset.taskNumber === '') && container.dataset.blurred === "true"){
+        container.parentElement.classList.add("blurChildren");
+
+        var revealBtn = document.createElement("button");
+        revealBtn.textContent = "Reveal code";
+        revealBtn.classList.add("start");
+        container.parentElement.appendChild(revealBtn);
+
+        revealBtn.addEventListener("click", () => {
+            revealBtn.remove();
+            container.parentElement.classList.remove("blurChildren");
+            container.scrollIntoView({behavior: "smooth", block: "center"});
+        });
+    }
+
 
 
 	// Terminal and run button
     if(container.dataset.run === "true"){
+		// add width class
+		container.classList.add("w-3/5");
 
 		// add terminal
 		var terminal = drawTerminal(container);
@@ -210,20 +230,68 @@ function createEditor(container) {
                 await runCode(view.state.doc.toString(), terminal, container, 'run');
 			}
 		});
-    }
+    }else{
+		// add width class
+		container.classList.add("w-full");
+	}
 
     return view;
+}
+
+function addShowSolutionButton(container, editorHost) {
+    var solutionTextarea = container.querySelector("textarea.solution");
+    if (!solutionTextarea) return;
+
+    var solutionCode = solutionTextarea.value
+        .replace(/\r\n/g, "\n")
+        .replace(/^\n/, "")
+        .replace(/\s+$/, "");
+
+    if (solutionCode === "") return;
+    if (container.querySelector(".show-solution")) return;
+
+    var showSolutionBtn = document.createElement("button");
+    showSolutionBtn.textContent = "Show solution";
+    showSolutionBtn.classList.add("showSolution");
+    container.appendChild(showSolutionBtn);
+
+    showSolutionBtn.addEventListener("click", () => {
+        renderSolutionEditor(container, editorHost, solutionCode);
+        showSolutionBtn.remove();
+    });
+}
+
+function renderSolutionEditor(container, editorHost, solutionCode) {
+    if (container.querySelector(".solution-view")) return;
+
+    var solutionView = document.createElement("div");
+    solutionView.className = "solution-view";
+
+    var label = document.createElement("p");
+    label.textContent = "Solution";
+    solutionView.appendChild(label);
+
+    var solutionHost = document.createElement("div");
+    solutionView.appendChild(solutionHost);
+
+    editorHost.after(solutionView);
+
+    new EditorView({
+        doc: solutionCode,
+        extensions: [...extensions, EditorState.readOnly.of(true)],
+        parent: solutionHost
+    });
 }
 
 
 
 async function runCode(code, terminal, container, action = 'run') {
 	var logs = [];
-	const fakeConsole = { log: (...args) => logs.push( args.join(" ") ) };
+	var fakeConsole = { log: (...args) => logs.push( args.join(" ") ) };
     let runStatus = "success";
     let runError = null;
 
-    const syntaxError = getSyntaxErrorWithLocation(code);
+    var syntaxError = getSyntaxErrorWithLocation(code);
     if (syntaxError) {
         runStatus = "error";
         runError = syntaxError;
@@ -232,8 +300,7 @@ async function runCode(code, terminal, container, action = 'run') {
 	try {
         if (!runError) {
             // Execute user code
-            const wrapped = `"use strict";\n${code}\n//# sourceURL=student-code.js`;
-            new Function("console", wrapped)(fakeConsole);
+        executeUserCode(code, fakeConsole);
         }
 	} catch (e) {
         runStatus = "error";
@@ -259,7 +326,7 @@ async function runCode(code, terminal, container, action = 'run') {
 		}
 		
 		if (logs.length === 0) await printLine(terminal, "Done");
-		else for (const entry of logs) await printLine(terminal, entry);
+		else for (var entry of logs) await printLine(terminal, entry);
     }
 
 }
@@ -267,7 +334,7 @@ async function runCode(code, terminal, container, action = 'run') {
 
 
 function getInitialDoc(container, type = 'normal') {
-    const textareaDoc = container.querySelector(".js-editor-doc");
+    var textareaDoc = container.querySelector(".js-editor-doc");
 	
 	return textareaDoc.value
 		.replace(/\r\n/g, "\n")
@@ -283,19 +350,19 @@ function drawTerminal(container) {
     terminal.className = "terminal w-2/5";
     container.after(terminal);
 
-    const line = document.createElement("div");
+    var line = document.createElement("div");
     line.className = "terminal-line";
     terminal.appendChild(line);
 
     // add clear btn	
-    const clearTerminal = document.createElement("button");
+    var clearTerminal = document.createElement("button");
     clearTerminal.className = "clearTerminal";
     clearTerminal.type = "button";
     clearTerminal.addEventListener("click", () => {
         terminal.innerHTML = "";
 
         // optional: recreate first line so styling stays consistent
-        const freshLine = document.createElement("div");
+        var freshLine = document.createElement("div");
         freshLine.className = "terminal-line";
         terminal.appendChild(freshLine);
 
@@ -317,34 +384,61 @@ function insertWithCursor(text, cursorOffset) {
     };
 }
 
-// function executeUserCode(code, fakeConsole) {
-//     const wrapped = `"use strict";\n${code}\n//# sourceURL=student-code.js`;
+function executeUserCode(code, fakeConsole) {
+    var wrapped = `"use strict";\n${code}\n//# sourceURL=student-code.js`;
+    var restoreNameState = null;
 
-//     return new Function("console", wrapped)(fakeConsole);
-// }
+    // In browsers, `name` exists globally (window.name) and can hide real scope errors.
+    // Remove it temporarily so `typeof name` is safe and bare `name` throws as expected.
+    try {
+        var originalNameDescriptor = Object.getOwnPropertyDescriptor(globalThis, "name");
+
+        if (originalNameDescriptor && originalNameDescriptor.configurable) {
+            delete globalThis.name;
+            restoreNameState = () => {
+                Object.defineProperty(globalThis, "name", originalNameDescriptor);
+            };
+        } else {
+            // Fallback if not configurable: avoid false positives for typeof checks.
+            var previousNameValue = globalThis.name;
+            globalThis.name = undefined;
+            restoreNameState = () => {
+                globalThis.name = previousNameValue;
+            };
+        }
+    } catch (e) {
+        restoreNameState = null;
+    }
+
+    try {
+        return new Function("console", wrapped)(fakeConsole);
+    } finally {
+        if (restoreNameState) restoreNameState();
+    }
+}
 
 function formatStudentError(error) {
-    const message = `${error?.name || "Error"}: ${error?.message || String(error)}`;
-    const location = extractStudentLocation(error);
+    var message = `${error?.name || "Error"}: ${error?.message || String(error)}`;
+    var location = extractStudentLocation(error);
     if (!location) return message;
 
     return `${message}\n    at student-code.js:${location.line}:${location.column}`;
 }
 
 function extractStudentLocation(error) {
-    const lineNumber = Number(error?.lineNumber);
-    const columnNumber = Number(error?.columnNumber);
+    var lineNumber = Number(error?.lineNumber);
+    var columnNumber = Number(error?.columnNumber);
     if (Number.isFinite(lineNumber) && lineNumber > 0) {
-        const lineOffset = error?.studentLineResolved === true ? 0 : STUDENT_LINE_OFFSET;
+        var lineOffset = error?.studentLineResolved === true ? 0 : STUDENT_LINE_OFFSET;
         return {
             line: Math.max(1, lineNumber - lineOffset),
             column: Number.isFinite(columnNumber) && columnNumber > 0 ? columnNumber : 1
         };
     }
 
-    const stack = String(error?.stack || "");
+    var stack = String(error?.stack || "");
 
-    const studentMatch = stack.match(/student-code\.js:(\d+):(\d+)/);
+    var studentMatch = stack.match(/student-code\.js:(\d+):(\d+)/);
     if (studentMatch) {
         return {
             line: Math.max(1, Number(studentMatch[1]) - STUDENT_LINE_OFFSET),
@@ -353,7 +447,7 @@ function extractStudentLocation(error) {
     }
 
     // Syntax errors from Function(...) often point to <anonymous> instead of sourceURL.
-    const anonymousMatch = stack.match(/<anonymous>:(\d+):(\d+)/) || stack.match(/anonymous:(\d+):(\d+)/);
+    var anonymousMatch = stack.match(/<anonymous>:(\d+):(\d+)/) || stack.match(/anonymous:(\d+):(\d+)/);
     if (anonymousMatch) {
         return {
             line: Math.max(1, Number(anonymousMatch[1]) - STUDENT_LINE_OFFSET),
@@ -370,7 +464,7 @@ function getSyntaxErrorWithLocation(code) {
         return null;
     } catch (error) {
         if (error && error.loc) {
-            const syntaxError = new SyntaxError(error.message);
+            var syntaxError = new SyntaxError(error.message);
             syntaxError.lineNumber = Number(error.loc.line);
             syntaxError.columnNumber = Number(error.loc.column) + 1;
             syntaxError.studentLineResolved = true;
@@ -383,12 +477,12 @@ function getSyntaxErrorWithLocation(code) {
 
 function printLine(terminal, text, type = "default", speed = 45) {
     return new Promise(resolve => {
-        const line = document.createElement("div");
+        var line = document.createElement("div");
         line.className = "terminal-line "+type;
         terminal.appendChild(line);
         let i = 0;
 
-        const interval = setInterval(() => {
+        var interval = setInterval(() => {
             line.textContent += text[i] ?? "";
             i++;
 
@@ -403,11 +497,11 @@ function printLine(terminal, text, type = "default", speed = 45) {
 }
 
 function saveEditorAttempt(container, status, code, logCount) {
-    const storageKey = "manual.editorAttempts";
-    const records = readRecords(storageKey);
-    const editorName = getEditorName(container);
-    const now = new Date();
-    const tries = records.filter(record => record.editorName === editorName).length + 1;
+    var storageKey = "manual.editorAttempts";
+    var records = readRecords(storageKey);
+    var editorName = getEditorName(container);
+    var now = new Date();
+    var tries = records.filter(record => record.editorName === editorName).length + 1;
 
     records.push({
         editorName,
@@ -428,18 +522,18 @@ function saveEditorAttempt(container, status, code, logCount) {
 }
 
 function getEditorName(container) {
-    const rawTitle = container.dataset.title || "JavaScript Editor";
-    const titleHolder = document.createElement("div");
+    var rawTitle = container.dataset.title || "JavaScript Editor";
+    var titleHolder = document.createElement("div");
     titleHolder.innerHTML = rawTitle;
-    const titleText = (titleHolder.textContent || "").trim();
+    var titleText = (titleHolder.textContent || "").trim();
     return titleText || "JavaScript Editor";
 }
 
 function readRecords(storageKey) {
     try {
-        const raw = localStorage.getItem(storageKey);
+        var raw = localStorage.getItem(storageKey);
         if (!raw) return [];
-        const parsed = JSON.parse(raw);
+        var parsed = JSON.parse(raw);
         return Array.isArray(parsed) ? parsed : [];
     } catch (error) {
         console.warn("Could not read saved records.", error);

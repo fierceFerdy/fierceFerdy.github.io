@@ -450,7 +450,7 @@ counter(); // logs 2
 					"explanation": "Scope defines where variables are available."
 				},
 				{
-					"question": "Where can a variable defined inside a function be used?",
+					"question": "Where can you use a variable that's defined inside a function?",
 					"options": [
 						"Anywhere",
 						"Only inside that function",
@@ -462,11 +462,12 @@ counter(); // logs 2
 				{
 					"question": "What will this code do?<editorlite>function test(){\n\tvar x = 5;\n}\n\nconsole.log(x);</editorlite>",
 					"options": [
-						"Logs 5",
-						"Logs undefined",
-						"Throws an error"
+						"Logs → 5",
+						"Throws an error → x is not defined",
+						"Logs → x"
+
 					],
-					"answer": 2,
+					"answer": 1,
 					"explanation": "x is inside the function and not accessible outside."
 				},
 				{

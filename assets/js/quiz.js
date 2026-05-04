@@ -116,11 +116,12 @@ function renderCurrentQuestion(body, footer, state) {
 	// Question text
 	var questionText = document.createElement("p");
 	questionText.className = "quiz-question";
-	setAllowedQuestionMarkup(
+	setAllowedMarkup(
 		questionText,
 		state.questions.length > 1
 			? `${state.currentIndex + 1}. ${questionData.question}`
-			: questionData.question
+			: questionData.question,
+		{ allowEditorLite: true }
 	);
 	body.appendChild(questionText);
 
@@ -132,7 +133,7 @@ function renderCurrentQuestion(body, footer, state) {
 	questionData.options.forEach((option, optionIndex) => {
 		var button = document.createElement("button");
 		button.type = "button";
-		setAllowedInlineMarkup(button, option);
+		setAllowedMarkup(button, option);
 
 		button.addEventListener("click", (e) => {
 			e.preventDefault();
@@ -148,11 +149,11 @@ function renderCurrentQuestion(body, footer, state) {
 				state.correctCount++;
 				body.parentElement.classList.add("correct");
 				title.textContent       = "Correct! 🎉";
-				setAllowedInlineMarkup(explanation, questionData.explanation);
+				setAllowedMarkup(explanation, questionData.explanation);
 			} else {
 				body.parentElement.classList.add("wrong");
 				title.textContent       = "No, you dummy! 😭";
-				setAllowedInlineMarkup(explanation, questionData.explanation);
+				setAllowedMarkup(explanation, questionData.explanation);
 			}
 
 			body.appendChild(title);
@@ -202,16 +203,16 @@ function renderFooter(footer, state, showNextButton, hideProgress = false) {
 	footer.appendChild(progressBar);
 }
 
-function setAllowedQuestionMarkup(target, rawText) {
+function setAllowedMarkup(target, rawText, options = {}) {
 	var decoded = decodeHtmlEntities(String(rawText ?? ""));
 	var parserContainer = document.createElement("div");
 	parserContainer.innerHTML = decoded;
 
 	target.textContent = "";
-	appendAllowedQuestionNodes(parserContainer, target);
+	appendAllowedNodes(parserContainer, target, options);
 }
 
-function appendAllowedQuestionNodes(sourceNode, targetNode) {
+function appendAllowedNodes(sourceNode, targetNode, options) {
 	for (var child of sourceNode.childNodes) {
 		if (child.nodeType === Node.TEXT_NODE) {
 			targetNode.appendChild(document.createTextNode(child.textContent || ""));
@@ -225,7 +226,7 @@ function appendAllowedQuestionNodes(sourceNode, targetNode) {
 			continue;
 		}
 
-		if (child.nodeType === Node.ELEMENT_NODE && child.tagName === "EDITORLITE") {
+		if (options.allowEditorLite && child.nodeType === Node.ELEMENT_NODE && child.tagName === "EDITORLITE") {
 			var editorLite = document.createElement("editorlite");
 			editorLite.textContent = child.textContent || "";
 			targetNode.appendChild(editorLite);
@@ -233,7 +234,7 @@ function appendAllowedQuestionNodes(sourceNode, targetNode) {
 		}
 
 		if (child.nodeType === Node.ELEMENT_NODE) {
-			appendAllowedQuestionNodes(child, targetNode);
+			appendAllowedNodes(child, targetNode, options);
 		}
 	}
 }
@@ -252,37 +253,6 @@ function decodeHtmlEntities(value) {
 
 	return decoded;
 }
-
-function setAllowedInlineMarkup(target, rawText) {
-	var decoded = decodeHtmlEntities(String(rawText ?? ""));
-	var parserContainer = document.createElement("div");
-	parserContainer.innerHTML = decoded;
-
-	target.textContent = "";
-	appendAllowedInlineNodes(parserContainer, target);
-}
-
-function appendAllowedInlineNodes(sourceNode, targetNode) {
-	for (var child of sourceNode.childNodes) {
-		if (child.nodeType === Node.TEXT_NODE) {
-			targetNode.appendChild(document.createTextNode(child.textContent || ""));
-			continue;
-		}
-
-		if (child.nodeType === Node.ELEMENT_NODE && child.tagName === "CODE") {
-			var code = document.createElement("code");
-			code.textContent = child.textContent || "";
-			targetNode.appendChild(code);
-			continue;
-		}
-
-		if (child.nodeType === Node.ELEMENT_NODE) {
-			appendAllowedInlineNodes(child, targetNode);
-		}
-	}
-}
-
-
 
 function renderFinishedState(body, footer, state) {
 	state.finishedAt     = Date.now();

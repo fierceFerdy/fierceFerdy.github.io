@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The manual.</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<script src="/assets/js/main.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+</head>
+
+<body>
+	
+
+
+<div class="content">
+	
+	<h1>Websockets and APIs</h1>
+	
+	<p>In this chapter, we will explore the concepts of WebSockets and APIs in JavaScript. We will learn how to establish real-time communication using WebSockets and we'll learn a bit about APIs.</p>
+
+	<h2>The core difference</h2>
+
+	<p>APIs and WebSockets are two different ways to communicate with a server. APIs typically use HTTP requests to fetch data, while WebSockets provide a persistent connection for real-time communication.</p>
+
+	<div class="w-1/2">
+		<h3>API (HTTP)</h3>
+		<ul>
+			<li>Request → response → connection closes</li>
+			<li>Client always starts the conversation</li>
+			<li>Stateless (each request stands alone)</li>
+		</ul>
+		<p>An API is like sending letters; each request is independent and the connection closes after the response. It's cooler than it sounds.</p>
+
+		<h4>Great for:</h4>
+		<ul>
+			<li>Fetching data (GET /scores)</li>
+			<li>Submitting forms (POST /login)</li>
+			<li>Protecting resources behind authentication</li>
+		</ul>
+	</div>
+
+	<div class="w-1/2">
+		<h3>WebSocket</h3>
+		<ul>
+			<li>Persistent<span class="tooltip"><span><strong>Persistent</strong>: continuing to do something, or lasting. In this case; "The connection remains open"</span></span> connection</li>
+			<li>Server can push data to the client</li>
+			<li>Stateful (connection remains open)</li>
+		</ul>
+		<p>A WebSocket is like a phone call; the connection stays open and both parties can communicate in real-time. Built for instant updates.</p>
+		<h4>Great for:</h4>
+		<ul>
+			<li>Chat</li>
+			<li>Live dashboards</li>
+			<li>Multiplayer games</li>
+		</ul>
+	</div>
+
+	<h2>Let's build a basic WebSocket</h2>
+	<ol>
+		<li>Create a project folder</li>
+		<li>Initialize Node. Inside the project, run: <txt>npm init -y</txt> <i>a wild package.json appears!</i>
+		</li>
+		<li>Install WebSocket library, run: <txt>npm install ws</txt>
+		</li>
+		<li>Create your server file → <code>server.js</code>
+		</li>
+		<li><i>Follow the teacher's instructions concerning the server file</i></li>
+	</ol>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="false" 
+			data-readonly="true">
+			<textarea class="title" hidden><p>WebSocket server - don't just copy, type!</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+import { WebSocketServer } from "ws"; // Look, we're using ES modules!
+
+var wss = new WebSocketServer({ port: 3030 });
+var clients = new Set();
+
+
+
+wss.on("connection", (ws) => { // ws is the new client connection
+  	console.log("Client connected");
+	clients.add(ws);
+
+	// broadcast to everyone
+	ws.on("message", (message) => { 
+		for (var client of clients) {
+			if (client.readyState === 1) client.send(message.toString());
+		}
+	});
+
+	ws.on("close", () => {
+    	console.log("Client disconnected");
+		clients.delete(ws);
+	});
+});
+
+console.log("WebSocket server running on ws://localhost:3030");
+			</textarea>
+		</div>
+	</div>
+
+
+	<ol start="6">
+		<li>Edit package.json to enable ES modules
+			<code>"type": "module"</code>
+		</li>
+		<li>Run the server: <txt>node server.js</txt> You should see → Running on ws://localhost:3030
+		</li>
+		<li>YAY!! <i>(We can already interact with it but let's make an interface instead)</i></li>
+		<li>Create your client files → <code>client.html</code> and <code>client.js</code>
+		</li>
+		<li><i>Follow the teacher's instructions concerning the client files</i></li>
+		<li>When finished, open <code>client.html</code> in your browser in two separate tabs and open the console in each of them. Send messages between the tabs to see the WebSocket in action!</li>
+	</ol>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-1/2" 
+			data-run="false" 
+			data-readonly="true">
+			<textarea class="title" hidden><p>Client html - don't just copy. Type, type, type!</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="client.js" defer></script>
+</head>
+
+<fakebodybecauseliveserverinjectshereotherwise>
+	<h1>WebSocket Client</h1>
+	<input type="text" id="messageInput" placeholder="Type a message...">
+	<button id="sendButton">Send</button>
+</fakebodybecauseliveserverinjectshereotherwise>
+
+</html>
+			</textarea>
+		</div>
+
+		<div class="js-editor w-1/2" 
+			data-run="false" 
+			data-readonly="true">
+			<textarea class="title" hidden><p>Client JavaScript - don't just copy. Tyyyyyyyyype!</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var ws = new WebSocket("ws://localhost:3030");
+
+ws.onmessage = (event) => {
+	var data = JSON.parse(event.data);
+	console.log("Message from server:", data);
+};
+
+ws.onopen = () => {
+	console.log("Connected to WebSocket server");
+};
+
+ws.onclose = () => {
+	console.log("Disconnected from WebSocket server");
+};
+
+document.getElementById('sendButton').addEventListener('click', () => {
+	const message = document.getElementById('messageInput').value;
+	sendMessage(message);
+});
+
+
+
+function sendMessage(text){
+	ws.send(JSON.stringify({
+		user: "Anonimouse",
+		text,
+		time: Date.now()
+	}));
+}
+			</textarea>
+		</div>
+	</div>
+
+
+
+	<!-- Recap -->
+	<!-- Recap -->
+	<!-- Recap -->
+	<h2>Recap</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS If...Else Quiz",
+			"questions": [
+				{
+					"question": "What will be logged to the console when the following code is executed? <br><br> <code>var x = 10; if(x > 5) console.log('x is greater than 5'); else console.log('x is not greater than 5');</code>",
+					"options": [
+						"x is greater than 5",
+						"x is not greater than 5",
+						"Nothing will be logged"
+					],
+					"answer": "x is greater than 5"
+				}
+			]
+		}
+		</script>
+	</div>
+
+	
+
+	<h2>Let's now make a real thing!</h2>
+
+	<a href="/pages/js/functions.html" class="nextPageTeaser">Next: JS Basics - functions <i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
+
+</body>
+</html>

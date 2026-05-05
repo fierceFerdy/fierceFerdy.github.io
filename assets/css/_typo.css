@@ -81,6 +81,22 @@ h3{
 
 
 
+h4{
+	position: relative;
+	/* text-transform: uppercase; */
+	color: var(--lime);
+	font-size: 1.2rem;
+	letter-spacing: 2px;
+	font-weight: bold;
+	display: block;
+	text-transform: uppercase;
+
+	margin-bottom: 1rem;
+	margin-top: 3.5rem;
+}
+
+
+
 small{
 	font-size: .6em;
 }
@@ -136,6 +152,7 @@ ol{
 ul{
 	list-style: none;
 	padding-left: 1rem;
+	padding-left: 0;
 
 	li{
 		input[type="checkbox"]{
@@ -153,6 +170,8 @@ ul{
 			font-family: "FontAwesome";
 			font-size: .8em;
 			margin-right: .8rem;
+			position: relative;
+			top: -1px;
 		}
 	}
 

@@ -232,7 +232,9 @@ function createEditor(container) {
 		});
     }else{
 		// add width class
-		container.classList.add("w-full");
+		if(!container.classList.contains("w-1/2")){
+			container.classList.add("w-full");
+		}
 	}
 
     return view;

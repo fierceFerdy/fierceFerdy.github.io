@@ -34,371 +34,149 @@
 					"question": "How do you give instructions to a computer?",
 					"options": [
 						"Using a programming language with precise instructions",
-						"By speaking to it in English",
-						"By sending it cute cat pictures"
+						"By speaking English",
+						"By clicking buttons randomly"
 					],
 					"answer": 0,
-					"explanation": "Programming languages allow you to give precise instructions to a computer, which it can understand and execute."
+					"explanation": "Programming languages give precise instructions computers can execute."
 				},
 				{
-					"question": "Are programming languages all completely different?",
+					"question": "Are programming languages completely different?",
 					"options": [
-						"Yes, each language is completely unique",
-						"No, they have a lot of similarities and shared concepts"
+						"Yes",
+						"No, they share core concepts"
 					],
 					"answer": 1,
-					"explanation": "Most programming languages share common concepts and structures, making it easier to learn new languages once you understand the basics of programming. Whilst they may have different syntax and features, the underlying principles of programming often remain consistent across languages."
+					"explanation": "Most languages share the same fundamentals."
 				},
 				{
-					"question": "How do you show a message in the console?",
+					"question": "How do you log something to the console?",
 					"options": [
-						"print('hi there...')",
-						"console.log('excuse me what the-')",
-						"terminal.print('now what is go-')",
-						"echo('ok this is just g-')"
+						"print('hi')",
+						"console.log('hi')",
+						"echo('hi')"
 					],
 					"answer": 1,
-					"explanation": "You first tell the console to do something. And that something is to log() a message. So you write console.log('your message here');"
+					"explanation": "console.log() is the correct syntax."
 				},
 				{
 					"question": "What is a variable?",
 					"options": [
-						"A container for storing data",
-						"Data when you don't know what it is yet",
-						"It depends"
+						"A container for data",
+						"A loop",
+						"A function"
 					],
 					"answer": 0,
-					"explanation": "A variable is a container for storing data. You can put any type of data in a variable, and you can change the value of a variable at any time."
+					"explanation": "Variables store values."
 				},
 				{
-					"question": "How do you save a string in a variable?",
-					"options": [
-						"var myString = 'Hello, world!';",
-						"let myString(Hello, world!);",
-						"const myString: 'Hello, world!';"
-					],
-					"answer": 0,
-					"explanation": "We will declare a variable using the var keyword, followed by the name of the variable, the assignment operator, and then the value we want to store in the variable. So it looks like this: var myString = 'Hello, world!';"
-				},
-				{
-					"question": "How do you change the value of an existing variable?",
+					"question": "How do you assign a value?",
 					"options": [
 						"x = 3;",
 						"var x = 3;",
 						"x:3;"
 					],
-					"answer": 1,
-					"explanation": "You just write the name of the variable, then the assignment operator and lastly the new value. <cmd>x = 3;</cmd>"
-				},
-				{
-					"question": "What kind of error is this?\n\nvar x = y;",
-					"options": [
-						"SyntaxError",
-						"ReferenceError",
-						"TypeError",
-						"NaN"
-					],
-					"answer": 1,
-					"explanation": "You're using a variable that does not exist. JavaScript throws a ReferenceError."
-				},
-				{
-					"question": "What is the problem here?\n\nvar x: 4;",
-					"options": [
-						"Wrong variable name",
-						"Missing quotes",
-						"Invalid syntax",
-						"x is not defined"
-					],
-					"answer": 2,
-					"explanation": "The ':' does not belong there. JavaScript doesn't understand this syntax."
-				},
-				{
-					"question": "What will this output?\n\nvar result = \"hello\" * 2;",
-					"options": [
-						"hellohello",
-						"2",
-						"NaN",
-						"Error"
-					],
-					"answer": 2,
-					"explanation": "You can't multiply a string. JavaScript gives NaN (Not a Number)."
-				},
-				{
-					"question": "What is wrong here?\n\nconsole.log;",
-					"options": [
-						"console does not exist",
-						"log is not defined",
-						"The function is not being called",
-						"Syntax error"
-					],
-					"answer": 2,
-					"explanation": "You're referencing the function, not calling it. You need ()."
-				},
-				{
-					"question": "Why does this fail?\n\nConsole.log(\"hi\");",
-					"options": [
-						"Missing quotes",
-						"Wrong function",
-						"Case sensitivity issue",
-						"Console is not loaded"
-					],
-					"answer": 2,
-					"explanation": "JavaScript is case-sensitive. 'Console' is not the same as 'console'."
-				},
-				{
-					"question": "What error will this cause?\n\nvar x = null;\nx.toUpperCase();",
-					"options": [
-						"ReferenceError",
-						"SyntaxError",
-						"TypeError",
-						"No error"
-					],
-					"answer": 2,
-					"explanation": "You can't call methods on null. That's a TypeError."
-				},
-				{
-					"question": "What is the issue here?\n\nvar num = 5;\nnum();",
-					"options": [
-						"num is undefined",
-						"num is not a function",
-						"Syntax error",
-						"Missing return"
-					],
-					"answer": 1,
-					"explanation": "You're trying to call a number like a function."
-				},
-				{
-					"question": "What happens here?\n\nif(x = 5){ console.log(\"hi\"); }",
-					"options": [
-						"SyntaxError",
-						"Nothing happens",
-						"It always logs 'hi'",
-						"ReferenceError"
-					],
-					"answer": 2,
-					"explanation": "You're assigning 5 to x, not comparing. The condition is always truthy."
-				},
-				{
-					"question": "What error will this cause?\n\nvar obj = {};\nconsole.log(obj.name.length);",
-					"options": [
-						"ReferenceError",
-						"TypeError",
-						"SyntaxError",
-						"No error"
-					],
-					"answer": 1,
-					"explanation": "obj.name is undefined, and you can't read .length of undefined."
-				},
-				{
-					"question": "Why might this fail?\n\ndocument.getElementById(\"exampleId\").innerHTML = \"Hi\";",
-					"options": [
-						"innerHTML is not valid",
-						"The element might not exist",
-						"getElementById is wrong",
-						"Syntax error"
-					],
-					"answer": 1,
-					"explanation": "If the element doesn't exist, getElementById returns null."
-				},
-				{
-					"question": "What is an arithmetic operator?",
-					"options": [
-						"It's a type of symbol that's used to do mathematical stuff. ",
-						"It's a type of variable that stores numbers.",
-						"It's a type of function that does math."
-					],
 					"answer": 0,
-					"explanation": "It's a type of symbol(operator) that's used to do mathematical stuff. And things."
-				},
-				{
-					"question": "What happens when you add a string to a number? <br><cmd>'2' + 1</cmd>",
-					"options": [
-						"They just add to eachother and you get 3.",
-                        "You get an error.",
-                        "You get 21."
-					],
-					"answer": 2,
-					"explanation": "Since a string and a number are being combined they are being 'glued' to eachother. '2' + 1 = 21."
-				},
-				{
-					"question": "What is the index of the first element in an array?",
-					"options": [
-						"0",
-						"1",
-						"-1"
-					],
-					"answer": 0,
-					"explanation": "JavaScript arrays are zero-indexed, so the first element is at index 0."
-				},
-				{
-					"question": "How do you access the third element of an array called 'fruits'?",
-					"options": [
-						"fruits[3]",
-						"fruits[2]",
-						"fruits[1]"
-					],
-					"answer": 1,
-					"explanation": "Indexing starts at 0, so the third element is at index 2."
-				},
-				{
-					"question": "What does .length return on an array?",
-					"options": [
-						"The last index",
-						"The number of elements",
-						"The first element"
-					],
-					"answer": 1,
-					"explanation": ".length gives the total number of elements in the array."
-				},
-				{
-					"question": "What is pseudocode mainly used for?",
-					"options": [
-						"Writing perfect JavaScript syntax",
-						"Planning logic in a human-readable way",
-						"Executing code faster"
-					],
-					"answer": 1,
-					"explanation": "Pseudocode helps you think through logic without worrying about syntax."
-				},
-				{
-					"question": "Which loop is best for looping over an existing array in a clean way?",
-					"options": [
-						"for loop",
-						"for...of loop",
-						"while loop"
-					],
-					"answer": 1,
-					"explanation": "for...of is the cleanest and simplest way to iterate over arrays."
-				},
-				{
-					"question": "What is a limitation of a for...of loop?",
-					"options": [
-						"It doesn't work with arrays",
-						"It doesn't give you the index automatically",
-						"It runs only once"
-					],
-					"answer": 1,
-					"explanation": "for...of gives values, not indexes."
-				},
-				{
-					"question": "What does this loop do?\nfor(var i = 0; i < 10; i++)",
-					"options": [
-						"Runs 10 times",
-						"Runs 9 times",
-						"Runs forever"
-					],
-					"answer": 0,
-					"explanation": "It runs from 0 up to 9, which is 10 iterations."
-				},
-				{
-					"question": "When would you use a traditional for loop instead of for...of?",
-					"options": [
-						"When you need the index",
-						"When you want cleaner code",
-						"When working with strings only"
-					],
-					"answer": 0,
-					"explanation": "A traditional for loop gives you full control, including access to the index."
-				},
-				{
-					"question": "What happens when 'return' is used inside a loop?",
-					"options": [
-						"It skips one iteration",
-						"It stops the loop immediately",
-						"It restarts the loop"
-					],
-					"answer": 1,
-					"explanation": "return exits the function entirely, stopping the loop instantly."
-				},
-				{
-					"question": "What does an if-statement do?",
-					"options": [
-						"It repeats code multiple times",
-						"It runs code based on a condition",
-						"It stores data"
-					],
-					"answer": 1,
-					"explanation": "An if-statement checks a condition and runs code if that condition is true."
+					"explanation": "Assignment uses '=' without 'var' after declaration."
 				},
 				{
 					"question": "What is the difference between '=' and '=='?",
 					"options": [
 						"No difference",
-						"'=' compares values, '==' assigns values",
-						"'=' assigns values, '==' compares values"
+						"'=' assigns, '==' compares",
+						"'==' assigns, '=' compares"
 					],
-					"answer": 2,
-					"explanation": "'=' is used to assign a value. '==' is used to compare values."
+					"answer": 1
 				},
 				{
-					"question": "Which operator means 'not equal to'?",
+					"question": "What error is this?\nvar x = y;",
 					"options": [
-						"!=",
-						"==",
-						">="
+						"SyntaxError",
+						"ReferenceError",
+						"TypeError"
 					],
-					"answer": 0,
-					"explanation": "!= checks if two values are NOT equal."
+					"answer": 1
 				},
 				{
-					"question": "What happens when an if condition is false?",
+					"question": "What is wrong here?\nvar x: 4;",
 					"options": [
-						"The code inside the if still runs",
-						"The code is skipped",
-						"The program crashes"
+						"Invalid syntax",
+						"x undefined",
+						"Missing quotes"
 					],
-					"answer": 1,
-					"explanation": "If the condition is false, the code inside the if block is skipped."
+					"answer": 0
 				},
 				{
-					"question": "What does this mean?\nif(value)",
+					"question": "What will this output?\n'2' + 1",
 					"options": [
-						"Runs only if value is false",
-						"Runs if value is true",
-						"It causes an error"
+						"3",
+						"21",
+						"Error"
 					],
-					"answer": 1,
-					"explanation": "This is shorthand for checking if value == true."
+					"answer": 1
 				},
 				{
-					"question": "What does '||' mean?",
+					"question": "What is wrong here?\nconsole.log;",
 					"options": [
-						"AND",
-						"OR",
-						"NOT"
+						"Nothing",
+						"Not being called",
+						"console doesn't exist"
 					],
-					"answer": 1,
-					"explanation": "|| means OR — only one condition needs to be true."
+					"answer": 1
 				},
 				{
-					"question": "What is the purpose of 'else if'?",
+					"question": "Why does this fail?\nConsole.log('hi');",
 					"options": [
-						"To repeat the same condition",
-						"To check another condition if the previous one was false",
-						"To stop the program"
+						"Wrong syntax",
+						"Case sensitivity",
+						"Missing quotes"
 					],
-					"answer": 1,
-					"explanation": "else if allows you to check multiple conditions in order."
+					"answer": 1
 				},
 				{
-					"question": "What does this mean?\nif(!value)",
+					"question": "What error?\nvar x = null;\nx.toUpperCase();",
 					"options": [
-						"Runs if value is true",
-						"Runs if value is false",
-						"It skips the if-statement"
+						"ReferenceError",
+						"TypeError",
+						"SyntaxError"
 					],
-					"answer": 1,
-					"explanation": "!value means 'not value', so it runs when value is false."
+					"answer": 1
 				},
 				{
-					"question": "Why is using multiple separate 'if' statements sometimes a bad idea?",
+					"question": "What is wrong?\nvar num = 5;\nnum();",
 					"options": [
-						"They run too fast",
-						"They can all execute instead of just one",
-						"They don't work with variables"
+						"num undefined",
+						"num is not a function",
+						"Syntax error"
 					],
-					"answer": 1,
-					"explanation": "Separate if statements all run independently, which can lead to multiple outputs instead of one."
+					"answer": 1
+				},
+				{
+					"question": "What happens?\nif(x = 5){ console.log('hi'); }",
+					"options": [
+						"Error",
+						"Always logs",
+						"Never logs"
+					],
+					"answer": 1
+				},
+				{
+					"question": "What does an if-statement do?",
+					"options": [
+						"Repeats code",
+						"Runs code based on condition",
+						"Stores data"
+					],
+					"answer": 1
+				},
+				{
+					"question": "What does '!=' mean?",
+					"options": [
+						"Equal",
+						"Not equal",
+						"Greater than"
+					],
+					"answer": 1
 				},
 				{
 					"question": "What does '&&' mean?",
@@ -407,246 +185,344 @@
 						"OR",
 						"NOT"
 					],
-					"answer": 0,
-					"explanation": "&& means AND — both conditions must be true."
+					"answer": 0
 				},
 				{
-					"question": "What will this code log?<editorlite>var age = 17;\n\nif(age >= 18){\n\tconsole.log('Adult');\n}else if(age >= 16){\n\tconsole.log('Almost adult');\n}</editorlite>",
+					"question": "What does '||' mean?",
 					"options": [
-						"Adult",
-						"Almost adult",
-						"Nothing"
+						"AND",
+						"OR",
+						"NOT"
 					],
-					"answer": 1,
-					"explanation": "17 is not >= 18, but it is >= 16, so the second condition runs."
+					"answer": 1
 				},
 				{
-					"question": "What will this code log?<editorlite>var x = 10;\n\nif(x > 5){\n\tconsole.log('A');\n}\nif(x > 8){\n\tconsole.log('B');\n}</editorlite>",
+					"question": "What does if(value) mean?",
+					"options": [
+						"value is false",
+						"value is truthy",
+						"error"
+					],
+					"answer": 1
+				},
+				{
+					"question": "Why use else if?",
+					"options": [
+						"Repeat condition",
+						"Check another condition",
+						"Stop code"
+					],
+					"answer": 1
+				},
+				{
+					"question": "What will this log?\nx=10; if(x>5){console.log('A')} if(x>8){console.log('B')}",
 					"options": [
 						"A",
 						"B",
 						"A and B"
 					],
-					"answer": 2,
-					"explanation": "These are two separate if statements, so both run."
+					"answer": 2
 				},
 				{
-					"question": "What will this code log?<editorlite>var x = 5;\n\nif(x == 5) {\n\tconsole.log('A');\n} else {\n\tconsole.log('B');\n}</editorlite>",
+					"question": "Why does order matter?",
 					"options": [
-						"A",
-						"B",
-						"Nothing"
+						"JS reads bottom up",
+						"First true condition stops rest",
+						"Else always runs"
 					],
-					"answer": 0,
-					"explanation": "x equals 5, so the if condition is true and 'A' is logged."
+					"answer": 1
 				},
 				{
-					"question": "Why does order matter in if...else if statements?",
+					"question": "What is a function?",
 					"options": [
-						"Because JavaScript reads from bottom to top",
-						"Because the first true condition stops the rest",
-						"Because else if always runs last"
+						"Loop",
+						"Reusable code",
+						"Variable"
 					],
-					"answer": 1,
-					"explanation": "Once a condition is true, the rest of the chain is ignored."
+					"answer": 1
 				},
 				{
-					"question": "What will this code log?\nvar arr = ['a','b','c'];\nconsole.log(arr[0]);",
+					"question": "How do you run a function?",
 					"options": [
-						"'a'",
-						"'b'",
-						"'c'"
+						"Define it",
+						"Call it",
+						"Import it"
 					],
-					"answer": 0,
-					"explanation": "Index 0 is the first element, which is 'a'."
+					"answer": 1
 				},
 				{
-					"question": "How do you round up a number?",
+					"question": "What does return do?",
 					"options": [
-						"Math.up(0.5)",
-						"Math.ceil(0.5)",
-						"ceil(0.5)",
-						"round(0.5)"
+						"Stops everything",
+						"Returns value",
+						"Loops"
 					],
-					"answer": 1,
-					"explanation": "Math.ceil() will always round up the passed data."
+					"answer": 1
 				},
 				{
-					"question": "How do you structure your variable names?",
+					"question": "What is scope?",
 					"options": [
-						"Use lowercase: myvariablename",
-						"Use snake_case: my_variable_name",
-						"Use PascalCase: MyVariableName",
-						"Use camelCasing: myVariableName"
+						"Speed",
+						"Where variables exist",
+						"Loop count"
 					],
-					"answer": 3,
-					"explanation": "We use camelCasing for variable names to make them easier to read. For example, myVariableName is easier to read than myvariablename."
+					"answer": 1
+				},
+				{
+					"question": "Where is a function variable accessible?",
+					"options": [
+						"Everywhere",
+						"Inside the function",
+						"Outside only"
+					],
+					"answer": 1
+				},
+				{
+					"question": "What happens?\nfunction t(){var x=5;} console.log(x);",
+					"options": [
+						"5",
+						"undefined",
+						"Error"
+					],
+					"answer": 2
+				},
+				{
+					"question": "What are parameters?",
+					"options": [
+						"Outputs",
+						"Inputs",
+						"Globals"
+					],
+					"answer": 1
 				},
 				{
 					"question": "What is an array?",
 					"options": [
-						"A single value",
-						"A list of values",
-						"A function"
+						"Single value",
+						"List of values",
+						"Loop"
 					],
-					"answer": 1,
-					"explanation": "Arrays store multiple values in one variable."
+					"answer": 1
 				},
 				{
-					"question": "What is the index of the first element?",
+					"question": "First index?",
 					"options": [
 						"0",
 						"1",
 						"-1"
 					],
-					"answer": 0,
-					"explanation": "Arrays are zero-indexed."
+					"answer": 0
 				},
 				{
-					"question": "What does <code>array.push('x')</code> do?",
+					"question": "fruits[2] gives?",
 					"options": [
-						"Adds to the start",
-						"Adds to the end",
-						"Removes an item"
+						"1st item",
+						"2nd item",
+						"3rd item"
 					],
-					"answer": 1,
-					"explanation": "push adds elements to the end."
+					"answer": 2
 				},
 				{
-					"question": "What does <code>array.pop()</code> do?",
+					"question": "array.length gives?",
 					"options": [
-						"Removes the first item",
-						"Removes the last item",
-						"Adds an item"
+						"Last index",
+						"Amount of items",
+						"First item"
 					],
-					"answer": 1,
-					"explanation": "pop removes the last element."
+					"answer": 1
 				},
 				{
-					"question": "What does <code>array.shift()</code> do?",
+					"question": "What does push do?",
 					"options": [
-						"Removes the first item",
-						"Removes the last item",
-						"Adds to the end"
+						"Start",
+						"End",
+						"Remove"
 					],
-					"answer": 0,
-					"explanation": "shift removes the first element."
+					"answer": 1
 				},
 				{
-					"question": "What does <code>array.length</code> return?",
+					"question": "What does pop do?",
 					"options": [
-						"The last index",
-						"The number of elements",
-						"The first value"
+						"Remove first",
+						"Remove last",
+						"Add item"
 					],
-					"answer": 1,
-					"explanation": "length gives the total number of items."
+					"answer": 1
 				},
 				{
-					"question": "What does <code>array.indexOf('a')</code> return?",
+					"question": "What does shift do?",
 					"options": [
-						"The value 'a'",
-						"The index of 'a'",
-						"True or false"
+						"Remove first",
+						"Remove last",
+						"Add end"
 					],
-					"answer": 1,
-					"explanation": "<code>indexOf()</code> returns the position of said value."
+					"answer": 0
 				},
 				{
-					"question": "How do you get the last index of an array?",
+					"question": "What does includes return?",
 					"options": [
-						"array.length - 1",
-						"array.length",
-						"array.lastIndex",
-						"array.lastIndexOf()"
+						"Index",
+						"True/false",
+						"Array"
 					],
-					"answer": 0,
-					"explanation": "The last index is always one less than the length."
+					"answer": 1
 				},
 				{
-					"question": "What does <code>array.includes('a')</code> return?",
+					"question": "How to get last index?",
 					"options": [
-						"The index",
-						"True or false",
-						"A new array"
+						"length",
+						"length-1",
+						"last()"
 					],
-					"answer": 1,
-					"explanation": "<code>includes()</code> checks if a value exists. That's either true or false."
+					"answer": 1
 				},
 				{
-					"question": "What does <code>array.unshift('x')</code> do?",
+					"question": "Which modifies array?",
 					"options": [
-						"Adds to the end",
-						"Adds to the beginning",
-						"Removes the first item"
+						"slice",
+						"concat",
+						"push"
 					],
-					"answer": 1,
-					"explanation": "<code>unshift()</code> adds elements to the start."
+					"answer": 2
 				},
 				{
-					"question": "What does <code>Array.isArray(value)</code> do?",
+					"question": "What does join return?",
 					"options": [
-						"Creates an array",
-						"Checks if <code>value</code> is an array",
-						"Checks if <code>value</code> is the same as <code>Array</code>"
+						"Array",
+						"String",
+						"Number"
 					],
-					"answer": 1,
-					"explanation": "It returns true if the value is an array."
-				},
-				{
-					"question": "What does <code>array.slice(1,3)</code> do?",
-					"options": [
-						"Removes items from the array",
-						"Copies part of the array",
-						"Adds items"
-					],
-					"answer": 1,
-					"explanation": "<code>slice()</code> returns a copy without changing the original."
-				},
-				{
-					"question": "What does <code>array.splice(1,2)</code> do?",
-					"options": [
-						"Copies items",
-						"Removes items",
-						"Checks length"
-					],
-					"answer": 1,
-					"explanation": "<code>splice()</code> removes elements from the array."
-				},
-				{
-					"question": "What does <code>array.concat(otherArray)</code> do?",
-					"options": [
-						"Merges arrays",
-						"Removes items",
-						"Sorts items"
-					],
-					"answer": 0,
-					"explanation": "<code>concat()</code> joins arrays into a new one."
-				},
-				{
-					"question": "What does <code>array.join(', ')</code> return?",
-					"options": [
-						"An array",
-						"A string",
-						"A number"
-					],
-					"answer": 1,
-					"explanation": "<code>join()</code> turns the array into a string."
-				},
-				{
-					"question": "Which method changes the original array?",
-					"options": [
-						"<code>slice()</code>",
-						"<code>concat()</code>",
-						"<code>push()</code>"
-					],
-					"answer": 2,
-					"explanation": "<code>push()</code> modifies the original array."
+					"answer": 1
 				}
 			]
 		}
 		</script>
 	</div>
+
+	<p>Done with the quiz? Take a breather.</p>
+
+	<h3>The final boss</h3>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "Recap 2 Quiz",
+			"questions": [
+				{
+					"question": "What will this code log? <editorlite>var x = 10;\n\nfunction test(){\n\tconsole.log(x);\n\tvar x = 5;\n}\n\ntest();</editorlite>",
+					"options": [
+						"10",
+						"5",
+						"undefined",
+						"ReferenceError"
+					],
+					"answer": 2,
+					"explanation": "Due to hoisting, <code>var x</code> inside the function is declared but not initialized yet, so it logs undefined."
+				},
+				{
+					"question": "What will this code log? <editorlite>var arr = [1,2,3];\n\nfunction modify(a){\n\ta.push(4);\n}\n\nmodify(arr);\nconsole.log(arr);</editorlite>",
+						"options": [
+						"[1,2,3]",
+						"[1,2,3,4]",
+						"undefined",
+						"Error"
+					],
+					"answer": 1,
+					"explanation": "Arrays are passed by reference, so modifying <code>a</code> affects the original array."
+				},
+				{
+					"question": "What will this code log? <editorlite>var x = 5;\n\nfunction change(){\n\tx = 10;\n}\n\nchange();\nconsole.log(x);</editorlite>",
+					"options": [
+						"5",
+						"10",
+						"undefined",
+						"Error"
+					],
+					"answer": 1,
+					"explanation": "The function modifies the global <code>var x</code>."
+				},
+				{
+					"question": "What will this code log? <editorlite>function test(){\n\tvar x = 5;\n}\n\ntest();\nconsole.log(x);</editorlite>",
+					"options": [
+						"5",
+						"undefined",
+						"ReferenceError",
+						"0"
+					],
+					"answer": 2,
+					"explanation": "<code>var x</code> is scoped inside the function and not accessible outside."
+				},
+				{
+					"question": "What will this code log? <editorlite>var arr = [10,20,30];\nconsole.log(arr[arr.length - 1]);</editorlite>",
+					"options": [
+						"10",
+						"20",
+						"30",
+						"undefined"
+					],
+					"answer": 2,
+					"explanation": "<code>arr.length - 1</code> gives the last index."
+				},
+				{
+					"question": "What will this code log? <editorlite>var result = 0;\n\nfor(var i = 0; i < 3; i++){\n\tresult += i;\n}\n\nconsole.log(result);</editorlite>",
+					"options": [
+						"3",
+						"6",
+						"2",
+						"0"
+					],
+					"answer": 0,
+					"explanation": "0 + 1 + 2 = 3."
+				},
+				{
+					"question": "What will this code log? <editorlite>function add(a,b){\n\treturn;\n\ta + b;\n}\n\nconsole.log(add(2,3));</editorlite>",
+					"options": [
+						"5",
+						"undefined",
+						"Error",
+						"NaN"
+					],
+					"answer": 1,
+					"explanation": "<code>return</code> exits immediately. The addition is never executed."
+				},
+				{
+					"question": "What will this code log? <editorlite>var arr = [1,2,3];\nvar newArr = arr.slice(1);\n\nconsole.log(newArr);</editorlite>",
+					"options": [
+						"[1,2]",
+						"[2,3]",
+						"[1,2,3]",
+						"[2]"
+					],
+					"answer": 1,
+					"explanation": "<code>slice(1)</code> copies from index 1 to the end."
+				},
+				{
+					"question": "What will this code log? <editorlite>var arr = [1,2,3];\narr.splice(1,1);\n\nconsole.log(arr);</editorlite>",
+					"options": [
+						"[1,2,3]",
+						"[1,3]",
+						"[2,3]",
+						"[1]"
+					],
+					"answer": 1,
+					"explanation": "<code>splice</code> removes 1 element at index 1."
+				},
+				{
+					"question": "What will this code log? <editorlite>var x = '5';\n\nif(x == 5){\n\tconsole.log('A');\n}\n\nif(x === 5){\n\tconsole.log('B');\n}</editorlite>",
+					"options": [
+						"A",
+						"B",
+						"A and B",
+						"Nothing"
+					],
+					"answer": 0,
+					"explanation": "<code>==</code> does type coercion (true), <code>===</code> does not (false)."
+				}
+			]
+		}
+		</script>
+	</div>
+
 
 	<a href="/pages/js/arrays.html" class="nextPageTeaser">Next: Arrays - complete <i class="fa-solid fa-arrow-right-long"></i></a>
 </div>

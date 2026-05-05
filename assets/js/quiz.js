@@ -79,7 +79,7 @@ function renderStartState(body, footer, state) {
 
 	var intro = document.createElement("p");
 	intro.className = "quiz-question";
-	if(state.questions.length >= 42){
+	if(state.questions.length >= 40){
 		intro.innerHTML = `Ready? This quiz has <span class="vibrate two">a ginormous</span> ${state.questions.length} question${state.questions.length === 1 ? "" : "s"}.`;
 	}else if(state.questions.length >= 12){
 		intro.innerHTML = `Ready? This quiz has <span class="vibrate">a whopping</span> ${state.questions.length} question${state.questions.length === 1 ? "" : "s"}.`;

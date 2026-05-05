@@ -128,7 +128,10 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/if-else.html">If...Else</a>
 				<a class="nested" href="/pages/js/functions.html">Functions</a>
 				<a class="nested" href="/pages/js/arrays.html">Arrays (complete)</a>
+				<a class="nested" href="/pages/js/recap.html">Recap</a>
 				<a class="nested" href="/pages/js/visualisation.html">Visualisation</a>
+				<a class="nested" href="/pages/js/event-listeners.html">Event Listeners</a>
+				<a class="nested" href="/pages/js/objects.html">Objects</a>
 				<a class="nested" href="/pages/js/neutralino.html">Neutralino</a>
 			</div>
 		</div>

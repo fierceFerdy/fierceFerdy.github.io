@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The manual.</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<script src="/assets/js/main.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+</head>
+
+<body>
+	
+
+
+<div class="content">
+	
+	<h1>JavaScript 101 <small>/arrays</small></h1>
+	
+	<h2>Arrays</h2>
+	<p>Arrays allow you to store multiple values in a single variable. They are like lists that can hold different types of data, such as numbers, strings, or even other arrays.</p>
+	<p>You can also create an array by using square brackets <code>[]</code> and separating the values with commas. You can access the values in an array using their index, which starts at 0. The index goes between square brackets., like so: <code>arrayName[0]</code></p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+			<textarea class="title" hidden>
+			<p>An array of fruits</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var fruits = [
+    'banana',
+    'apple',
+    'pie',
+    'strawberry',
+    'kiwi',
+    'kiwi'
+];
+			</textarea>
+		</div>
+	</div>
+
+
+
+	<h2>Let's manipulate some arrays</h2>
+	<p>Some array methods change the original array (like push, pop, splice), while others return a new array or value without changing the original (like slice, concat, join).</p>
+
+	<h3>The basics</h3>
+	<ul>
+		<li><code>arrayName.push(value, ...)</code> - Adds one or more values to the end of the array</li>
+		<li><code>arrayName.pop()</code> - Removes the last value from the array</li>
+		<li><code>arrayName.shift()</code> - Removes the first value from the array</li>
+	</ul>
+
+	<h3>Intermediates</h3>
+	<ul>
+		<li><code>arrayName.unshift(value, ...)</code> - Adds one or more values to the beginning of the array</li>
+		<!-- <li><code>arrayName.slice(start, end)</code> - Returns a shallow<span class="tooltip"><span>shalow: not deep, only the first level of elements</span></span> copy of a portion of the array</li> -->
+		<li><code>arrayName.slice(start, end)</code> - Copies a portion of the array and returns<span class="tooltip"><span><strong>Return:</strong> Sends the data back to the position where it was called so it can be captured or used</span></span> it</li>
+		<li><code>arrayName.splice(start, deleteCount)</code> - Cuts a portion of the array and returns it</li>
+		<li><code>arrayName.splice(start, deleteCount, item1, item2, ...)</code> - Cuts a portion of the array, returns it and then inserts new elements</li>
+		<li><code>arrayName.concat(array2, ...)</code> - Merges two or more arrays and returns a new array</li>
+		<li><code>arrayName.join(separator)</code> - Joins all elements of an array into a string, separated by the specified separator <span class="tooltip"><span><strong>Separator:</strong> The string to separate each element from eachother in the resulting string. i.e. ", "</span></span></li>
+	</ul>
+
+	
+
+	<h3>Gather info about arrays</h3>
+	<ul>
+		<li><code>arrayName.length</code> - Returns the number of values in the array</li>
+		<li><code>Array.isArray(value)</code> - Checks if the value is an array - the way this is written is a bit weird</li>
+		<li><code>arrayName.indexOf(value)</code> - Returns the index of the first occurrence of a value in the array</li>
+		<li><code>arrayName.includes(value)</code> - Checks if a value exists in the array</li>
+	</ul>
+
+
+
+	<h2>Conclusion/recap</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS Arrays Quiz",
+			"questions": [
+				{
+					"question": "What is an array?",
+					"options": [
+						"A single value",
+						"A list of values",
+						"A function"
+					],
+					"answer": 1,
+					"explanation": "Arrays store multiple values in one variable."
+				},
+				{
+					"question": "What is the index of the first element?",
+					"options": [
+						"0",
+						"1",
+						"-1"
+					],
+					"answer": 0,
+					"explanation": "Arrays are zero-indexed."
+				},
+				{
+					"question": "What does <code>array.push('x')</code> do?",
+					"options": [
+						"Adds to the start",
+						"Adds to the end",
+						"Removes an item"
+					],
+					"answer": 1,
+					"explanation": "push adds elements to the end."
+				},
+				{
+					"question": "What does <code>array.pop()</code> do?",
+					"options": [
+						"Removes the first item",
+						"Removes the last item",
+						"Adds an item"
+					],
+					"answer": 1,
+					"explanation": "pop removes the last element."
+				},
+				{
+					"question": "What does <code>array.shift()</code> do?",
+					"options": [
+						"Removes the first item",
+						"Removes the last item",
+						"Adds to the end"
+					],
+					"answer": 0,
+					"explanation": "shift removes the first element."
+				},
+				{
+					"question": "What does <code>array.length</code> return?",
+					"options": [
+						"The last index",
+						"The number of elements",
+						"The first value"
+					],
+					"answer": 1,
+					"explanation": "length gives the total number of items."
+				},
+				{
+					"question": "What does <code>array.indexOf('a')</code> return?",
+					"options": [
+						"The value 'a'",
+						"The index of 'a'",
+						"True or false"
+					],
+					"answer": 1,
+					"explanation": "<code>indexOf()</code> returns the position of said value."
+				},
+				{
+					"question": "How do you get the last index of an array?",
+					"options": [
+						"array.length - 1",
+						"array.length",
+						"array.lastIndex",
+						"array.lastIndexOf()"
+					],
+					"answer": 0,
+					"explanation": "The last index is always one less than the length."
+				},
+				{
+					"question": "What does <code>array.includes('a')</code> return?",
+					"options": [
+						"The index",
+						"True or false",
+						"A new array"
+					],
+					"answer": 1,
+					"explanation": "<code>includes()</code> checks if a value exists. That's either true or false."
+				},
+				{
+					"question": "What does <code>array.unshift('x')</code> do?",
+					"options": [
+						"Adds to the end",
+						"Adds to the beginning",
+						"Removes the first item"
+					],
+					"answer": 1,
+					"explanation": "<code>unshift()</code> adds elements to the start."
+				},
+				{
+					"question": "What does <code>Array.isArray(value)</code> do?",
+					"options": [
+						"Creates an array",
+						"Checks if <code>value</code> is an array",
+						"Checks if <code>value</code> is the same as <code>Array</code>"
+					],
+					"answer": 1,
+					"explanation": "It returns true if the value is an array."
+				},
+				{
+					"question": "What does <code>array.slice(1,3)</code> do?",
+					"options": [
+						"Removes items from the array",
+						"Copies part of the array",
+						"Adds items"
+					],
+					"answer": 1,
+					"explanation": "<code>slice()</code> returns a copy without changing the original."
+				},
+				{
+					"question": "What does <code>array.splice(1,2)</code> do?",
+					"options": [
+						"Copies items",
+						"Removes items",
+						"Checks length"
+					],
+					"answer": 1,
+					"explanation": "<code>splice()</code> removes elements from the array."
+				},
+				{
+					"question": "What does <code>array.concat(otherArray)</code> do?",
+					"options": [
+						"Merges arrays",
+						"Removes items",
+						"Sorts items"
+					],
+					"answer": 0,
+					"explanation": "<code>concat()</code> joins arrays into a new one."
+				},
+				{
+					"question": "What does <code>array.join(', ')</code> return?",
+					"options": [
+						"An array",
+						"A string",
+						"A number"
+					],
+					"answer": 1,
+					"explanation": "<code>join()</code> turns the array into a string."
+				},
+				{
+					"question": "Which method changes the original array?",
+					"options": [
+						"<code>slice()</code>",
+						"<code>concat()</code>",
+						"<code>push()</code>"
+					],
+					"answer": 2,
+					"explanation": "<code>push()</code> modifies the original array."
+				}
+			]
+		}
+		</script>
+	</div>
+
+	<a href="/pages/js/recap.html" class="nextPageTeaser">Next: Recap <i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
+
+</body>
+</html>

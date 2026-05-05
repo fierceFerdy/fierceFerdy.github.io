@@ -79,7 +79,13 @@ function renderStartState(body, footer, state) {
 
 	var intro = document.createElement("p");
 	intro.className = "quiz-question";
-	intro.textContent = `Ready? This quiz has ${state.questions.length} question${state.questions.length === 1 ? "" : "s"}.`;
+	if(state.questions.length >= 42){
+		intro.innerHTML = `Ready? This quiz has <span class="vibrate two">a ginormous</span> ${state.questions.length} question${state.questions.length === 1 ? "" : "s"}.`;
+	}else if(state.questions.length >= 12){
+		intro.innerHTML = `Ready? This quiz has <span class="vibrate">a whopping</span> ${state.questions.length} question${state.questions.length === 1 ? "" : "s"}.`;
+	}else {
+		intro.textContent = `Ready? This quiz has ${state.questions.length} question${state.questions.length === 1 ? "" : "s"}.`;
+	}
 	body.appendChild(intro);
 
 	var startButton = document.createElement("button");

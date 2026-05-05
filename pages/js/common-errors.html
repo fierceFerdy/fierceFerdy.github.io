@@ -275,114 +275,114 @@ console.log(`Total price is: ${total.toFixed(2)}`); //alt
 		"name": "JS Errors Quiz",
 		"questions": [
 			{
-			"question": "What kind of error is this?\n\nvar x = y;",
-			"options": [
-				"SyntaxError",
-				"ReferenceError",
-				"TypeError",
-				"NaN"
-			],
-			"answer": 1,
-			"explanation": "You're using a variable that does not exist. JavaScript throws a ReferenceError."
+				"question": "What kind of error is this?\n\nvar x = y;",
+				"options": [
+					"SyntaxError",
+					"ReferenceError",
+					"TypeError",
+					"NaN"
+				],
+				"answer": 1,
+				"explanation": "You're using a variable that does not exist. JavaScript throws a ReferenceError."
 			},
 			{
-			"question": "What is the problem here?\n\nvar x: 4;",
-			"options": [
-				"Wrong variable name",
-				"Missing quotes",
-				"Invalid syntax",
-				"x is not defined"
-			],
-			"answer": 2,
-			"explanation": "The ':' does not belong there. JavaScript doesn't understand this syntax."
+				"question": "What is the problem here?\n\nvar x: 4;",
+				"options": [
+					"Wrong variable name",
+					"Missing quotes",
+					"Invalid syntax",
+					"x is not defined"
+				],
+				"answer": 2,
+				"explanation": "The ':' does not belong there. JavaScript doesn't understand this syntax."
 			},
 			{
-			"question": "What will this output?\n\nvar result = \"hello\" * 2;",
-			"options": [
-				"hellohello",
-				"2",
-				"NaN",
-				"Error"
-			],
-			"answer": 2,
-			"explanation": "You can't multiply a string. JavaScript gives NaN (Not a Number)."
+				"question": "What will this output?\n\nvar result = \"hello\" * 2;",
+				"options": [
+					"hellohello",
+					"2",
+					"NaN",
+					"Error"
+				],
+				"answer": 2,
+				"explanation": "You can't multiply a string. JavaScript gives NaN (Not a Number)."
 			},
 			{
-			"question": "What is wrong here?\n\nconsole.log;",
-			"options": [
-				"console does not exist",
-				"log is not defined",
-				"The function is not being called",
-				"Syntax error"
-			],
-			"answer": 2,
-			"explanation": "You're referencing the function, not calling it. You need ()."
+				"question": "What is wrong here?\n\nconsole.log;",
+				"options": [
+					"console does not exist",
+					"log is not defined",
+					"The function is not being called",
+					"Syntax error"
+				],
+				"answer": 2,
+				"explanation": "You're referencing the function, not calling it. You need ()."
 			},
 			{
-			"question": "Why does this fail?\n\nConsole.log(\"hi\");",
-			"options": [
-				"Missing quotes",
-				"Wrong function",
-				"Case sensitivity issue",
-				"Console is not loaded"
-			],
-			"answer": 2,
-			"explanation": "JavaScript is case-sensitive. 'Console' is not the same as 'console'."
+				"question": "Why does this fail?\n\nConsole.log(\"hi\");",
+				"options": [
+					"Missing quotes",
+					"Wrong function",
+					"Case sensitivity issue",
+					"Console is not loaded"
+				],
+				"answer": 2,
+				"explanation": "JavaScript is case-sensitive. 'Console' is not the same as 'console'."
 			},
 			{
-			"question": "What error will this cause?\n\nvar x = null;\nx.toUpperCase();",
-			"options": [
-				"ReferenceError",
-				"SyntaxError",
-				"TypeError",
-				"No error"
-			],
-			"answer": 2,
-			"explanation": "You can't call methods on null. That's a TypeError."
+				"question": "What error will this cause?\n\nvar x = null;\nx.toUpperCase();",
+				"options": [
+					"ReferenceError",
+					"SyntaxError",
+					"TypeError",
+					"No error"
+				],
+				"answer": 2,
+				"explanation": "You can't call methods on null. That's a TypeError."
 			},
 			{
-			"question": "What is the issue here?\n\nvar num = 5;\nnum();",
-			"options": [
-				"num is undefined",
-				"num is not a function",
-				"Syntax error",
-				"Missing return"
-			],
-			"answer": 1,
-			"explanation": "You're trying to call a number like a function."
+				"question": "What is the issue here?\n\nvar num = 5;\nnum();",
+				"options": [
+					"num is undefined",
+					"num is not a function",
+					"Syntax error",
+					"Missing return"
+				],
+				"answer": 1,
+				"explanation": "You're trying to call a number like a function."
 			},
 			{
-			"question": "What happens here?\n\nif(x = 5){ console.log(\"hi\"); }",
-			"options": [
-				"SyntaxError",
-				"Nothing happens",
-				"It always logs 'hi'",
-				"ReferenceError"
-			],
-			"answer": 2,
-			"explanation": "You're assigning 5 to x, not comparing. The condition is always truthy."
+				"question": "What happens here?\n\nif(x = 5){ console.log(\"hi\"); }",
+				"options": [
+					"SyntaxError",
+					"Nothing happens",
+					"It always logs 'hi'",
+					"ReferenceError"
+				],
+				"answer": 2,
+				"explanation": "You're assigning 5 to x, not comparing. The condition is always truthy."
 			},
 			{
-			"question": "What error will this cause?\n\nvar obj = {};\nconsole.log(obj.name.length);",
-			"options": [
-				"ReferenceError",
-				"TypeError",
-				"SyntaxError",
-				"No error"
-			],
-			"answer": 1,
-			"explanation": "obj.name is undefined, and you can't read .length of undefined."
+				"question": "What error will this cause?\n\nvar obj = {};\nconsole.log(obj.name.length);",
+				"options": [
+					"ReferenceError",
+					"TypeError",
+					"SyntaxError",
+					"No error"
+				],
+				"answer": 1,
+				"explanation": "obj.name is undefined, and you can't read .length of undefined."
 			},
 			{
-			"question": "Why might this fail?\n\ndocument.getElementById(\"exampleId\").innerHTML = \"Hi\";",
-			"options": [
-				"innerHTML is not valid",
-				"The element might not exist",
-				"getElementById is wrong",
-				"Syntax error"
-			],
-			"answer": 1,
-			"explanation": "If the element doesn't exist, getElementById returns null."
+				"question": "Why might this fail?\n\ndocument.getElementById(\"exampleId\").innerHTML = \"Hi\";",
+				"options": [
+					"innerHTML is not valid",
+					"The element might not exist",
+					"getElementById is wrong",
+					"Syntax error"
+				],
+				"answer": 1,
+				"explanation": "If the element doesn't exist, getElementById returns null."
 			}
 		]
 		}

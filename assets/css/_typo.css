@@ -173,6 +173,10 @@ p, li{
 	transition: all .3s ease-in-out;
 	/* letter-spacing: .05rem; */
 
+	span{
+		font-weight: inherit;
+	}
+
 	&:hover{
 		color: white;
 	}

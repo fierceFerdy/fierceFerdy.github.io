@@ -27,7 +27,7 @@
 
 	<p>APIs and WebSockets are two different ways to communicate with a server. APIs typically use HTTP requests to fetch data, while WebSockets provide a persistent connection for real-time communication.</p>
 
-	<div class="w-1/2">
+	<div class="w-1/2 sm-full">
 		<h3>API (HTTP)</h3>
 		<ul>
 			<li>Request → response → connection closes</li>
@@ -44,7 +44,7 @@
 		</ul>
 	</div>
 
-	<div class="w-1/2">
+	<div class="w-1/2 sm-full">
 		<h3>WebSocket</h3>
 		<ul>
 			<li>Persistent<span class="tooltip"><span><strong>Persistent</strong>: continuing to do something, or lasting. In this case; "The connection remains open"</span></span> connection</li>
@@ -73,7 +73,7 @@
 	</ol>
 
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor" 
+		<div class="js-editor w-1/2 sm-full" 
 			data-run="false" 
 			data-readonly="true">
 			<textarea class="title" hidden><p>WebSocket server - don't just copy, type!</p></textarea>
@@ -90,6 +90,7 @@ wss.on("connection", (ws) => { // ws is the new client connection
 	clients.add(ws);
 
 	// broadcast to everyone
+	// Whilst the 'event' is just called 'message', this is what you 'listen' to, to receive outgoing data
 	ws.on("message", (message) => { 
 		for (var client of clients) {
 			if (client.readyState === 1) client.send(message.toString());
@@ -122,7 +123,7 @@ console.log("WebSocket server running on ws://localhost:3030");
 	</ol>
 
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-1/2" 
+		<div class="js-editor w-1/2 sm-full" 
 			data-run="false" 
 			data-readonly="true">
 			<textarea class="title" hidden><p>Client html - don't just copy. Type, type, type!</p></textarea>
@@ -147,7 +148,7 @@ console.log("WebSocket server running on ws://localhost:3030");
 			</textarea>
 		</div>
 
-		<div class="js-editor w-1/2" 
+		<div class="js-editor w-1/2 sm-full" 
 			data-run="false" 
 			data-readonly="true">
 			<textarea class="title" hidden><p>Client JavaScript - don't just copy. Tyyyyyyyyype!</p></textarea>

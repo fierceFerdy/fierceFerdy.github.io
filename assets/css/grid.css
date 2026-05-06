@@ -316,7 +316,7 @@ i[class*='w-'] {
 
 
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 800px) {
     .sm-full {
         width: calc(100% - 20px);
     }

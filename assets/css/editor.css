@@ -1,7 +1,12 @@
 .editorWrapper{
 	position: relative;
 	display: flex;
+	/* display: block; */
 	margin-bottom: 2rem;
+
+	@media screen and (max-width: 800px){
+		display: block;
+	}
 
 	button{
 		padding: 0.8rem 1rem;

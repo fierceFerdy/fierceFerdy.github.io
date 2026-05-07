@@ -289,7 +289,7 @@ function renderSolutionEditor(container, editorHost, solutionCode) {
 
 async function runCode(code, terminal, container, action = 'run') {
 	var logs = [];
-	var fakeConsole = { log: (...args) => logs.push( args.join(" ") ) };
+    var fakeConsole = { log: (...args) => logs.push(formatConsoleArgs(args)) };
     let runStatus = "success";
     let runError = null;
 
@@ -417,6 +417,47 @@ function executeUserCode(code, fakeConsole) {
     } finally {
         if (restoreNameState) restoreNameState();
     }
+}
+
+function formatConsoleArgs(args) {
+    return args.map(formatConsoleValue).join(" ");
+}
+
+function formatConsoleValue(value) {
+    if (typeof value === "string") return value;
+    if (value === null) return "null";
+
+    var valueType = typeof value;
+    if (valueType === "undefined" || valueType === "number" || valueType === "boolean" || valueType === "bigint" || valueType === "symbol") {
+        return String(value);
+    }
+
+    if (valueType === "function") {
+        return value.name ? `[Function: ${value.name}]` : "[Function]";
+    }
+
+    if (value instanceof Error) {
+        return `${value.name}: ${value.message}`;
+    }
+
+    try {
+        return JSON.stringify(value, createSafeJsonReplacer(), 2);
+    } catch (error) {
+        return String(value);
+    }
+}
+
+function createSafeJsonReplacer() {
+    var seen = new WeakSet();
+
+    return (_, value) => {
+        if (typeof value === "object" && value !== null) {
+            if (seen.has(value)) return "[Circular]";
+            seen.add(value);
+        }
+
+        return value;
+    };
 }
 
 function formatStudentError(error) {

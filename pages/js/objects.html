@@ -28,13 +28,14 @@
 			data-readonly="false">
 			<textarea class="title" hidden><p>An object's constructor</p></textarea>
 			<textarea class="js-editor-doc" hidden>
-var object = new Object(){
+var object = {
 	voornaam: 'Jos',
 	leeftijd: 19,
 	hobby: 'voetbal'
-}
+};
 console.log(object)
-console.log(object.hobby);
+console.log(object.hobby); // how to access the properties
+console.log(object['hobby']); // how to access the properties
 
 // Mochten we een array gebruiken zou dit veel onhandiger zijn:
 var jos = ['Jos', 19, 'voetbal'];
@@ -50,25 +51,25 @@ jos[2];
 		<div class="js-editor" 
 			data-run="true" 
 			data-task-number="X - need to determine previous ones first" 
-			data-task-docs="true"
+			data-task-docs="false"
 			data-task-internet="true"
 			data-task-team="false"
 			data-task-questions="true"
 			data-readonly="false" 
 			data-height="200">
 			<textarea class="title" hidden>
-				<p>Create an object class. Classes have:</p>
+				<p>Find out: what's an object class? Explain it in 1-2 sentences in your own words.</p>
+				<p>Create an object class called 'Car'. Cars need to have a brand and a colour. Classes have:</p>
 				<ul>
 					<li>constructor</li>
-					<li>getters & setters</li>
+					<li>getters & setters (make at least one of each)</li>
 				</ul>
-				<p>Answer this: what's an object classs?</p>
 				<p>Also do these:</p>
 				<ul>
 					<li>Make an object using the class</li>
 					<li>Use the getters & setters</li>
 				</ul>
-				<p>Extension assignment:</p>
+				<p>Done and time left? Nice! Here's a small extra task:</p>
 				<ul>
 					<li>Create a method.</li>
 				</ul>
@@ -85,14 +86,15 @@ jos[2];
 	<!-- Class + constructor -->
 	<!-- Class + constructor -->
 	<h2>Class + constructor</h2>
-	<p>A class is like a template/blueprint. Compare it to a printed form which you can fill in. Yet, classes have way more functonalities. It's code after all!</p>
+	<p>A class is like a template/blueprint. You can create multiple similar objects from it. You can compare it to a printed form which you can fill in. Yet, classes have way more functonalities. It's code after all! </p>
+	<p class="hint">One important distinction<span class="tooltip"><span><strong>Distinction</strong>: A clear difference</span></span>: Objects are actual data. Classes are templates used to create those objects.</p>
 	<p>You define a class by typing <code>class</code> and then <strong>the name in PascalCasing</strong>. This is an exception to the usual camelCasing rule and it is widely adopted<span class="tooltip"><span><strong>Adopted</strong>: It's the standard, it's what people do to make it easier.</span></span>.</p>
 
 	<p>Since you need to make objects from this template, you need to be able to fill in data. That's what the <code>constructor</code> is for. The constructor is a special function which you can use to receive data when making an object and to then assign those values to (earlier defined) properties<span class="tooltip"><span>NL: eigenschappen</span></span>.</p>
 	<p>Properties are kind of like variables. They hold data but they are accessed differently. All properties are added to <strong>this</strong> object.</p>
 
 	<h4>Creating an object from a class</h4>
-	<p>Finally, can create an object very similarly like the rudimentary way to create arrays. See the code underneath for an example.</p>
+	<p>We have created a basic class, great. Now we can create an object very similarly like the 'long' way to create arrays. See the code underneath for an example.</p>
 
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor" 
@@ -111,12 +113,11 @@ class ClothingArticle{
 	}	
 }
 
-var blackAndYellowShirt = new ClothingArticle('YouAndMe', 'M', 'shirt', '10.99', 'black-yellow');
+var blackAndYellowShirt = new ClothingArticle('YouAndMe', 'M', 'shirt', 10.99, 'black-yellow');
 console.log(blackAndYellowShirt);
 		</textarea>
 	</div>
 </div>
-<!-- TODO: Make logging for objects better in custom terminal☻-->
 
 
 
@@ -124,7 +125,7 @@ console.log(blackAndYellowShirt);
 	<!-- Getters and setters -->
 	<!-- Getters and setters -->
 	<h2>Getters and setters</h2>
-	<p>You use getters to get data and setters to set/change data. You <i>create</i> them almost like how you create a <code>function</code>. Additionaly, since getters and setters are similar to <code>function</code> you can also do other things in these said getters and setters, such as formatting a name.</p>
+	<p>You use getters to get data and setters to set/change data. You <i>create</i> them almost like how you create a <code>function</code>. Additionally, just like with <code>function</code>s, you can also do other things in these getters and setters. Maybe you want to format a name or check a value before changing it.</p>
 
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor" 
@@ -159,13 +160,16 @@ console.log(andries);
 
 // Using the getters and setters
 console.log(andries.getLName);
-console.log(andries.setLName = 'Fandries'); // Remember that setters are LIKE functions? Well, they're more like properties and properties don't work with 
+andries.setLName = 'Fandries'
+console.log(andries.getLName); // Remember that setters are LIKE functions? Well, they're more like properties and properties don't work with 
 			</textarea>
 		</div>
 	</div>
 
 	<p>One thing we can do better is make use of the fact that getters and setters are properties as well. This means they're like <code>innerHTML</code> and can actually use the same 'word'  both for getting and setting!</p>
-	<p>Since we'll be using 'fname' as a getter and setter we need to change the name. Putting a underscore in front of it is widely adopted. Here's the revision:</p>
+	<p>Since we'll be using 'fname' as a getter and setter we need to change the name. Putting a underscore in front of it is widely adopted.</p>
+
+	<h3>Revision</h3>
 
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor" 
@@ -200,13 +204,182 @@ console.log(andries);
 
 // Way cleaner now!
 console.log(andries.lname);
-console.log(andries.lname = 'Sandries');
+andries.lname = 'Sandries'
+console.log(andries.lname);
 console.log(andries.name); // I did a thing!
 			</textarea>
 		</div>
 	</div>
 
+	<h2>Methods</h2>
+	<p>Methods are functions which are properties of an object. They are used to give objects functionality. You can create them in a similar way as getters, setters and functions but instead of using <code>get</code>, <code>set</code> or <code>function</code> you just write the name of the method.</p>
 
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+			<textarea class="title" hidden><p>A property's getter and setter</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+class Person{
+	constructor(fname, lname, gender, haircolour){
+		this._fname = fname;
+		this._lname = lname;
+		this._gender = gender;
+		this._haircolour = haircolour;
+
+		this.showContent(); // You can call methods in the constructor! This will run as soon as you make an object.
+	}	
+
+	showContent(){ // This is a method. It gives the object functionality.
+		var testveld = document.getElementById('testveld');
+		testveld.innerHTML += `<p>${this._fname} ${this._lname} has ${this._haircolour} hair.</p>`; 
+		// You can also use the properties in methods!
+	}
+}
+
+var andries = new Person('Andries', 'Koekenbakker', 'male', 'brown');
+andries.showContent(); // You can call the method like this, after making the object.
+			</textarea>
+		</div>
+	</div>
+
+	<div id="testveld"></div>
+
+
+	<h2>Conclusion/recap</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "Objects Quiz",
+			"questions": [
+				{
+					"question": "What is an object in JavaScript?",
+					"options": [
+						"A function that runs code",
+						"A collection of key-value pairs",
+						"A type of loop"
+					],
+					"answer": 1,
+					"explanation": "Objects store data using keys (properties) and values."
+				},
+				{
+					"question": "How do you access the property 'name' from an object 'user'?",
+					"options": [
+						"user(name)",
+						"user.name",
+						"user->name"
+					],
+					"answer": 1,
+					"explanation": "Dot notation is the most common way to access properties."
+				},
+				{
+					"question": "Which is also a correct way to access a property?",
+					"options": [
+						"user['name']",
+						"user{name}",
+						"user:name"
+					],
+					"answer": 0,
+					"explanation": "Bracket notation allows dynamic property access."
+				},
+				{
+					"question": "What is a class?",
+					"options": [
+						"An object with fixed values",
+						"A template used to create objects",
+						"A type of variable"
+					],
+					"answer": 1,
+					"explanation": "Classes are blueprints used to create multiple objects."
+				},
+				{
+					"question": "What does a constructor do?",
+					"options": [
+						"Deletes properties",
+						"Runs when a class is defined",
+						"Initializes object data when the object's created"
+					],
+					"answer": 2,
+					"explanation": "The constructor runs when you create a new object using the class."
+				},
+				{
+					"question": "What does 'this' refer to inside a class?",
+					"options": [
+						"The class itself",
+						"The current object instance",
+						"The global window"
+					],
+					"answer": 1,
+					"explanation": "'this' refers to the specific object created from the class."
+				},
+				{
+					"question": "What is a getter used for?",
+					"options": [
+						"To change data",
+						"To retrieve or format data",
+						"To delete properties"
+					],
+					"answer": 1,
+					"explanation": "Getters return data, often with formatting or logic."
+				},
+				{
+					"question": "What is a setter used for?",
+					"options": [
+						"To return values",
+						"To loop through objects",
+						"To update or validate data"
+					],
+					"answer": 2,
+					"explanation": "Setters allow controlled updates to properties."
+				},
+				{
+					"question": "How do you use a setter called 'name'?",
+					"options": [
+						"object.name() = 'John'",
+						"object.name = 'John'",
+						"object.setName('John')"
+					],
+					"answer": 1,
+					"explanation": "Setters are used like properties, not functions."
+				},
+				{
+					"question": "What will this return?<editorlite>var obj = { a: 5 };\nconsole.log(obj.b);</editorlite>",
+					"options": [
+						"0",
+						"null",
+						"undefined"
+					],
+					"answer": 2,
+					"explanation": "Accessing a non-existing property returns undefined."
+				},
+				{
+					"question": "What is a method?",
+					"options": [
+						"A property that stores data",
+						"A function inside an object",
+						"A type of loop"
+					],
+					"answer": 1,
+					"explanation": "Methods give objects functionality."
+				},
+				{
+					"question": "What will this log?<editorlite>var user = {\n  name: 'Sam',\n  greet(){ return 'Hi ' + this.name; }\n};\n\nconsole.log(user.greet());</editorlite>",
+					"options": [
+						"'Hi Sam'",
+						"'Hi undefined'",
+						"Error"
+					],
+					"answer": 0,
+					"explanation": "'this.name' refers to the object's own property."
+				}
+			]
+		}
+		</script>
+	</div>
+
+
+	
 	<a href="/pages/js/" class="nextPageTeaser"><i class="fa-solid fa-arrow-right-long"></i></a>
 </div>
 

@@ -20,8 +20,171 @@
 <div class="content">
 	
 	<h1>Objects</h1>
-	
+
+	<h2>Basic object</h2>
+
+	<h2>Information gathering (and applying) assignment</h2>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-task-number="X - need to determine previous ones first" 
+			data-task-docs="true"
+			data-task-internet="true"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<p>Create an object class. Classes have:</p>
+				<ul>
+					<li>constructor</li>
+					<li>getters & setters</li>
+				</ul>
+				<p>Answer this: what's an object classs?</p>
+				<p>Also do these:</p>
+				<ul>
+					<li>Make an object using the class</li>
+					<li>Use the getters & setters</li>
+				</ul>
+				<p>Extension assignment:</p>
+				<ul>
+					<li>Create a method.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+
+			</textarea>
+		</div>
 	</div>
+
+
+
+	<!-- Class + constructor -->
+	<!-- Class + constructor -->
+	<!-- Class + constructor -->
+	<h2>Class + constructor</h2>
+	<p>A class is like a template/blueprint. Compare it to a printed form which you can fill in. Yet, classes have way more functonalities. It's code after all!</p>
+	<p>You define a class by typing <code>class</code> and then <strong>the name in PascalCasing</strong>. This is an exception to the usual camelCasing rule and it is widely adopted<span class="tooltip"><span><strong>Adopted</strong>: It's the standard, it's what people do to make it easier.</span></span>.</p>
+
+	<p>Since you need to make objects from this template, you need to be able to fill in data. That's what the <code>constructor</code> is for. The constructor is a special function which you can use to receive data when making an object and to then assign those values to (earlier defined) properties<span class="tooltip"><span>NL: eigenschappen</span></span>.</p>
+	<p>Properties are kind of like variables. They hold data but they are accessed differently. All properties are added to <strong>this</strong> object.</p>
+
+	<h4>Creating an object from a class</h4>
+	<p>Finally, can create an object very similarly like the rudimentary way to create arrays. See the code underneath for an example.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+			<textarea class="title" hidden><p>An object's constructor</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+class ClothingArticle{
+	constructor(brand, size, type, price, colour){
+		this.brand = brand;
+		this.size = size;
+		this.type = type;
+		this.price = price;
+		this.colour = colour;
+		this.sold = 0; // You can also set properties without receiving data for it.
+	}	
+}
+
+var blackAndYellowShirt = new ClothingArticle('YouAndMe', 'M', 'shirt', '10.99', 'black-yellow');
+console.log(blackAndYellowShirt);
+		</textarea>
+	</div>
+</div>
+<!-- TODO: Make logging for objects better in custom terminal☻-->
+
+
+
+	<!-- Getters and setters -->
+	<!-- Getters and setters -->
+	<!-- Getters and setters -->
+	<h2>Getters and setters</h2>
+	<p>You use getters to get data and setters to set/change data. You <i>create</i> them almost like how you create a <code>function</code>. Additionaly, since getters and setters are similar to <code>function</code> you can also do other things in these said getters and setters, such as formatting a name.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+			<textarea class="title" hidden><p>A property's getter and setter</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+class Person{
+	constructor(fname, lname, gender, haircolour){
+		this.fname = fname;
+		this.lname = lname;
+		this.gender = gender;
+		this.haircolour = haircolour;
+	}	
+
+	get getLName(){
+		if(this.gender == 'male'){
+			return 'Mr. ' + this.lname; // You can format the data while sending it back!
+		}else if (this.gender == 'female'){
+			return 'Ms. ' + this.lname;
+		}
+	}
+
+	set setLName(newValue){ 
+		// Wanna check if the data's ok first? You can do that!
+		this.lname = newValue;
+	}
+}
+
+var andries = new Person('Andries', 'Koekenbakker', 'male', 'brown');
+console.log(andries);
+
+// Using the getters and setters
+console.log(andries.getLName);
+console.log(andries.setLName = 'Fandries'); // Remember that setters are LIKE functions? Well, they're more like properties and properties don't work with 
+			</textarea>
+		</div>
+	</div>
+
+	<p>One thing we can do better is make use of the fact that getters and setters are properties as well. This means they're like <code>innerHTML</code> and can actually use the same 'word'  both for getting and setting!</p>
+	<p>Since we'll be using 'fname' as a getter and setter we need to change the name. Putting a underscore in front of it is widely adopted. Here's the revision:</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+			<textarea class="title" hidden><p>A property's getter and setter</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+class Person{
+	constructor(fname, lname, gender, haircolour){
+		this._fname = fname;
+		this._lname = lname;
+		this._gender = gender;
+		this._haircolour = haircolour;
+	}	
+
+	get lname(){ // Look! They both have the same name now!
+		if(this._gender == 'male') return 'Mr. ' + this._lname;
+		else if (this._gender == 'female') return 'Ms. ' + this._lname;
+	}
+
+	set lname(newValue){  // Look! They both have the same name now!
+		this._lname = newValue;
+	}
+
+	get name(){ // You can invent stuff too! Look at you!
+		return this._fname + ' ' + this._lname;
+	}
+}
+
+var andries = new Person('Andries', 'Koekenbakker', 'male', 'brown');
+console.log(andries);
+
+// Way cleaner now!
+console.log(andries.lname);
+console.log(andries.lname = 'Sandries');
+console.log(andries.name); // I did a thing!
+			</textarea>
+		</div>
+	</div>
+
 
 	<a href="/pages/js/" class="nextPageTeaser"><i class="fa-solid fa-arrow-right-long"></i></a>
 </div>

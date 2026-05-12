@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 			<div class="dropdown">
 				<a class="nested" href="/pages/js/overview.html">Overview</a>
 				<a class="nested" href="/pages/js/about.html">About</a>
+				<a class="nested" href="/pages/js/finding-information.html">Finding information</a>
 				<a class="nested" href="/pages/js/data.html">Data</a>
 				<a class="nested" href="/pages/js/common-errors.html">Common Errors</a>
 				<a class="nested" href="/pages/js/math.html">Math</a>

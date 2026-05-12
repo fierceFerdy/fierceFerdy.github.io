@@ -100,7 +100,7 @@ em{
 
 strong{
 	font-weight: 700;
-	color: inherit;
+	color: white;
 }
 
 a{
@@ -122,10 +122,6 @@ ol, ul{
 			&::before{
 				content: "\f0c1" !important;
 			}
-		}
-
-		strong{
-			color: inherit !important;
 		}
 
 		ul{
@@ -244,52 +240,11 @@ p{
 		}
 	}
 
-	&.center{
-		text-align: center;
-	}
-
 	+ p{
 		margin-top: 1rem;
 	}
 
 	+ ul{
 		margin-top: .6rem;
-	}
-}
-
-
-
-table{
-	width: 500px;
-	/* margin: 0 auto; */
-	border-collapse: collapse;
-	margin-bottom: 1rem;
-
-	tr.info{
-		/* background-color: var(--dark3);
-		color: white;	 */
-	}
-
-	th, td{
-		border: 1px solid var(--dark1);
-		padding: .6rem 1rem;
-		text-align: left;
-		font-size: 1.4rem;
-	}
-
-	th{
-		background-color: var(--dark1);
-		color: white;
-		font-weight: bold;
-	}
-
-	tfoot{
-		tr{
-			background-color: var(--dark3);
-			color: white;	
-			th{
-				background-color: var(--dark3);
-			}
-		}
 	}
 }

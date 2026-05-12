@@ -14,16 +14,6 @@
 		transform: translate(-50%);
 	}
 
-	p{
-		position: absolute;
-		top: 58%;
-		color: #7a7a7a;
-		text-align: center;
-		display: block;
-		width: 100%;
-		font-size: 1.8rem;
-	}
-
 	&::before{
 		content: "\f03e";
 		font-family: "FontAwesome";
@@ -85,9 +75,6 @@ span{
 		&::before{
 			content: "\f059";
 			font-family: "FontAwesome";
-			font-size: .9em;
-			position: relative;
-			top: -3px;
 		}
 
 		span{
@@ -138,26 +125,5 @@ span{
 
 	&:hover{
 		background-color: var(--dark4);
-	}
-}
-
-
-.backBtn{
-	position: fixed;
-	bottom: 20px;
-	right: -20px;
-	background-color: white;
-	padding: 15px 35px 15px 15px;
-	border-radius: var(--radius) 0 0 var(--radius);
-	font-size: 1.4rem;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-	transition: all .2s ease-in-out;
-
-	&:before{
-		content: "< ";
-	}
-
-	&:hover{
-		right: 0;
 	}
 }

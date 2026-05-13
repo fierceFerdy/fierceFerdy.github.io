@@ -1,9 +1,9 @@
-document.querySelectorAll('readMore').forEach((x) => {
+// Review popup
+document.querySelectorAll('.reviews .readMore').forEach((el) => {
 
-    this.addEventListener('click', function(e){
-        console.log('click');
+    el.addEventListener('click', function(e){
         
-        var interviewContent = e.nextElement().innerHTML;
+        var interviewContent = e.target.nextElementSibling.innerHTML;
         var popupWrapper = document.querySelector('.popupWrapper');
         var popupLocation = document.querySelector('.popup .content');
     
@@ -12,4 +12,9 @@ document.querySelectorAll('readMore').forEach((x) => {
     
     });
 
-})
+});
+
+// Close review popup
+document.querySelector('.popupWrapper .close').addEventListener('click', function(){
+    document.querySelector('.popupWrapper').classList.remove('visible');
+});

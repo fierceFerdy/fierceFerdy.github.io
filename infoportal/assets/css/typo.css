@@ -28,7 +28,7 @@ h2{
 h3{
 	position: relative;
 	color: var(--blackest);
-	font-size: 2.2rem;
+	font-size: 2rem;
 	font-weight: var(--bold);
 	display: block;
 
@@ -174,16 +174,13 @@ ul{
 	&.checklist{
 		li::before{
 			content: "\f054";
-			/* font-family: "FontAwesome";
-			font-size: .8em;
-			margin-right: .8rem; */
 		}
 	}
 }
 
 p, li{
-	font-size: 1.6rem;
-	line-height: 1.3em;
+	font-size: 1.5rem;
+	line-height: 1.4em;
 	color: rgb(64, 64, 64);
 	transition: all .3s ease-in-out;
 
@@ -210,8 +207,19 @@ p, li{
 }
 
 p{
+	&.center{
+		text-align: center;
+	}
 
-	&.check, &.xmark{
+	+ p{
+		margin-top: 1rem;
+	}
+
+	+ ul{
+		margin-top: .6rem;
+	}
+
+	/* &.check, &.xmark{
 		&::before{
 			content: "";
 			display: inline-block;
@@ -242,33 +250,15 @@ p{
 			content: "\f00d";
 			color: var(--red);
 		}
-	}
-
-	&.center{
-		text-align: center;
-	}
-
-	+ p{
-		margin-top: 1rem;
-	}
-
-	+ ul{
-		margin-top: .6rem;
-	}
+	} */
 }
 
 
 
 table{
 	width: 500px;
-	/* margin: 0 auto; */
 	border-collapse: collapse;
 	margin-bottom: 1rem;
-
-	tr.info{
-		/* background-color: var(--dark3);
-		color: white;	 */
-	}
 
 	th, td{
 		border: 1px solid var(--dark1);

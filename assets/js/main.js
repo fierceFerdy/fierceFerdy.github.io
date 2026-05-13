@@ -143,9 +143,10 @@ document.addEventListener("DOMContentLoaded", async function() {
 			<a class="navParent" href="#">PHP</a>
 			<div class="dropdown">
 				<a class="nested" href="/pages/php/overview.html">Overview</a>
-				<a class="nested" href="/pages/php/crud.html">CRUD</a>
 				<a class="nested" href="/pages/php/local-server.html">Local server</a>
+				<a class="nested" href="/pages/php/crud.html">CRUD</a>
 				<a class="nested" href="/pages/php/mvc.html">MVC</a>
+				<a class="nested" href="/pages/php/crud.html">AJAX</a>
 			</div>
 		</div>
 

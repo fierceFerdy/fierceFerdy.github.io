@@ -8,6 +8,7 @@
 @import url('typo.css');
 @import url('classes.css');
 @import url('form.css');
+@import url('footer.css');
 
 /* *::selection {
 	background: var(--accent);
@@ -41,6 +42,8 @@ body{
 	--dark4: #7a7f84;
 	--black: rgb(71, 71, 71);
 	--blackest: rgb(34, 34, 34);
+	--blue: #314f6f;
+	--red: #c73f4a;
 	--bold: 600;
 	--normal: 300;
 }
@@ -186,21 +189,5 @@ body{
 				}
 			}
 		}
-	}
-}
-
-
-footer{
-	background-color: var(--dark1);
-	color: white;
-	text-align: center;
-	padding: 2rem 0;
-	font-size: 1.4rem;
-	font-weight: var(--bold);
-	margin-bottom: 0 !important;
-
-	p{
-		color: white;
-		margin-bottom: .5rem;
 	}
 }

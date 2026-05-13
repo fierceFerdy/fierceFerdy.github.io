@@ -21,7 +21,118 @@
 	
 	<h1>Visualisation</h1>
 	
+	<!-- <p>From this chapter onwards we'll start working in VSC and the browser more and more.</p> -->
+	<p>When we talk about visualisation this would be in a browser or in an app. When you visualise in the browser you would create a .html file and a .js file and you connect the two to eachother so the js automatically gets loaded in. Soon we'll start doing this as well, but we'll work within this platform for as long as we can.</p>
+
+	<h2>Showing stuff in the html</h2>
+	<!-- <p>From here on onwards we'll have an extra block which will represent our browser window (client).</p> -->
+	<p>Showing something in the browser is really simple.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false"
+			data-browser="true"
+			data-height="120">
+			<textarea class="title" hidden><p>innerHTML</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+document.body.innerHTML = '<p>Hello world!</p>';
+			</textarea>
+		</div>
 	</div>
+
+	<p>So what's really cool about this is that the fake editors we've been using really work. You just made the whole page dissapear by overwriting the html. This isn't great to work with but at least it works!</p>
+	<p>To solve this problem we'll jump to the next step in our learning process.</p>
+	
+	<h2>Selecting elements</h2>
+	<p>Using <code>document.getElementById()</code> we can select an element in our document that has a specific id. Then we can manipulate that element. Each editor will have their own custom body which you can use to do all sorts of fun stuff with!</p>
+	<p><code>getElementById()</code> is a very handy function that you will use <em>a lot</em>. You usually don't just put everything in the body but in a specific element!</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false"
+			data-browser="true"
+			data-height="160">
+			<textarea class="title" hidden><p>getElementById()</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var customBody = document.getElementById('body2');
+customBody.innerHTML = '<p>Hello world!</p>'; // Why is this not showing?!
+customBody.innerHTML = '<p>Be my garden!</p>';  
+			</textarea>
+		</div>
+	</div>
+	<div id="body2"></div>
+
+	<div class="advancedWrapper">
+		<h3>Advanced methods <button class="toggle"></button></h3>
+
+		<div class="advancedContent">
+			<p><code>querySelector()</code> will let you select the first match of any element that mathes your selector. This works exactly like selecting elements in CSS!</p>
+			<p>Some examples:</p>
+			<ul>
+				<li><code>document.querySelector('.block');</code></li>
+				<li><code>document.querySelector('a.btn');</code></li>
+				<li><code>document.querySelector('#videos .toggle');</code></li>
+			</ul>
+			<p><code>querySelectorAll()</code> this will now select ALL elements that match. You might want to select all buttons for example so you can add an eventListener.</p>
+		</div>
+	</div>
+
+	<h2>Return of the innerHTML</h2>
+	<p>You can use innerHTML to change the content of an element in the document. It does something. It functions.</p>
+	<p>Yet, it is not a <code>function</code>, it's a property. The nice thing about a property is that you can use it to both change and read the value, like so:</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false"
+			data-browser="true"
+			data-height="160">
+			<textarea class="title" hidden><p>getElementById()</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var customBody = document.getElementById('body3');
+var randomClass = 'example';
+
+customBody.innerHTML = 'You can just add some content';
+customBody.innerHTML += `
+	<div class="block ${randomClass}" style="background-color: aquamarine;">
+		<p style="color: black;">But you can also add lots of html!</p>
+	</div>
+`;
+console.log(customBody.innerHTML);
+			</textarea>
+		</div>
+	</div>
+	<div id="body3"></div>
+
+	<p>Knowing this, there is <em>a lot</em> that you can do with innerHTML. You can change the content of any element in the html, add new elements and even add specific styling to them (try to write it in style.css when you're using it for multiple elements though, this is more for exceptions).</p> 
+	<p>Lastly, you can also read out data with innerHTML and use it for something else. </p>
+
+	<h2>createElement()</h2>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false"
+			data-browser="true"
+			data-height="160">
+			<textarea class="title" hidden><p>getElementById()</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var customBody = document.getElementById('body3');
+var randomClass = 'example';
+
+customBody.innerHTML = 'You can just add some content';
+customBody.innerHTML += `
+	<div class="block ${randomClass}" style="background-color: aquamarine;">
+		<p style="color: black;">But you can also add lots of html!</p>
+	</div>
+`;
+console.log(customBody.innerHTML);
+			</textarea>
+		</div>
+	</div>
+	<div id="body4"></div>
 
 	<a href="/pages/js/" class="nextPageTeaser"><i class="fa-solid fa-arrow-right-long"></i></a>
 </div>

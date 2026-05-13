@@ -335,6 +335,14 @@ button{
 	}
 }
 
+.advancedWrapper{
+	h3{
+		&::after{
+			content: none;
+		}
+	}
+}
+
 .advancedContent{
 	max-height: 0;
 	overflow: hidden;

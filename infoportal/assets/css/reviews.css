@@ -3,7 +3,7 @@
 	blockquote{
 		margin-bottom: 0;
 	}
-	
+
     .readMore{
         background-color: transparent;
         font-size: 1.5rem;
@@ -83,11 +83,12 @@
 	}
 
 	.content{
-		padding: 4rem;
+		padding: 2rem 4rem 4rem;
 
 		img.float{
 			float: right;
 			padding: 2rem 0 1.5rem 3rem;
+			width: 280px;
 		}
 	}
 

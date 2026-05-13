@@ -4,6 +4,7 @@
 @import url('/../assets/css/grid.css');
 @import url('/../assets/css/nav.css');
 @import url('/../assets/css/forms.css');
+@import url('fonts.css');
 @import url('typo.css');
 @import url('classes.css');
 @import url('form.css');
@@ -27,6 +28,8 @@ html{
 
 body{
 	font-family: 'Roboto', Helvetica, Arial, sans-serif;
+	font-family: 'Poppins', 'Roboto', Helvetica, Arial, sans-serif;
+	font-weight: var(--normal);
 }
 
 :root {
@@ -38,6 +41,8 @@ body{
 	--dark4: #7a7f84;
 	--black: rgb(71, 71, 71);
 	--blackest: rgb(34, 34, 34);
+	--bold: 600;
+	--normal: 300;
 }
 
 .content{
@@ -146,7 +151,7 @@ body{
 	text-align: center;
 	padding: 1rem 0;
 	font-size: 1.4rem;
-	font-weight: bold;
+	font-weight: var(--bold);
 	width: 100%;
 	max-width: none !important;
 	position: fixed;
@@ -191,7 +196,7 @@ footer{
 	text-align: center;
 	padding: 2rem 0;
 	font-size: 1.4rem;
-	font-weight: bold;
+	font-weight: var(--bold);
 	margin-bottom: 0 !important;
 
 	p{

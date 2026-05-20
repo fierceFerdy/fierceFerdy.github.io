@@ -88,6 +88,10 @@
     <p><cmd>TypeError: obj.name is not a function</cmd></p>
     <p class="descriptor">Of course it says that! It's a property.</p>
 
+    <editorlite>document.body.innerHTML = obj;</editorlite>
+    <p>In HTML you see: [object Object]</p>
+    <p class="descriptor">You are trying to visualise an object, which is not possible. You need to target specific things (probably a property) <strong>inside</strong> the object.</p>
+
     <editorlite>if(x = 5){ console.log("hi"); }</editorlite>
     <p><cmd></cmd></p>
     <p class="descriptor">A very common mistake that will throw you off. In this case, you're using a single equals sign '=' which is an assignment operator, instead of '==' or '===' which are comparison operators. So you're not checking if x is equal to 5, you're actually changing x to 5.</p>

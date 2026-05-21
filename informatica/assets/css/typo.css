@@ -50,28 +50,16 @@ h4{
 
 
 h5{
+
 }
 
 blockquote{
-	padding: 2rem 1rem 1rem;
+	padding: 1rem 1rem 1rem 3rem;
 	margin-left: 0;
 	font-style: italic;
 	color: var(--black);
 	margin-bottom: 1rem;
-	font-size: 1.8rem;
-
-	span{
-		display: block;
-		color: black;
-		font-weight: var(--bold);
-		font-style: normal;
-		font-size: .9em;;
-		margin-top: 1.5rem;
-
-		&::before{
-			content: "- ";
-		}
-	}
+	font-size: 1.6rem;
 
 	&::before{
 		content: "\f10d";
@@ -82,9 +70,28 @@ blockquote{
 		line-height: 0;
 		margin-bottom: .6rem;
 		position: relative;
-		top: 10px;
-		left: 10px;
+		top: 1rem;
+		left: -1.5rem;
 		z-index: -1;
+	}
+
+	span{
+		display: block;
+		color: black;
+		font-weight: var(--bold);
+		font-style: normal;
+		font-size: .9em;
+		margin-top: 1rem;
+
+		small{
+			color: var(--blue);
+			font-size: .8em;
+			margin-left: .2rem;
+		}
+
+		&::before{
+			content: "- ";
+		}
 	}
 }
 

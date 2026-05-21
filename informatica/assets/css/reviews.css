@@ -1,17 +1,41 @@
 .reviews{
 
+	img{
+		display: inline-block;
+		border-radius: 100px;
+		width: 80px;
+		height: 80px;
+	}
+
+	.review{
+		position: relative;
+	}
+
 	blockquote{
 		margin-bottom: 0;
+		display: inline-block;
+		width: calc(100% - 80px);
+	}
+
+	.btn{
+		display: table;
+		margin-left: 20%;
 	}
 
     .readMore{
         background-color: transparent;
-        font-size: 1.5rem;
-        color: var(--blue);
+
+        font-size: 1.4rem;
         font-weight: var(--normal);
-        position: relative;
+        color: var(--blue);
+		color: var(--red);
+
         margin-top: 0;
         margin-left: -5px;
+
+		position: absolute;
+		right: 0;
+		bottom: .5rem;
 
         &::after{
             content: '>';
@@ -24,12 +48,6 @@
             transform: rotate(-1deg);
             background-color: var(--blue);
             color: white;
-
-            /* &::after{
-                content: '>';
-                position: relative;
-                left: 5px;
-            } */
         }
     }
 
@@ -53,6 +71,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
     box-shadow: 0px 2px 9px #848484;
+	/* border: 1px solid black; */
 
 	&.visible{
 		display: block;
@@ -68,8 +87,8 @@
 		cursor: pointer;
 		
 		position: absolute;
-		top: 10px;
-		right: 10px;
+		top: -1.5rem;
+		right: -1.5rem;
 		z-index: 10001;
 
 		&:hover{

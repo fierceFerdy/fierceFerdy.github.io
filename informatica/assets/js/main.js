@@ -9,7 +9,12 @@ document.querySelectorAll('.reviews .readMore').forEach((el) => {
     
         popupWrapper.classList.add('visible');
         popupLocation.innerHTML = interviewContent;
-    
+
+        // Add overlay to body
+        document.getElementById('overlay').classList = 'active';
+        document.querySelectorAll('.row').forEach((el) => {
+            el.classList.add('blurred');
+        });
     });
 
 });
@@ -17,11 +22,19 @@ document.querySelectorAll('.reviews .readMore').forEach((el) => {
 // Close review popup
 document.querySelector('.popupWrapper .close').addEventListener('click', function(){
     document.querySelector('.popupWrapper').classList.remove('visible');
+    document.getElementById('overlay').classList = '';
+    document.querySelectorAll('.row').forEach((el) => {
+        el.classList.remove('blurred');
+    });
 });
 
 // Close review popup when pressing ESC
 document.addEventListener('keydown', function(e){
 	if(e.key === 'Escape'){
 		document.querySelector('.popupWrapper').classList.remove('visible');
+        document.getElementById('overlay').classList = '';
+        document.querySelectorAll('.row').forEach((el) => {
+            el.classList.remove('blurred');
+        });
 	}
 });

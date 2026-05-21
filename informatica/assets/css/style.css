@@ -214,3 +214,24 @@ body{
 		}
 	}
 }
+
+
+#overlay{
+	background-color: rgba(255,255,255,.8);
+	height: 100%;
+	width: 100%;
+	display: none;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+
+	&.active{
+		display: block;
+	}
+}
+
+.blurred{
+	filter: blur(4px);
+}

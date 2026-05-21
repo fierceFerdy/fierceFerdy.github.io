@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/event-listeners.html">Event Listeners (todo)</a>
 				<a class="nested" href="/pages/js/objects.html">Objects</a>
 				<a class="nested" href="/pages/js/json.html">JSON (todo)</a>
+				<a class="nested" href="/pages/js/collision-detection.html">Collision detection</a>
 				<a class="nested" href="/pages/js/neutralino.html">Neutralino (todo)</a>
 				<a class="nested" href="/pages/js/websockets-api.html">Websockets and APIs</a>
 			</div>

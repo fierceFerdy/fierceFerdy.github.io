@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The manual.</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<script src="/assets/js/main.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+</head>
+
+<body>
+	
+
+
+<div class="content">
+	
+	<h1>Collision detection</h1>
+    <p>A simple introduction on how to do simple collision detection.</p>
+
+	<h2>Collision on the x-axis</h2>
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+			<textarea class="title" hidden><p>An object's constructor</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var a = {
+    top: 0,
+    left: 0,
+    height: 100,
+    width: 100
+}
+var b = {
+    top: 500,
+    left: 500,
+    height: 100,
+    width: 100
+}
+var moveAmount = 20;
+
+// Check if collision happens on the x-axis (horizontal / CSS: left)
+if(a.left > b.left && a.left < (b.left + b.width)){
+    console.log('there is collision on the x-axis');
+}
+
+		</textarea>
+	</div>
+</div>
+
+<p>Now you basically need to compare all sides of the element you want to compare against all the sides of the other element. Then against all other elements.</p>
+	
+
+	<a href="/pages/js/" class="nextPageTeaser"><i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
+
+</body>
+</html>

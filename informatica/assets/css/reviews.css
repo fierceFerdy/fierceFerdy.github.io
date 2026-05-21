@@ -15,7 +15,7 @@
 		height: 80px;
 
 		&:hover{
-			animation: rotate 1s linear;
+			animation: rotate .3s linear;
 		}
 	}
 

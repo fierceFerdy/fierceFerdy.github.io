@@ -86,7 +86,7 @@ blockquote{
 		small{
 			color: var(--blue);
 			font-size: .8em;
-			margin-left: .2rem;
+			margin-left: .4rem;
 		}
 
 		&::before{

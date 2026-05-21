@@ -111,6 +111,9 @@ body{
 			font-size: .65em;
 			font-weight: var(--bold);
 			/* margin-left: 25rem; */
+			transform: rotate(-1deg);
+			position: relative;
+			left: -10px;
 		}
 
 		.visit2{
@@ -176,8 +179,6 @@ body{
 			}
 		}
 
-		.init{
-		}
 		.vary{
 			display: none;
 		}

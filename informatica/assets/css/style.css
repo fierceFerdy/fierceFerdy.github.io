@@ -235,3 +235,48 @@ body{
 .blurred{
 	filter: blur(4px);
 }
+
+.class{
+	position: relative;
+	height: 100%;
+	display: block;
+
+	&:hover{
+		&::after{
+			content: '';
+			color: white;
+			font-size: 5.2rem;
+			text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+			font-weight: var(--bold);
+			text-align: center;
+
+			position: absolute;
+			width: 100%;
+			/* height: 100%; */
+			line-height: 50px;
+			letter-spacing: .05em;
+			top: 50%;
+			/* top: 0; */
+			left: 0;
+			transform: translateY(-50%);
+		}
+
+		&.dane{
+			&::after{
+				content: 'DANE';
+			}
+		}
+		&.apda{
+			&::after{
+				content: 'APDA';
+			}
+		}
+		&.binf{
+			&::after{
+				content: 'BINF';
+			}
+		}
+	}
+
+
+}

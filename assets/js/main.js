@@ -28,6 +28,12 @@ document.addEventListener("DOMContentLoaded", async function() {
 		});
 	});
 
+	// if the viewport is less than 700px, add .hiddenNav to body so nav doesn't show up after switching pages
+	if(window.innerWidth <= 700){
+		document.body.classList.add('hiddenNav')
+	}
+	console.log(window.innerWidth);
+
 
 
 	async function customPrompt(message, defaultValue = "") {

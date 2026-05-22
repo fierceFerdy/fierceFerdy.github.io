@@ -130,13 +130,17 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/functions.html">Functions</a>
 				<a class="nested" href="/pages/js/arrays.html">Arrays (complete)</a>
 				<a class="nested" href="/pages/js/recap.html">Recap 1</a>
+
 				<a class="nested" href="/pages/js/visualisation.html">Visualisation (todo)</a>
+				<a class="nested" href="/pages/js/tackle-big-tasks.html">How to tackle big tasks (todo)</a>
 				<a class="nested" href="/pages/js/event-listeners.html">Event Listeners (todo)</a>
 				<a class="nested" href="/pages/js/objects.html">Objects</a>
 				<a class="nested" href="/pages/js/json.html">JSON (todo)</a>
-				<a class="nested" href="/pages/js/collision-detection.html">Collision detection</a>
-				<a class="nested" href="/pages/js/neutralino.html">Neutralino (todo)</a>
-				<a class="nested" href="/pages/js/websockets-api.html">Websockets and APIs</a>
+				<a class="nested" href="/pages/js/collision-detection.html">Collision detection (in progress)</a>
+				<a class="nested" href="/pages/js/recap2.html">Recap 2</a>
+
+				<a class="nested" href="/pages/js/neutralino.html">6BINF: Neutralino (todo)</a>
+				<a class="nested" href="/pages/js/websockets-api.html">6BINF: Websockets and APIs</a>
 			</div>
 		</div>
 

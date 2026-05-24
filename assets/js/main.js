@@ -137,16 +137,17 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/arrays.html">Arrays (complete)</a>
 				<a class="nested" href="/pages/js/recap.html">Recap 1</a>
 
-				<a class="nested" href="/pages/js/visualisation.html">Visualisation (todo)</a>
-				<a class="nested" href="/pages/js/tackle-big-tasks.html">How to tackle big tasks (todo)</a>
-				<a class="nested" href="/pages/js/event-listeners.html">Event Listeners (todo)</a>
+				<a class="nested" href="/pages/js/visualisation.html">Visualisation <small>(todo)</small></a>
+				<a class="nested" href="/pages/js/tackle-big-tasks.html">How to tackle big tasks <small>(todo)</small></a>
+				<a class="nested" href="/pages/js/event-listeners.html">Event Listeners <small>(todo)</small></a>
 				<a class="nested" href="/pages/js/objects.html">Objects</a>
-				<a class="nested" href="/pages/js/json.html">JSON (todo)</a>
-				<a class="nested" href="/pages/js/localstorage.html">LocalStorage (todo)</a>
-				<a class="nested" href="/pages/js/collision-detection.html">Collision detection (in progress)</a>
+				<a class="nested" href="/pages/js/json.html">JSON <small>(todo)</small></a>
+				<a class="nested" href="/pages/js/localstorage.html">LocalStorage <small>(todo)</small></a>
+				<a class="nested" href="/pages/js/collision-detection.html">Collision detection <small>(in progress)</small></a>
 				<a class="nested" href="/pages/js/recap2.html">Recap 2</a>
 
-				<a class="nested" href="/pages/js/neutralino.html">6BINF: Neutralino (todo)</a>
+				<a class="nested" href="/pages/js/async-await.html">6BINF: Async/await <small>(todo)</small></a>
+				<a class="nested" href="/pages/js/neutralino.html">6BINF: Neutralino <small>(todo)</small></a>
 				<a class="nested" href="/pages/js/websockets-api.html">6BINF: Websockets and APIs</a>
 			</div>
 		</div>

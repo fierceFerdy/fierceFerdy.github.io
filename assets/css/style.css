@@ -72,6 +72,7 @@ body{
 	padding: 3rem 2rem 2.8rem;
 	transition: all .3s ease-in-out;
 	max-width: 190px;
+    min-height: 150px;
 
 	i{
 		font-size: 3rem;

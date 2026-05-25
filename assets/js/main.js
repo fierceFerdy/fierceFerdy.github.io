@@ -152,8 +152,8 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/collision-detection.html">Collision detection <small>(in progress)</small></a>
 				<a class="nested" href="/pages/js/recap2.html">Recap 2</a>
 
-				<a class="nested" href="/pages/js/async-await.html">6BINF: Async/await <small></small></a>
-				<a class="nested" href="/pages/js/neutralino.html">6BINF: Neutralino <small>(todo)</small></a>
+				<a class="nested" href="/pages/js/async-await.html">6BINF: Async/await</a>
+				<a class="nested" href="/pages/js/neutralino.html">6BINF: Neutralino</a>
 				<a class="nested" href="/pages/js/websockets-api.html">6BINF: Websockets & APIs</a>
 			</div>
 		</div>

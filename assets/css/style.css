@@ -176,3 +176,10 @@ body{
 		margin-right: 1rem;
 	}
 }
+
+
+#neutralinoIframe{
+	p{
+		color: white !important;
+	}
+}

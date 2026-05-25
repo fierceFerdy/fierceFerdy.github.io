@@ -183,3 +183,42 @@ body{
 		color: white !important;
 	}
 }
+
+
+/* Let's style the imageHover. When .imageHover .text is being hovered, show the image */
+.imageHover {
+	position: relative;
+	display: inline-block;
+
+	img {
+		display: none;
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 200px;
+		max-width: none;
+		height: auto;
+		z-index: 9999;
+		border: 1px solid white;
+	}
+
+	.text{
+		&:after{
+			content: "\f03e" !important;
+			font-family: "FontAwesome";
+			font-size: .8em;
+			margin-left: .5rem;
+		}
+	}
+
+	&:hover {
+		.text {
+			visibility: visible;
+			opacity: 1;
+		}
+		img {
+			display: block;
+		}
+	}
+}

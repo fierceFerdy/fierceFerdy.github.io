@@ -20,9 +20,112 @@
 <div class="content">
 	
 	<h1>Tackle Big Tasks</h1>
-	
+	<p class="hint">This page is still under construction but should already offer some nice support</p>
+	<p>Bigger task can seem daunting to a junior programmer. But every big task is just a collection of a lot of smaller tasks so the thing to do to help you out is rather easy: Split up the tasks into small manageable tasks.</p>
 
-	<a href="/pages/js/" class="nextPageTeaser"><i class="fa-solid fa-arrow-right-long"></i></a>
+	<p>For some people this happens automatically as they go through the steps in their head but others have to put some more manual effort in. In any case, don't worry, <em>you will get better at this</em>.</p>
+
+	<p>First, think about what your goal is and then list all the steps that are needed to reach said goal. You don't have to do this in order. Write everything down that pops up in your head, even ideas. Eventually start structuring it into a logical order and keep adding as you get new ideas.</p>
+	
+	<p>When that's done, you're ready to start! Follow your list step by step, adapt where needed, check off every step you complete (it's a tiny victory, and they <span class="imageHover"><span class="text"><em>feels good</em></span><img src="/assets/img/feels-good.gif" alt=""></span>!) and before you know it, you're done!</p>
+	<p>And if you get stuck, don't worry about it. Just start on what you can. Surely the ideas will come?</p>
+
+	<h3>Here, I'll give you an example</h3>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor"  data-run="false">
+			<textarea class="title" hidden><p>Example task. Goal: Make a cup of tea</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+// Bad breakdown:
+[] Make tea
+
+// Good breakdown:
+[] Get a mug
+[] Fill kettle with water
+	[] Boil water
+[] Put tea bag in mug
+[] Grab a teaspoon and put it in the mug
+[] Add sugar, maybe?
+[] Pour water into mug
+	[] Wait 2 minutes
+	[] Remove tea bag
+[] Enjoy your tea!
+			</textarea>
+		</div>
+	</div>
+
+	<h3>Now it's your turn</h3>
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="false" 
+			data-task-number="??" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="false"
+			data-height="340">
+			<textarea class="title" hidden>
+<p><strong>Goal:</strong> Create a simple webpage feature where a user can click a button to increase a number on the screen. When the number reaches '10' it should change its colour to white.</p>
+
+<p><strong>The page should eventually behave like this:</strong></p>
+
+<ul>
+	<li>There is a number visible on the screen (starting at 0)</li>
+	<li>There is a button that says "Click me"</li>
+	<li>Every time the button is clicked, the number increases by 1</li>
+	<li>The updated number is immediately shown on the page</li>
+</ul>
+
+<p><strong>Your task:</strong></p>
+<ul>
+	<li>Break this problem into small programming steps</li>
+	<li>Think about what needs to exist before anything can work</li>
+	<li>Think about what happens when the button is clicked</li>
+	<li>Think about what needs to change on the page</li>
+</ul>
+
+<p><strong>Rules:</strong></p>
+<ul>
+	<li>Each step must describe a single programming action</li>
+	<li>No vague steps like "make it work"</li>
+	<li>Good steps might start with words like: "create", "select", "store", "listen", "update"</li>
+	<li>Some steps have sub-steps! Group stuff together by tabbing and creating white-space to make the list cleaner.</li>
+	<li>If a step contains words like "build the system" or "make it work", it is WAY too big</li>
+</ul>
+
+<p>Hint:think in actions the <span class="imageHover"><span class="text"><em>computer</em></span><img src="/assets/img/i-are-programmer.jpg" alt=""></span> can perform: selecting, storing, listening, updating</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+
+			</textarea>
+		</div>
+	</div>
+
+
+
+	<h3>Final step, create!</h3>
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-task-number="??" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="false"
+			data-height="340">
+			<textarea class="title" hidden>
+				<p>Now that you have a clear list of steps, it's time to start programming! Follow your list and check off every step you complete. Don't worry if you get stuck, just do what you can and the ideas will come!</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var customBody = document.getElementById('sandBoxSpace');
+customBody.innerHTML = '<p>test</p>';
+			</textarea>
+		</div>
+	</div>
+
+	<div id="sandBoxSpace" width="200" height="150"></div>
+
+	<a href="/pages/js/objects.html" class="nextPageTeaser">Objects<i class="fa-solid fa-arrow-right-long"></i></a>
+
 </div>
 
 

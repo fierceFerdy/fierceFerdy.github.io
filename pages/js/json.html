@@ -83,7 +83,7 @@ console.log(people);
 		</div>
 	</div>
 
-	<p>Small problem: <code>var people</code> variable will not contain the fetched data immediately because <code>fetch()</code> is asynchronous. You need to work with the data inside the <code>then()</code> chain or use `async/await`.</p>
+	<p>Small problem: <code>var people</code> variable will not contain the fetched data immediately because <code>fetch()</code> is asynchronous<span class="tooltip"><span><strong>Asynchronous:</strong> An operation that runs independently of the main program flow and doesn't block other operations from executing.</span></span>. You need to work with the data inside the <code>then()</code> chain or use `async/await`.</p>
 
 	<p>Did you notice how the empty object list (people) was logged before the data was fetched? This is because the <code>console.log(people)</code> statement runs before the fetch request completes and exactly the reason why this doesn't work as expected.</p>
 

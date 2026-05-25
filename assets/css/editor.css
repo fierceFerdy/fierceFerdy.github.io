@@ -133,8 +133,19 @@
 			}
 		}
 
+		code{
+			line-height: 1.6em;
+		}
+
+		code, ul, ol{
+			& + p{
+				margin-top: .5rem;
+			}
+		}
+
 		p{
 			line-height: 1.3em;
+
 		}
 	}
 

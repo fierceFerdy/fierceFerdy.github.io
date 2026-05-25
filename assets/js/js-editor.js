@@ -295,9 +295,28 @@ function renderSolutionEditor(container, editorHost, solutionCode) {
 
 async function runCode(code, terminal, container, action = 'run') {
 	var logs = [];
-    var fakeConsole = { log: (...args) => logs.push(formatConsoleArgs(args)) };
+    var outputQueue = Promise.resolve();
+    var printedCount = 0;
+    var shouldStreamOutput = action !== 'finish';
+
+    function queueOutput(text, type = "default") {
+        logs.push(text);
+        if (!shouldStreamOutput) return;
+
+        printedCount++;
+        outputQueue = outputQueue.then(() => printLine(terminal, text, type));
+    }
+
+    var fakeConsole = {
+        log: (...args) => queueOutput(formatConsoleArgs(args)),
+        info: (...args) => queueOutput(formatConsoleArgs(args)),
+        warn: (...args) => queueOutput(formatConsoleArgs(args)),
+        error: (...args) => queueOutput(formatConsoleArgs(args), "error")
+    };
     let runStatus = "success";
     let runError = null;
+    var executionResult = null;
+    var asyncTracker = createAsyncTracker();
 
     var syntaxError = getSyntaxErrorWithLocation(code);
     if (syntaxError) {
@@ -308,11 +327,14 @@ async function runCode(code, terminal, container, action = 'run') {
 	try {
         if (!runError) {
             // Execute user code
-            executeUserCode(code, fakeConsole);
+        executionResult = executeUserCode(code, fakeConsole, asyncTracker);
+        await waitForAsyncLogs(executionResult, logs, asyncTracker);
         }
 	} catch (e) {
         runStatus = "error";
         runError = e;
+	} finally {
+    asyncTracker.restore();
 	}
 
     if (container?.dataset?.store === "true"){
@@ -324,17 +346,17 @@ async function runCode(code, terminal, container, action = 'run') {
 	
 
 	if (action === 'finish') {
-        printLine(terminal, 'Assignment has been submitted. Please ask your teacher for feedback.', 'success');
+        await printLine(terminal, 'Assignment has been submitted. Please ask your teacher for feedback.', 'success');
 
 	} else {
+        await outputQueue;
 
 		if (runStatus === "error") {
 			await printLine(terminal, formatStudentError(runError), 'error');
 			return;
 		}
 		
-		if (logs.length === 0) await printLine(terminal, "Done");
-		else for (var entry of logs) await printLine(terminal, entry);
+        if (printedCount === 0) await printLine(terminal, "Done");
     }
 
 }
@@ -435,7 +457,7 @@ function insertWithCursor(text, cursorOffset) {
     };
 }
 
-function executeUserCode(code, fakeConsole) {
+function executeUserCode(code, fakeConsole, asyncTracker = createAsyncTracker()) {
     var wrapped = `"use strict";\n${code}\n//# sourceURL=student-code.js`;
     var restoreNameState = null;
 
@@ -462,10 +484,90 @@ function executeUserCode(code, fakeConsole) {
     }
 
     try {
-        return new Function("console", wrapped)(fakeConsole);
+        return new Function("console", "setTimeout", "clearTimeout", wrapped)(
+            fakeConsole,
+            asyncTracker.setTimeout,
+            asyncTracker.clearTimeout
+        );
     } finally {
         if (restoreNameState) restoreNameState();
     }
+}
+
+async function waitForAsyncLogs(executionResult, logs, asyncTracker, maxWaitMs = 4500, idleMs = 180) {
+    var start = Date.now();
+    var lastChangeAt = Date.now();
+    var lastCount = logs.length;
+
+    if (isPromiseLike(executionResult)) {
+        try {
+            await Promise.race([
+                executionResult,
+                delay(maxWaitMs)
+            ]);
+        } catch (error) {
+            // Preserve async errors as normal run errors.
+            throw error;
+        }
+    }
+
+    while (Date.now() - start < maxWaitMs) {
+        if (logs.length !== lastCount) {
+            lastCount = logs.length;
+            lastChangeAt = Date.now();
+        }
+
+        var hasPendingTimers = asyncTracker && asyncTracker.getPendingCount() > 0;
+
+        if (!hasPendingTimers && Date.now() - lastChangeAt >= idleMs) {
+            break;
+        }
+
+        await delay(50);
+    }
+}
+
+function createAsyncTracker() {
+    var pendingTimers = new Set();
+    var nativeSetTimeout = globalThis.setTimeout.bind(globalThis);
+    var nativeClearTimeout = globalThis.clearTimeout.bind(globalThis);
+
+    function trackedSetTimeout(callback, delay, ...args) {
+        var timerId = null;
+
+        timerId = nativeSetTimeout(() => {
+            pendingTimers.delete(timerId);
+            callback(...args);
+        }, delay);
+
+        pendingTimers.add(timerId);
+        return timerId;
+    }
+
+    function trackedClearTimeout(timerId) {
+        pendingTimers.delete(timerId);
+        nativeClearTimeout(timerId);
+    }
+
+    return {
+        setTimeout: trackedSetTimeout,
+        clearTimeout: trackedClearTimeout,
+        getPendingCount: () => pendingTimers.size,
+        restore: () => {
+            for (var timerId of pendingTimers) {
+                nativeClearTimeout(timerId);
+            }
+            pendingTimers.clear();
+        }
+    };
+}
+
+function isPromiseLike(value) {
+    return value && typeof value.then === "function";
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function formatConsoleArgs(args) {

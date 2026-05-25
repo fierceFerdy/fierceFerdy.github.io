@@ -20,7 +20,239 @@
 <div class="content">
 	
 	<h1>Async/Await</h1>
-	
+
+	<h2>But first... Let's have a look at .then(), again</h2>
+	<p>Before we dive into async/await, let's see how we handle asynchronous operations using <code>.then()</code>. Earlier (probably last year) we used <code>.then()</code> to load JSON files</p>
+
+	<h3>Classic slow operation simulation</h3>
+	<p>Let's <em>simulate</em> a slow operation, like ordering food at a restaurant, to understand how async/await works.</p>
+	<p>The code is almost literally telling you how it works. Can you deduce<span class="tooltip"><span>Vertaling: afleiden</span></span> what's happening?</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+			<textarea class="title" hidden></textarea>
+			<textarea class="js-editor-doc" hidden>
+console.log("👋 Arrive at restaurant");
+
+orderFood().then(food => {
+	console.log(food);
+});
+
+console.log("🧠 He's cooking...");
+console.log("💬 Talking with friend while waiting...");
+
+function orderFood() {
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve("🍔 Burger ready!");
+		}, 3000);
+	});
+}
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Async/Await</h2>
+	<p>Async/await is a more modern way to handle asynchronous operations. It allows us to write asynchronous<span class="tooltip"><span><strong>Asynchronous:</strong> An operation that runs independently of the main program flow and doesn't block other operations from executing.</span></span> code that looks and behaves like synchronous code, making it easier to read and understand.</p>
+	<p>Async/await works in two parts: functions marked with <code>async</code> which then can use code marked with <code>await</code> to pause execution until a promise<span class="tooltip"><span><strong>Promise:</strong> An object representing the eventual completion or failure of an (asynchronous) operation.</span></span> resolves.</p>
+	<p>Let's rewrite our restaurant example using async/await. Once again, deduce what's happening.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+			<textarea class="title" hidden></textarea>
+			<textarea class="js-editor-doc" hidden>
+restaurantVisit();
+
+// An async function allows us to use await INSIDE it
+async function restaurantVisit() { 
+	console.log("👋 Arrive at restaurant");
+
+	const food = await orderFood();
+
+	console.log(food);
+	console.log("🍽️ Start eating! YAY!");
+}
+
+console.log("🌍 The world around you keeps moving...");
+
+
+function orderFood() {
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve("🍔 Burger ready!");
+		}, 3000);
+	});
+}
+			</textarea>
+		</div>
+	</div>
+
+	<p>Notice how the code is more linear and easier to read? The <code>await</code> keyword tells JavaScript to wait for the promise to resolve before moving on to the next line of code. This way, we can write asynchronous code that looks and behaves like synchronous code.</p>
+
+	<p>And just so it's clear: <code>await</code> pauses the current function, not the entire JavaScript program. Other code can still continue running. That's exactly what these snippets are showcasing.</p>
+
+	<h2>Quiz time!</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "Async/await Quiz",
+			"questions": [
+				{
+					"question": "What is asynchronous code?",
+					"options": [
+						"Code that blocks everything until it finishes",
+						"Code that can run while other code continues",
+						"Code that only works online"
+					],
+					"answer": 1,
+					"explanation": "Asynchronous code allows other code to continue running while waiting for something to finish."
+				},
+				{
+					"question": "What does <code>.then()</code> do?",
+					"options": [
+						"It repeats a function",
+						"It runs code after a promise resolves",
+						"It stops asynchronous code"
+					],
+					"answer": 1,
+					"explanation": ".then() runs after the promise successfully finishes."
+				},
+				{
+					"question": "What is a Promise?",
+					"options": [
+						"A special type of loop",
+						"An object representing a future result",
+						"A way to create arrays"
+					],
+					"answer": 1,
+					"explanation": "A Promise represents a value that may arrive later."
+				},
+				{
+					"question": "What keyword allows you to wait for a Promise?",
+					"options": [
+						"pause",
+						"wait",
+						"await"
+					],
+					"answer": 2,
+					"explanation": "The await keyword pauses the current async function until the Promise resolves."
+				},
+				{
+					"question": "Where can you use <code>await</code>?",
+					"options": [
+						"Anywhere",
+						"Only inside async functions",
+						"Only inside loops"
+					],
+					"answer": 1,
+					"explanation": "await only works inside functions marked with async."
+				},
+				{
+					"question": "What does the <code>async</code> keyword do?",
+					"options": [
+						"It allows a function to use await",
+						"It makes code run faster",
+						"It creates a WebSocket"
+					],
+					"answer": 0,
+					"explanation": "Functions marked async can use the await keyword."
+				},
+				{
+					"question": "What happens first in this code?<br><br><code>console.log('A'); setTimeout(() => console.log('B'), 1000); console.log('C');</code>",
+					"options": [
+						"A, B, C",
+						"A, C, B",
+						"B, A, C"
+					],
+					"answer": 1,
+					"explanation": "setTimeout is asynchronous, so the rest of the code continues first."
+				},
+				{
+					"question": "Why is async/await often easier to read than <code>.then()</code>?",
+					"options": [
+						"Because it looks more like normal top-to-bottom code",
+						"Because it removes Promises",
+						"Because it only works with simple code"
+					],
+					"answer": 0,
+					"explanation": "Async/await makes asynchronous code look more linear and readable."
+				},
+				{
+					"question": "What does <code>resolve()</code> do inside a Promise?",
+					"options": [
+						"It finishes the Promise successfully",
+						"It cancels the Promise",
+						"It restarts the Promise"
+					],
+					"answer": 0,
+					"explanation": "resolve() marks the Promise as successfully completed."
+				},
+				{
+					"question": "What is being simulated with <code>setTimeout()</code> in the restaurant example?",
+					"options": [
+						"A syntax error",
+						"A slow operation",
+						"An infinite loop"
+					],
+					"answer": 1,
+					"explanation": "setTimeout simulates something taking time, like waiting for food."
+				},
+				{
+					"question": "Why does JavaScript use asynchronous programming?",
+					"options": [
+						"To prevent the program from freezing while waiting",
+						"To make variables global",
+						"To avoid using functions"
+					],
+					"answer": 0,
+					"explanation": "Asynchronous programming allows JavaScript to stay responsive while waiting for operations to finish."
+				}
+			]
+		}
+		</script>
+	</div>
+
+	<h2>Mini assignment</h2>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-task-number="X"
+			data-task-docs="false"
+			data-task-internet="true"
+			data-task-team="false"
+			data-task-questions="true"
+			data-height="500">
+
+			<textarea class="title" hidden>
+				<p>You are simulating a system that checks if a server is online. The check is not instant. It takes time, like a real network request. Your job is to simulate this behaviour in JavaScript.</p>
+				<p><strong>When the system runs, the output should look like this:</strong></p>			
+				<code>Checking system...</code><br>
+				<code>⏳ (something else runs while waiting)</code><br>
+				<code>🟢 Server is online</code><br>
+				<code>Monitoring complete</code>
+
+				<p><strong>Rules:</strong></p>
+				<ul>
+					<li>The server check must be delayed by 2 seconds</li>
+					<li>The rest of the program must continue while waiting</li>
+					<li>The final result must only appear after the delay</li>
+				</ul>
+
+				<p><strong>Tip:</strong> you will need async functions and a Promise.</p>
+			</textarea>
+
+			<textarea class="js-editor-doc" hidden>
+
+			</textarea>
+		</div>
+	</div>
+
 
 	<a href="/pages/js/" class="nextPageTeaser"><i class="fa-solid fa-arrow-right-long"></i></a>
 </div>

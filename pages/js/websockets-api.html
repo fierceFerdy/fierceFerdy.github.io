@@ -130,7 +130,7 @@ console.log("WebSocket server running on ws://localhost:3030");
 			<textarea class="title" hidden><p>Client html - don't just copy. Type, type, type!</p></textarea>
 			<textarea class="js-editor-doc" hidden>
 <html>
-	
+
 <head>
 	<script src="client.js" defer></script>
 </head>
@@ -173,6 +173,8 @@ document.getElementById('sendButton').addEventListener('click', () => {
 
 
 function sendMessage(text){
+	// WebSockets send text data. JSON.stringify() converts 
+	// our object into text so it can be sent over the connection.
 	ws.send(JSON.stringify({
 		user: "Anonimouse",
 		text,
@@ -183,7 +185,10 @@ function sendMessage(text){
 		</div>
 	</div>
 
-	<p>Note: WebSockets send text data. <code>JSON.stringify()</code> converts our object into text so it can be sent over the connection.</p>
+	<h3>Questions</h3>
+	<ul>
+		<li>Why do we have message and close functions both in the client.js and the server.js?</li>
+	</ul>
 
 
 	<!-- Recap -->

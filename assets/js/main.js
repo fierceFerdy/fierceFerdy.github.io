@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 		</div>
 
 		<div class="dropdownWrapper">
-			<a class="navParent" href="#">JavaScript</a>
+			<a class="navParent" href="#">JavaScript Basics</a>
 			<div class="dropdown">
 				<a class="nested" href="/pages/js/overview.html">Overview</a>
 				<a class="nested" href="/pages/js/about.html">About</a>
@@ -134,8 +134,15 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/if-else.html">If...Else</a>
 				<a class="nested" href="/pages/js/functions.html">Functions</a>
 				<a class="nested" href="/pages/js/arrays.html">Arrays (complete)</a>
-				<a class="nested" href="/pages/js/recap.html">Recap 1</a>
+				<a class="nested" href="/pages/js/recap.html">Recap</a>
+			</div>
+		</div>
 
+		<div class="dropdownWrapper">
+			<a class="navParent" href="#">JavaScript Advanced</a>
+			<div class="dropdown">
+
+				<a class="nested" href="/pages/js/advanced-overview.html">Overview</a>
 				<a class="nested" href="/pages/js/visualisation.html">Visualisation <small>(todo)</small></a>
 				<a class="nested" href="/pages/js/tackle-big-tasks.html">How to tackle big tasks <small>(todo)</small></a>
 				<a class="nested" href="/pages/js/event-listeners.html">Event Listeners <small>(todo)</small></a>
@@ -159,6 +166,18 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/php/crud.html">CRUD</a>
 				<a class="nested" href="/pages/php/mvc.html">MVC</a>
 				<a class="nested" href="/pages/php/crud.html">AJAX</a>
+			</div>
+		</div>
+
+
+		<div class="dropdownWrapper">
+			<a class="navParent" href="#">Lesoverzichten</a>
+			<div class="dropdown">
+				<a class="nested" href="/pages/lesoverzichten/5apda.html">5APDA</a>
+				<a class="nested" href="/pages/lesoverzichten/6apda-js.html">6APDA JS <small>(todo)</small></a>
+				<a class="nested" href="/pages/lesoverzichten/6apda-php.html">6APDA PHP <small>(todo)</small></a>
+				<a class="nested" href="/pages/lesoverzichten/5binf.html">5BINF <small>(todo)</small></a>
+				<a class="nested" href="/pages/lesoverzichten/6binf.html">6BINF <small>(todo)</small></a>
 			</div>
 		</div>
 

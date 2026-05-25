@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>JS: Arrays - The manual.</title>
+	<title>JS: Websockets & APIs - The manual.</title>
 
 	<link rel="stylesheet" href="/assets/css/style.css">
 
@@ -19,9 +19,9 @@
 
 <div class="content">
 	
-	<h1>Websockets and APIs</h1>
+	<h1>Websockets & APIs</h1>
 	
-	<p>In this chapter, we will explore the concepts of WebSockets and APIs in JavaScript. We will learn how to establish real-time communication using WebSockets and we'll learn a bit about APIs.</p>
+	<p>In this chapter, we will explore the concepts of WebSockets and APIs in JavaScript. We will learn how to establish real-time communication using WebSockets and we'll learn the basics of APIs.</p>
 
 	<h2>The core difference</h2>
 
@@ -49,7 +49,7 @@
 		<ul>
 			<li>Persistent<span class="tooltip"><span><strong>Persistent</strong>: continuing to do something, or lasting. In this case; "The connection remains open"</span></span> connection</li>
 			<li>Server can push data to the client</li>
-			<li>Stateful (connection remains open)</li>
+			<li>Stateful (the server remembers the connection)</li>
 		</ul>
 		<p>A WebSocket is like a phone call; the connection stays open and both parties can communicate in real-time. Built for instant updates.</p>
 		<h4>Great for:</h4>
@@ -73,7 +73,7 @@
 	</ol>
 
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-1/2 sm-full" 
+		<div class="js-editor sm-full" 
 			data-run="false" 
 			data-readonly="true">
 			<textarea class="title" hidden><p>WebSocket server - don't just copy, type!</p></textarea>
@@ -125,24 +125,21 @@ console.log("WebSocket server running on ws://localhost:3030");
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-1/2 sm-full" 
 			data-run="false" 
+			data-language="html" 
 			data-readonly="true">
 			<textarea class="title" hidden><p>Client html - don't just copy. Type, type, type!</p></textarea>
 			<textarea class="js-editor-doc" hidden>
-<!DOCTYPE html>
-<html lang="en">
-
+<html>
+	
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
 	<script src="client.js" defer></script>
 </head>
 
-<fakebodybecauseliveserverinjectshereotherwise>
+<fakebody>
 	<h1>WebSocket Client</h1>
 	<input type="text" id="messageInput" placeholder="Type a message...">
 	<button id="sendButton">Send</button>
-</fakebodybecauseliveserverinjectshereotherwise>
+</fakebody>
 
 </html>
 			</textarea>
@@ -186,6 +183,7 @@ function sendMessage(text){
 		</div>
 	</div>
 
+	<p>Note: WebSockets send text data. <code>JSON.stringify()</code> converts our object into text so it can be sent over the connection.</p>
 
 
 	<!-- Recap -->
@@ -199,13 +197,124 @@ function sendMessage(text){
 			"name": "JS If...Else Quiz",
 			"questions": [
 				{
-					"question": "What will be logged to the console when the following code is executed? <br><br> <code>var x = 10; if(x > 5) console.log('x is greater than 5'); else console.log('x is not greater than 5');</code>",
+					"question": "What is the main difference between an API and a WebSocket?",
 					"options": [
-						"x is greater than 5",
-						"x is not greater than 5",
-						"Nothing will be logged"
+						"WebSockets store data permanently",
+						"APIs use request-response while WebSockets keep a persistent connection",
+						"APIs only work in JavaScript"
 					],
-					"answer": "x is greater than 5"
+					"answer": 1,
+					"explanation": "APIs usually use separate HTTP requests while WebSockets keep the connection open for real-time communication."
+				},
+				{
+					"question": "What does 'persistent connection' mean?",
+					"options": [
+						"The connection stays open",
+						"The server never crashes",
+						"The data gets saved forever"
+					],
+					"answer": 0,
+					"explanation": "Persistent means the connection remains open so both sides can keep communicating."
+				},
+				{
+					"question": "Which technology is best for a live chat application?",
+					"options": [
+						"WebSocket",
+						"HTTP API",
+						"LocalStorage"
+					],
+					"answer": 0,
+					"explanation": "WebSockets are designed for real-time communication."
+				},
+				{
+					"question": "What does the server do when a new WebSocket client connects?",
+					"options": [
+						"It reloads the page",
+						"It creates a connection object",
+						"It closes immediately"
+					],
+					"answer": 1,
+					"explanation": "The server creates a new connection object for each connected client."
+				},
+				{
+					"question": "Which event listens for incoming WebSocket messages?",
+					"options": [
+						"ws.onmessage",
+						"ws.onclick",
+						"ws.onload"
+					],
+					"answer": 0,
+					"explanation": "The onmessage event runs whenever data is received."
+				},
+				{
+					"question": "What does JSON.stringify() do?",
+					"options": [
+						"Turns text into an object",
+						"Turns an object into text",
+						"Deletes JSON data"
+					],
+					"answer": 1,
+					"explanation": "JSON.stringify converts JavaScript objects into JSON text."
+				},
+				{
+					"question": "What does JSON.parse() do?",
+					"options": [
+						"Turns JSON text into a JavaScript object",
+						"Deletes invalid JSON",
+						"Creates a WebSocket"
+					],
+					"answer": 0,
+					"explanation": "JSON.parse converts JSON text back into usable JavaScript data."
+				},
+				{
+					"question": "Why do we use JSON with WebSockets?",
+					"options": [
+						"Because WebSockets can only send images",
+						"Because JSON is an easy format for sending structured data",
+						"Because JSON makes the internet faster"
+					],
+					"answer": 1,
+					"explanation": "JSON is lightweight, readable and easy to convert between text and objects."
+				},
+				{
+					"question": "What does ws.send() do?",
+					"options": [
+						"Sends data through the WebSocket connection",
+						"Creates a server",
+						"Refreshes the browser"
+					],
+					"answer": 0,
+					"explanation": "ws.send() sends data to the other side of the WebSocket connection."
+				},
+				{
+					"question": "What happens when a WebSocket connection closes?",
+					"options": [
+						"The page automatically reloads",
+						"The client disconnects from the server",
+						"The server shuts down"
+					],
+					"answer": 1,
+					"explanation": "Closing the WebSocket disconnects the client from the server."
+				},
+				{
+					"question": "Which line creates a WebSocket connection in the browser?",
+					"options": [
+						"new WebSocket('ws://localhost:3030')",
+						"createSocket('localhost')",
+						"fetch('ws://localhost:3030')"
+					],
+					"answer": 0,
+					"explanation": "The WebSocket constructor creates a new WebSocket connection."
+				},
+				{
+					"question": "Who can send data first in a WebSocket connection?",
+					"options": [
+						"Only the client",
+						"Only the server",
+						"Both the client and the server"
+					],
+					"answer": 2,
+					"explanation": "WebSockets allow two-way communication."
 				}
 			]
 		}

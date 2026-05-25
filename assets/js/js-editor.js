@@ -5,13 +5,18 @@
 //=================================================
 
 import {EditorView, basicSetup} from "https://esm.sh/codemirror";
-import {javascript} from "https://esm.sh/@codemirror/lang-javascript";
-import {oneDark} from "https://esm.sh/@codemirror/theme-one-dark";
-import {autocompletion, completeFromList} from "https://esm.sh/@codemirror/autocomplete";
-import {keymap} from "https://esm.sh/@codemirror/view";
-import {defaultKeymap, historyKeymap, indentWithTab} from "https://esm.sh/@codemirror/commands";
-import {EditorState} from "https://esm.sh/@codemirror/state";
-import {parse} from "https://esm.sh/acorn";
+import {javascript} 			from "https://esm.sh/@codemirror/lang-javascript";
+import {html} 					from "https://esm.sh/@codemirror/lang-html";
+import {oneDark} 				from "https://esm.sh/@codemirror/theme-one-dark";
+import {autocompletion, 
+		completeFromList} 		from "https://esm.sh/@codemirror/autocomplete";
+import {keymap} 				from "https://esm.sh/@codemirror/view";
+import {defaultKeymap, 
+		historyKeymap, 
+		indentWithTab} 			from "https://esm.sh/@codemirror/commands";
+import {EditorState} 			from "https://esm.sh/@codemirror/state";
+import {parse} 					from "https://esm.sh/acorn";
+
 
 var STUDENT_LINE_OFFSET = 3;
 var globalCompletions = completeFromList([
@@ -23,18 +28,19 @@ var globalCompletions = completeFromList([
     {label: "window", 		type: "variable"},
     {label: "setTimeout", 	type: "function", apply: insertWithCursor("setTimeout(()=>{},1000)", 16)}
 ]);
-var extensions = [
-	basicSetup,
-	javascript({typescript: false, jsx: false}),
-	oneDark,
+var baseExtensions = [
+    basicSetup,
+    oneDark,
     EditorView.lineWrapping,
-	autocompletion({override: [globalCompletions]}),
-	keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab])
+    keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab])
 ];
+
 
 // Init all editors on the page
 document.querySelectorAll(".js-editor").forEach(createEditor);
 document.querySelectorAll('editorlite').forEach(createLiteEditor);
+
+
 
 // Watch for dynamically injected <editorlite> nodes (e.g. quiz questions)
 var liteObserver = new MutationObserver((mutations) => {
@@ -50,7 +56,7 @@ var liteObserver = new MutationObserver((mutations) => {
 		}
 	}
 });
-liteObserver.observe(document.body, { childList: true, subtree: true });
+liteObserver.observe(document.body || document.documentElement, { childList: true, subtree: true });
 
 
 // If there's an active task in localStorage, re-activate it (e.g. after page refresh)
@@ -89,8 +95,9 @@ function createLiteEditor(container) {
     if (container.dataset.editorliteInit) return;
     container.dataset.editorliteInit = 'true';
 
-    var liteExtensions = [...extensions, EditorState.readOnly.of(true)];
-    var content = container.textContent;
+    var language = getEditorLanguage(container);
+    var liteExtensions = getEditorExtensions(language, true);
+    var content = normalizeEditorSource(container.textContent, language);
     container.innerHTML = '';
 
     var view = new EditorView({
@@ -103,6 +110,8 @@ function createLiteEditor(container) {
 }
 
 function createEditor(container) {
+	var language = getEditorLanguage(container);
+    var editorExtensions = getEditorExtensions(language, container.dataset.readonly === "true");
 
     // Build DOM
 	// if(container.dataset.height) container.style.minHeight = container.dataset.height + "px";
@@ -117,13 +126,9 @@ function createEditor(container) {
     var editorHost = document.createElement("div");
     container.appendChild(editorHost);
 
-	if(container.dataset.readonly === "true"){
-		extensions.push(EditorState.readOnly.of(true));
-	}
-
     var view = new EditorView({
         doc: getInitialDoc(container),
-        extensions,
+		extensions: editorExtensions,
         parent: editorHost
     });
 
@@ -244,7 +249,7 @@ function addShowSolutionButton(container, editorHost) {
     var solutionTextarea = container.querySelector("textarea.solution");
     if (!solutionTextarea) return;
 
-    var solutionCode = solutionTextarea.value
+    var solutionCode = normalizeEditorSource(solutionTextarea.value, getEditorLanguage(container))
         .replace(/\r\n/g, "\n")
         .replace(/^\n/, "")
         .replace(/\s+$/, "");
@@ -265,6 +270,7 @@ function addShowSolutionButton(container, editorHost) {
 
 function renderSolutionEditor(container, editorHost, solutionCode) {
     if (container.querySelector(".solution-view")) return;
+    var language = getEditorLanguage(container);
 
     var solutionView = document.createElement("div");
     solutionView.className = "solution-view";
@@ -280,7 +286,7 @@ function renderSolutionEditor(container, editorHost, solutionCode) {
 
     new EditorView({
         doc: solutionCode,
-        extensions: [...extensions, EditorState.readOnly.of(true)],
+		extensions: getEditorExtensions(language, true),
         parent: solutionHost
     });
 }
@@ -302,7 +308,7 @@ async function runCode(code, terminal, container, action = 'run') {
 	try {
         if (!runError) {
             // Execute user code
-        executeUserCode(code, fakeConsole);
+            executeUserCode(code, fakeConsole);
         }
 	} catch (e) {
         runStatus = "error";
@@ -337,11 +343,54 @@ async function runCode(code, terminal, container, action = 'run') {
 
 function getInitialDoc(container, type = 'normal') {
     var textareaDoc = container.querySelector(".js-editor-doc");
+	var language = getEditorLanguage(container);
 	
-	return textareaDoc.value
+    return normalizeEditorSource(textareaDoc.value, language)
 		.replace(/\r\n/g, "\n")
 		.replace(/^\n/, "") // optional: remove first blank line from formatting
 		.replace(/\s+$/, ""); // Remove trailing whitespace/newlines if needed:
+}
+
+
+
+function normalizeEditorSource(text, language = "javascript") {
+    var source = String(text ?? "");
+    if (language !== "html") return source;
+
+    return source
+        // .replace(/<\s*fakehtml(\s|>)/gi, "<html$1")
+        // .replace(/<\s*\/\s*fakehtml\s*>/gi, "</html>")
+        // .replace(/<\s*fakehead(\s|>)/gi, "<head$1")
+        // .replace(/<\s*\/\s*fakehead\s*>/gi, "</head>")
+        .replace(/<\s*fakebody(\s|>)/gi, "<body$1")
+        .replace(/<\s*\/\s*fakebody\s*>/gi, "</body>");
+}
+
+
+
+function getEditorLanguage(container) {
+	return (container?.dataset?.language || "javascript").toLowerCase();
+}
+
+
+
+function getEditorExtensions(language, isReadOnly = false) {
+	var languageExtension = language === "html"
+		? html()
+		: javascript({typescript: false, jsx: false});
+
+	var completionExtensions = language === "html"
+		? []
+		: [autocompletion({override: [globalCompletions]})];
+
+	var readOnlyExtensions = isReadOnly ? [EditorState.readOnly.of(true)] : [];
+
+	return [
+		...baseExtensions,
+		languageExtension,
+		...completionExtensions,
+		...readOnlyExtensions
+	];
 }
 
 

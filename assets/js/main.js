@@ -34,8 +34,6 @@ document.addEventListener("DOMContentLoaded", async function() {
 	}
 	console.log(window.innerWidth);
 
-
-
 	async function customPrompt(message, defaultValue = "") {
 		return new Promise((resolve) => {
 			document.body.classList.add("blur");
@@ -149,7 +147,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 				<a class="nested" href="/pages/js/async-await.html">6BINF: Async/await <small>(todo)</small></a>
 				<a class="nested" href="/pages/js/neutralino.html">6BINF: Neutralino <small>(todo)</small></a>
-				<a class="nested" href="/pages/js/websockets-api.html">6BINF: Websockets and APIs</a>
+				<a class="nested" href="/pages/js/websockets-api.html">6BINF: Websockets & APIs</a>
 			</div>
 		</div>
 

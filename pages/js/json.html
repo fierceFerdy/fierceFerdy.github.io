@@ -24,7 +24,7 @@
 	<p>JSON is a text format that is completely language independent but uses conventions that are familiar to programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. These properties make JSON an ideal data-interchange language. The best of all; it's easy for humans to read and write, and easy for machines to parse and generate.</p>
 
 	<h2>JSON syntax</h2>
-	<p>What does it look like, you say? Well, it's written exactly the same way, the way you write arrays and objects in JavaScript.</p>
+	<p>JSON looks very similar to JavaScript objects and arrays.</p>
 
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor" 
@@ -86,38 +86,181 @@ console.log(people);
 	<p>Small problem: <code>var people</code> variable will not contain the fetched data immediately because <code>fetch()</code> is asynchronous. You need to work with the data inside the <code>then()</code> chain or use `async/await`.</p>
 
 	<p>Did you notice how the empty object list (people) was logged before the data was fetched? This is because the <code>console.log(people)</code> statement runs before the fetch request completes and exactly the reason why this doesn't work as expected.</p>
+
+
+	<!-- Advanced Topics -->
+	<!-- Advanced Topics -->
+	<!-- Advanced Topics -->
+	<div class="advancedWrapper">
+		<h2>Advanced Topics <button class="toggle"></button></h2>
+
+		<div class="advancedContent">
 	
-	<h3>If you want to format the data before working with it, you can do it like so:</h3>
-
-	<div class="gridCorrector editorWrapper">
-		<div class="js-editor" 
-			data-run="true" 
-			data-readonly="false">
-			<textarea class="title" hidden><p>Getting data from a JSON file</p></textarea>
-			<textarea class="js-editor-doc" hidden>
-console.log('Fetching data from JSON file...');
-
-var people = fetch('https://fierceferdy.github.io/assets/data.json')
-	.then((response) => response.json()) // Parse the response as JSON
-	.then(data => { // Work with the parsed data
-		const peopleObjects = [];
-
-		// Loop through the 'people' array and create an object for each one
-		data.people.forEach(person => {
-			const personObj = {
-				fullName: `${person.firstName} ${person.lastName}`,
-				firstName: person.firstName,
-				lastName: person.lastName
-			};
+			<h3>If you want to format the data before working with it, you can do it like so:</h3>
 			
-			peopleObjects.push(personObj);
-		});
+			<div class="gridCorrector editorWrapper">
+				<div class="js-editor" 
+					data-run="true" 
+					data-readonly="false">
+					<textarea class="title" hidden><p>Getting data from a JSON file</p></textarea>
+					<textarea class="js-editor-doc" hidden>
+		console.log('Fetching data from JSON file...');
 
-		console.log(peopleObjects);
-	});
-			</textarea>
+		var people = fetch('https://fierceferdy.github.io/assets/data.json')
+			.then((response) => response.json()) // Parse the response as JSON
+			.then(data => { // Work with the parsed data
+				const peopleObjects = [];
+
+				// Loop through the 'people' array and create an object for each one
+				data.people.forEach(person => {
+					const personObj = {
+						fullName: `${person.firstName} ${person.lastName}`,
+						firstName: person.firstName,
+						lastName: person.lastName
+					};
+					
+					peopleObjects.push(personObj);
+				});
+
+				console.log(peopleObjects);
+			});
+					</textarea>
+				</div>
+			</div>
+
+			<h2>Creating a JSON file</h2>
+			<p>To create a JSON file, you can use the <code>JSON.stringify()</code> method to convert a JavaScript object into a JSON string. You can then save this string to a file or send it to a server (we will not be doing this in this course).</p>
+
+			<h3>Save to a file</h3>
+			<p>To save a JSON string to a file, you can use the <code>Blob</code> object and the <code>URL.createObjectURL()</code> method to create a downloadable link.</p>
 		</div>
 	</div>
+
+
+
+	<h2>Conclusion/recap</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JSON Quiz",
+			"questions": [
+				{
+					"question": "What does JSON stand for?",
+					"options": [
+						"Java Source Object Notation",
+						"JavaScript Object Notation",
+						"Java Syntax Object Naming"
+					],
+					"answer": 1,
+					"explanation": "JSON stands for JavaScript Object Notation."
+				},
+				{
+					"question": "What is JSON mainly used for?",
+					"options": [
+						"Styling web pages",
+						"Storing and transporting data",
+						"Creating loops"
+					],
+					"answer": 1,
+					"explanation": "JSON is commonly used to store and exchange data."
+				},
+				{
+					"question": "Which of these is valid JSON?",
+					"options": [
+						"{ name: 'John' }",
+						"{ \"name\": \"John\" }",
+						"{ name: \"John\" }"
+					],
+					"answer": 1,
+					"explanation": "JSON requires double quotes around property names and strings."
+				},
+				{
+					"question": "What function is commonly used to get a JSON file from a server?",
+					"options": [
+						"request()",
+						"getJSON()",
+						"fetch()"
+					],
+					"answer": 2,
+					"explanation": "fetch() is used to request data from servers."
+				},
+				{
+					"question": "What does <code>response.json()</code> do?",
+					"options": [
+						"Turns JSON into a JavaScript object",
+						"Downloads a file",
+						"Creates a JSON file"
+					],
+					"answer": 0,
+					"explanation": "response.json() parses the JSON data into usable JavaScript objects."
+				},
+				{
+					"question": "Why doesn't fetched data appear immediately?",
+					"options": [
+						"Because JSON is broken",
+						"Because fetch() is asynchronous",
+						"Because objects load slowly"
+					],
+					"answer": 1,
+					"explanation": "fetch() works asynchronously, meaning the code continues running while waiting for the data."
+				},
+				{
+					"question": "What is a Promise?",
+					"options": [
+						"A special loop",
+						"An object representing a future result",
+						"A type of array"
+					],
+					"answer": 1,
+					"explanation": "Promises represent values that may become available later."
+				},
+				{
+					"question": "What will usually happen first?\n\nconsole.log('A');\nfetch(...)\nconsole.log('B');",
+					"options": [
+						"'A' then fetched data then 'B'",
+						"'A' then 'B' then fetched data",
+						"'B' then fetched data then 'A'"
+					],
+					"answer": 1,
+					"explanation": "fetch() runs asynchronously, so the rest of the code continues first."
+				},
+				{
+					"question": "What does <code>JSON.stringify()</code> do?",
+					"options": [
+						"Turns a JavaScript object into a JSON string",
+						"Downloads JSON from the internet",
+						"Converts JSON into HTML"
+					],
+					"answer": 0,
+					"explanation": "JSON.stringify() converts JavaScript data into JSON text."
+				},
+				{
+					"question": "What kind of thing does fetch() return?",
+					"options": [
+						"An array",
+						"A Promise",
+						"A string"
+					],
+					"answer": 1,
+					"explanation": "fetch() immediately returns a Promise."
+				},
+				{
+					"question": "Why is JSON popular?",
+					"options": [
+						"Because humans and machines can both read it easily",
+						"Because everyone loves JavaScript and also JSon",
+						"Because it can replace HTML"
+					],
+					"answer": 0,
+					"explanation": "JSON is lightweight, readable and easy to parse."
+				}
+			]
+		}
+		</script>
+	</div>
+
+
 
 
 

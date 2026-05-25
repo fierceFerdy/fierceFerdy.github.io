@@ -58,13 +58,46 @@
 	<h3>ELI5</h3>
 	<p>Imagine you have a box (the JSON file) that contains a letter (the data). You want to read the letter, but you can't open the box. Instead, you have to ask a friend (the fetch function) to get the letter for you. The fetch function will go to the box, get the letter, and <em>then</em> give it to you. Once you have the letter, you can read it and understand what's inside.</p>
 
+	<h3>Example</h3>
+
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor" 
 			data-run="true" 
 			data-readonly="false">
 			<textarea class="title" hidden><p>Getting data from a JSON file</p></textarea>
 			<textarea class="js-editor-doc" hidden>
-fetch('assets/data.json')
+console.log('Fetching data from JSON file...');
+
+var people = fetch('https://fierceferdy.github.io/assets/data.json')
+	.then(response => response.json())
+	.then(data => {
+		var people = data.people; // Let's filter a bit
+		console.log(people);
+		
+		return people; 
+	})
+	.catch(error => console.error('Error fetching data:', error));
+
+console.log(people);
+			</textarea>
+		</div>
+	</div>
+
+	<p>Small problem: <code>var people</code> variable will not contain the fetched data immediately because <code>fetch()</code> is asynchronous. You need to work with the data inside the <code>then()</code> chain or use `async/await`.</p>
+
+	<p>Did you notice how the empty object list (people) was logged before the data was fetched? This is because the <code>console.log(people)</code> statement runs before the fetch request completes and exactly the reason why this doesn't work as expected.</p>
+	
+	<h3>If you want to format the data before working with it, you can do it like so:</h3>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+			<textarea class="title" hidden><p>Getting data from a JSON file</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+console.log('Fetching data from JSON file...');
+
+var people = fetch('https://fierceferdy.github.io/assets/data.json')
 	.then((response) => response.json()) // Parse the response as JSON
 	.then(data => { // Work with the parsed data
 		const peopleObjects = [];
@@ -76,7 +109,7 @@ fetch('assets/data.json')
 				firstName: person.firstName,
 				lastName: person.lastName
 			};
-			console.log(personObj);
+			
 			peopleObjects.push(personObj);
 		});
 
@@ -86,44 +119,12 @@ fetch('assets/data.json')
 		</div>
 	</div>
 
-	<a href="/pages/js/" class="nextPageTeaser"><i class="fa-solid fa-arrow-right-long"></i></a>
+
+
+	<a href="/pages/js/localstorage.html" class="nextPageTeaser">LocalStorage <i class="fa-solid fa-arrow-right-long"></i></a>
 </div>
 
 
 
 </body>
 </html>
-
-
-
-Review assignments:
-
-MVC - together
-Fun: /5
-Difficulty: /5
-Interesting: /5
-Good assignment: /5
-Wat kon beter?
-
-MVC - alone
-Fun: /5
-Difficulty: /5
-Interesting: /5
-Good assignment: /5
-Wat kon beter?
-
-Neutralino app: Real company app (Metal Bricks)
-Fun: /5
-Difficulty: /5
-Interesting: /5
-Good assignment: /5
-Wat kon beter?
-
-Gladiators
-Fun: /5
-Difficulty: /5
-Interesting: /5
-Good assignment: /5
-Wat kon beter?
-
-Nog iets waar je feedback op wil geven? Ik stel dit enorm op prijs want ik wil graag dat mijn lessen zo goed mogelijk zijn. Ik weet dat ik fouten maak en dat er altijd ruimte is voor verbetering, dus alle feedback is welkom! 

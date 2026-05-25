@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/tackle-big-tasks.html">How to tackle big tasks <small>(todo)</small></a>
 				<a class="nested" href="/pages/js/event-listeners.html">Event Listeners <small>(todo)</small></a>
 				<a class="nested" href="/pages/js/objects.html">Objects</a>
-				<a class="nested" href="/pages/js/json.html">JSON <small>(todo)</small></a>
+				<a class="nested" href="/pages/js/json.html">JSON</a>
 				<a class="nested" href="/pages/js/localstorage.html">LocalStorage <small>(todo)</small></a>
 				<a class="nested" href="/pages/js/collision-detection.html">Collision detection <small>(in progress)</small></a>
 				<a class="nested" href="/pages/js/recap2.html">Recap 2</a>

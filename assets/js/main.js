@@ -119,6 +119,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/css/overview.html">Overview</a>
 				<a class="nested" href="/pages/css/selectors.html">Selectors</a>
 				<a class="nested" href="/pages/css/box-model.html">Box Model</a>
+				<a class="nested" href="/pages/css/centering-stuff.html">Centering stuff</a>
 			</div>
 		</div>
 

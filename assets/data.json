@@ -1,0 +1,16 @@
+{
+    "people":[
+        {
+			"firstName": "Jasper",  
+			"lastName": "Van Haegen"
+		},
+        {
+			"firstName": "Nick",    
+			"lastName": "Brabant"
+		},
+        {
+			"firstName": "Quinten", 
+			"lastName": "Vermeulen"
+		}
+    ]
+}

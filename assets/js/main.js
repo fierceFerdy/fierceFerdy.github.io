@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 			<div class="dropdown">
 
 				<a class="nested" href="/pages/js/advanced-overview.html">Overview</a>
-				<a class="nested" href="/pages/js/visualisation.html">Visualisation <small>(todo)</small></a>
+				<a class="nested" href="/pages/js/visualisation.html">Visualisation <small>(in progress)</small></a>
 				<a class="nested" href="/pages/js/event-listeners.html">Event Listeners <small>(todo)</small></a>
 				<a class="nested" href="/pages/js/tackle-big-tasks.html">How to tackle big tasks</a>
 				<a class="nested" href="/pages/js/objects.html">Objects</a>

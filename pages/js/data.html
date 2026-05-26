@@ -61,48 +61,14 @@
 		</div>
 	</div>
 
-	<h2>Datatypes</h2>
-	<p>There are several basic "datatypes" in JavaScript. In most cases you don't have to tell the computer what type of data you're using, it figures it out for you.</p>
 
-	<div class="gridCorrector editorWrapper">
-		<div class="js-editor w-full" 
-			data-run="false" 
-			data-readonly="false">
-			<textarea class="title" hidden><p>JS Datatypes</p></textarea>
-			<textarea class="js-editor-doc" hidden>
-// The most common ones we will use:
-var string = "This is a string"; // You can use both "double" and 'single' quotes
-var number = 42;
-var boolean = true;
-var array = new Array(); // Empty array
-var array2 = new Array('value1', 'value2', 'value3');
-var object = new Object(); // Empty object
-var object2 = { name: "Alice", age: 30 }; // You can assign properties (name, age, ..) and give those values 
 
-// We won't create these types of data, but it's REALLY IMPORTANT to know what these mean.
-var nullValue = null; // null is a special value that represents "no value" or "empty". It's like an empty box but different than "", which is an empty string.
-var undefinedValue = undefined; // undefined is a special value that represents "not defined". It's like a box that hasn't been labeled yet. You might be talking about a box that hasn't been created yet.
-			</textarea>
-		</div>
-	</div>
-
-	<h2>Naming conventions</h2>
-	<p>Now that we've started naming <i>things</i>, it's important to follow certain conventions/rules to make your code more readable and maintainable. Here are some globally accepted guidelines:</p>
-	<ul>
-		<li>Use <strong>camelCasing</strong>  (e.g., <cmd>myVariableName</cmd>) - easier to read than <cmd>myvariablename</cmd>.</li>
-		<li>Choose <em>descriptive</em> names that convey the purpose.</li>
-		<li>Avoid using special characters.</li>
-	</ul>
-	<p>By following these conventions, you can make your code easier to understand for yourself and others who may read it in the future.</p>
-
-	
-
-	<h2>Quiz time!</h2>
+	<h2>Time for a tiny quiz</h2>
 
 	<div class="quiz" id="#quiz">
 		<script type="application/json" class="quiz-data">
 		{
-			"name": "JS Basics Quiz",
+			"name": "JS Data - 1",
 			"questions": [
 				{
 					"question": "How do you show a message in the console?",
@@ -162,6 +128,153 @@ var undefinedValue = undefined; // undefined is a special value that represents 
 	</div>
 
 
+	<h2>Datatypes</h2>
+	<p>There are several basic "datatypes" in JavaScript. In most cases you don't have to tell the computer what type of data you're using, it figures it out for you.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="false" 
+			data-readonly="false">
+			<textarea class="title" hidden><p>JS Datatypes</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+// The most common ones we will use:
+var string = "This is a string"; // You can use both "double" and 'single' quotes
+var number = 42;
+var boolean = true;
+var array = new Array(); // Empty array
+var array2 = new Array('value1', 'value2', 'value3');
+var object = new Object(); // Empty object
+var object2 = { name: "Alice", age: 30 }; // You can assign properties (name, age, ..) and give those values 
+
+// We won't create these types of data, but it's REALLY IMPORTANT to know what these mean.
+var nullValue = null; // null is a special value that represents "no value" or "empty". It's like an empty box but different than "", which is an empty string.
+var undefinedValue = undefined; // undefined is a special value that represents "not defined". It's like a box that hasn't been labeled yet. You might be talking about a box that hasn't been created yet.
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Naming conventions</h2>
+	<p>Now that we've started naming <i>things</i>, it's important to follow certain conventions/rules to make your code more readable and maintainable. Here are some globally accepted guidelines:</p>
+	<ul>
+		<li>Use <strong>camelCasing</strong>  (e.g., <cmd>myVariableName</cmd>) - easier to read than <cmd>myvariablename</cmd>.</li>
+		<li>Choose <em>descriptive</em> names that convey the purpose.</li>
+		<li>Avoid using special characters.</li>
+	</ul>
+	<p>By following these conventions, you can make your code easier to understand for yourself and others who may read it in the future.</p>
+
+
+	
+
+	<h2>Another quiz!</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS Data - 2",
+			"questions": [
+				{
+					"question": "Which of these is a boolean?",
+					"options": [
+						"'true'",
+						"42",
+						"true",
+						"'yes'"
+					],
+					"answer": 2,
+					"explanation": "A boolean is either true or false without quotes."
+				},
+				{
+					"question": "What datatype is this? <code>var pets = ['cat', 'dog'];</code>",
+					"options": [
+						"Object",
+						"Array",
+						"String",
+						"Boolean"
+					],
+					"answer": 1,
+					"explanation": "Square brackets [] create an array."
+				},
+				{
+					"question": "What datatype is this? <code>var user = { name: 'Alice', age: 22 };</code>",
+					"options": [
+						"Array",
+						"Boolean",
+						"Object",
+						"String"
+					],
+					"answer": 2,
+					"explanation": "Curly braces {} with properties create an object."
+				},
+				{
+					"question": "Which variable name follows the naming conventions best?",
+					"options": [
+						"myvariablename",
+						"MY_VARIABLE",
+						"myVariableName",
+						"my-variable-name"
+					],
+					"answer": 2,
+					"explanation": "camelCasing is the preferred naming convention here."
+				},
+				{
+					"question": "What is the value of x after this code runs? <br><code>var x = 2; x = 5;</code>",
+					"options": [
+						"2",
+						"5",
+						"undefined",
+						"null"
+					],
+					"answer": 1,
+					"explanation": "The second assignment replaces the old value."
+				},
+				{
+					"question": "What does <code>null</code> mean?",
+					"options": [
+						"A variable that was never created",
+						"An empty or intentionally missing value",
+						"A number equal to zero",
+						"A broken variable"
+					],
+					"answer": 1,
+					"explanation": "null represents an intentional empty value."
+				},
+				{
+					"question": "What does <code>undefined</code> usually mean?",
+					"options": [
+						"The variable has no value assigned yet",
+						"The variable contains 0",
+						"The variable is broken",
+						"The variable is a string"
+					],
+					"answer": 0,
+					"explanation": "undefined usually means something exists but has not been given a value yet."
+				},
+				{
+					"question": "What will this log? <code>var score = 10; console.log(score);</code>",
+					"options": [
+						"score",
+						"10",
+						"undefined",
+						"null"
+					],
+					"answer": 1,
+					"explanation": "console.log(score) shows the value stored in the variable."
+				},
+				{
+					"question": "Why are descriptive variable names important?",
+					"options": [
+						"They make JavaScript run faster",
+						"They make code easier to understand",
+						"They reduce file size",
+						"They prevent bugs automatically"
+					],
+					"answer": 1,
+					"explanation": "Good names make code easier to read for yourself and others."
+				}
+			]
+		}
+		</script>
+	</div>
 
 
 	<h2>Assignments</h2>

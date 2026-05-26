@@ -189,6 +189,7 @@ body{
 .imageHover {
 	position: relative;
 	display: inline-block;
+	cursor: pointer;
 
 	img {
 		display: none;
@@ -219,6 +220,20 @@ body{
 		}
 		img {
 			display: block;
+		}
+		&:after{
+			content: "Click to enlarge";
+			font-size: .7em;
+			line-height: 1.2em;
+			background-color: var(--dark3);
+			color: white;
+			padding: .5rem;
+			border-radius: var(--radius);
+
+			position: absolute;
+			white-space: nowrap;
+			top: .5rem;
+			/* left: .5rem; */
 		}
 	}
 }

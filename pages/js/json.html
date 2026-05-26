@@ -104,26 +104,26 @@ console.log(people);
 					data-readonly="false">
 					<textarea class="title" hidden><p>Getting data from a JSON file</p></textarea>
 					<textarea class="js-editor-doc" hidden>
-		console.log('Fetching data from JSON file...');
+console.log('Fetching data from JSON file...');
 
-		var people = fetch('https://fierceferdy.github.io/assets/data.json')
-			.then((response) => response.json()) // Parse the response as JSON
-			.then(data => { // Work with the parsed data
-				const peopleObjects = [];
+var people = fetch('https://fierceferdy.github.io/assets/data.json')
+	.then((response) => response.json()) // Parse the response as JSON
+	.then(data => { // Work with the parsed data
+		const peopleObjects = [];
 
-				// Loop through the 'people' array and create an object for each one
-				data.people.forEach(person => {
-					const personObj = {
-						fullName: `${person.firstName} ${person.lastName}`,
-						firstName: person.firstName,
-						lastName: person.lastName
-					};
-					
-					peopleObjects.push(personObj);
-				});
+		// Loop through the 'people' array and create an object for each one
+		data.people.forEach(person => {
+			const personObj = {
+				fullName: `${person.firstName} ${person.lastName}`,
+				firstName: person.firstName,
+				lastName: person.lastName
+			};
+			
+			peopleObjects.push(personObj);
+		});
 
-				console.log(peopleObjects);
-			});
+		console.log(peopleObjects);
+	});
 					</textarea>
 				</div>
 			</div>

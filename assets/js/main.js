@@ -74,6 +74,16 @@ document.addEventListener("DOMContentLoaded", async function() {
 			}
 		});
 	}
+
+
+
+	// When you click .imageHover the img in it which is by default 200px becomes 100px bigger than before
+	document.querySelectorAll(".imageHover").forEach(wrapper => {
+		const img = wrapper.querySelector("img");
+		wrapper.addEventListener("click", () => {
+			img.style.width = img.offsetWidth + 50 + "px";
+		});
+	});  
 	
 
 	/**

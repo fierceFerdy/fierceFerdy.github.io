@@ -161,6 +161,7 @@ cmd, code{
 	font-family: Inconsolata, monospace;
 	position: relative;
 	user-select: none;
+	white-space: nowrap; /* maybe */
 
 	&:before{
 		content: "> ";

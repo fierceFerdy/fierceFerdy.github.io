@@ -23,7 +23,7 @@
 
 	<p>By now you have probably run into errors once or twice. It is important to understand that errors aren't bad. They are not the enemy. In fact, they are your "friend". A good error (sadly not every error's good) gives a good explanation of exactly what's going wrong <em>and even where</em>.</p>
 
-
+	<p class="hint">This page will show you a lot of possible errors that you have never seen before which can make it look difficult. You don't have to look at all of the errors but you can search through the document using <kbd>CTRL</kbd> + <kbd>F</kbd> in the future to look up specific errors.</p>
 
 	<h2>Editor errors</h2>
 
@@ -162,7 +162,7 @@ document.getElementById("exampleId").innerHTML = "Hi"; // This requires a creati
         <li>Comments to describe functionality that's not easily scanned.</li>
     </ul>
 
-	<p class="hint">You can comment out a line by pressing <kbd>CTRL</kbd> + <kbd>/</kbd> (works in every language) or by simply typing <cmd>//</cmd> in front of your comment</p>
+	<p class="hint">You can comment out a line by pressing <kbd>CTRL</kbd> + <kbd>/</kbd> (works in every language) or by simply <nobr>typing <cmd>//</cmd></nobr> in front of your comment</p>
 
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor w-2/4" 
@@ -195,8 +195,12 @@ function dosomething(text,cursordiff){
 function insertWithCursor(text, cursorOffset){
     return (view, completion, from, to) => {
         view.dispatch({
-            changes: { from, to, insert:text },
-            selection: { anchor:from+cursorOffset }
+            changes: { 
+				from, to, insert:text 
+			},
+            selection: { 
+				anchor: from + cursorOffset 
+			}
         });
     };
 }
@@ -258,7 +262,7 @@ console.log(`Total price is: ${total.toFixed(2)}`); //alt
 	</div>
 
 
-    <h2>Some more rookie mistakes => solutions:</h2>
+    <h2>Some more rookie mistakes & solutions:</h2>
 
     <ul>
         <li>When working in VSC, always open the project <strong>folder</strong>, not just a file.</li>

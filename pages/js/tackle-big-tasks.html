@@ -20,7 +20,6 @@
 <div class="content">
 	
 	<h1>Tackle Big Tasks</h1>
-	<p class="hint">This page is still under construction but should already offer some nice support</p>
 	<p>Bigger task can seem daunting to a junior programmer. But every big task is just a collection of a lot of smaller tasks so the thing to do to help you out is rather easy: Split up the tasks into small manageable tasks.</p>
 
 	<p>For some people this happens automatically as they go through the steps in their head but others have to put some more manual effort in. In any case, don't worry, <em>you will get better at this</em>.</p>
@@ -28,12 +27,12 @@
 	<p>First, think about what your goal is and then list all the steps that are needed to reach said goal. You don't have to do this in order. Write everything down that pops up in your head, even ideas. Eventually start structuring it into a logical order and keep adding as you get new ideas.</p>
 	
 	<p>When that's done, you're ready to start! Follow your list step by step, adapt where needed, check off every step you complete (it's a tiny victory, and they <span class="imageHover"><span class="text"><em>feels good</em></span><img src="/assets/img/feels-good.gif" alt=""></span>!) and before you know it, you're done!</p>
-	<p>And if you get stuck, don't worry about it. Just start on what you can. Surely the ideas will come?</p>
+	<p class="hint">If you get stuck, don't worry about it! Just start on what you can, you'll get there :)</p>
 
-	<h3>Here, I'll give you an example</h3>
+	<h3>But first, an example</h3>
 
 	<div class="gridCorrector editorWrapper">
-		<div class="js-editor"  data-run="false">
+		<div class="js-editor" data-run="false">
 			<textarea class="title" hidden><p>Example task. Goal: Make a cup of tea</p></textarea>
 			<textarea class="js-editor-doc" hidden>
 // Bad breakdown:
@@ -62,7 +61,7 @@
 			data-task-docs="true"
 			data-task-internet="false"
 			data-task-team="false"
-			data-task-questions="false"
+			data-task-questions="true"
 			data-height="340">
 			<textarea class="title" hidden>
 <p><strong>Goal:</strong> Create a simple webpage feature where a user can click a button to increase a number on the screen. When the number reaches '10' it should change its colour to white.</p>
@@ -84,7 +83,7 @@
 	<li>Think about what needs to change on the page</li>
 </ul>
 
-<p><strong>Rules:</strong></p>
+<p><strong>After finishing or when experiencing difficulties, check the rules:</strong></p>
 <ul>
 	<li>Each step must describe a single programming action</li>
 	<li>No vague steps like "make it work"</li>
@@ -93,16 +92,55 @@
 	<li>If a step contains words like "build the system" or "make it work", it is WAY too big</li>
 </ul>
 
-<p>Hint:think in actions the <span class="imageHover"><span class="text"><em>computer</em></span><img src="/assets/img/i-are-programmer.jpg" alt=""></span> can perform: selecting, storing, listening, updating</p></textarea>
+<p>Hint: think in actions the <span class="imageHover"><span class="text"><em>computer</em></span><img src="/assets/img/i-are-programmer.jpg" alt=""></span> can perform: selecting, storing, listening, updating</p></textarea>
 			<textarea class="js-editor-doc" hidden>
 
 			</textarea>
 		</div>
 	</div>
 
+	<h2>Reflection</h2>
+	<p>You finished, great! Let's look at what we can improve.</p>
 
+	<h3>Are your steps too big?</h3>
+	<div class="w-stack">
+		<h5>Bad examples:</h5>
+		<ul class="cross">
+			<li>“Make the counter”</li>
+			<li>“Handle the button”</li>
+			<li>“Update everything”</li>
+		</ul>
+	</div>
 
-	<h3>Final step, create!</h3>
+	<div class="w-stack">
+		<h5>Better:</h5>
+		<ul class="check">
+			<li>“Select the button”</li>
+			<li>“Store the current number”</li>
+			<li>“Increase the value”</li>
+			<li>“Change the text on the page”</li>
+		</ul>
+	</div>
+
+	<h3>Did you make proper use of sub-steps?</h3>
+	<p>Some steps are more complex than others and require multiple steps to complete. It's important to break those down as well to make sure you don't miss anything and to make it easier to follow.</p>
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" data-run="false">
+			<textarea class="title" hidden><p>An example of substeps</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+[] Add click event to button
+	[] Increase the number
+	[] Update the text on the page
+	[] Check if number reached 10
+		[] Change text colour to white
+			</textarea>
+		</div>
+	</div>
+
+	<h3>Can another student follow your steps without asking questions?</h3>
+	<p>If not, try to make your steps more clear and detailed. When you feel comfortable sharing, do so!</p>
+
+	<h2>Next step, create!</h2>
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor" 
 			data-run="true" 
@@ -110,19 +148,81 @@
 			data-task-docs="true"
 			data-task-internet="false"
 			data-task-team="false"
-			data-task-questions="false"
+			data-task-questions="true"
 			data-height="340">
 			<textarea class="title" hidden>
-				<p>Now that you have a clear list of steps, it's time to start programming! Follow your list and check off every step you complete. Don't worry if you get stuck, just do what you can and the ideas will come!</p>
+				<p>Now that you have a clear list of steps, it's time to start programming! Follow your list and check off every step you complete.</p>
+				<p>Don't worry if you get stuck, just do what you can and the ideas will come!</p>
 			</textarea>
 			<textarea class="js-editor-doc" hidden>
 var customBody = document.getElementById('sandBoxSpace');
-customBody.innerHTML = '<p>test</p>';
+// You can add html to customBody
 			</textarea>
 		</div>
 	</div>
 
-	<div id="sandBoxSpace" width="200" height="150"></div>
+	<h5>customBody</h5>
+	<div id="sandBoxSpace" style="width: 200px; height: 150px; border: 1px solid white;"></div>
+
+	<h3>Reflection, part 2</h3>
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="false" 
+			data-task-number="??" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-height="340">
+			<textarea class="title" hidden>
+				<p>Reflection</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+// Did you find it hard to break up the task into small steps? Why do you think that is? (You can answer in Dutch)
+
+// Were you able to finish the assignment?
+
+// Did breaking up the task in small tasks help you out?
+
+// Did you notice that you needed less time to think about the next step and were not as stressed because you already had it planned out?
+
+			</textarea>
+		</div>
+	</div>
+
+	<h2>There's always a bigger challenge</h2>
+
+	<h3>Let's do that again but this time we'll do a harder assignment</h3>
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="false" 
+			data-task-number="??" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-height="340">
+			<textarea class="title" hidden>
+<p><strong>“Mini To-Do App”</strong> Planning Exercise</p>
+
+<p><strong>Plan creating a webpage where:</strong></p>
+
+<ul>
+	<li>a user types a task</li>
+	<li>clicks “Add”</li>
+	<li>the task appears in a list</li>
+	<li>clicking a task removes it</li>
+</ul>
+</textarea>
+			<textarea class="js-editor-doc" hidden>
+
+			</textarea>
+		</div>
+	</div>
+	
+	<h2>Done? Finish up by making the mini app in VS Code</h2>
+	<p><em>Good luck!</em></p>
+
 
 	<a href="/pages/js/objects.html" class="nextPageTeaser">Objects<i class="fa-solid fa-arrow-right-long"></i></a>
 
@@ -132,3 +232,5 @@ customBody.innerHTML = '<p>test</p>';
 
 </body>
 </html>
+
+<!-- Een groot probleen is dat snellere leerlingen meer feedback krijgen omdat ze sneller klaar zijn en daardoor nog beter worden. Waar zwakkere leerlingen tegen de deadline pushen en dan moeten we soms doorgaan naar het volgende of is de les klaar. Met dit systeem wordt dit probleem gelukkig kleiner :)  -->

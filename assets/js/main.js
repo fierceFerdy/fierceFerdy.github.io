@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 			<div class="dropdown">
 				<a class="nested" href="/pages/js/overview.html">Overview</a>
 				<a class="nested" href="/pages/js/about.html">About</a>
-				<a class="nested" href="/pages/js/finding-information.html">Finding information</a>
+				<a class="nested" href="/pages/js/finding-information.html">Finding information <small>(in progress)</small></a>
 				<a class="nested" href="/pages/js/data.html">Data</a>
 				<a class="nested" href="/pages/js/common-errors.html">Common Errors</a>
 				<a class="nested" href="/pages/js/math.html">Math</a>
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/advanced-overview.html">Overview</a>
 				<a class="nested" href="/pages/js/visualisation.html">Visualisation <small>(todo)</small></a>
 				<a class="nested" href="/pages/js/event-listeners.html">Event Listeners <small>(todo)</small></a>
-				<a class="nested" href="/pages/js/tackle-big-tasks.html">How to tackle big tasks <small>(todo)</small></a>
+				<a class="nested" href="/pages/js/tackle-big-tasks.html">How to tackle big tasks</a>
 				<a class="nested" href="/pages/js/objects.html">Objects</a>
 				<a class="nested" href="/pages/js/json.html">JSON</a>
 				<a class="nested" href="/pages/js/localstorage.html">LocalStorage <small>(todo)</small></a>

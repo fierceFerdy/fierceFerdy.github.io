@@ -52,7 +52,7 @@ i[class*='w-'] {
 .w-1\/4,
 .w-2\/4,
 .w-3\/4,
-.w-stack {
+.w-stack{
     display: inline-block;
     vertical-align: top;
 }

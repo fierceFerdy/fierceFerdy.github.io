@@ -21,7 +21,7 @@
 	
 	<h1>JSON</h1>
 	<p>JSON<span class="tooltip"><span>JavaScript Object Notation</span></span> is a format for storing and transporting data. It is often used when data is sent from a server to a web page and pretty much everywhere else. No matter what IT field you end up working in, you will work with JSON.</p>
-	<p>JSON is a text format that is completely language independent but uses conventions that are familiar to programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. These properties make JSON an ideal data-interchange language. The best of all; it's easy for humans to read and write, and easy for machines to parse and generate.</p>
+	<p>Contradictory to its name, JSON is a text format that is completely language independent but uses conventions that are familiar to programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. These properties make JSON an ideal data-interchange language. The best of all; it's easy for humans to read and write, and easy for machines to parse and generate.</p>
 
 	<h2>JSON syntax</h2>
 	<p>JSON looks very similar to JavaScript objects and arrays.</p>
@@ -56,7 +56,7 @@
 	<p>To get data from a JSON file, you can use the <code>fetch()</code> function. This function returns a promise<span class="tooltip"><span><strong>Promise:</strong> An object representing the eventual completion or failure of an (asynchronous) operation.</span></span> that resolves to the response of the request. You can then use the <code>.json()</code> method to parse the response as JSON.</p>
 
 	<h3>ELI5</h3>
-	<p>Imagine you have a box (the JSON file) that contains a letter (the data). You want to read the letter, but you can't open the box. Instead, you have to ask a friend (the fetch function) to get the letter for you. The fetch function will go to the box, get the letter, and <em>then</em> give it to you. Once you have the letter, you can read it and understand what's inside.</p>
+	<p>Imagine you have a box (the JSON file) that contains a letter (the data). You want to read the letter, but you can't open the box. Instead, you have to ask a friend to <em>fetch</em> the letter for you. The <code>fetch()</code> function will go to the box, get the letter, and <em>then</em> give it to you. Once you have the letter, you can read the letter and understand the <em>'data'</em> inside.</p>
 
 	<h3>Example</h3>
 
@@ -343,7 +343,7 @@ var people = fetch('https://fierceferdy.github.io/assets/data.json')
 				<ul>
 					<li>Get<span class="tooltip"><span>What do you shout when a dog should go get something?</span></span> the JSON file (https://fierceferdy.github.io/assets/data2.json)</li>
 					<li>Convert the response to JSON</li>
-					<li>Log data in the console in a clean way</li>
+					<li>Log "X has Y in their purse" for each person</li>
 				</ul>
 			</textarea>
 			<textarea class="js-editor-doc" hidden>

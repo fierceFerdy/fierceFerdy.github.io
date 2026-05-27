@@ -116,7 +116,7 @@
 	.content{
 		padding: 2rem 4rem 4rem;
 
-		img.float{
+		img.float, video.float{
 			float: right;
 			padding: 2rem 0 1.5rem 3rem;
 			width: 280px;

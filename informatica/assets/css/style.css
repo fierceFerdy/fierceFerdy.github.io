@@ -286,3 +286,40 @@ body{
 
 
 }
+
+
+.bannerImage{
+	position: relative;
+
+	.bannerText{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: white;
+		text-align: center;
+		z-index: 10;
+		width: 90%;
+		max-width: 800px;
+
+		h1{
+			font-size: 4rem;
+			margin-bottom: 1rem;
+			line-height: 1.2em;
+			color: white;
+			text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+			span{
+				font-weight: inherit;
+				color: var(--red);
+			}
+		}
+
+		p{
+			font-size: 1.5rem;
+			line-height: 1.2em;
+			color: white;
+			text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+		}
+	}
+}

@@ -88,6 +88,50 @@ console.log(people);
 	<p>Did you notice how the empty object list (people) was logged before the data was fetched? This is because the <code>console.log(people)</code> statement runs before the fetch request completes and exactly the reason why this doesn't work as expected.</p>
 
 
+
+	<h2>Assignment 1 - Modify existing code</h2>
+	<p>First, let's learn how to read and understand fetched JSON data.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="true" 
+			data-task-number="??" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="320">
+
+			<textarea class="title" hidden>
+				<p><strong>Your task:</strong></p>
+
+				<ul>
+					<li>Log ONLY the first person's first name</li>
+					<li>Then log ONLY the second person's last name</li>
+					<li>Finally, log the amount of people inside the JSON file</li>
+				</ul>
+
+				<p>Try to understand the structure before changing things. In the next assignment you're on your own, kinda.</p>
+			</textarea>
+
+			<textarea class="js-editor-doc" hidden>
+fetch('https://fierceferdy.github.io/assets/data.json')
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+	});
+			</textarea>
+		</div>
+	</div>
+
+	<p class="hint">
+		Don't panic if you don't remember the entire fetch() structure yet.
+		Most people learn it through repetition and by adapting examples.
+		The more you use it, the more natural it becomes.
+	</p>
+
+
 	<!-- Advanced Topics -->
 	<!-- Advanced Topics -->
 	<!-- Advanced Topics -->
@@ -131,14 +175,14 @@ var people = fetch('https://fierceferdy.github.io/assets/data.json')
 			<h2>Creating a JSON file</h2>
 			<p>To create a JSON file, you can use the <code>JSON.stringify()</code> method to convert a JavaScript object into a JSON string. You can then save this string to a file or send it to a server (we will not be doing this in this course).</p>
 
-			<h3>Save to a file</h3>
+			<h4>Save to a file</h4>
 			<p>To save a JSON string to a file, you can use the <code>Blob</code> object and the <code>URL.createObjectURL()</code> method to create a downloadable link.</p>
 		</div>
 	</div>
 
 
 
-	<h2>Conclusion/recap</h2>
+	<h2>Recap</h2>
 
 	<div class="quiz" id="#quiz">
 		<script type="application/json" class="quiz-data">
@@ -249,17 +293,65 @@ var people = fetch('https://fierceferdy.github.io/assets/data.json')
 					"question": "Why is JSON popular?",
 					"options": [
 						"Because humans and machines can both read it easily",
-						"Because everyone loves JavaScript and also JSon",
-						"Because it can replace HTML"
+						"Because it can replace HTML",
+						"Because it has a cool name"
 					],
 					"answer": 0,
 					"explanation": "JSON is lightweight, readable and easy to parse."
+				},
+				{
+					"question": "What does it mean that fetch() is asynchronous?",
+					"options": [
+						"That it runs in a separate thread",
+						"That it doesn't block other code from running while waiting for the response",
+						"That it can only be used with async functions"
+					],
+					"answer": 1,
+					"explanation": "fetch() is asynchronous, meaning it doesn't block other code from running while waiting for the response."
+				},
+				{
+					"question": "What does .then() do?",
+					"options": [
+						"Attaches a callback to be executed when the Promise is resolved",
+						"Creates a new Promise",
+						"Blocks code execution until the Promise is resolved"
+					],
+					"answer": 0,
+					"explanation": ".then() attaches a callback to be executed when the Promise is resolved."
 				}
 			]
 		}
 		</script>
 	</div>
 
+	<h2>Assignment 2 - Build it yourself</h2>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="true" 
+			data-task-number="??" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="320">
+
+			<textarea class="title" hidden>
+				<p>Note: Whilst you can look at the docs, please <em>try</em> to do as much as you can by yourself.</p>
+				<p><strong>Your task:</strong></p>
+				<ul>
+					<li>Get<span class="tooltip"><span>What do you shout when a dog should go get something?</span></span> the JSON file (https://fierceferdy.github.io/assets/data2.json)</li>
+					<li>Convert the response to JSON</li>
+					<li>Log data in the console in a clean way</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+			</textarea>
+		</div>
+	</div>
+	
+</div>
 
 
 

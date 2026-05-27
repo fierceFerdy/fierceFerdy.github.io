@@ -1,0 +1,16 @@
+{
+	"purses": [
+		{
+			"name": "Alice",
+			"balance": 100
+		},
+		{
+			"name": "Bob",
+			"balance": 50
+		},
+		{
+			"name": "Jason",
+			"balance": 9999
+		}
+	]
+}

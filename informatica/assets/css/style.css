@@ -319,7 +319,17 @@ body{
 			font-size: 1.5rem;
 			line-height: 1.2em;
 			color: white;
-			text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+			background-color: var(--red);
+			padding: .7rem .8rem .5rem;
+			display: table;
+			margin: 0 auto;
+			transition: none;
+		}
+	}
+
+	&:hover{
+		.bannerText p{
+			transform: rotate(-1deg);
 		}
 	}
 }

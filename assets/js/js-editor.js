@@ -370,11 +370,13 @@ async function runCode(code, terminal, container, action = 'run') {
     asyncTracker.restore();
 	}
 
-    if (container?.dataset?.store === "true"){
-		if(action === 'run' || action === 'finish' && container.dataset.taskNumber && container.dataset.taskNumber != '') {
-        	saveEditorAttempt(container, runStatus, code, logs.length);
-		}
-    }
+        var hasTaskNumber = !!container?.dataset?.taskNumber;
+        var shouldStoreRunAttempt = container?.dataset?.store === "true" && action === "run";
+        var shouldStoreFinishedTask = action === "finish" && hasTaskNumber;
+
+        if (shouldStoreRunAttempt || shouldStoreFinishedTask) {
+                saveEditorAttempt(container, runStatus, code, logs.length);
+        }
 
 	
 

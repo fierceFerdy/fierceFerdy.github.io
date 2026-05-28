@@ -44,5 +44,9 @@
 	// MAYBE
 	"workbench.sideBar.location": "right",
 	"editor.folding": false,
-	"breadcrumbs.enabled": false
+	"breadcrumbs.enabled": false,
+	"terminal.integrated.defaultProfile.windows": "Command Prompt",
+	"chat.disableAIFeatures": true,
+	"terminal.integrated.tabs.allowAgentCliTitle": false,
+	"workbench.editor.useModal": "off"
 }

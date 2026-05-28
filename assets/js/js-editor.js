@@ -112,6 +112,7 @@ function createLiteEditor(container) {
 function createEditor(container) {
 	var language = getEditorLanguage(container);
     var editorExtensions = getEditorExtensions(language, container.dataset.readonly === "true");
+    var pasteAllowed = container.dataset.paste !== "false";
 
     // Build DOM
 	// if(container.dataset.height) container.style.minHeight = container.dataset.height + "px";
@@ -147,6 +148,9 @@ function createEditor(container) {
 			"internet <span class='" + (container.dataset.taskInternet === "true" ? "check" : "xmark") + "'></span> " +
 			"teamwork <span class='" + (container.dataset.taskTeam === "true" ? "check" : "xmark") + "'></span> " +
 			"questions <span class='" + (container.dataset.taskQuestions === "true" ? "check" : "xmark") + "'></span>";
+		if(container.dataset.paste === "false"){
+			allowed.innerHTML += " paste <span class='xmark'></span>";
+		}
 		container.parentElement.appendChild(allowed);
 
 		// Add start button
@@ -241,6 +245,35 @@ function createEditor(container) {
 			container.classList.add("w-full");
 		}
 	}
+
+    if (!pasteAllowed) {
+        var blockInsert = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        };
+
+        // Block browser/context-menu paste and drop for this editor instance.
+        view.dom.addEventListener("paste", blockInsert, true);
+        view.contentDOM.addEventListener("paste", blockInsert, true);
+        view.dom.addEventListener("drop", blockInsert, true);
+        view.contentDOM.addEventListener("drop", blockInsert, true);
+
+        // Block IME/input pipeline paste events used by some browsers.
+        view.dom.addEventListener("beforeinput", (e) => {
+            if (e.inputType === "insertFromPaste" || e.inputType === "insertFromDrop") {
+                blockInsert(e);
+            }
+        }, true);
+
+        // Block keyboard shortcuts that can trigger paste.
+        view.dom.addEventListener("keydown", (e) => {
+            var isPasteShortcut = (e.ctrlKey || e.metaKey) && (e.key === "v" || e.key === "V");
+            var isShiftInsert = e.shiftKey && e.key === "Insert";
+            if (isPasteShortcut || isShiftInsert) {
+                blockInsert(e);
+            }
+        }, true);
+    }
 
     return view;
 }

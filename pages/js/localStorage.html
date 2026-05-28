@@ -10,22 +10,353 @@
 
 	<script src="/assets/js/main.js" defer></script>
 	<script src="/assets/js/quiz.js" defer></script>
-	<script type="module" src="/assets/js/js-editor.js" defer></script>
+	<script src="/assets/js/js-editor.js" defer type="module"></script>
 </head>
 
 <body>
-	
-
 
 <div class="content">
 	
 	<h1>LocalStorage</h1>
+
+	<p>Usually we save data in variables. But, variables disappear when you refresh the page. <code>localStorage</code> however allows you to save data <em>inside</em> the browser so it can still exist later.</p>
+
+	<p>You can use <code>localStorage</code> to (amongst other things):</p>
+
+	<ul>
+		<li>Save settings</li>
+		<li>Remember usernames</li>
+		<li>Store theme preferences</li>
+		<li>Save simple app data</li>
+		<li>Keep data after refreshing the page</li>
+	</ul>
+
+	<h3>ELI5</h3>
+
+	<p>Variables are like writing on a whiteboard. When the page reloads, the whiteboard gets erased. <code>localStorage</code> however is more like putting the information in a locker. Even if you leave and come back later, the data is still there.</p>
+
+	<h3>Comparison</h3>
+	
+	<p>When you compare <code>localStorage</code> to JSON, <code>localStorage</code> is like a simple key-value store where both the key and the value are strings whilst JSON is <i>a whole file of data</i>. But the biggest difference between the two might be that <code>localStorage</code> is saved locally in the user's computer, making it specifically for the user. JSON however is more something for global data which can be available to every user.</p>
+
+	<table>
+		<tr>
+			<th class="empty"></th>
+			<th>Variables</th>
+			<th>localStorage</th>
+			<th>JSON</th>
+		</tr>
+		<tr>
+			<th>Persists after refresh?</th>
+			<td>No</td>
+			<td>Yes</td>
+			<td>Depends where stored</td>
+		</tr>
+		<tr>
+			<th>Main purpose</th>
+			<td>Temporary data</td>
+			<td>User-specific saved data</td>
+			<td>Transporting/storing structured data</td>
+		</tr>
+		<tr>
+			<th>Can store objects?</th>
+			<td>Yes</td>
+			<td>Not directly</td>
+			<td>Yes</td>
+		</tr>
+	</table>
+
+	<h2>Saving data</h2>
+
+	<p>You can save data using <code>localStorage.setItem()</code>. The function accepts two values, the name of the value (key) and the value itself. Try it out!</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+
+			<textarea class="title" hidden>
+				<p>Try it out: Save your name</p>
+			</textarea>
+
+			<textarea class="js-editor-doc" hidden>
+			</textarea>
+		</div>
+	</div>								
+
+	<p>Now that you've saved your name, let's check it out! Open the DevTools, switch to the "Application" tab and in the sidebar open "Local Storage" under "Storage". You should see your saved name there.</p>
+	<p>Lots of websites store data in your browser and not only using <code>localStorage</code>, as you can see. You can always see what a website's up to using the DevTools.</p>
 	
 
-	<a href="/pages/js/collision-detection.html" class="nextPageTeaser">Collision detection<i class="fa-solid fa-arrow-right-long"></i></a>
+	<h2>Getting data</h2>				
+
+	<p>Of course, using the DevTools is not the only way to see the data that's been saved. You can always get saved data back using <code>localStorage.getItem()</code>. Can you figure out how to get your data?</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+
+			<textarea class="title" hidden>
+				<p>Getting data from localStorage</p>
+			</textarea>
+
+			<textarea class="js-editor-doc" hidden>
+
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Removing data</h2>
+
+	<p>And lastly, if you no longer need something, you can remove it using <code>localStorage.removeItem()</code></p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+
+			<textarea class="title" hidden>
+				<p>Removing data from localStorage</p>
+			</textarea>
+
+			<textarea class="js-editor-doc" hidden>
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Assignment 1</h2>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="true" 
+			data-task-number="??" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="260">
+
+			<textarea class="title" hidden>
+				<p><strong>Your task:</strong></p>
+
+				<ul>
+					<li>Create a variable containing your name</li>
+					<li>Save the name inside localStorage</li>
+					<li>Get the name back from localStorage</li>
+					<li>Log the result in the console</li>
+				</ul>
+			</textarea>
+
+			<textarea class="js-editor-doc" hidden>
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Important! localStorage only stores strings.</h2>
+
+	<p>If you try to save objects or arrays directly, weird things can happen.</p>
+
+	<h3>Bad example</h3>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+
+			<textarea class="title" hidden>
+				<p>This does NOT work properly</p>
+			</textarea>
+
+			<textarea class="js-editor-doc" hidden>
+var user = {
+	name: 'InjectVisitorName',
+	age: 30
+};
+
+localStorage.setItem('user', user);
+
+console.log(localStorage.getItem('user'));
+			</textarea>
+		</div>
+	</div>
+
+	<p>Oops. Instead of the object itself, we got: <code>[object Object]</code>.</p>
+
+	<h3>JSON to the rescue</h3>
+
+	<p>To properly save objects and arrays, we convert them to JSON first. As you can see, JSON is not only used in files. JSON is simply a text format for structured data.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+
+			<textarea class="title" hidden>
+				<p>Saving objects properly</p>
+			</textarea>
+
+			<textarea class="js-editor-doc" hidden>
+var user = {
+	name: 'InjectVisitorName',
+	age: 30
+};
+
+var userString = JSON.stringify(user);
+
+localStorage.setItem('user', userString);
+
+console.log('Saved!');
+			</textarea>
+		</div>
+	</div>
+
+	<p>Now the object becomes a string that localStorage can store.</p>
+
+	<h3>Converting it back</h3>
+
+	<p>When you get the data back, it will still be a string. You can convert it back into a real object using <code>JSON.parse()</code>.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+
+			<textarea class="title" hidden>
+				<p>Reading JSON data from localStorage</p>
+			</textarea>
+
+			<textarea class="js-editor-doc" hidden>
+var userString = localStorage.getItem('user');
+
+var userObject = JSON.parse(userString);
+
+console.log(userObject);
+console.log(userObject.name);
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Assignment 2 - Store an object</h2>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="true" 
+			data-task-number="??" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-paste="false" 
+			data-height="320">
+
+			<textarea class="title" hidden>
+				<p><strong>Your task:</strong></p>
+
+				<ul>
+					<li>Create an object with at least 3 properties</li>
+					<li>Convert the object to JSON</li>
+					<li>Save it in localStorage</li>
+					<li>Get it back from localStorage</li>
+					<li>Convert it back into an object</li>
+					<li>Log one property in the console</li>
+				</ul>
+			</textarea>
+
+			<textarea class="js-editor-doc" hidden>
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Recap</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "LocalStorage Quiz",
+			"questions": [
+				{
+					"question": "What does localStorage allow you to do?",
+					"options": [
+						"Style a webpage",
+						"Store data inside the browser",
+						"Create HTML elements"
+					],
+					"answer": 1,
+					"explanation": "localStorage stores data inside the browser."
+				},
+				{
+					"question": "What function saves data in localStorage?",
+					"options": [
+						"localStorage.save()",
+						"localStorage.setItem()",
+						"localStorage.push()"
+					],
+					"answer": 1,
+					"explanation": "setItem() stores data in localStorage."
+				},
+				{
+					"question": "What function gets data from localStorage?",
+					"options": [
+						"localStorage.getItem()",
+						"localStorage.load()",
+						"localStorage.read()"
+					],
+					"answer": 0,
+					"explanation": "getItem() retrieves stored data."
+				},
+				{
+					"question": "What datatype does localStorage store?",
+					"options": [
+						"Only strings",
+						"Only arrays",
+						"Only objects"
+					],
+					"answer": 0,
+					"explanation": "localStorage only stores strings."
+				},
+				{
+					"question": "What does JSON.stringify() do?",
+					"options": [
+						"Turns a JavaScript object into a string",
+						"Deletes JSON",
+						"Turns JSON into HTML"
+					],
+					"answer": 0,
+					"explanation": "JSON.stringify() converts objects into strings."
+				},
+				{
+					"question": "What does JSON.parse() do?",
+					"options": [
+						"Deletes an object",
+						"Turns a JSON string back into a JavaScript object",
+						"Creates localStorage"
+					],
+					"answer": 1,
+					"explanation": "JSON.parse() converts JSON text back into usable JavaScript data."
+				},
+				{
+					"question": "What function removes data from localStorage?",
+					"options": [
+						"localStorage.removeItem()",
+						"localStorage.delete()",
+						"localStorage.clearOne()"
+					],
+					"answer": 0,
+					"explanation": "removeItem() removes stored data."
+				}
+			]
+		}
+		</script>
+	</div>
+
+	<a href="/pages/js/arrays.html" class="nextPageTeaser">
+		Next: Arrays <i class="fa-solid fa-arrow-right-long"></i>
+	</a>
+
 </div>
-
-
 
 </body>
 </html>

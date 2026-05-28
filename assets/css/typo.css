@@ -290,3 +290,39 @@ p{
 		margin-top: .6rem;
 	}
 }
+
+
+table{
+	border-collapse: collapse;
+	margin-bottom: 1rem;
+
+
+	th, td{
+		border: 1px solid var(--dark0);
+		padding: .6rem 1rem;
+		text-align: left;
+		font-size: 1.4rem;
+		color: white;
+	}
+
+	th{
+		background-color: var(--lime);
+		color: black;
+		font-weight: var(--bold);
+
+		&.empty{
+			background-color: transparent;
+			border: none;
+		}
+	}
+
+	tfoot{
+		tr{
+			background-color: var(--dark3);
+			color: white;	
+			th{
+				background-color: var(--dark3);
+			}
+		}
+	}
+}

@@ -13,10 +13,19 @@ document.addEventListener("DOMContentLoaded", async function() {
 		}
 	}
 
+
+
 	// Inject visitor's name here and there
 	const visitorName = localStorage.getItem("visitorName").split(" ")[0] || "Boo";
 	document.querySelectorAll(".yourname").forEach(el => el.textContent = visitorName);
-
+	
+	// Replace all 'InjectVisitorName' strings with the visitor's name ANYWHERE in the page
+	document.querySelectorAll("*").forEach(el => {
+		if(el.children.length === 0 && el.textContent.includes("InjectVisitorName")){
+			el.textContent = el.textContent.replace(/InjectVisitorName/g, visitorName);
+		}
+	});
+	
 
 
 	// button.toggle handler
@@ -27,6 +36,8 @@ document.addEventListener("DOMContentLoaded", async function() {
 			content.classList.toggle("active");
 		});
 	});
+
+
 
 	// if the viewport is less than 700px, add .hiddenNav to body so nav doesn't show up after switching pages
 	if(window.innerWidth <= 700){
@@ -158,7 +169,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/tackle-big-tasks.html">How to tackle big tasks</a>
 				<a class="nested" href="/pages/js/objects.html">Objects</a>
 				<a class="nested" href="/pages/js/json.html">JSON</a>
-				<a class="nested" href="/pages/js/localstorage.html">LocalStorage <small>(todo)</small></a>
+				<a class="nested" href="/pages/js/localstorage.html">LocalStorage</a>
 				<a class="nested" href="/pages/js/collision-detection.html">Collision detection <small>(in progress)</small></a>
 				<a class="nested" href="/pages/js/recap2.html">Recap</a>
 

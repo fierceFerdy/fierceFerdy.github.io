@@ -358,6 +358,10 @@ button{
 		margin-top: 0;
 	}
 
+	h2:first-of-type{
+		margin-top: 0;
+	}
+
 	&.active{
 		max-height: 300vh; /* or any suitable max height */
 		padding: 3rem 2rem;

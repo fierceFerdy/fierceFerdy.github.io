@@ -151,8 +151,9 @@ fetch('https://fierceferdy.github.io/assets/data.json')
 		<h2>Advanced Topics <button class="toggle"></button></h2>
 
 		<div class="advancedContent">
-	
-			<h3>If you want to format the data before working with it, you can do it like so:</h3>
+
+			<h2>Formatting data</h2>
+			<p>If you want to format the data before working with it, you can do it like so:</p>
 			
 			<div class="gridCorrector editorWrapper">
 				<div class="js-editor" 
@@ -180,6 +181,57 @@ var people = fetch('https://fierceferdy.github.io/assets/data.json')
 
 		console.log(peopleObjects);
 	});
+					</textarea>
+				</div>
+			</div>
+
+			<h2>JSON is not only a filetype, it's a datatype</h2>
+
+			<p>We can convert all kinds of data to JSON, for all kinds of reasons using <code>JSON.stringify()</code>.</p>
+
+			<div class="gridCorrector editorWrapper">
+				<div class="js-editor" 
+					data-run="true" 
+					data-readonly="false">
+
+					<textarea class="title" hidden>
+						<p>Saving objects properly</p>
+					</textarea>
+
+					<textarea class="js-editor-doc" hidden>
+var user = {
+	name: 'InjectVisitorName',
+	age: 30
+};
+
+var userString = JSON.stringify(user);
+					</textarea>
+				</div>
+			</div>
+
+
+			<h3>Converting it back</h3>
+
+			<p>When you get this type of data, it's basically just a string. You can convert it back into a real object using <code>JSON.parse()</code>.</p>
+
+			<div class="gridCorrector editorWrapper">
+				<div class="js-editor" 
+					data-run="true" 
+					data-readonly="false">
+
+					<textarea class="title" hidden>
+						<p>Reading JSON data from localStorage</p>
+					</textarea>
+
+					<textarea class="js-editor-doc" hidden>
+var user = {
+	name: 'InjectVisitorName',
+	age: 30
+};
+var userString = JSON.stringify(user);
+var userObject = JSON.parse(userString);
+
+console.log(userObject);
 					</textarea>
 				</div>
 			</div>

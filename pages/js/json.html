@@ -134,6 +134,32 @@ fetch('https://fierceferdy.github.io/assets/data.json')
 		console.log(data);
 	});
 			</textarea>
+			<textarea class="solution">
+fetch('https://fierceferdy.github.io/assets/data.json')
+	.then(response => response.json())
+	.then(data => {
+		// console.log(data.people);
+        
+		// option 1:
+		var personIndex = 0;
+		for(person of data.people){
+			// console.log(person.firstName);
+			// console.log(personIndex);
+			if(personIndex == 0){
+				console.log(person.firstName);
+			}else if(personIndex == 1){
+				console.log(person.lastName);
+			}
+			personIndex++;
+        }
+		console.log('aantal personen: ' + personIndex);
+		
+		// option 2:
+		console.log(data.people[0].firstName);
+		console.log(data.people[1].lastName);
+		console.log(data.people.length);
+	});
+			</textarea>
 		</div>
 	</div>
 
@@ -398,7 +424,8 @@ console.log(userObject);
 			data-task-internet="false"
 			data-task-team="false"
 			data-task-questions="true"
-			data-readonly="false" 
+			data-readonly="false"
+			data-paste="false"
 			data-height="320">
 
 			<textarea class="title" hidden>
@@ -427,3 +454,8 @@ console.log(userObject);
 
 </body>
 </html>
+
+
+Editor problems TODO:
+- Logging object sometimes goes wrong
+- Targetting something that doesn't exist doesnt return an error. person.data.firstName[0]

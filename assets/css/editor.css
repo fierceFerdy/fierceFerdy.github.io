@@ -1,7 +1,6 @@
 .editorWrapper{
 	position: relative;
 	display: flex;
-	/* display: block; */
 	margin-bottom: 2rem;
 
 	@media screen and (max-width: 800px){
@@ -80,6 +79,8 @@
 	position: relative;
 	background-color: #282c34;
 	display: table;
+	/* padding-bottom: 31px; */
+	background-color: #3e474f;
 
 	.cm-editor{
 		height: 100%;

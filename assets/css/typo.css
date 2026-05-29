@@ -31,7 +31,7 @@ h2{
 	display: block;
 
 	margin-bottom: 2rem;
-	margin-top: 8rem;
+	margin-top: 16rem;
 
 	&:before{
 		content: '';
@@ -39,7 +39,7 @@ h2{
 		display: inline-block;
 		font-size: inherit;
 		/* top: 100%; */
-		top: -3.5rem;
+		top: -2.5rem;
 		left: 0;
 		height: .15em;
 		width: 1.5em;
@@ -295,6 +295,7 @@ p{
 table{
 	border-collapse: collapse;
 	margin-bottom: 1rem;
+	margin-top: 1rem;
 
 
 	th, td{
@@ -306,8 +307,8 @@ table{
 	}
 
 	th{
-		background-color: var(--lime);
-		color: black;
+		background-color: black;
+		color: var(--lime);
 		font-weight: var(--bold);
 
 		&.empty{

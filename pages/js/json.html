@@ -459,3 +459,8 @@ console.log(userObject);
 Editor problems TODO:
 - Logging object sometimes goes wrong
 - Targetting something that doesn't exist doesnt return an error. person.data.firstName[0]
+
+Deze log werkt ook niet:
+for(person of data.purses){
+	console.log(person.name + " has " + person.balance + " in their purse");
+}

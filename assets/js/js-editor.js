@@ -360,23 +360,23 @@ async function runCode(code, terminal, container, action = 'run') {
 	try {
         if (!runError) {
             // Execute user code
-        executionResult = executeUserCode(code, fakeConsole, asyncTracker);
-        await waitForAsyncLogs(executionResult, logs, asyncTracker);
+            executionResult = executeUserCode(code, fakeConsole, asyncTracker);
+            await waitForAsyncLogs(executionResult, logs, asyncTracker);
         }
 	} catch (e) {
         runStatus = "error";
         runError = e;
 	} finally {
-    asyncTracker.restore();
+        asyncTracker.restore();
 	}
 
-        var hasTaskNumber = !!container?.dataset?.taskNumber;
-        var shouldStoreRunAttempt = container?.dataset?.store === "true" && action === "run";
-        var shouldStoreFinishedTask = action === "finish" && hasTaskNumber;
+    var hasTaskNumber = !!container?.dataset?.taskNumber;
+    var shouldStoreRunAttempt = container?.dataset?.store === "true" && action === "run";
+    var shouldStoreFinishedTask = action === "finish" && hasTaskNumber;
 
-        if (shouldStoreRunAttempt || shouldStoreFinishedTask) {
-                saveEditorAttempt(container, runStatus, code, logs.length);
-        }
+    if (shouldStoreRunAttempt || shouldStoreFinishedTask) {
+        saveEditorAttempt(container, runStatus, code, logs.length);
+    }
 
 	
 

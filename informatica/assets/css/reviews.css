@@ -75,6 +75,7 @@
 	display: none;
 	width: 100%;
 	max-width: 800px;
+	max-height: 90vh;
 	background-color: white;
 	z-index: 10000;
 
@@ -101,7 +102,8 @@
 		position: absolute;
 		top: -1.5rem;
 		right: -1.5rem;
-		z-index: 10001;
+		z-index: 100001;
+		
 
 		&:hover{
 			background-color: black;
@@ -110,11 +112,16 @@
 	}
 
 	.popup{
-
+		height: 100%;
+		height: 85vh;
+		/* overflow-y: scroll; */
+		overflow: hidden;
 	}
 
 	.content{
 		padding: 2rem 4rem 4rem;
+		height: 100%;
+		overflow-y: scroll;
 
 		img.float, video.float{
 			float: right;

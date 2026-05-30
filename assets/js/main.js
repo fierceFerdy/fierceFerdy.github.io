@@ -503,5 +503,20 @@ document.addEventListener("DOMContentLoaded", async function() {
 	});
 
 
+
+	/**
+	* Add license to footer
+	*
+	* @version 30/05/2026
+	* @author Ferdy <ferdy.fiers@gmail.com>
+	*/
+	
+	var license = this.createElement('div');
+	license.classList.add('footer');
+	license.innerHTML = `
+		<p>&copy; Developed by Fiers Ferdy. This may only be used within the institution that is GO! Talent. <a href='http://fierceFerdy.github.io/license.txt' target='_blank' >Full license</a></p>
+	`;
+	document.body.querySelector('.content').appendChild(license);
+
 	
 });

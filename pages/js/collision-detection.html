@@ -21,13 +21,15 @@
 	
 	<h1>Collision detection</h1>
     <p>A simple introduction on how to do simple collision detection.</p>
+	<p class="hint">This page is under heavy construction but might offer some basic guidance already</p>
 
 	<h2>Collision on the x-axis</h2>
+
 	<div class="gridCorrector editorWrapper">
 		<div class="js-editor" 
 			data-run="true" 
 			data-readonly="false">
-			<textarea class="title" hidden><p>An object's constructor</p></textarea>
+			<textarea class="title" hidden><p>Collision on the X-axis</p></textarea>
 			<textarea class="js-editor-doc" hidden>
 var a = {
     top: 0,
@@ -48,11 +50,47 @@ if(a.left > b.left && a.left < (b.left + b.width)){
     console.log('there is collision on the x-axis');
 }
 
-		</textarea>
+			</textarea>
+		</div>
 	</div>
+
+	<h3>Let's test that out in a real example</h3>
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-readonly="false">
+			<textarea class="title" hidden><p>Collision on the X-axis</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var a = {
+    top: 0,
+    left: 0,
+    height: 100,
+    width: 100
+}
+var b = {
+    top: 500,
+    left: 500,
+    height: 100,
+    width: 100
+}
+var moveAmount = 20;
+
+// Check if collision happens on the x-axis (horizontal / CSS: left)
+if(a.left > b.left && a.left < (b.left + b.width)){
+    console.log('there is collision on the x-axis');
+}
+
+			</textarea>
+		</div>
+	</div>
+
+
+
+
+
 </div>
 
-<p>Now you basically need to compare all sides of the element you want to compare against all the sides of the other element. Then against all other elements.</p>
+<!-- <p>Now you basically need to compare all sides of the element you want to compare against all the sides of the other element. Then against all other elements.</p> -->
 	
 
 	<a href="/pages/js/recap2.html" class="nextPageTeaser">Recap 2<i class="fa-solid fa-arrow-right-long"></i></a>

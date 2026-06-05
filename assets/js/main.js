@@ -163,19 +163,24 @@ document.addEventListener("DOMContentLoaded", async function() {
 			<a class="navParent" href="#">JavaScript Advanced</a>
 			<div class="dropdown">
 
-				<a class="nested" href="/pages/js/advanced-overview.html">Overview</a>
-				<a class="nested" href="/pages/js/visualisation.html">Visualisation <small>(in progress)</small></a>
-				<a class="nested" href="/pages/js/event-listeners.html">Event Listeners <small>(todo)</small></a>
-				<a class="nested" href="/pages/js/tackle-big-tasks.html">How to tackle big tasks</a>
-				<a class="nested" href="/pages/js/objects.html">Objects</a>
-				<a class="nested" href="/pages/js/json.html">JSON</a>
-				<a class="nested" href="/pages/js/local-storage.html">LocalStorage</a>
-				<a class="nested" href="/pages/js/collision-detection.html">Collision detection <small>(in progress)</small></a>
-				<a class="nested" href="/pages/js/recap2.html">Recap</a>
+				<a class="nested" href="/pages/js-advanced/overview.html">Overview</a>
+				<a class="nested" href="/pages/js-advanced/visualisation.html">Visualisation <small>(in progress)</small></a>
+				<a class="nested" href="/pages/js-advanced/event-listeners.html">Event Listeners <small>(todo)</small></a>
+				<a class="nested" href="/pages/js-advanced/tackle-big-tasks.html">How to tackle big tasks</a>
+				<a class="nested" href="/pages/js-advanced/objects.html">Objects</a>
+				<a class="nested" href="/pages/js-advanced/json.html">JSON</a>
+				<a class="nested" href="/pages/js-advanced/local-storage.html">LocalStorage</a>
+				<a class="nested" href="/pages/js-advanced/collision-detection.html">Collision detection <small>(in progress)</small></a>
+				<a class="nested" href="/pages/js-advanced/recap2.html">Recap</a>
+				
+				<a class="nested" href="/pages/js-advanced/timers.html">2627 Timers <small>(todo)</small></a>
+				<a class="nested" href="/pages/js-advanced/forms.html">2627 Forms <small>(todo)</small></a>
+				<a class="nested" href="/pages/js-advanced/sort.html">2627 Sort <small>(todo)</small></a>
+				<a class="nested" href="/pages/js-advanced/css.html">2627 CSS <small>(todo)</small></a>
 
-				<a class="nested" href="/pages/js/async-await.html">6BINF: Async/await</a>
-				<a class="nested" href="/pages/js/neutralino.html">6BINF: Neutralino</a>
-				<a class="nested" href="/pages/js/websockets-api.html">6BINF: Websockets & APIs</a>
+				<a class="nested" href="/pages/js-advanced/async-await.html">6BINF: Async/await</a>
+				<a class="nested" href="/pages/js-advanced/neutralino.html">6BINF: Neutralino</a>
+				<a class="nested" href="/pages/js-advanced/websockets-api.html">6BINF: Websockets & APIs</a>
 			</div>
 		</div>
 

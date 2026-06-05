@@ -151,6 +151,29 @@ for(var i = 10; i > 0; i--){ }
 		</div>
 	</div>
 
+
+
+	<h3>forEach loop</h3>
+	<p class="check">It is used to iterate over arrays. You can create a forEach either without or with an index.</p>
+	<p class="xmark">It's a bit harder to read/remember.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-readonly="false" 
+			data-height="230">
+			<textarea class="title" hidden><p>forEach loop</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+var animals = ["cat", "dog", "rabbit"];
+animals.forEach((animal, index) => { // If you don't want an index, just don't add it as a parameter.
+	var div = document.createElement("div");
+	div.textContent = `${index + 1}. ${animal}`;
+	animalList.appendChild(div);
+});
+			</textarea>
+		</div>
+	</div>
+
 	
 
 	<div class="gridCorrector editorWrapper">

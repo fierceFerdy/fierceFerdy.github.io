@@ -43,7 +43,7 @@ var b = {
     height: 100,
     width: 100
 }
-var moveAmount = 20;
+var moveAmount = 5;
 
 // Check if collision happens on the x-axis (horizontal / CSS: left)
 if(a.left > b.left && a.left < (b.left + b.width)){
@@ -61,27 +61,68 @@ if(a.left > b.left && a.left < (b.left + b.width)){
 			data-readonly="false">
 			<textarea class="title" hidden><p>Collision on the X-axis</p></textarea>
 			<textarea class="js-editor-doc" hidden>
-var a = {
-    top: 0,
-    left: 0,
-    height: 100,
-    width: 100
+var myCharacter = {
+	top: 0,
+	left: 0,
+	height: 10,
+	width: 10
 }
-var b = {
-    top: 500,
-    left: 500,
-    height: 100,
-    width: 100
+var block = {
+	top: 50,
+	left: 50,
+	height: 50,
+	width: 50
 }
-var moveAmount = 20;
+
+var moveAmount = 5;
+var sandbox = document.getElementById('sandBoxSpace');
+sandbox.innerHTML = `
+	<div id="myCharacter" style="height: ${myCharacter.height}px; width: ${myCharacter.width}px; background-color: white; position: relative; top: 0; left: 0;"></div>
+	<div id="block" style="height: ${block.height}px; width: ${block.width}px; background-color: white; position: relative; top: ${block.top}px; left: ${block.left}px;"></div>
+`;
+
+var myCharacterDiv = document.getElementById('myCharacter');
+var blockDiv = document.getElementById('block');
+
+document.addEventListener('keydown', function(e){
+	if(e.key == 'ArrowUp'){
+		e.preventDefault();
+
+		myCharacter.top -= moveAmount;
+		myCharacterDiv.style.top = myCharacter.top + 'px';
+		console.log('up');
+		
+	}else if(e.key == 'ArrowDown'){
+		e.preventDefault();
+
+		myCharacter.top += moveAmount;
+		myCharacterDiv.style.top = myCharacter.top + 'px';
+		console.log('down');
+
+	}else if(e.key == 'ArrowRight'){
+		myCharacter.left += moveAmount;
+		myCharacterDiv.style.left = myCharacter.left + 'px';
+		console.log('right');
+		
+	}else if(e.key == 'ArrowLeft'){
+		myCharacter.left -= moveAmount;
+		myCharacterDiv.style.left = myCharacter.left + 'px';
+		console.log('left');
+		
+	}
+});
+
 
 // Check if collision happens on the x-axis (horizontal / CSS: left)
-if(a.left > b.left && a.left < (b.left + b.width)){
+if(myCharacter.left > block.left && myCharacter.left < (block.left + block.width)){
     console.log('there is collision on the x-axis');
 }
-
 			</textarea>
 		</div>
+	</div>
+
+	<h5>customBody</h5>
+	<div id="sandBoxSpace" style="width: 200px; height: 150px; border: 1px solid white;">
 	</div>
 
 

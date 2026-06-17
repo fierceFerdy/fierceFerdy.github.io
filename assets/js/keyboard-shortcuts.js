@@ -56,6 +56,7 @@ if(document.body.id === "keyboardShortcutsPage"){
         { keys: ["CTRL", "B"], 			description: "Toggle sidebar (in VSC)" },
         { keys: ["CTRL", "P"], 			description: "Navigate to file (in VSC)" },
         { keys: ["CTRL", "SHIFT", "P"], description: "Command palette (in VSC)" },
+        { keys: ["CTRL", "SHIFT", "SPACE"], description: "Trigger parameter hints (in VSC)" },
         { keys: ["CTRL", "SHIFT", "`"], description: "Terminal (in VSC)" },
         { keys: ["CTRL", "/"], 			description: "Toggle comment (in VSC)" },
         { keys: ["CTRL", "H"], 			description: "Find & replace (in VSC)" },

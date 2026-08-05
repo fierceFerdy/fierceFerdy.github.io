@@ -147,7 +147,8 @@ document.addEventListener("DOMContentLoaded", async function() {
 			<div class="dropdown">
 				<a class="nested" href="/pages/js/overview.html">Overview</a>
 				<a class="nested" href="/pages/js/about.html">About</a>
-				<a class="nested" href="/pages/js/finding-information.html">Finding information <small>(in progress)</small></a>
+				<a class="nested" href="/pages/js/finding-information.html">Finding information <small></small></a>
+				<a class="nested" href="/pages/js/ai.html">The elephant in the room <small></small></a>
 				<a class="nested" href="/pages/js/variables.html">Variables</a>
 				<a class="nested" href="/pages/js/datatypes.html">Datatypes</a>
 				<a class="nested" href="/pages/js/common-errors.html">Common Errors</a>
@@ -480,6 +481,31 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 
 
+
+	/**
+	* Rainbow wave effect on .rainbowWave elements!
+	*
+	* @version 05/08/2026
+	* @author Ferdy <ferdy.fiers@gmail.com>
+	*/
+	document.querySelectorAll(".rainbowWave").forEach(function (e){
+		var text = e.textContent;
+		e.innerHTML = "";
+
+		for (var i = 0; i < text.length; i++) {
+			var span = document.createElement("span");
+
+			span.textContent = text[i];
+			span.style.setProperty("--i", i);
+
+			if (text[i] == " ") span.innerHTML = "&nbsp;";
+
+			e.appendChild(span);
+		}
+	});
+
+
+
 	/**
 	* When clicking <txt> elements, copy their content to the clipboard and show a tooltip
 	*
@@ -532,6 +558,8 @@ document.addEventListener("DOMContentLoaded", async function() {
 		<p>&copy; Developed by Fiers Ferdy. This may only be used within the institution that is GO! Talent. <a href='http://fierceFerdy.github.io/license.txt' target='_blank' >Full license</a></p>
 	`;
 	document.body.querySelector('.content').appendChild(license);
+
+	
 
 	
 });

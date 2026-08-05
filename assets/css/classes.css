@@ -400,7 +400,6 @@ button{
 
 .rainbowWave span {
     display: inline-block;
-
     color: hsl(calc(var(--i) * 25deg), 100%, 50%);
 
     animation:
@@ -413,7 +412,6 @@ button{
 }
 
 @keyframes wave {
-
     0%,
     100% {
         transform: translateY(0);
@@ -425,11 +423,9 @@ button{
 }
 
 @keyframes rainbow {
-
     from {
         filter: hue-rotate(0deg);
     }
-
     to {
         filter: hue-rotate(360deg);
     }

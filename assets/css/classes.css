@@ -154,6 +154,12 @@ txt{
 	}
 }
 
+pre{
+	color: white;
+	tab-size: 15px;
+	margin: 1rem 0;
+}
+
 cmd, code{
 	background-color: var(--dark00);
 	color: white;
@@ -162,6 +168,7 @@ cmd, code{
 	position: relative;
 	user-select: none;
 	white-space: nowrap; /* maybe */
+    font-size: 1.6rem;
 
 	&:before{
 		content: "> ";

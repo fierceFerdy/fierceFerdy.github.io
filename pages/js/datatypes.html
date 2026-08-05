@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JS: Data - The manual.</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<script src="/assets/js/main.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+</head>
+
+<body>
+	
+
+
+<div class="content">
+	
+	<h1>JavaScript 101 <small>/data</small></h1>
+
+	<h2>Datatypes</h2>
+	<p>As we have learned, variables are a way of storing data using a programming language. You can save all sorts of data in these variables however, each with its own datatype. In most cases you don't have to tell the computer what type of data you're using, it figures it out for you. Let's have a look:</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="false" 
+			data-readonly="false">
+			<textarea class="title" hidden><p>JS Datatypes</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+// The most common ones we will use:
+var string = "This is a string"; // You can use both "double" and 'single' quotes
+var number = 42; // Don't use quotes for numbers, or else it will be a string
+var boolean = true; // or false
+var array = new Array('value1', 'value2', 3); // A collection of data
+var object3 = new Object({ name: "Alice", age: 30 }); // A collection of data, in a structured way
+
+// We won't CREATE these types of data, but it's REALLY IMPORTANT to know what these mean.
+var nullValue = null; // null is a special value that represents "no value" or "nothing". It's like an empty box but different than "", which is an empty string - and is actually something.
+var undefinedValue = undefined; // undefined is a special value that represents "not defined". It's like a box that hasn't been labeled yet. You might be talking about a box that hasn't been created yet.
+			</textarea>
+		</div>
+	</div>
+
+	<p>Let's talk a bit more about these so called 'collections' of data.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-full" 
+			data-run="false" 
+			data-readonly="false">
+			<textarea class="title" hidden><p>JS Datatypes - Collections</p></textarea>
+			<textarea class="js-editor-doc" hidden>
+
+var array = new Array(); // Empty array
+var array2 = []; // You can also use square brackets [] to create an array.
+var array3 = ['value1', 'value2', 3]; // Every value is separated by a comma. You can mix datatypes, but it's not recommended.
+
+var object = new Object(); // Empty object
+var object2 = {}; // You can also use curly braces {}. 
+var object3 = { name: "Alice", age: 30 }; // Assign properties (name, age, ..) and give those values 
+
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Naming conventions</h2>
+		<p>Now that we've started naming <i>things</i>, it's <strong>important</strong> to follow certain conventions<span class="tooltip"><span><strong>Convention:</strong> habits, practices, and rules for naming things in code</span></span> to make your code more readable and maintainable. Here are some globally accepted guidelines:</p>
+	<ul>
+		<li>Use <strong>camelCasing</strong>  (e.g., <cmd>myVariableName</cmd>) - easier to read than <cmd>myvariablename</cmd>.</li>
+		<li>Choose <em>descriptive</em> names that convey<span class="tooltip"><span><strong>Convey:</strong> communicate clearly</span></span> the purpose. The name should make it <em>very</em> clear what it is.</li>
+		<li>Avoid using special characters, such as: . , ; ' " ! @ # $ % ^ & * ( )</li>
+	</ul>
+	<p>By following these conventions, you can make your code easier to understand for yourself and others who may read it in the future.</p>
+
+
+	
+
+	<h2>Quizzing time!</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS Datatypes",
+			"questions": [
+				{
+					"question": "Which of these is a boolean?",
+					"options": [
+						"'true'",
+						"42",
+						"true",
+						"'yes'"
+					],
+					"answer": 2,
+					"explanation": "A boolean is either true or false without quotes."
+				},
+				{
+					"question": "What datatype is this? <code>var pets = ['cat', 'dog'];</code>",
+					"options": [
+						"Object",
+						"Array",
+						"String",
+						"Boolean"
+					],
+					"answer": 1,
+					"explanation": "Square brackets [] create an array."
+				},
+				{
+					"question": "What datatype is this? <code>var user = { name: 'Alice', age: 22 };</code>",
+					"options": [
+						"Array",
+						"Boolean",
+						"Object",
+						"String"
+					],
+					"answer": 2,
+					"explanation": "Curly braces {} with properties create an object."
+				},
+				{
+					"question": "Which variable name follows the naming conventions best?",
+					"options": [
+						"myvariablename",
+						"MY_VARIABLE",
+						"myVariableName",
+						"my-variable-name"
+					],
+					"answer": 2,
+					"explanation": "camelCasing is the preferred naming convention here."
+				},
+				{
+					"question": "What is the value of x after this code runs? <br><code>var x = 2; x = 5;</code>",
+					"options": [
+						"2",
+						"5",
+						"undefined",
+						"null"
+					],
+					"answer": 1,
+					"explanation": "The second assignment replaces the old value."
+				},
+				{
+					"question": "What does <code>null</code> mean?",
+					"options": [
+						"A variable that was never created",
+						"An empty or intentionally missing value",
+						"A number equal to zero",
+						"A broken variable"
+					],
+					"answer": 1,
+					"explanation": "null represents an intentional empty value."
+				},
+				{
+					"question": "What does <code>undefined</code> usually mean?",
+					"options": [
+						"The variable has no value assigned yet",
+						"The variable contains 0",
+						"The variable is broken",
+						"The variable is a string"
+					],
+					"answer": 0,
+					"explanation": "undefined usually means something exists but has not been given a value yet."
+				},
+				{
+					"question": "What will this log? <code>var score = 10; console.log(score);</code>",
+					"options": [
+						"score",
+						"10",
+						"undefined",
+						"null"
+					],
+					"answer": 1,
+					"explanation": "console.log(score) shows the value stored in the variable."
+				},
+				{
+					"question": "Why are descriptive variable names important?",
+					"options": [
+						"They make JavaScript run faster",
+						"They make code easier to understand",
+						"They reduce file size",
+						"They prevent bugs automatically"
+					],
+					"answer": 1,
+					"explanation": "Good names make code easier to read for yourself and others."
+				}
+			]
+		}
+		</script>
+	</div>
+
+
+	<h2>Assignments</h2>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="1b" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<ul>
+					<li>Create a variable for each of the different datatypes (7).</li>
+					<li>Make sure you 'describe' them correctly.</li>
+					<li>Finally, show one of them in the console.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="1c" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<ul>
+					<li>Create a variable for each of two made up numbers.</li>
+					<li>Add them together.</li>
+					<li>Finally, show the result in the console.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="1d" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="true"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<ul>
+					<li>Save your name, age and favorite color.</li>
+					<li>Now do the same for your neighbour.</li>
+					<li>Is this the best way to save this data? If so, submit.</li>
+				</ul>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+
+	<a href="/pages/js/common-errors.html" class="nextPageTeaser">Next: Common errors <i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
+
+</body>
+</html>

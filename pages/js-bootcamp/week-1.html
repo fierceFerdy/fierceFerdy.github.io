@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JavaScript Summer Bootcamp - Introduction & Week 1</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<script src="/assets/js/main.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+	<script type="module" src="/assets/js/test-form.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+</head>
+
+<body>
+
+
+	
+<div class="content">
+
+	<h1>Week 1 - Thinking Like a Programmer</h1>
+	<img src="/assets/img/memes/think-programmer.jpg" alt="Thinking like a programmer" class="imgCenter" style="max-width: 400px; float: right;">
+	<p>This week is mostly about understanding code. You will not immediately write large programs. <br>First, you need to learn how to predict what code does.</p>
+	
+	
+
+	<h3>Topics</h3>
+	<ul>
+		<li>variables</li>
+		<li>changing values</li>
+		<li><code>console.log()</code></li>
+		<li>comparisons</li>
+		<li>conditions: <code>if</code>, <code>else if</code> and <code>else</code></li>
+		<li>finding bugs</li>
+	</ul>
+
+	<h3>Goals</h3>
+	<p>By the end of this 'week', you can:</p>
+	<ul>
+		<li>explain step by step what a program does</li>
+		<li>predict the output of simple code</li>
+		<li>recognise and fix mistakes</li>
+		<li>write a small program with conditions</li>
+	</ul>
+
+
+
+	<h2>Exercise 1 - Become the Computer</h2>
+
+	<ul>
+		<li>Read each code fragment, then fill in the expected output</li>
+		<li>You can "check" your answers at any time (click either the button or <kbd>Enter</kbd>).</li>
+		<li>Don't execute the code before finishing all the answers.</li>
+	</ul>
+
+	<p class="hint">Hint: Use <kbd>Tab</kbd> to quickly navigate between fields.</p>
+
+	<form action="" class="test-form gridCorrector">
+		<input type="hidden" name="exercise" value="1">
+		
+		<fieldset class="w-1/2">
+			<legend>Part 1</legend>
+			<div class="formField">
+				<label for="answer-1-1" class="code"><code>var x = 4;</code> x = </label>
+				<input type="text" name="answer-1-1" id="answer-1-1" autocomplete="off">
+			</div>
+			
+			<div class="formField">
+				<label for="answer-1-2" class="code"><code>var y = x;</code> y = </label>
+				<input type="text" name="answer-1-2" id="answer-1-2" autocomplete="off">
+			</div>
+			
+			<div class="formField">
+				<label for="answer-1-3" class="code"><code>x = 10;</code> x = </label>
+				<input type="text" name="answer-1-3" id="answer-1-3" autocomplete="off">
+			</div>
+
+			<div class="formField">
+				<label for="answer-1-4" class="code"><code>console.log(y);</code> console = </label>
+				<input type="text" name="answer-1-4" id="answer-1-4" autocomplete="off">
+			</div>
+		</fieldset>
+		
+		<fieldset class="w-1/2">
+			<legend>Part 2</legend>
+			<div class="formField">
+				<label for="answer-1-5" class="code"><code>var price = 20;</code> price = </label>
+				<input type="text" name="answer-1-5" id="answer-1-5" autocomplete="off">
+			</div>
+			
+			<div class="formField">
+				<label for="answer-1-6" class="code"><code>price = price + 5;</code> price = </label>
+				<input type="text" name="answer-1-6" id="answer-1-6" autocomplete="off">
+			</div>
+			
+			<div class="formField">
+				<label for="answer-1-7" class="code"><code>price = price - 3;</code> price = </label>
+				<input type="text" name="answer-1-7" id="answer-1-7" autocomplete="off">
+			</div>
+
+			<div class="formField">
+				<label for="answer-1-8" class="code"><code>console.log(price);</code> console = </label>
+				<input type="text" name="answer-1-8" id="answer-1-8" autocomplete="off">
+			</div>
+		</fieldset>
+		
+		<fieldset class="w-1/2">
+			<legend>Part 3</legend>
+			<div class="formField">
+				<label for="answer-1-9" class="code"><code>var life = 10;</code> life = </label>
+				<input type="text" name="answer-1-9" id="answer-1-9" autocomplete="off">
+			</div>
+			
+			<div class="formField">
+				<label for="answer-1-10" class="code"><code>var damage = 2;</code> damage = </label>
+				<input type="text" name="answer-1-10" id="answer-1-10" autocomplete="off">
+			</div>
+			
+			<div class="formField">
+				<label for="answer-1-11" class="code"><code>life = life - damage;</code> life = </label>
+				<input type="text" name="answer-1-11" id="answer-1-11" autocomplete="off">
+			</div>
+			
+			<div class="formField">
+				<label for="answer-1-12" class="code"><code>life -= damage;</code> life = </label>
+				<input type="text" name="answer-1-12" id="answer-1-12" autocomplete="off">
+			</div>
+
+			<div class="formField">
+				<label for="answer-1-13" class="code"><code>console.log(damage);</code> console = </label>
+				<input type="text" name="answer-1-13" id="answer-1-13" autocomplete="off">
+			</div>
+		</fieldset>
+		
+		<fieldset class="w-1/2">
+			<legend>Part 4</legend>
+			<div class="formField">
+				<label for="answer-1-14" class="code"><code>var name = "Lina";</code> name = </label>
+				<input type="text" name="answer-1-14" id="answer-1-14" autocomplete="off">
+			</div>
+			
+			<div class="formField">
+				<label for="answer-1-15" class="code"><code>name = "Amir";</code> name = </label>
+				<input type="text" name="answer-1-15" id="answer-1-15" autocomplete="off">
+			</div>
+			
+			<div class="formField">
+				<label for="answer-1-16" class="code"><code>var name2 = "Verbeke";</code> name2 = </label>
+				<input type="text" name="answer-1-16" id="answer-1-16" autocomplete="off">
+			</div>
+			
+			<div class="formField">
+				<label for="answer-1-17" class="code"><code>name = name + name2;</code> name = </label>
+				<input type="text" name="answer-1-17" id="answer-1-17" autocomplete="off">
+			</div>
+		</fieldset>
+
+		<input type="submit" value="Check">
+
+		<script type="application/json" class="form-data">{
+			"name": "1",
+			"answers": {
+				"1": "4",
+				"2": "4",
+				"3": "10",
+				"4": "4",
+				"5": "20",
+				"6": "25",
+				"7": "22",
+				"8": "22",
+				"9": "10",
+				"10": "2",
+				"11": "8",
+				"12": "6",
+				"13": "2",
+				"14": "Amir",
+				"15": "Amir",
+				"16": "Verbeke",
+				"17": "AmirVerbeke"
+			}
+		}</script>
+	</form>
+
+
+
+	<h2>Exercise 2 - Predict the Output</h2>
+	<p>First write down what will appear in the console. Then you may test it.</p>
+
+	<form action="" class="test-form gridCorrector">
+		<input type="hidden" name="exercise" value="1">
+
+		<fieldset class="w-1/2">
+			<legend>Prediction 1</legend>
+			<div class="formField">
+				<label for="answer-2-1" class="code"><editorlite>var number = 5;
+if (number > 10) {
+	console.log("Large");
+} else {
+	console.log("Small");
+}
+				</editorlite> console = </label>
+				<input type="text" name="answer-2-1" id="answer-2-1" autocomplete="off">
+			</div>
+		</fieldset>
+		
+		<fieldset class="w-1/2">
+			<legend>Prediction 2</legend>
+			<div class="formField">
+				<label for="answer-2-2" class="code"><editorlite>var age = 18;
+
+if (age >= 18) {
+	console.log("Adult");
+}
+
+console.log("Done");
+				</editorlite> console = </label>
+				<input type="text" name="answer-2-2" id="answer-2-2" autocomplete="off">
+			</div>
+		</fieldset>
+
+		<fieldset class="w-1/2">
+			<legend>Prediction 3</legend>
+			
+			<div class="formField">
+				<label for="answer-2-3" class="code"><editorlite>var score = 72;
+
+if (score >= 80) {
+	console.log("Great");
+} else if (score >= 50) {
+	console.log("Passed");
+} else {
+	console.log("Failed");
+}
+				</editorlite> console = </label>
+				<input type="text" name="answer-2-3" id="answer-2-3" autocomplete="off">
+			</div>
+		</fieldset>
+
+		<fieldset class="w-1/2">
+			<legend>Prediction 4</legend>
+
+			<div class="formField">
+				<label for="answer-2-4" class="code"><editorlite>var temperature = 12;
+
+if (temperature < 0) {
+	console.log("Freezing");
+} else if (temperature < 15) {
+	console.log("Cold");
+} else if (temperature < 25) {
+	console.log("Warm");
+} else {
+	console.log("Hot");
+}
+				</editorlite> console = </label>
+				<input type="text" name="answer-2-4" id="answer-2-4" autocomplete="off">
+			</div>
+		</fieldset>
+
+		<fieldset class="w-1/2">
+			<legend>Prediction 5</legend>
+
+			<div class="formField">
+				<label for="answer-2-5" class="code"><editorlite>var password = "Hunter2";
+
+if (password === "hunter2") {
+	console.log("Access granted");
+} else {
+	console.log("Access denied");
+}
+				</editorlite> console = </label>
+				<input type="text" name="answer-2-5" id="answer-2-5" autocomplete="off">
+			</div>
+		</fieldset>
+
+		<input type="submit" value="Check">
+
+		<script type="application/json" class="form-data">{
+			"name": "1",
+			"answers": {
+				"1": "Small",
+				"2": "AdultDone",
+				"3": "Passed",
+				"4": "Cold",
+				"5": "Access denied"
+			}
+		}</script>
+	</form>
+
+
+	<details>
+		<summary>Hint</summary>
+
+		<p>
+			In an <code>if</code> / <code>else if</code> / <code>else</code> structure, only the first true block runs.
+		</p>
+	</details>
+
+	<h2>Exercise 3 - Find the Bug</h2>
+
+	<p>
+		Each program contains at least one mistake. For each one, write down:
+	</p>
+
+	<ul>
+		<li>what the mistake is</li>
+		<li>why it is wrong</li>
+		<li>how to fix it</li>
+	</ul>
+
+	<h3>Bug 1</h3>
+
+	<pre><code class="language-javascript">var age = 18;
+
+if (age = 18) {
+console.log("Adult");
+}</code></pre>
+
+	<h3>Bug 2</h3>
+
+	<pre><code class="language-javascript">var score = 45;
+
+if (score >= 50) {
+console.log("Passed");
+else {
+console.log("Failed");
+}</code></pre>
+
+	<h3>Bug 3</h3>
+
+	<pre><code class="language-javascript">var username = "ferdy";
+
+if (userName == "ferdy") {
+console.log("Welcome");
+}</code></pre>
+
+	<h3>Bug 4</h3>
+
+	<pre><code class="language-javascript">var number = 7;
+
+if (number > 10) {
+console.log("Big");
+} else if (number < 10) {
+console.log("Small");
+} else if (number == 7) {
+console.log("Seven");
+}</code></pre>
+
+	<h3>Bug 5</h3>
+
+	<pre><code class="language-javascript">var isStudent = "yes";
+
+if (isStudent == yes) {
+console.log("Student price");
+}</code></pre>
+
+	<p class="hint">Hint: Pay close attention to capital letters, brackets, strings and the difference between <code>=</code> and <code>==</code>.</p>
+
+	<h2>Exercise 4 - Change Existing Code</h2>
+
+	<p>You get working code. Change it step by step. Test after every small change.</p>
+
+
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-task-number="4" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			>
+			<textarea class="title" hidden>
+				<ol>
+					<li>Change the minimum for warm to 25 degrees.</li>
+					<li>Add the message <code>"Hot"</code> from 30 degrees.</li>
+					<li>Add the message <code>"Freezing"</code> below 0 degrees.</li>
+					<li>Test with <code>-5</code>, <code>10</code>, <code>26</code> and <code>35</code>.</li>
+				</ol>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var temperature = 24;
+
+if (temperature >= 20) {
+	console.log("Warm");
+} else {
+	console.log("Cold");
+}
+			</textarea>
+		</div>
+	</div>
+
+	<h3>Same thing, now with scores</h3>
+	<p class="hint">Hint: start with the most specific or most exceptional cases.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor" 
+			data-run="true" 
+			data-task-number="4b" 
+			data-task-docs="true"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			>
+			<textarea class="title" hidden>
+				<ol>
+					<li>Add <code>"Great"</code> from 80.</li>
+					<li>Add <code>"Perfect"</code> when the score is 100.</li>
+					<li>Make sure a score below 0 or above 100 shows <code>"Invalid score"</code>.</li>
+				</ol>
+			</textarea>
+			<textarea class="js-editor-doc" hidden>
+var score = 62;
+
+if (score >= 50) {
+	console.log("Passed");
+} else {
+	console.log("Failed");
+}
+			</textarea>
+		</div>
+	</div>
+
+	<h2>Exercise 5 - Write Your First Programs</h2>
+
+	<p>
+		Now you write small programs yourself. Fill in the analysis before each task.
+	</p>
+
+	<h3>Program 1 - Age</h3>
+
+	<p>
+		Create a variable <code>age</code>. Show:
+	</p>
+
+	<ul>
+		<li><code>"Child"</code> if the age is lower than 12</li>
+		<li><code>"Teenager"</code> if the age is lower than 18</li>
+		<li><code>"Adult"</code> if the age is lower than 65</li>
+		<li><code>"Senior"</code> from 65</li>
+	</ul>
+
+	<h3>Program 2 - Two Numbers</h3>
+
+	<p>
+		Create two variables: <code>numberOne</code> and <code>numberTwo</code>.
+		Show which number is the largest. If they are equal, show <code>"Equal"</code>.
+	</p>
+
+	<h3>Program 3 - Score</h3>
+
+	<p>
+		Create a variable <code>score</code>. Show:
+	</p>
+
+	<ul>
+		<li><code>"Invalid score"</code> if the score is lower than 0 or higher than 100</li>
+		<li><code>"Failed"</code> if the score is lower than 50</li>
+		<li><code>"Passed"</code> if the score is lower than 70</li>
+		<li><code>"Good"</code> if the score is lower than 85</li>
+		<li><code>"Excellent"</code> from 85</li>
+	</ul>
+
+	<details>
+		<summary>Hint</summary>
+
+		<p>
+			Use <code>else if</code>. Check your conditions in the correct order.
+		</p>
+	</details>
+
+	<h2>Mini-challenge - Cinema Ticket</h2>
+
+	<p>
+		Create a program that calculates the price of a cinema ticket.
+	</p>
+
+	<h3>Data</h3>
+
+	<p>
+		Your program uses these variables:
+	</p>
+
+	<pre><code class="language-javascript">var age = 16;
+var isStudent = "yes";
+var price = 0;</code></pre>
+
+	<h3>Rules</h3>
+
+	<ul>
+		<li>Children younger than 12 pay €8.</li>
+		<li>Students pay €10.</li>
+		<li>Adults pay €14.</li>
+		<li>Seniors from 65 pay €9.</li>
+	</ul>
+
+	<p>
+		Then show:
+	</p>
+
+	<pre><code>Ticket price: €10</code></pre>
+
+	<h3>Required</h3>
+
+	<ul>
+		<li>Use <code>if</code>, <code>else if</code> and <code>else</code>.</li>
+		<li>Use a variable called <code>price</code>.</li>
+		<li>Test with at least five different ages.</li>
+		<li>Test at least one student and one non-student.</li>
+	</ul>
+
+	<details>
+		<summary>Hint 1</summary>
+
+		<p>
+			First decide the price. Only show the message at the very end.
+		</p>
+	</details>
+
+	<details>
+		<summary>Hint 2</summary>
+
+		<p>
+			Some rules are more important than others. A child who is also a student should still get the child price.
+		</p>
+	</details>
+
+	<details>
+		<summary>Hint 3</summary>
+
+		<pre><code class="language-javascript">if (...) {
+price = ...;
+} else if (...) {
+price = ...;
+} else if (...) {
+price = ...;
+} else {
+price = ...;
+}
+
+console.log("Ticket price: €" + price);</code></pre>
+	</details>
+
+	<h2>Week 1 Reflection</h2>
+
+	<p>
+		Answer these questions after the mini-challenge.
+	</p>
+
+	<ol>
+		<li>Which exercise went the smoothest?</li>
+		<li>Which exercise was the hardest?</li>
+		<li>Which mistake did you make that you now understand better?</li>
+		<li>Did you think first, or did you still start typing immediately?</li>
+		<li>What would you do differently if you had to make the mini-challenge again?</li>
+	</ol>
+
+	<h2>Checklist</h2>
+
+	<p>
+		Before submitting week 1, check this:
+	</p>
+
+	<ul>
+		<li>I completed every exercise.</li>
+		<li>I filled in my analyses.</li>
+		<li>I tested my code with multiple values.</li>
+		<li>My code uses <code>var</code>.</li>
+		<li>My code is readable and has spaces around operators.</li>
+		<li>I understand why my programs work.</li>
+	</ul>
+
+</div>
+
+
+
+</body>
+</html>

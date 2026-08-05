@@ -148,7 +148,8 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js/overview.html">Overview</a>
 				<a class="nested" href="/pages/js/about.html">About</a>
 				<a class="nested" href="/pages/js/finding-information.html">Finding information <small>(in progress)</small></a>
-				<a class="nested" href="/pages/js/data.html">Data</a>
+				<a class="nested" href="/pages/js/variables.html">Variables</a>
+				<a class="nested" href="/pages/js/datatypes.html">Datatypes</a>
 				<a class="nested" href="/pages/js/common-errors.html">Common Errors</a>
 				<a class="nested" href="/pages/js/math.html">Math</a>
 				<a class="nested" href="/pages/js/loops.html">Loops</a>
@@ -181,6 +182,15 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/js-advanced/async-await.html">6BINF: Async/await</a>
 				<a class="nested" href="/pages/js-advanced/neutralino.html">6BINF: Neutralino</a>
 				<a class="nested" href="/pages/js-advanced/websockets-api.html">6BINF: Websockets & APIs</a>
+			</div>
+		</div>
+
+		<div class="dropdownWrapper">
+			<a class="navParent" href="#">JS Summer Bootcamp</a>
+
+			<div class="dropdown">
+				<a class="nested" href="/pages/js-bootcamp/overview.html">Overview</a>
+				<a class="nested" href="/pages/js-bootcamp/week-1.html">Week 1</a>
 			</div>
 		</div>
 

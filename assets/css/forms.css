@@ -6,3 +6,53 @@ input{
 		outline: none;
 	}
 }
+
+
+
+.test-form{
+	position: relative;
+	margin-top: 2rem;
+
+	fieldset{
+
+	}
+
+	legend{
+		font-size: 2rem;
+		color: white;
+		font-weight: var(--bold);
+		margin-bottom: 1rem;
+	}
+
+	.formField{
+		display: block;
+		margin-bottom: 1rem;
+	}
+
+	label{
+		font-size: 1.6rem;
+		color: white;
+		line-height: 24px;
+
+		code{
+			display: inline-block;
+			line-height: 1em;
+			margin-right: 1rem;
+		}
+	}
+
+	input[type="text"]{
+		background-color: var(--dark3);
+		border: 1px solid transparent;
+		color: white;
+		padding: .4rem .8rem .4rem;
+		margin-left: 1rem;
+
+		&.correct{
+			border: 1px solid var(--lime);
+		}
+		&.incorrect{
+			border: 1px solid var(--red);
+		}
+	}
+}

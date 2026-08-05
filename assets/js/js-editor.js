@@ -96,15 +96,12 @@ function createLiteEditor(container) {
     container.dataset.editorliteInit = 'true';
 
     var language = getEditorLanguage(container);
-    var liteExtensions = getEditorExtensions(language, true);
     var content = normalizeEditorSource(container.textContent, language);
     container.innerHTML = '';
 
-    var view = new EditorView({
-        doc: content,
-        extensions: liteExtensions,
-        parent: container
-    });
+    var view = createCodeMirrorEditor(container, content, getEditorExtensions(language, true));
+
+    applyEditorSelectionStyles(view);
 
     return view;
 }
@@ -127,11 +124,9 @@ function createEditor(container) {
     var editorHost = document.createElement("div");
     container.appendChild(editorHost);
 
-    var view = new EditorView({
-        doc: getInitialDoc(container),
-		extensions: editorExtensions,
-        parent: editorHost
-    });
+    var view = createCodeMirrorEditor(editorHost, getInitialDoc(container), editorExtensions);
+
+    applyEditorSelectionStyles(view);
 
 
 
@@ -317,11 +312,13 @@ function renderSolutionEditor(container, editorHost, solutionCode) {
 
     editorHost.after(solutionView);
 
-    new EditorView({
+    var solutionViewInstance = new EditorView({
         doc: solutionCode,
 		extensions: getEditorExtensions(language, true),
         parent: solutionHost
     });
+
+    applyEditorSelectionStyles(solutionViewInstance);
 }
 
 
@@ -431,6 +428,14 @@ function getEditorLanguage(container) {
 
 
 
+function createCodeMirrorEditor(host, initialDoc, extensions) {
+    return new EditorView({
+        doc: initialDoc,
+        extensions: extensions,
+        parent: host
+    });
+}
+
 function getEditorExtensions(language, isReadOnly = false) {
 	var languageExtension = language === "html"
 		? html()
@@ -441,13 +446,41 @@ function getEditorExtensions(language, isReadOnly = false) {
 		: [autocompletion({override: [globalCompletions]})];
 
 	var readOnlyExtensions = isReadOnly ? [EditorState.readOnly.of(true)] : [];
+	var baseEditorExtensions = language === "html"
+		? [
+			oneDark,
+			EditorView.lineWrapping,
+			keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab])
+		]
+		: baseExtensions;
 
 	return [
-		...baseExtensions,
+		...baseEditorExtensions,
 		languageExtension,
 		...completionExtensions,
 		...readOnlyExtensions
 	];
+}
+
+function applyEditorSelectionStyles(view) {
+	if (!view?.dom) return;
+
+	view.dom.style.fontFamily = "Inconsolata, monospace";
+	view.dom.style.fontSize = "1.3rem";
+	view.dom.style.backgroundColor = "#282c34";
+	view.dom.style.color = "#f8f8f2";
+
+	var targets = view.dom.querySelectorAll?.(".cm-content, .cm-line, .cm-scroller, .cm-selectionLayer");
+	if (!targets) return;
+
+	targets.forEach((element) => {
+		element.style.setProperty("white-space", "pre", "important");
+		element.style.setProperty("user-select", "text", "important");
+		element.style.setProperty("-webkit-user-select", "text", "important");
+		element.style.setProperty("word-break", "normal", "important");
+		element.style.setProperty("overflow-wrap", "normal", "important");
+		element.style.setProperty("line-height", "1.5", "important");
+	});
 }
 
 

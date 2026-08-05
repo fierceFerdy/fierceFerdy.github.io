@@ -8,6 +8,7 @@
 
 .content {
 	font-size: 0;
+	overflow-x: clip;
 }
 
 #wrapper {

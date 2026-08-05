@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JS: Data - The manual.</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+	<script src="/assets/js/main.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+</head>
+
+<body>
+	
+
+
+<div class="content">
+	
+	<h1>JavaScript 101 <small>/data</small></h1>
+
+	<p>When working with JavaScript, the console is just as important as the editor. It allows you to see the output of your code, debug errors, and interact with your program in real-time. The console is your friend, don't forget that.</p>
+
+	<ul>
+		<li>As a first exercise, log something in the console: <cmd>console.log("Hello, world!");</cmd></li>
+		<li>Press <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>enter</kbd> to run your code.</li>
+	</ul>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-title=""
+			data-run="true" 
+			data-store="true" 
+			data-readonly="false" 
+			data-height="150">
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+	<h2>Variables</h2>
+	<img src="/assets/img/variableBox.png" alt="" style="width: 300px; float: right;">
+	<p>Variables are like boxes for storing data. You slap a big label on them to know what's inside and that's that.</p>
+
+	<p>Variables allow you to give a name to a value and use that name to refer to the value later in your code. In JavaScript, you can declare a variable using the "var", "let" and "const" keywords. But, during this course we will only use <cmd>var</cmd> in order to keep it easier.</p>
+	<p>You create a variable like so: <cmd>var myNum = 2;</cmd>. If you then want to either read or change the content of the variable you can just type the name, without writing 'var' again, like so: <cmd>myNum = 5;</cmd>.</p>
+
+	<p>Now, <em>try</em> to make a variable and then read it out in the console:</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-store="true" 
+			data-readonly="false" 
+			data-height="150">
+			<textarea class="title" hidden>
+				<p>Make a variable and log it in the console</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+
+
+	<h2>Time for a tiny quiz</h2>
+
+	<div class="quiz" id="#quiz">
+		<script type="application/json" class="quiz-data">
+		{
+			"name": "JS Variables",
+			"questions": [
+				{
+					"question": "How do you show a message in the console?",
+					"options": [
+						"print('hi there...')",
+						"console.log('excuse me what the-')",
+						"terminal.print('now what is go-')",
+						"echo('ok this is just g-')"
+					],
+					"answer": 1,
+					"explanation": "You first tell the console to do something. And that something is to log() a message. So you write console.log('your message here');"
+				},
+				{
+					"question": "What is a variable?",
+					"options": [
+						"A container for storing data",
+						"Data when you don't know what it is yet",
+						"It depends"
+					],
+					"answer": 0,
+					"explanation": "A variable is a container for storing data. You can put any type of data in a variable, and you can change the value of a variable at any time."
+				},
+				{
+					"question": "How do you save a string in a variable?",
+					"options": [
+						"var myString = 'Hello, world!';",
+						"let myString(Hello, world!);",
+						"const myString: 'Hello, world!';"
+					],
+					"answer": 0,
+					"explanation": "We will declare a variable using the var keyword, followed by the name of the variable, the assignment operator, and then the value we want to store in the variable. So it looks like this: var myString = 'Hello, world!';"
+				},
+				{
+					"question": "How do you change the value of an existing variable?",
+					"options": [
+						"x = 3;",
+						"var x = 3;",
+						"x:3;"
+					],
+					"answer": 0,
+					"explanation": "You just write the name of the variable, then the assignment operator and lastly the new value. <cmd>x = 3;</cmd>"
+				},
+				{
+					"question": "How do you structure your variable names?",
+					"options": [
+						"Use lowercase: myvariablename",
+						"Use snake_case: my_variable_name",
+						"Use PascalCase: MyVariableName",
+						"Use camelCasing: myVariableName"
+					],
+					"answer": 3,
+					"explanation": "We use camelCasing for variable names to make them easier to read. For example, myVariableName is easier to read than myvariablename."
+				}
+			]
+		}
+		</script>
+	</div>
+
+
+	<h2>Assignments</h2>
+	<p>Now and then you will get some assignments which will <em>really</em> test your knowledge. Sometimes these assignments will forbid you from peeking at the documentation. This is a real test after all!</p>
+	<p>Don't start the assignment before you're ready to give it your full attention as time will be recorded in order to assess your knowledge. Don't rush though, no points are awarded based on completion time.</p>
+	<p class="hint">When you complete an assignment, make sure to submit it by pressing the "Finish assignment" button. Then, <strong>ask the teacher for feedback</strong>.</p>
+
+	<div class="gridCorrector editorWrapper">
+		<div class="js-editor w-3/5" 
+			data-run="true" 
+			data-task-number="1a" 
+			data-task-docs="false"
+			data-task-internet="false"
+			data-task-team="false"
+			data-task-questions="true"
+			data-readonly="false" 
+			data-height="200">
+			<textarea class="title" hidden>
+				<p>Make a variable that contains your name. Then show it in the console.</p>
+			</textarea>
+			<textarea class="js-editor-doc" hidden></textarea>
+		</div>
+	</div>
+
+
+	<a href="/pages/js/datatypes.html" class="nextPageTeaser">Next: Datatypes <i class="fa-solid fa-arrow-right-long"></i></a>
+</div>
+
+
+
+</body>
+</html>

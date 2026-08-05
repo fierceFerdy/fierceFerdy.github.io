@@ -78,13 +78,60 @@
 	font-family: Inconsolata, monospace;
 	position: relative;
 	background-color: #282c34;
-	display: table;
-	/* padding-bottom: 31px; */
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
 	background-color: #3e474f;
+
+	.plain-text-editor{
+		width: 100%;
+		min-height: 240px;
+		background-color: #282c34;
+		color: #f8f8f2;
+		font-family: Inconsolata, monospace;
+		font-size: 1.3rem;
+		border: none;
+		padding: 1rem;
+		line-height: 1.5;
+		white-space: pre;
+		resize: vertical;
+		overflow: auto;
+		tab-size: 4;
+		caret-color: var(--accent);
+		-moz-tab-size: 4;
+	}
+
+	.plain-text-editor:focus{
+		outline: none;
+	}
 
 	.cm-editor{
 		height: 100%;
+		display: block;
+		width: 100%;
 		/* overflow-y: scroll; */
+	}
+
+	.cm-content,
+	.cm-line,
+	.cm-scroller,
+	.cm-lineWrapping,
+	.cm-selectionLayer{
+		white-space: pre-wrap !important;
+		word-break: normal;
+		overflow-wrap: anywhere;
+		-webkit-user-select: text;
+		user-select: text;
+	}
+
+	.cm-content{
+		display: block;
+		line-height: 1.5;
+	}
+
+	.cm-line{
+		display: block;
+		line-height: 1.5;
 	}
 
 	.cm-line{

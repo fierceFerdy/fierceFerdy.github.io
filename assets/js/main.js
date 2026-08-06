@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/intro/overview.html">Overview</a>
 				<a class="nested" href="/pages/intro/klasregels.html">Klasregels</a>
 				<a class="nested" href="/pages/intro/initial-configuration.html">Initial configuration</a>
-				<a class="nested" href="/pages/intro/typing-lessons.html">Typing lessons</a>
+				<a class="nested" href="/pages/intro/typing-lessons.html">BINF: Typing lessons</a>
 				<a class="nested" href="/pages/intro/keyboard-shortcuts.html">Keyboard Shortcuts</a>
 				<a class="nested" href="/pages/intro/productivity.html">Productivity</a>
 				<a class="nested" href="/pages/intro/dev-tools.html">Dev tools</a>

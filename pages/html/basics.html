@@ -1,16 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>The manual.</title>
 	<link rel="stylesheet" href="/assets/css/style.css">
+	
 	<script src="/assets/js/main.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+	<script type="module"  src="/assets/js/js-editor.js" defer></script>
+	<script type="module"  src="/assets/js/js-editor.js" defer></script>
 </head>
+
 <body>
 
 	<div class="content">
-		bestanden inladen gebruik van / aan begin of ../ of ./
+		<h1>HTML 101</h1>
+		<p>The practical part of today includes an exercise on taking notes. It is therefore strongly recommended that you <strong>take notes</strong>. This is preparation for your further studies and career. If you don't take notes, I assume you can remember everything.</p>
+
+		<h2>Basic structure</h2>
+		<p>This structure forms the basis of <strong>every HTML document</strong>.</p>
+
+
+
+		<div class="gridCorrector editorWrapper">
+			<div class="js-editor w-8/12" data-run="false" data-edit="true" data-language="html" >
+				<textarea class="title" hidden><p>Basic structure</p></textarea>
+				<textarea class="js-editor-doc" hidden>
+<!DOCTYPE html>
+<fakehtml lang="en"> <!-- Every element/tag you open, you must close. There are a few exceptions though. -->
+
+	<fakehead> <!-- Things in the head are not visible to other humans -->
+		<title>Page title</title> <!-- Visible in the browser tab --> 
+		<!-- Here comes document information that's mostly useful for machines -->
+		<!-- Here you load in different filetypes such as CSS and JS -->
+	</fakehead>
+
+	<fakebody> <!-- The way the body looks... That's what humans see -->
+		<!-- This is where you put your content -->
+	</fakebody>
+
+</fakehtml>
+				</textarea>
+			</div>
+
+
+
+			<div class="js-editor w-4/12" data-run="false"data-edit="true" data-language="html" >
+				<textarea class="title" hidden><p>Basic structure (no comment)</p></textarea>
+				<textarea class="js-editor-doc" hidden>
+<!-- Note that tags that are inside of eachother are indented using the tab-key -->
+<!DOCTYPE html>
+<fakehtml lang="en"> 
+
+	<fakehead> 
+		<title>Page title</title>
+	</fakehead>
+
+	<fakebody>
+	</fakebody>
+
+</fakehtml>
+				</textarea>
+			</div>
+
+
+
+		</div>
+
+
+
+		<!-- Oefening: haakjes invullen, closing tag, html, body en head tags invullen -->
+
+		<div class="quiz" id="quiz">
+			<script type="application/json" class="quiz-data">{
+				"name": "HTML Basics Quiz",
+				"blur": true,
+				"questions": [
+					{
+						"question": "What 3 basic structure tags does a html document need? (in order) _html/<html>_, _head/<head>_ and _body/<body>_."
+					},
+					{
+						"question": "Fill in the gap: _<html>_"
+					},
+					{
+						"question": "Complete: _<ul>_ ... _</ul>_"
+					}
+				]
+			}</script>
+		</div>
+
+		<div class="gridCorrector editorWrapper">
+			<div class="js-editor" 
+				data-run="false" 
+				data-task-number="html-1" 
+				data-task-docs="false"
+				data-task-internet="false"
+				data-task-team="false"
+				data-task-questions="true"
+				data-height="340"
+				>
+				<textarea class="title" hidden>
+					<p>Tiny test: Create the basis structure of a HTML document. A few hints:</p>
+					<ul>
+						<li>What are we creating?</li>
+						<li>What can we as humans not see?</li>
+						<li>What can we see?</li>
+						<li>You must always open and ...?</li>
+					</ul>
+				</textarea>
+				<textarea class="js-editor-doc" hidden>
+
+				</textarea>
+			</div>
+		</div>
+
+
+		<h2>Basic elements/tags</h2>
+
+		<div class="gridCorrector editorWrapper">
+			<div class="js-editor w-12/12" data-run="false"data-edit="true" data-language="html" >
+				<textarea class="title" hidden><p>Basic structure (no comment)</p></textarea>
+				<textarea class="js-editor-doc" hidden>
+<h1>Heading - also known as a title</h1>
+<h2>Subheading</h2> <!-- This goes all the way to <h6> -->
+<p>Paragraph. All text must go in a text element such as <h1> or <p></p>
+<a>Anchor - use this to link to another page. This is how you make a button!</a>
+
+<!-- Two exceptions: -->
+<br> <!-- Line break / "enter" -->
+<hr> <!-- Horizontal line -->
+
+<!-- And as you might have noticed, this is a comment. You can write whatever and the browser will ignore it. Stupid Google! -->
+				</textarea>
+			</div>
+		</div>
+		
+
+		<a href="/pages/html/basics.html" class="nextPageTeaser">Next: HTML Basics <i class="fa-solid fa-arrow-right-long"></i></a>
 	</div>
 
 </body>

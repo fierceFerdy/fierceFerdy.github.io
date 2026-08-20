@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 	});  
 	
 
+
 	/**
 	* Add navigation to the beginning of the body
 	*
@@ -128,6 +129,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 			<a class="navParent" href="#">HTML</a>
 			<div class="dropdown">
 				<a class="nested" href="/pages/html/overview.html">Overview</a>
+				<a class="nested" href="/pages/html/intro.html">Intro</a>
 				<a class="nested" href="/pages/html/basics.html">Basics</a>
 			</div>
 		</div>
@@ -327,9 +329,9 @@ document.addEventListener("DOMContentLoaded", async function() {
 		for(let i = 1; i <= 7; i++){
 			const img = document.createElement("img");
 
-			if(i === 6) img.src = `/assets/img/light1.gif`;
-			else if(i === 7) img.src = `/assets/img/light2.gif`;
-			else img.src = `/assets/img/light${i}.jpg`;
+			if(i === 6) img.src = `/assets/img/memes/light1.gif`;
+			else if(i === 7) img.src = `/assets/img/memes/light2.gif`;
+			else img.src = `/assets/img/memes/light${i}.jpg`;
 			
 			img.classList.add("lightImg", `light${i}`);
 			img.style.top = Math.random() * 90 + "%";
@@ -516,12 +518,15 @@ document.addEventListener("DOMContentLoaded", async function() {
 	txtElements.forEach(txt => {
 		txt.addEventListener("click", function() {
 			const textToCopy = this.textContent;
+			
 			navigator.clipboard.writeText(textToCopy).then(() => {
+
 				// Show tooltip
 				const tooltip = document.createElement("div");
 				tooltip.classList.add("tooltip");
 				tooltip.textContent = "Copied!";
 				this.appendChild(tooltip);
+
 				setTimeout(() => {
 					tooltip.remove();
 				}, 2000);

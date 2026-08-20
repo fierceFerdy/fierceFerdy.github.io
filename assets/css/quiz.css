@@ -120,6 +120,9 @@
 		font-size: 1.6rem;
 		text-align: left;
 
+		&:hover{
+		}
+		
 		&:before{
 			content: "";
 			display: inline-block;
@@ -138,6 +141,12 @@
 
 			&::before{
 				border-width: 6.5px;
+			}
+		}
+
+		&.quiz-check{
+			&:before{
+				content: none;
 			}
 		}
 	}

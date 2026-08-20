@@ -7,6 +7,7 @@
 var QUIZ_TARGET_SECONDS_PER_QUESTION = 15;
 var QUIZ_SCORE_API_URL = `${window.location.protocol}//${window.location.hostname}:3030/api/quiz-scores`;
 var QUIZ_LOCAL_ATTEMPTS_KEY = "manual.quizAttempts";
+var QUIZ_ACTIVE_STATE_KEY = "manual.activeQuiz";
 var QUIZ_ACCURACY_WEIGHT_POWER = 8;
 
 document.querySelectorAll(".quiz").forEach(initQuizBlock);
@@ -42,8 +43,16 @@ function initQuizBlock(block) {
 		playerName:      "",
 		savedAttemptId:  null,
 		questions:       quizData.questions || [],
-		quizName:        quizData.name || "Unnamed Quiz"
+		quizName:        quizData.name || "Unnamed Quiz",
+		quizInstanceId:  getQuizInstanceId(block, quizData),
+		blurPage:        isTrueValue(block.dataset.blur) || isTrueValue(block.dataset.blurPage) || isTrueValue(quizData.blur) || isTrueValue(quizData.blurPage)
 	};
+
+	if (shouldRestoreActiveQuiz(state)) {
+		state.started = true;
+		state.startedAt = Date.now();
+		setQuizPageBlur(block, state, true);
+	}
 
 	// Prevent quiz clicks from bubbling outside the block
 	block.addEventListener("click", (e) => e.stopPropagation());
@@ -99,6 +108,7 @@ function renderStartState(body, footer, state) {
 		state.playerName = String(localStorage.getItem("visitorName") || "").trim();
 		state.started    = true;
 		state.startedAt  = Date.now();
+		setQuizPageBlur(body.parentElement, state, true);
 		renderCurrentQuestion(body, footer, state);
 	});
 
@@ -119,56 +129,39 @@ function renderCurrentQuestion(body, footer, state) {
 
 	var questionData = state.questions[state.currentIndex];
 
-	// Question text
-	var questionText = document.createElement("p");
-	questionText.className = "quiz-question";
-	setAllowedMarkup(
-		questionText,
-		state.questions.length > 1
-			? `${state.currentIndex + 1}. ${questionData.question}`
-			: questionData.question,
-		{ allowEditorLite: true }
-	);
-	body.appendChild(questionText);
+	if (hasMultipleChoiceOptions(questionData)) {
+		// Question text
+		var questionText = document.createElement("p");
+		questionText.className = "quiz-question";
+		setAllowedMarkup(
+			questionText,
+			getQuestionPrompt(state, questionData.question),
+			{ allowEditorLite: true }
+		);
+		body.appendChild(questionText);
 
-	// Answer options
-	var optionsWrap = document.createElement("div");
-	optionsWrap.className = "quiz-options";
-	body.appendChild(optionsWrap);
+		// Multiple-choice mode
+		var optionsWrap = document.createElement("div");
+		optionsWrap.className = "quiz-options";
+		body.appendChild(optionsWrap);
 
-	questionData.options.forEach((option, optionIndex) => {
-		var button = document.createElement("button");
-		button.type = "button";
-		setAllowedMarkup(button, option);
+		questionData.options.forEach((option, optionIndex) => {
+			var button = document.createElement("button");
+			button.type = "button";
+			setAllowedMarkup(button, option);
 
-		button.addEventListener("click", (e) => {
-			e.preventDefault();
-			var isCorrect = optionIndex === questionData.answer;
-			state.answeredCount++;
+			button.addEventListener("click", (e) => {
+				e.preventDefault();
+				var isCorrect = optionIndex === questionData.answer;
+				handleQuestionResult(body, footer, state, questionData, isCorrect);
+			});
 
-			body.innerHTML = "";
-
-			var title       = document.createElement("h2");
-			var explanation = document.createElement("p");
-
-			if (isCorrect) {
-				state.correctCount++;
-				body.parentElement.classList.add("correct");
-				title.textContent       = "Correct! 🎉";
-				setAllowedMarkup(explanation, questionData.explanation);
-			} else {
-				body.parentElement.classList.add("wrong");
-				title.textContent       = "No, you dummy! 😭";
-				setAllowedMarkup(explanation, questionData.explanation);
-			}
-
-			body.appendChild(title);
-			body.appendChild(explanation);
-			renderFooter(footer, state, true);
+			optionsWrap.appendChild(button);
 		});
-
-		optionsWrap.appendChild(button);
-	});
+	} else {
+		// Fill-in mode (one or more input fields + check button)
+		renderTextInputQuestion(body, footer, state, questionData, getQuestionPrompt(state, questionData.question));
+	}
 
 	renderFooter(footer, state, false);
 }
@@ -207,6 +200,330 @@ function renderFooter(footer, state, showNextButton, hideProgress = false) {
 	progressFill.style.width = `${(state.answeredCount / state.questions.length) * 100}%`;
 	progressBar.appendChild(progressFill);
 	footer.appendChild(progressBar);
+}
+
+function getQuestionPrompt(state, questionText) {
+	return state.questions.length > 1
+		? `${state.currentIndex + 1}. ${questionText}`
+		: questionText;
+}
+
+function hasMultipleChoiceOptions(questionData) {
+	return Array.isArray(questionData?.options) && questionData.options.length > 0;
+}
+
+function handleQuestionResult(body, footer, state, questionData, isCorrect) {
+	state.answeredCount++;
+	body.innerHTML = "";
+	body.parentElement.classList.remove("correct", "wrong");
+
+	var title       = document.createElement("h2");
+	var explanation = document.createElement("p");
+
+	if (isCorrect) {
+		state.correctCount++;
+		body.parentElement.classList.add("correct");
+		title.textContent       = "Correct! 🎉";
+		setAllowedMarkup(explanation, questionData.explanation);
+	} else {
+		body.parentElement.classList.add("wrong");
+		title.textContent       = "No, you dummy! 😭";
+		setAllowedMarkup(explanation, questionData.explanation);
+	}
+
+	body.appendChild(title);
+	body.appendChild(explanation);
+	renderFooter(footer, state, true);
+}
+
+function renderTextInputQuestion(body, footer, state, questionData, questionPromptText) {
+	var questionText = document.createElement("p");
+	questionText.className = "quiz-question";
+	body.appendChild(questionText);
+
+	var gapTemplate = parseGapTemplate(questionPromptText);
+	var fields = gapTemplate ? gapTemplate.fields : getInputFields(questionData);
+	var inputElements = [];
+
+	var inputsWrap = document.createElement("div");
+	inputsWrap.className = "quiz-options quiz-input-options";
+	body.appendChild(inputsWrap);
+
+	if (fields.length === 0) {
+		setAllowedMarkup(questionText, questionPromptText, { allowEditorLite: true });
+		var msg = document.createElement("p");
+		msg.textContent = "This question has no valid answer configuration.";
+		inputsWrap.appendChild(msg);
+		renderFooter(footer, state, false);
+		return;
+	}
+
+	if (gapTemplate) {
+		renderGapTemplatePrompt(questionText, gapTemplate, inputElements, state.currentIndex);
+	} else {
+		setAllowedMarkup(questionText, questionPromptText, { allowEditorLite: true });
+	}
+
+	fields.forEach((field, index) => {
+		if (gapTemplate) return;
+
+		var row = document.createElement("div");
+		row.className = "quiz-input-row";
+
+		if (field.label) {
+			var label = document.createElement("label");
+			label.textContent = field.label;
+			label.setAttribute("for", `quiz-answer-${state.currentIndex}-${index}`);
+			row.appendChild(label);
+		}
+
+		var input = document.createElement("input");
+		input.type = "text";
+		input.className = "quiz-input";
+		input.autocomplete = "off";
+		input.id = `quiz-answer-${state.currentIndex}-${index}`;
+		if (field.placeholder) input.placeholder = field.placeholder;
+
+		row.appendChild(input);
+		inputsWrap.appendChild(row);
+		inputElements.push(input);
+	});
+
+	var checkButton = document.createElement("button");
+	checkButton.type = "button";
+	checkButton.className = "quiz-check";
+	checkButton.textContent = "Check answer";
+	inputsWrap.appendChild(checkButton);
+
+	var feedback = document.createElement("p");
+	feedback.className = "quiz-input-feedback";
+	inputsWrap.appendChild(feedback);
+
+	var checkAnswers = () => {
+		var allCorrect = true;
+
+		fields.forEach((field, index) => {
+			var input = inputElements[index];
+			var isCorrect = field.answers.some((answer) => isTextAnswerMatch(input.value, answer));
+
+			input.classList.toggle("correct", isCorrect);
+			input.classList.toggle("incorrect", !isCorrect);
+			if (!isCorrect) allCorrect = false;
+		});
+
+		if (!allCorrect) {
+			body.parentElement.classList.remove("correct");
+			body.parentElement.classList.add("wrong");
+			feedback.textContent = "Some answers are incorrect. Try again.";
+			return;
+		}
+
+		feedback.textContent = "";
+		handleQuestionResult(body, footer, state, questionData, true);
+	};
+
+	checkButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		checkAnswers();
+	});
+
+	inputElements.forEach((input) => {
+		input.addEventListener("keydown", (event) => {
+			if (event.key !== "Enter") return;
+			event.preventDefault();
+			checkAnswers();
+		});
+
+		input.addEventListener("input", () => {
+			input.classList.remove("incorrect");
+			if (feedback.textContent) feedback.textContent = "";
+		});
+	});
+
+	if (inputElements[0]) inputElements[0].focus();
+}
+
+function renderGapTemplatePrompt(questionText, template, inputElements, questionIndex) {
+	questionText.textContent = "";
+
+	template.items.forEach((item) => {
+		if (item.type === "text") {
+			questionText.appendChild(document.createTextNode(item.value));
+			return;
+		}
+
+		var field = template.fields[item.fieldIndex];
+		if (!field) return;
+
+		var input = document.createElement("input");
+		input.type = "text";
+		input.className = "quiz-input quiz-gap-input";
+		input.autocomplete = "off";
+		input.id = `quiz-answer-${questionIndex}-${item.fieldIndex}`;
+		input.setAttribute("aria-label", `Gap ${item.fieldIndex + 1}`);
+		input.size = getInputSizeForAnswers(field.answers);
+		input.style.width = `${getInputSizeForAnswers(field.answers)}ch`;
+
+		questionText.appendChild(input);
+		inputElements[item.fieldIndex] = input;
+	});
+}
+
+function parseGapTemplate(text) {
+	var source = String(text ?? "");
+	var regex = /_([^_]+)_/g;
+	var fields = [];
+	var items = [];
+	var lastIndex = 0;
+	var match;
+
+	while ((match = regex.exec(source))) {
+		var before = source.slice(lastIndex, match.index);
+		if (before) items.push({ type: "text", value: before });
+
+		var gapToken = String(match[1] ?? "").trim();
+		var alternatives = splitGapAlternatives(gapToken);
+
+		if (alternatives.length > 1) {
+			fields.push({ answers: alternatives, label: "", placeholder: "" });
+			items.push({ type: "field", fieldIndex: fields.length - 1 });
+		} else {
+			var pieces = splitGapToken(gapToken);
+
+			if (pieces.left) {
+				fields.push({ answers: [pieces.left], label: "", placeholder: "" });
+				items.push({ type: "field", fieldIndex: fields.length - 1 });
+			}
+
+			if (pieces.middle) items.push({ type: "text", value: pieces.middle });
+
+			if (pieces.right) {
+				fields.push({ answers: [pieces.right], label: "", placeholder: "" });
+				items.push({ type: "field", fieldIndex: fields.length - 1 });
+			}
+
+			if (!pieces.left && !pieces.right) {
+				fields.push({ answers: [pieces.middle], label: "", placeholder: "" });
+				items.push({ type: "field", fieldIndex: fields.length - 1 });
+			}
+		}
+
+		lastIndex = regex.lastIndex;
+	}
+
+	if (fields.length === 0) return null;
+
+	var after = source.slice(lastIndex);
+	if (after) items.push({ type: "text", value: after });
+	return { items, fields };
+}
+
+function splitGapToken(value) {
+	var token = String(value ?? "").trim();
+	if (!token) return { left: "", middle: "", right: "" };
+
+	if (!/^<[^<>]+>$/.test(token)) {
+		return { left: "", middle: token, right: "" };
+	}
+
+	var match = token.match(/^(<)([^<>]+)(>)$/);
+	if (!match) {
+		return { left: "", middle: token, right: "" };
+	}
+
+	return {
+		left: match[1] || "",
+		middle: String(match[2] || "").trim(),
+		right: match[3] || ""
+	};
+}
+
+function splitGapAlternatives(token) {
+	var source = String(token ?? "").trim();
+	if (!source) return [];
+
+	var options = [];
+	var current = "";
+	var insideAngle = false;
+
+	for (var char of source) {
+		if (char === "<") insideAngle = true;
+
+		if (char === "/" && !insideAngle) {
+			options.push(current.trim());
+			current = "";
+			continue;
+		}
+
+		current += char;
+
+		if (char === ">") insideAngle = false;
+	}
+
+	options.push(current.trim());
+	options = options.filter((value) => value.length > 0);
+
+	if (options.length <= 1) return [source];
+
+	return [...new Set(options.map((value) => value.trim()))];
+}
+
+function getInputSizeForAnswer(answer) {
+	var length = String(answer ?? "").trim().length;
+	return Math.max(3, Math.min(24, length + 1));
+}
+
+function getInputSizeForAnswers(answers) {
+	var list = Array.isArray(answers) ? answers : [];
+	var longest = list.reduce((maxLength, answer) => {
+		return Math.max(maxLength, String(answer ?? "").trim().length);
+	}, 0);
+	return getInputSizeForAnswer("x".repeat(longest));
+}
+
+function getInputFields(questionData) {
+	if (Array.isArray(questionData?.fields) && questionData.fields.length > 0) {
+		return questionData.fields
+			.map((field) => normalizeField(field))
+			.filter(Boolean);
+	}
+
+	var fallbackField = normalizeField(questionData);
+	return fallbackField ? [fallbackField] : [];
+}
+
+function normalizeField(field) {
+	if (!field || typeof field !== "object") return null;
+
+	var answers = [];
+
+	if (Array.isArray(field.answers)) answers = field.answers;
+	else if (Array.isArray(field.accept)) answers = field.accept;
+	else if (field.answerText != null) answers = [field.answerText];
+	else if (field.answer != null && typeof field.answer !== "number") answers = [field.answer];
+
+	answers = answers
+		.map((value) => String(value ?? "").trim())
+		.filter((value) => value.length > 0);
+
+	if (answers.length === 0) return null;
+
+	return {
+		label: String(field.label ?? "").trim(),
+		placeholder: String(field.placeholder ?? "").trim(),
+		answers: answers
+	};
+}
+
+function isTextAnswerMatch(inputValue, expectedValue) {
+	return normalizeAnswerText(inputValue) === normalizeAnswerText(expectedValue);
+}
+
+function normalizeAnswerText(value) {
+	return String(value ?? "")
+		.trim()
+		.toLowerCase()
+		.replace(/\s+/g, " ");
 }
 
 function setAllowedMarkup(target, rawText, options = {}) {
@@ -261,6 +578,8 @@ function decodeHtmlEntities(value) {
 }
 
 function renderFinishedState(body, footer, state) {
+	setQuizPageBlur(body.parentElement, state, false);
+
 	state.finishedAt     = Date.now();
 	state.elapsedMs      = Math.max(0, state.finishedAt - (state.startedAt ?? state.finishedAt));
 	state.timeMultiplier = roundScore(getTimeMultiplier(state.elapsedMs, state.questions.length));
@@ -283,7 +602,7 @@ function renderFinishedState(body, footer, state) {
 	if (state.correctCount === state.questions.length) {
 		body.parentElement.classList.add("correct");
 		var partyImage = document.createElement("img");
-		partyImage.src       = `/assets/img/party${Math.floor(Math.random() * 31) + 1}.gif`;
+		partyImage.src       = `/assets/img/party/party${Math.floor(Math.random() * 31) + 1}.gif`;
 		partyImage.className = "party";
 		body.appendChild(partyImage);
 	} else {
@@ -526,5 +845,73 @@ function saveQuizAttemptLocal(state) {
 		localStorage.setItem(QUIZ_LOCAL_ATTEMPTS_KEY, JSON.stringify(records));
 	} catch (error) {
 		console.warn("Could not save quiz attempt locally.", error);
+	}
+}
+
+function isTrueValue(value) {
+	if (typeof value === "boolean") return value;
+	if (typeof value !== "string") return false;
+	return value.trim().toLowerCase() === "true";
+}
+
+function setQuizPageBlur(quizBlock, state, enabled) {
+	if (!state?.blurPage || !quizBlock) return;
+
+	quizBlock.classList.toggle("activeTask", !!enabled);
+	quizBlock.classList.toggle("quiz-active-task", !!enabled);
+
+	if (enabled) {
+		setActiveQuizId(state.quizInstanceId);
+		document.body.classList.add("blur-quiz");
+		return;
+	}
+
+	clearActiveQuizId(state.quizInstanceId);
+
+	var hasActiveQuiz = document.querySelector(".quiz.quiz-active-task");
+	if (!hasActiveQuiz) {
+		document.body.classList.remove("blur-quiz");
+	}
+}
+
+function getQuizInstanceId(block, quizData) {
+	var pagePath = window.location.pathname || "";
+	if (block?.id) return `${pagePath}#${block.id}`;
+
+	var allQuizzes = Array.from(document.querySelectorAll(".quiz"));
+	var index = allQuizzes.indexOf(block);
+	var safeIndex = index >= 0 ? index : 0;
+	return `${pagePath}::${String(quizData?.name || "Unnamed Quiz")}::${safeIndex}`;
+}
+
+function shouldRestoreActiveQuiz(state) {
+	if (!state?.blurPage || !state?.quizInstanceId) return false;
+	return getActiveQuizId() === state.quizInstanceId;
+}
+
+function getActiveQuizId() {
+	try {
+		return String(localStorage.getItem(QUIZ_ACTIVE_STATE_KEY) || "").trim();
+	} catch {
+		return "";
+	}
+}
+
+function setActiveQuizId(quizInstanceId) {
+	if (!quizInstanceId) return;
+	try {
+		localStorage.setItem(QUIZ_ACTIVE_STATE_KEY, quizInstanceId);
+	} catch {
+		// Ignore storage failures.
+	}
+}
+
+function clearActiveQuizId(quizInstanceId) {
+	if (!quizInstanceId) return;
+	try {
+		if (getActiveQuizId() !== quizInstanceId) return;
+		localStorage.removeItem(QUIZ_ACTIVE_STATE_KEY);
+	} catch {
+		// Ignore storage failures.
 	}
 }

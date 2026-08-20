@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The manual.</title>
+	<link rel="stylesheet" href="/assets/css/style.css">
+	
+	<script src="/assets/js/main.js" defer></script>
+	<script src="/assets/js/quiz.js" defer></script>
+	<script type="module"  src="/assets/js/js-editor.js" defer></script>
+</head>
+<body>
+
+	<div class="content">
+		<h1>What is HTML?</h1>
+		
+
+		<div class="flexbox">
+			<div>
+				<h2>The Internet</h2>
+				<p>First of all, let's take a step back and talk about "The internet".</p>
+				<p><strong>The internet</strong> is a global network of computers that enables communication and data exchange. Across the world, there are <strong>undersea cables</strong> connecting continents. We don't really need that many, but they are crucial for connectivity and also serve as a fallback<span class="tooltip"><span><strong>Fallback</strong>: A backup option used if the primary option fails</span></span>.</p>
+			</div>
+			<img src="/assets/img/internet-kabels.jpg" class="w-3/5" alt="All major internet cables in the world">
+		</div>
+		
+		<div class="flexbox">
+			<img src="/assets/img/internet-kabel.jpg" class="w-3/5" alt="A submarine internet cable in detail">
+			<div>
+				<h3>A submarine internet cable in detail</h3>
+				<p>An internet cable is a physical connection that transports data between computers and networks. They are essential for the functioning of the internet.</p>
+				<p>A submarine internet cable is about 17mm to 25mm thick. It looks very similar to a common garden hose. However, the actual glass fibers inside that carry data, are tiny. They're about the width of a human hair. <span class="imageHover"><span class="text">The whole internet passes through that!</span><img src="/assets/img/memes/mind-blown.gif"></span></p>
+			</div>
+		</div>
+
+		<div class="flexbox">
+			<div>
+				<h2>The WWW</h2>
+				<p><strong>The WWW</strong> (World Wide Web) is a system of interconnected HyperText<span class="tooltip"><span><strong>HyperText</strong>: Text with links to other texts</span></span> documents accessible via the internet. With a web browser, users can view web pages and navigate between these documents through hyperlinks<span class="tooltip"><span><strong>Hyperlinks</strong>: Links to other web pages or resources</span></span>. The WWW is thus not the same as the internet.</p>
+				<p>When we open our <strong>web browser</strong> and navigate to a website, we are interacting with the WWW which in turn relies on the internet to fetch and display the requested web pages.</p>
+				<p>When you enter a <strong>URL</strong> in your web browser, it sends a <strong>request</strong> to the appropriate web server. The <strong>server</strong> processes the request and sends back the requested web page.</p>
+				<p>Then, <strong>the browser processes</strong> the received web page, requests additional resources if needed, and <strong>renders the content</strong> for the user to view.</p>
+			</div>
+			<img src="/assets/img/requests.jpg" class="w-2/5" alt="How a request works">
+		</div>
+		
+
+
+		<div class="flexbox">
+			<img src="/assets/img/html.jpg" class="w-2/4" alt="The start of an HTML file">
+			<div>
+				<h2>HTML and what it stands for</h2>
+				<ul>
+					<li>HTML stands for HyperText Markup Language</li>
+					<li>It is a standard set by the W3C (World Wide Web Consortium)</li>
+					<li>A semantic<span class="tooltip"><span><strong>Semantic</strong>: Making something clear according to the rules</span></span> structure with textual content and media (video, images, audio,..)</li>
+					<li>It is the basis of the WWW</li>
+				</ul>
+			</div>
+		</div>
+
+
+		<h2>How HTML works and how to recognize it</h2>
+		<p>HTML consists of a series of elements that define the structure and content of a web page. HTML files;</p>
+		<ul>
+			<li>have a doctype declaration like <code>&lt;!DOCTYPE html&gt;</code>;</li>
+			<li>have elements like &lt;h1&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt; that are used to structure the content;</li>
+			<li>usually have the extension .html, .htm or .php;</li>
+			<li>can be opened in a web browser like Google Chrome, Mozilla Firefox, Edge, Safari,.. ;</li>
+			<li>can be edited with a text editor like Notepad, VS Code, Sublime Text,.. ;</li>
+			<li>can be hosted on a web server so they are accessible via the internet;</li>
+			<li>can be linked to CSS files for styling (soon) and JavaScript files for interactivity (5APDA → next year, 5BINF → DW2);</li>
+		</ul>
+
+		<h2>Time for some inception type shi-:</h2>
+		<div class="gridCorrector editorWrapper">
+			<div class="js-editor" data-run="false" data-edit="true" data-language="html" >
+				<textarea class="title" hidden><p>Inception type shi-</p></textarea>
+				<textarea class="js-editor-doc" hidden>
+<div class="flexbox">
+	<img src="/assets/img/html.jpg" class="w-2/4" alt="The start of an HTML file">
+	<div>
+		<h2>HTML and what it stands for</h2>
+		<ul>
+			<li>HTML stands for HyperText<span class="tooltip"><span><strong>HyperText</strong>: Text with links to other texts</span></span> Markup Language</li>
+			<li>It is a standard set by the W3C (World Wide Web Consortium)</li>
+			<li>A semantic<span class="tooltip"><span><strong>Semantic</strong>: Making something clear according to the rules</span></span> structure with textual content and media (video, images, audio,..)</li>
+			<li>It is the basis of the WWW</li>
+		</ul>
+	</div>
+</div>
+
+
+<h2>How HTML works and how to recognize it</h2>
+<p>HTML consists of a series of elements that define the structure and content of a web page. HTML files;</p>
+<ul>
+	<li>have a doctype declaration like <code>&lt;!DOCTYPE html&gt;</code>;</li>
+	<li>have elements like &lt;h1&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt; that are used to structure the content;</li>
+	<li>usually have the extension .html, .htm or .php;</li>
+	<li>can be opened in a web browser like Google Chrome, Mozilla Firefox, Edge, Safari,.. ;</li>
+	<li>can be edited with a text editor like Notepad, VS Code, Sublime Text,.. ;</li>
+	<li>can be hosted on a web server so they are accessible via the internet;</li>
+	<li>can be linked to CSS files for styling (soon) and JavaScript files for interactivity (5APDA → next year, 5BINF → DW2);</li>
+</ul>
+
+<h2>Time for some inception type shi-:</h2>
+<!-- Wanna go deeper? -->
+				</textarea>
+			</div>
+		</div>
+
+		<a href="/pages/html/basics.html" class="nextPageTeaser">Next: HTML Basics <i class="fa-solid fa-arrow-right-long"></i></a>
+	</div>
+
+</body>
+</html>

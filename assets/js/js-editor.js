@@ -77,9 +77,7 @@ if (activeTask) {
 // Toggle checkmarks
 document.addEventListener("click", (e) => {
 	var grandparent = e.target?.parentElement?.parentElement?.parentElement;
-	if(grandparent?.classList.contains("js-editor")){
-		e.target.classList.toggle("check");
-	}
+	if(grandparent?.classList.contains("js-editor")) e.target.classList.toggle("check");
 });
 
 
@@ -412,10 +410,10 @@ function normalizeEditorSource(text, language = "javascript") {
     if (language !== "html") return source;
 
     return source
-        // .replace(/<\s*fakehtml(\s|>)/gi, "<html$1")
-        // .replace(/<\s*\/\s*fakehtml\s*>/gi, "</html>")
-        // .replace(/<\s*fakehead(\s|>)/gi, "<head$1")
-        // .replace(/<\s*\/\s*fakehead\s*>/gi, "</head>")
+        .replace(/<\s*fakehtml(\s|>)/gi, "<html$1")
+        .replace(/<\s*\/\s*fakehtml\s*>/gi, "</html>")
+        .replace(/<\s*fakehead(\s|>)/gi, "<head$1")
+        .replace(/<\s*\/\s*fakehead\s*>/gi, "</head>")
         .replace(/<\s*fakebody(\s|>)/gi, "<body$1")
         .replace(/<\s*\/\s*fakebody\s*>/gi, "</body>");
 }
@@ -506,7 +504,6 @@ function drawTerminal(container) {
         var freshLine = document.createElement("div");
         freshLine.className = "terminal-line";
         terminal.appendChild(freshLine);
-
         terminal.appendChild(clearTerminal);
     });
     terminal.appendChild(clearTerminal);
@@ -788,6 +785,7 @@ function getEditorName(container) {
     var titleHolder = document.createElement("div");
     titleHolder.innerHTML = rawTitle;
     var titleText = (titleHolder.textContent || "").trim();
+
     return titleText || "JavaScript Editor";
 }
 
@@ -796,9 +794,11 @@ function readRecords(storageKey) {
         var raw = localStorage.getItem(storageKey);
         if (!raw) return [];
         var parsed = JSON.parse(raw);
+
         return Array.isArray(parsed) ? parsed : [];
     } catch (error) {
         console.warn("Could not read saved records.", error);
+
         return [];
     }
 }

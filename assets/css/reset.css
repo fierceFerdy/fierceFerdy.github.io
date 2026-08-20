@@ -140,6 +140,10 @@ select {
     vertical-align: middle;
 }
 
+img{
+	height: auto;;
+}
+
 hr {
     display: block;
     height: 1px;

@@ -200,7 +200,8 @@ cmd, code{
 }
 
 
-.blur{
+.blur,
+.blur-quiz{
 	&::before{
 		content: "";
 		position: fixed;
@@ -429,4 +430,44 @@ button{
     to {
         filter: hue-rotate(360deg);
     }
+}
+
+
+.floatright{
+	float: right;
+}
+
+
+.floatleft{
+	float: left;
+	margin-left: 0;
+}
+
+.dummydiv{
+	clear: both;
+}
+
+.flexbox{
+	display: flex;
+	vertical-align: top;
+	margin-bottom: 8rem;
+
+	h2{
+		margin-top: 4rem;
+	}
+
+	h3{
+		margin-top: 1rem;
+	}
+
+	img{
+		object-fit: contain;
+		margin-left: 0;
+		margin-right: 3rem;
+	}
+
+	div + img{
+		margin-left: 3rem;
+		margin-right: 0;
+	}
 }

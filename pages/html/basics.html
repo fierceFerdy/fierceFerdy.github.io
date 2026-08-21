@@ -21,7 +21,7 @@
 
 
 		<h2>Intro</h2>
-		<p>HTML works with what's called <strong>elements</strong> or <strong>tags</strong>. A tag exists of a name and surrounding angle brackets. <code>&lt; &gt;</code> Tags almost always come in pairs: an opening tag <code>&lt;tagname&gt;</code> and a closing tag <code>&lt;/tagname&gt;</code>. The opening and closing tag have the same name. The only difference is that the closing tag has a &#47; (forward slash) before the name.  For example, a paragraph<span class="tooltip"><span><strong>Paragraph</strong>: A block of text</span></span> is defined with <code>&lt;p&gt;</code> and <code>&lt;/p&gt;</code>. The content goes between these tags. </p>
+		<p>HTML works with what's called <strong>elements</strong> or <strong>tags</strong>. A tag consists of a name and surrounding angle brackets. <code>&lt; &gt;</code> Tags almost always come in pairs: an opening tag <code>&lt;tagname&gt;</code> and a closing tag <code>&lt;/tagname&gt;</code>. The opening and closing tag have the same name. The only difference is that the closing tag has a &#47; (forward slash) before the name.  For example, a paragraph<span class="tooltip"><span><strong>Paragraph</strong>: A block of text</span></span> is defined with <code>&lt;p&gt;</code> and <code>&lt;/p&gt;</code>. The content goes between these tags. </p>
 		<p class="warning">Closing tags is <strong>really important</strong>. If you do not close tags, everything goes inside of each other. Of course, sometimes you want this to be the case.</p>
 
 
@@ -33,14 +33,14 @@
 			<li><code>&lt;!doctype html&gt;</code> → The document type. Absolutely necessary. If you don't use this, the browser might render the page in 'quirks mode' which could break your website.</li>
 			<li><code>&lt;html&gt;</code> → The root<span class="tooltip"><span><strong>Root (NL: wortel)</strong>: The top-level element in an HTML document. This is the beginning.</span></span> element. All your code goes inside of this element.</li>
 			<li><code>&lt;head&gt;</code> → Things in the head are not visible to other humans. Here comes document information that's mostly useful for machines, who somehow can read what's in your head. Here you load in different files such as CSS (styling) and JS (interactivity).</li>
-			<li><code>&lt;title&gt;</code> → The page title goes in here. Visible only in the <span class="imageHover"><span class="text">browser tab</span><img src="/assets/img/page-title.jpg"></span>. If you leave it empty, it shows the file name. <nobr></nobre>This goes in the <code>&lt;head&gt;</code></nobr>.</li>
+			<li><code>&lt;title&gt;</code> → The page title goes in here. Visible only in the <span class="imageHover"><span class="text">browser tab</span><img src="/assets/img/page-title.jpg"></span>. If you leave it empty, it shows the file name. <nobr>This goes in the <code>&lt;head&gt;</code></nobr>.</li>
 			<li><code>&lt;body&gt;</code> → The way the body looks, that's what humans see! This is where you put <em>all</em> of your content.</li>
 			<li><code>&lt;!-- This is a comment --&gt;</code> → Only visible in the code, the browser doesn't render this.</li>
 		</ul>
 		<p class="hint">It is important that we <strong>indent tags</strong> that are inside of each other for <strong>readability</strong>. Code is indented using <kbd>Tab</kbd>. You can un-indent using <kbd>Shift</kbd> + <kbd>Tab</kbd>. You can also select multiple lines and then indent. Try it out!</p>
 		
 		<div class="gridCorrector editorWrapper">
-			<div class="js-editor" data-run="false"data-edit="true" data-language="html" >
+			<div class="js-editor" data-run="false" data-edit="true" data-language="html" >
 				<textarea class="title" hidden><p>Basic structure</p></textarea>
 				<textarea class="js-editor-doc" hidden>
 <!doctype html>
@@ -61,7 +61,7 @@
 
 
 		<h3>Basic structure quiz</h3>
-		<div class="quiz" id="quiz">
+		<div class="quiz" id="quiz2">
 			<script type="application/json" class="quiz-data">{
 				"name": "HTML - Basic structure Quiz",
 				"blur": true,
@@ -107,7 +107,7 @@
 		<p>There are several basic elements/tags in HTML that you should be familiar with...</p>
 
 		<div class="gridCorrector editorWrapper">
-			<div class="js-editor w-12/12" data-run="false"data-edit="true" data-language="html" >
+			<div class="js-editor w-12/12" data-run="false" data-edit="true" data-language="html" >
 				<textarea class="title" hidden><p>Basic tags</p></textarea>
 				<textarea class="js-editor-doc" hidden>
 <h1>Heading - also known as a title</h1>
@@ -123,7 +123,7 @@
 
 
 		<h3>Basic elements/tags quiz</h3>
-		<div class="quiz" id="quiz">
+		<div class="quiz" id="quiz3">
 			<script type="application/json" class="quiz-data">{
 				"name": "HTML - Basic tags Quiz",
 				"blur": true,
@@ -145,20 +145,34 @@
 
 		<h2>Attributes</h2>
 		<p>As you might've noticed with the anchor, it's missing some data in order to function well. Lots of tags can receive attributes, which provide additional information about the element and what it should do. Attributes are <strong>always</strong> part of the opening tag and happen after the name of the tag and before the closing angle bracket (&gt;).</p>
+		
+		<div class="gridCorrector editorWrapper">
+			<div class="js-editor" data-run="false">
+				<textarea class="title" hidden><p>ID's and classes</p></textarea>
+				<textarea class="js-editor-doc" hidden>
+<tag attribute="value">Content (visible to user)</tag>
+
+<a href="https://google.be">Google</a>
+	└─ attribute  └─ attribute value
+				</textarea>
+			</div>
+		</div>
 
 		<p>Example: <editorlite>&lt;a href="http://google.be" title="Visit Google's homepage"&gt;Google&lt;/a&gt;</editorlite> Which then looks like: <a href="http://google.be" class="nolink" title="Visit Google's homepage">Google</a>.</p>
 		<p>An anchor needs a <code>href</code> attribute to specify the URL it links to. Secondly, a <code>title</code> attribute can provide additional information about the link. Hover the link for a second and see what happens.</p>
-		<p>A second interesting example is the <code>&lt;img&gt;</code> tag. Obviously it also requires a source, which in this case is called <code>src</code>. Secondly it needs an <code>alt</code> attribute to provide alternative text for the image. This is used by search engines, special devices, blind people and more.</p>
-		<p>Example: <editorlite>&lt;img src="image.jpg" alt="Description of the image"&gt;</editorlite> Which then looks like: <img src="image.jpg" class="nolink" alt="Description of the image"></p>
+		<p>A second interesting example is the <code>&lt;img&gt;</code> tag. Obviously it also requires a source, which in this case is called <code>src</code>. Secondly it needs an <code>alt</code> attribute to provide alternative text for the image. This is used when the image can't be displayed, in search engines, for special devices, blind people, and more.</p>
+
+		<h3>Second example</h3>
+		<p>Let's load in an image which is one of the few exceptions and doesn't need a closing tag: <editorlite>&lt;img src="image.jpg" alt="Description of the image"&gt;</editorlite> <br>Which then looks like: <img src="image.jpg" class="nolink" alt="Description of the image"></p>
 		<p class="hint">See how it's not working properly? That's because there is no image.jpg at the same location of this HTML file. We also need to refer to the correct folder.</p>
 		<p>Let's try that again. Note how I'm using "../" to go "up" a folder. Then I tell the computer in which folders it needs to go. <editorlite>&lt;img src="../../assets/img/file-structure.jpg" alt="An example of a file structure"&gt;</editorlite> Which then looks like: <br><img src="../../assets/img/file-structure.jpg" class="nolink" alt="An example of a file structure"></p>
 
 
 
-		<h3>ID's and classes</h3>
-		<p>The above attributes are specific for the <code>&lt;a&gt;</code> and <code>&lt;img&gt;</code> tags. But there's also attributes that work for <em>every</em> tag. You can add a <code>class</code> or an <code>id</code> attribute to any element which is then used to target this element. Adding a class or an ID has three purposes:</p>
+		<h3>IDs and classes</h3>
+		<p>The above attributes are specific for the <code>&lt;a&gt;</code> and <code>&lt;img&gt;</code> tags. But there are also attributes that work for almost every tag. You can add a <code>class</code> or an <code>id</code> attribute to any element which is then used to target this element. Adding a class or an ID has three purposes:</p>
 		<ul>
-			<li>It is <strong>used as an identifier</strong>. If you give a paragraph the class 'introText' then you can easily deduct that it's the introduction text.</li>
+			<li>It is <strong>used as an identifier</strong>. If you give a paragraph the class 'introText' then you can easily deduce that it's the introduction text.</li>
 			<li>They're used <strong>to apply styles with CSS</strong>. <i>Don't quite understand it? inspect the red warning block under this.</i></li>
 			<li>They can be <strong>used by JavaScript to manipulate elements</strong>, such as changing the value or adding a visual effect.</li>
 		</ul>
@@ -185,7 +199,7 @@
 
 
 		<h3>HTML Attributes quiz</h3>
-		<div class="quiz" id="quiz">
+		<div class="quiz" id="quiz1">
 			<script type="application/json" class="quiz-data">{
 				"name": "HTML - Basic attributes Quiz",
 				"blur": true,
@@ -215,10 +229,10 @@
 							"&grave;Backticks&grave;"
 						],
 						"answer": 2,
-						"explanation": "The attribute to add a description to an image is alt. Example: <img src='image.jpg' alt='Description'>"
+						"explanation": "You can use both single and double quotes for attribute values. Example: <a href='https://example.com' title=\"Description\">Link</a>"
 					},
 					{
-						"question": "What attribute lets you identify multiple elements? _class_",
+						"question": "What attribute lets you identify and manipulate multiple elements? _class_",
 						"explanation": "The attribute to identify multiple elements is class. Example: <p class='class-name'>This is a paragraph.</p>"
 					}
 				]

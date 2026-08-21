@@ -252,11 +252,15 @@ editorlite{
     border-radius: 8px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
 	position: relative;
-	top: -px;
+	top: -1px;
+
+	.cm-gutters{
+		display: none !important;
+	}
 
 	.cm-content{
 		background-color: transparent;
-		padding: 2px !important;
+		padding: 2px 5px 2px 2px !important;
 	}
 
 	.cm-content,

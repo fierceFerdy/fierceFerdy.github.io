@@ -1,4 +1,18 @@
 document.addEventListener("DOMContentLoaded", async function() {
+	// Emergency unlock: clear editor/quiz blur and persisted active states.
+	document.addEventListener("keydown", (event) => {
+		var isUnlockCombo = event.ctrlKey && event.altKey && String(event.key || "").toLowerCase() === "u";
+		if (!isUnlockCombo) return;
+
+		event.preventDefault();
+
+		document.body.classList.remove("blur", "blur-quiz");
+		document.querySelectorAll(".activeTask").forEach((element) => element.classList.remove("activeTask"));
+		document.querySelectorAll(".quiz-active-task").forEach((element) => element.classList.remove("quiz-active-task"));
+
+		localStorage.removeItem("activeTask");
+		localStorage.removeItem("manual.activeQuiz");
+	});
 
 	// Save visitor's name in localStorage
 	if(!localStorage.getItem("visitorName")){

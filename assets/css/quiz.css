@@ -109,9 +109,14 @@
 		background-color: var(--dark2);
 	}
 
+	input[type="text"] {
+		padding: 0.3rem 0.4rem 0.2rem;
+	}
+
 	button{
-		display: block;
+		display: inline-block;
 		margin-top: 1rem;
+		margin-right: 2rem;
 		border: none;
 		background-color: var(--dark2);
 		border: 3px solid transparent;
@@ -144,10 +149,14 @@
 			}
 		}
 
-		&.quiz-check{
+		&.quiz-check, &.quiz-skip{
 			&:before{
 				content: none;
 			}
+		}
+
+		&.quiz-skip{
+			background-color: rgb(255, 79, 79);
 		}
 	}
 

@@ -193,9 +193,6 @@ ul{
 	&.checklist{
 		li::before{
 			content: "\f054";
-			/* font-family: "FontAwesome";
-			font-size: .8em;
-			margin-right: .8rem; */
 		}
 	}
 
@@ -210,6 +207,19 @@ ul{
 			content: "\f00d";
 			font-size: .9em;
 			color: var(--red);
+		}
+	}
+
+	&.empty{
+		li::before{
+			content: "";
+			margin-right: 0;
+		}
+	}
+
+	&.spaced{
+		li{
+			margin-bottom: 1rem;
 		}
 	}
 }
@@ -243,6 +253,12 @@ p, li{
 			font-size: .6em;
 			padding-left: .4rem;
 			top: -2px;
+		}
+
+		&.nolink{
+			&::after{
+				content: none !important;
+			}
 		}
 	}
 }

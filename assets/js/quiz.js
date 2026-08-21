@@ -158,12 +158,14 @@ function renderCurrentQuestion(body, footer, state) {
 
 			optionsWrap.appendChild(button);
 		});
+
+		renderFooter(footer, state, false);
+		appendSkipButton(footer, body, footer, state, questionData);
 	} else {
 		// Fill-in mode (one or more input fields + check button)
 		renderTextInputQuestion(body, footer, state, questionData, getQuestionPrompt(state, questionData.question));
+		renderFooter(footer, state, false);
 	}
-
-	renderFooter(footer, state, false);
 }
 
 
@@ -178,9 +180,29 @@ function renderFooter(footer, state, showNextButton, hideProgress = false) {
 		nextButton.textContent = state.currentIndex === state.questions.length - 1 ? "Finish quiz" : "Next question";
 		footer.appendChild(nextButton);
 
+		var handleEnterNext = (event) => {
+			if (!nextButton.isConnected) {
+				document.removeEventListener("keydown", handleEnterNext, true);
+				return;
+			}
+
+			if (event.key !== "Enter") return;
+			if (event.defaultPrevented) return;
+
+			var tagName = String(event.target?.tagName || "").toLowerCase();
+			if (tagName === "input" || tagName === "textarea" || tagName === "select") return;
+			if (event.target?.isContentEditable) return;
+
+			event.preventDefault();
+			nextButton.click();
+		};
+
+		document.addEventListener("keydown", handleEnterNext, true);
+
 		nextButton.addEventListener("click", (e) => {
 			e.preventDefault();
 			e.stopPropagation();
+			document.removeEventListener("keydown", handleEnterNext, true);
 			state.currentIndex++;
 			renderCurrentQuestion(footer.parentElement.querySelector("section"), footer, state);
 		});
@@ -212,6 +234,20 @@ function hasMultipleChoiceOptions(questionData) {
 	return Array.isArray(questionData?.options) && questionData.options.length > 0;
 }
 
+function appendSkipButton(container, body, footer, state, questionData) {
+	var skipButton = document.createElement("button");
+	skipButton.type = "button";
+	skipButton.className = "quiz-skip";
+	skipButton.textContent = "Skip question";
+	container.appendChild(skipButton);
+
+	skipButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		handleSkippedQuestion(body, footer, state, questionData);
+	});
+}
+
 function handleQuestionResult(body, footer, state, questionData, isCorrect) {
 	state.answeredCount++;
 	body.innerHTML = "";
@@ -230,6 +266,23 @@ function handleQuestionResult(body, footer, state, questionData, isCorrect) {
 		title.textContent       = "No, you dummy! 😭";
 		setAllowedMarkup(explanation, questionData.explanation);
 	}
+
+	body.appendChild(title);
+	body.appendChild(explanation);
+	renderFooter(footer, state, true);
+}
+
+function handleSkippedQuestion(body, footer, state, questionData) {
+	state.answeredCount++;
+	body.innerHTML = "";
+	body.parentElement.classList.remove("correct", "wrong");
+	body.parentElement.classList.add("wrong");
+
+	var title = document.createElement("h2");
+	title.textContent = "Skipped ⏭️";
+
+	var explanation = document.createElement("p");
+	setAllowedMarkup(explanation, questionData.explanation || "No explanation provided.");
 
 	body.appendChild(title);
 	body.appendChild(explanation);
@@ -294,6 +347,7 @@ function renderTextInputQuestion(body, footer, state, questionData, questionProm
 	checkButton.className = "quiz-check";
 	checkButton.textContent = "Check answer";
 	inputsWrap.appendChild(checkButton);
+	appendSkipButton(inputsWrap, body, footer, state, questionData);
 
 	var feedback = document.createElement("p");
 	feedback.className = "quiz-input-feedback";
@@ -362,7 +416,7 @@ function renderGapTemplatePrompt(questionText, template, inputElements, question
 		input.id = `quiz-answer-${questionIndex}-${item.fieldIndex}`;
 		input.setAttribute("aria-label", `Gap ${item.fieldIndex + 1}`);
 		input.size = getInputSizeForAnswers(field.answers);
-		input.style.width = `${getInputSizeForAnswers(field.answers)}ch`;
+		input.style.width = `${getInputSizeForAnswers(field.answers) * .8}rem`;
 
 		questionText.appendChild(input);
 		inputElements[item.fieldIndex] = input;
@@ -388,6 +442,14 @@ function parseGapTemplate(text) {
 			fields.push({ answers: alternatives, label: "", placeholder: "" });
 			items.push({ type: "field", fieldIndex: fields.length - 1 });
 		} else {
+			// Plain gaps (e.g. _href_) should be input-only.
+			if (!/^<[^<>]+>$/.test(gapToken)) {
+				fields.push({ answers: [gapToken], label: "", placeholder: "" });
+				items.push({ type: "field", fieldIndex: fields.length - 1 });
+				lastIndex = regex.lastIndex;
+				continue;
+			}
+
 			var pieces = splitGapToken(gapToken);
 
 			if (pieces.left) {
@@ -533,6 +595,12 @@ function setAllowedMarkup(target, rawText, options = {}) {
 
 	target.textContent = "";
 	appendAllowedNodes(parserContainer, target, options);
+
+	// If the safe parser stripped everything (e.g. literal tags like <html> or <!doctype html>),
+	// fall back to plain text so escaped code snippets are still visible.
+	if (!target.hasChildNodes() && decoded.trim().length > 0) {
+		target.textContent = decoded;
+	}
 }
 
 function appendAllowedNodes(sourceNode, targetNode, options) {

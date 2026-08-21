@@ -3,9 +3,9 @@
 	display: flex;
 	margin-bottom: 2rem;
 
-	@media screen and (max-width: 800px){
+	/* @media screen and (max-width: 800px){
 		display: block;
-	}
+	} */
 
 	button{
 		padding: 0.8rem 1rem;
@@ -233,19 +233,32 @@
 
 editorlite{
 	display: inline-block;
-	margin-right: 20px;
+	margin-right: 1rem;
 	font-size: 0;
 	vertical-align: top;
+	margin-top: 3rem;
+	overflow: hidden;
+    border: 1px solid var(--dark3);
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.28);
 
 	.cm-content{
 		background-color: var(--dark2);
-		/* background-color: var(--lime); */
 		padding: 2px !important;
 	}
 
 	.cm-editor{
 		font-size: 1.5rem;
 	}
+
+	& + p{
+		margin-left: 3.1rem;
+	}
+}
+
+p editorlite{
+	margin-top: 0;
+	margin-right: .4rem;
 }
 
 
@@ -328,15 +341,6 @@ editorlite{
 /* .cm-completionIcon {
 	display: none !important;
 } */
-
-
-editorlite{
-	margin-top: 3rem;
-
-	& + p{
-		margin-left: 3.1rem;
-	}
-}
 
 
 @media screen and (max-width: 700px){

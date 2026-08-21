@@ -8,6 +8,7 @@ import {EditorView, basicSetup} from "https://esm.sh/codemirror";
 import {javascript} 			from "https://esm.sh/@codemirror/lang-javascript";
 import {html} 					from "https://esm.sh/@codemirror/lang-html";
 import {oneDark} 				from "https://esm.sh/@codemirror/theme-one-dark";
+import {vscodeDark} 			from "https://esm.sh/@uiw/codemirror-theme-vscode";
 import {autocompletion, 
 		completeFromList} 		from "https://esm.sh/@codemirror/autocomplete";
 import {keymap} 				from "https://esm.sh/@codemirror/view";
@@ -15,6 +16,7 @@ import {defaultKeymap,
 		historyKeymap, 
 		indentWithTab} 			from "https://esm.sh/@codemirror/commands";
 import {EditorState} 			from "https://esm.sh/@codemirror/state";
+import {indentUnit} 			from "https://esm.sh/@codemirror/language";
 import {parse} 					from "https://esm.sh/acorn";
 
 
@@ -30,7 +32,9 @@ var globalCompletions = completeFromList([
 ]);
 var baseExtensions = [
     basicSetup,
-    oneDark,
+    vscodeDark,
+    EditorState.tabSize.of(4),
+    indentUnit.of("    "),
     EditorView.lineWrapping,
     keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab])
 ];
@@ -93,8 +97,9 @@ function createLiteEditor(container) {
     if (container.dataset.editorliteInit) return;
     container.dataset.editorliteInit = 'true';
 
-    var language = getEditorLanguage(container);
-    var content = normalizeEditorSource(container.textContent, language);
+    var rawContent = String(container.textContent ?? "");
+    var language = getEditorLiteLanguage(container, rawContent);
+    var content = normalizeEditorSource(rawContent, language);
     container.innerHTML = '';
 
     var view = createCodeMirrorEditor(container, content, getEditorExtensions(language, true));
@@ -102,6 +107,17 @@ function createLiteEditor(container) {
     applyEditorSelectionStyles(view);
 
     return view;
+}
+
+function getEditorLiteLanguage(container, source) {
+    if (container?.dataset?.language) return getEditorLanguage(container);
+
+    // Infer HTML when snippet contains tags; otherwise keep JavaScript default.
+    if (/<\s*\/?\s*!?[a-z][^>]*>/i.test(String(source ?? ""))) {
+        return "html";
+    }
+
+    return "javascript";
 }
 
 function createEditor(container) {
@@ -446,7 +462,9 @@ function getEditorExtensions(language, isReadOnly = false) {
 	var readOnlyExtensions = isReadOnly ? [EditorState.readOnly.of(true)] : [];
 	var baseEditorExtensions = language === "html"
 		? [
-			oneDark,
+            vscodeDark,
+            EditorState.tabSize.of(4),
+            indentUnit.of("    "),
 			EditorView.lineWrapping,
 			keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab])
 		]
@@ -465,8 +483,8 @@ function applyEditorSelectionStyles(view) {
 
 	view.dom.style.fontFamily = "Inconsolata, monospace";
 	view.dom.style.fontSize = "1.3rem";
-	view.dom.style.backgroundColor = "#282c34";
-	view.dom.style.color = "#f8f8f2";
+    view.dom.style.backgroundColor = "#1f1f1f";
+    view.dom.style.color = "#d4d4d4";
 
 	var targets = view.dom.querySelectorAll?.(".cm-content, .cm-line, .cm-scroller, .cm-selectionLayer");
 	if (!targets) return;

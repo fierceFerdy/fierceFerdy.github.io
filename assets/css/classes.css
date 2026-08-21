@@ -14,7 +14,7 @@
 	display: table;
 }
 
-.hint, question, .task{
+.hint, .question, question, .task, .warning{
 	display: table;
 	background-color: var(--dark3);
 	color: white;
@@ -48,6 +48,18 @@
 	}
 }
 
+.warning{
+	background-color: var(--red);
+
+	&:before{
+		content: "\f071";
+		font-family: "FontAwesome";
+		font-size: .9em;
+		color: #ffffff;
+		margin-right: .6rem;
+	}
+}
+
 .task{
 	background-color: var(--red);
 	background-color: var(--accent);
@@ -63,7 +75,7 @@
 	}
 }
 
-question{
+question, .question{
 	font-size: 1.6rem;
 
 	&:after{
@@ -161,21 +173,27 @@ pre{
 }
 
 cmd, code{
-	background-color: var(--dark00);
-	color: white;
-	padding: 4px;
+	background-color: #111822;
+	color: #e8edf3;
+	padding: 0 5px 0;
 	font-family: Inconsolata, monospace;
 	position: relative;
 	user-select: none;
 	white-space: nowrap; /* maybe */
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+	display: inline-block;
+	border: 1px solid #2d3a47;
+	border-radius: 7px;
+}
 
+cmd{
 	&:before{
 		content: "> ";
 		font-size: .9em;
 		color: var(--lime);
 		margin-right: .6rem;
 	}
+
 }
 
 .descriptor{

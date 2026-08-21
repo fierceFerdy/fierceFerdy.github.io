@@ -9,8 +9,7 @@
 	
 	<script src="/assets/js/main.js" defer></script>
 	<script src="/assets/js/quiz.js" defer></script>
-	<script type="module"  src="/assets/js/js-editor.js" defer></script>
-	<script type="module"  src="/assets/js/js-editor.js" defer></script>
+	<script type="module" src="/assets/js/js-editor.js" defer></script>
 </head>
 
 <body>
@@ -19,39 +18,34 @@
 		<h1>HTML 101</h1>
 		<p>The practical part of today includes an exercise on taking notes. It is therefore strongly recommended that you <strong>take notes</strong>. This is preparation for your further studies and career. If you don't take notes, I assume you can remember everything.</p>
 
+
+
+		<h2>Intro</h2>
+		<p>HTML works with what's called <strong>elements</strong> or <strong>tags</strong>. A tag exists of a name and surrounding angle brackets. <code>&lt; &gt;</code> Tags almost always come in pairs: an opening tag <code>&lt;tagname&gt;</code> and a closing tag <code>&lt;/tagname&gt;</code>. The opening and closing tag have the same name. The only difference is that the closing tag has a &#47; (forward slash) before the name.  For example, a paragraph<span class="tooltip"><span><strong>Paragraph</strong>: A block of text</span></span> is defined with <code>&lt;p&gt;</code> and <code>&lt;/p&gt;</code>. The content goes between these tags. </p>
+		<p class="warning">Closing tags is <strong>really important</strong>. If you do not close tags, everything goes inside of each other. Of course, sometimes you want this to be the case.</p>
+
+
+
 		<h2>Basic structure</h2>
 		<p>This structure forms the basis of <strong>every HTML document</strong>.</p>
 
-
-
+		<!-- Escape the < and > characters in code examples -->
+		<ul class="empty spaced">
+			<li><code>&lt;!doctype html&gt;</code> → The document type. Absolutely necessary. If you don't use this, the browser might render the page in 'quirks mode' which could break your website.</li>
+			<li><code>&lt;html&gt;</code> → The root<span class="tooltip"><span><strong>Root (NL: wortel)</strong>: The top-level element in an HTML document. This is the beginning.</span></span> element. All your code goes inside of this element.</li>
+			<li><code>&lt;head&gt;</code> → Things in the head are not visible to other humans. Here comes document information that's mostly useful for machines, who somehow can read what's in your head. Here you load in different files such as CSS (styling) and JS (interactivity).</li>
+			<li><code>&lt;title&gt;</code> → The page title goes in here. Visible only in the 
+<span class="imageHover"><span class="text">browser tab</span><img src="/assets/img/page-title.jpg"></span>. If you leave it empty, it shows the file name. <nobr></nobre>This goes in the <code>&lt;head&gt;</code></nobr>.</li>
+			<li><code>&lt;body&gt;</code> → The way the body looks, that's what humans see! This is where you put <em>all</em> of your content.</li>
+			<li><code>&lt;!-- This is a comment --&gt;</code> → Only visible in the code, the browser doesn't render this.</li>
+		</ul>
+		<p class="hint">It is important that we <strong>indent tags</strong> that are inside of each other for <strong>readability</strong>. Code is indented using <kbd>Tab</kbd>. You can un-indent using <kbd>Shift</kbd> + <kbd>Tab</kbd>. You can also select multiple lines and then indent. Try it out!</p>
+		
 		<div class="gridCorrector editorWrapper">
-			<div class="js-editor w-8/12" data-run="false" data-edit="true" data-language="html" >
+			<div class="js-editor" data-run="false"data-edit="true" data-language="html" >
 				<textarea class="title" hidden><p>Basic structure</p></textarea>
 				<textarea class="js-editor-doc" hidden>
-<!DOCTYPE html>
-<fakehtml lang="en"> <!-- Every element/tag you open, you must close. There are a few exceptions though. -->
-
-	<fakehead> <!-- Things in the head are not visible to other humans -->
-		<title>Page title</title> <!-- Visible in the browser tab --> 
-		<!-- Here comes document information that's mostly useful for machines -->
-		<!-- Here you load in different filetypes such as CSS and JS -->
-	</fakehead>
-
-	<fakebody> <!-- The way the body looks... That's what humans see -->
-		<!-- This is where you put your content -->
-	</fakebody>
-
-</fakehtml>
-				</textarea>
-			</div>
-
-
-
-			<div class="js-editor w-4/12" data-run="false"data-edit="true" data-language="html" >
-				<textarea class="title" hidden><p>Basic structure (no comment)</p></textarea>
-				<textarea class="js-editor-doc" hidden>
-<!-- Note that tags that are inside of eachother are indented using the tab-key -->
-<!DOCTYPE html>
+<!doctype html>
 <fakehtml lang="en"> 
 
 	<fakehead> 
@@ -64,20 +58,26 @@
 </fakehtml>
 				</textarea>
 			</div>
-
-
-
 		</div>
 
 
-
-		<!-- Oefening: haakjes invullen, closing tag, html, body en head tags invullen -->
-
+		<h3>Basic structure quiz</h3>
 		<div class="quiz" id="quiz">
 			<script type="application/json" class="quiz-data">{
-				"name": "HTML Basics Quiz",
+				"name": "HTML - Basic structure Quiz",
 				"blur": true,
 				"questions": [
+					{
+						"question": "How do you define the document type?",
+						"options": [
+							"&lt;!doctype html&gt;",
+							"&lt;doctype html&gt;",
+							"&lt;doctype=html&gt;",
+							"&lt;html&gt;"
+						],
+						"answer": 0,
+						"explanation": "The correct way to define the document type is <!doctype html>."
+					},
 					{
 						"question": "What 3 basic structure tags does a html document need? (in order) _html/<html>_, _head/<head>_ and _body/<body>_."
 					},
@@ -85,58 +85,143 @@
 						"question": "Fill in the gap: _<html>_"
 					},
 					{
-						"question": "Complete: _<ul>_ ... _</ul>_"
+						"question": "What is the name of the tag for a page title? _<title>/title/<title></title>_"
+					},
+					{
+						"question": "What is the correct way to write a comment in HTML?",
+						"options": [
+							"&lt;!-- This is a comment --&gt;",
+							"&lt;comment&gt; This is a comment &lt;/comment&gt;",
+							"&lt;!comment&gt; This is a comment &lt;/!comment&gt;",
+							"&lt;# This is a comment #&gt;"
+						],
+						"answer": 0,
+						"explanation": "The correct way to write a comment in HTML is <!-- This is a comment -->."
 					}
 				]
 			}</script>
 		</div>
 
-		<div class="gridCorrector editorWrapper">
-			<div class="js-editor" 
-				data-run="false" 
-				data-task-number="html-1" 
-				data-task-docs="false"
-				data-task-internet="false"
-				data-task-team="false"
-				data-task-questions="true"
-				data-height="340"
-				>
-				<textarea class="title" hidden>
-					<p>Tiny test: Create the basis structure of a HTML document. A few hints:</p>
-					<ul>
-						<li>What are we creating?</li>
-						<li>What can we as humans not see?</li>
-						<li>What can we see?</li>
-						<li>You must always open and ...?</li>
-					</ul>
-				</textarea>
-				<textarea class="js-editor-doc" hidden>
-
-				</textarea>
-			</div>
-		</div>
-
 
 		<h2>Basic elements/tags</h2>
+		<p>There are several basic elements/tags in HTML that you should be familiar with...</p>
 
 		<div class="gridCorrector editorWrapper">
 			<div class="js-editor w-12/12" data-run="false"data-edit="true" data-language="html" >
-				<textarea class="title" hidden><p>Basic structure (no comment)</p></textarea>
+				<textarea class="title" hidden><p>Basic tags</p></textarea>
 				<textarea class="js-editor-doc" hidden>
 <h1>Heading - also known as a title</h1>
 <h2>Subheading</h2> <!-- This goes all the way to <h6> -->
 <p>Paragraph. All text must go in a text element such as <h1> or <p></p>
 <a>Anchor - use this to link to another page. This is how you make a button!</a>
 
-<!-- Two exceptions: -->
-<br> <!-- Line break / "enter" -->
-<hr> <!-- Horizontal line -->
+<!-- And as you might have noticed, this is a comment (not a tag). You can write whatever and the browser will ignore it. Stupid Google! -->
+				</textarea>
+			</div>
+		</div>
 
-<!-- And as you might have noticed, this is a comment. You can write whatever and the browser will ignore it. Stupid Google! -->
+
+		<h3>Basic elements/tags quiz</h3>
+		<div class="quiz" id="quiz">
+			<script type="application/json" class="quiz-data">{
+				"name": "HTML - Basic tags Quiz",
+				"blur": true,
+				"questions": [
+					{
+						"question": "How do you create a paragraph? _p/<p>_"
+					},
+					{
+						"question": "How do you create an anchor? _a/<a>_"
+					},
+					{
+						"question": "How do you create a heading on the highest level? _h1/<h1>_"
+					}
+				]
+			}</script>
+		</div>
+
+
+		<h2>Attributes</h2>
+		<p>As you might've noticed with the anchor, it's missing some data in order to function well. Lots of tags can receive attributes, which provide additional information about the element and what it should do. Attributes are <strong>always</strong> part of the opening tag and happen after the name of the tag and before the closing angle bracket (&gt;).</p>
+
+		<p>Example: <editorlite>&lt;a href="http://google.be" title="Visit Google's homepage"&gt;Google&lt;/a&gt;</editorlite> Which then looks like: <a href="http://google.be" class="nolink" title="Visit Google's homepage">Google</a>.</p>
+		<p>An anchor needs a <code>href</code> attribute to specify the URL it links to. Secondly, a <code>title</code> attribute can provide additional information about the link. Hover the link for a second and see what happens.</p>
+		<p>A second interesting example is the <code>&lt;img&gt;</code> tag. Obviously it also requires a source, which in this case is called <code>src</code>. Secondly it needs an <code>alt</code> attribute to provide alternative text for the image. This is used by search engines, special devices, blind people and more.</p>
+		<p>Example: <editorlite>&lt;img src="image.jpg" alt="Description of the image"&gt;</editorlite> Which then looks like: <img src="image.jpg" class="nolink" alt="Description of the image"></p>
+		<p class="hint">See how it's not working properly? That's because there is no image.jpg at the same location of this HTML file. We also need to refer to the correct folder.</p>
+		<p>Let's try that again. Note how I'm using "../" to go "up" a folder. Then I tell the computer in which folders it needs to go. <editorlite>&lt;img src="../../assets/img/file-structure.jpg" alt="An example of a file structure"&gt;</editorlite> Which then looks like: <br><img src="../../assets/img/file-structure.jpg" class="nolink" alt="An example of a file structure"></p>
+
+
+		<h3>ID's and classes</h3>
+		<p>The above attributes are specific for the <code>&lt;a&gt;</code> and <code>&lt;img&gt;</code> tags. But there's also attributes that work for <em>every</em> tag. You can add a <code>class</code> or an <code>id</code> attribute to any element which is then used to target this element. Adding a class or an ID has three purposes:</p>
+		<ul>
+			<li>It is <strong>used as an identifier</strong>. If you give a paragraph the class 'introText' then you can easily deduct that it's the introduction text.</li>
+			<li>They're used <strong>to apply styles with CSS</strong>. <i>Don't quite understand it? inspect the red warning block under this.</i></li>
+			<li>They can be <strong>used by JavaScript to manipulate elements</strong>, such as changing the value or adding a visual effect.</li>
+		</ul>
+		
+		<p class="warning">You can use a class as often as you like, but an ID should be unique within a page. Both of these are often forgotten.</p>
+		
+		<div class="gridCorrector editorWrapper">
+			<div class="js-editor" data-run="false">
+				<textarea class="title" hidden><p>ID's and classes</p></textarea>
+				<textarea class="js-editor-doc" hidden>
+<p id="unique-id" class="class-name">This is a paragraph.</p>
+<p id="unique-id2" class="class-name">This is a paragraph.</p>
 				</textarea>
 			</div>
 		</div>
 		
+		
+		<p>For now we'll stick to using classes.</p>
+
+
+
+		<h3>Recap</h3>
+		<img src="../../assets/img/recap-html-attributes.jpg" class="nolink" alt="HTML attributes in Dutch">
+
+		<h3>HTML Attributes quiz</h3>
+		<div class="quiz" id="quiz">
+			<script type="application/json" class="quiz-data">{
+				"name": "HTML - Basic attributes Quiz",
+				"blur": true,
+				"questions": [
+					{
+						"question": "What's the attribute to add a link to an anchor? _href_",
+						"explanation": "The attribute to add a link to an anchor is href. Example: <a href='https://example.com'>Link</a>"
+					},
+					{
+						"question": "What's the attribute to add a description to an anchor? _title_",
+						"explanation": "The attribute to add a description to an anchor is title. Example: <a href='https://example.com' title='Description'>Link</a>"
+					},
+					{
+						"question": "What's the attribute to add a source to an image? _src_",
+						"explanation": "The attribute to add a source to an image is src. Example: <img src='image.jpg'>"
+					},
+					{
+						"question": "What's the attribute to add a description to an image? _alt_",
+						"explanation": "The attribute to add a description to an image is alt. Example: <img src='image.jpg' alt='Description'>"
+					},
+					{
+						"question": "What quotes can you use for attribute values?",
+						"options": [
+							"&quot;Double quotes&quot;",
+							"&apos;Single quotes&apos;",
+							"Both &apos;Single quotes&apos; and &quot;Double quotes&quot;",
+							"&grave;Backticks&grave;"
+						],
+						"answer": 2,
+						"explanation": "The attribute to add a description to an image is alt. Example: <img src='image.jpg' alt='Description'>"
+					},
+					{
+						"question": "What attribute lets you identify multiple elements? _class_",
+						"explanation": "The attribute to identify multiple elements is class. Example: <p class='class-name'>This is a paragraph.</p>"
+					}
+				]
+			}</script>
+		</div>
+
+
 
 		<a href="/pages/html/basics.html" class="nextPageTeaser">Next: HTML Basics <i class="fa-solid fa-arrow-right-long"></i></a>
 	</div>

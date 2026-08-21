@@ -77,17 +77,17 @@
 	font-size: 1.3rem;
 	font-family: Inconsolata, monospace;
 	position: relative;
-	background-color: #282c34;
+	background-color: #1f1f1f;
 	display: block;
 	width: 100%;
 	box-sizing: border-box;
-	background-color: #3e474f;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
 
 	.plain-text-editor{
 		width: 100%;
 		min-height: 240px;
-		background-color: #282c34;
-		color: #f8f8f2;
+		background-color: #1f1f1f;
+		color: #d4d4d4;
 		font-family: Inconsolata, monospace;
 		font-size: 1.3rem;
 		border: none;
@@ -109,7 +109,17 @@
 		height: 100%;
 		display: block;
 		width: 100%;
+		background-color: #1f1f1f;
 		/* overflow-y: scroll; */
+	}
+
+	.cm-scroller{
+		background-color: #1f1f1f;
+	}
+
+	.cm-gutters{
+		background-color: #181818;
+		border-right: 1px solid #2b2b2b;
 	}
 
 	.cm-content,
@@ -136,12 +146,12 @@
 
 	.cm-line{
 		&.cm-activeLine{
-			background-color: #333943;
+			background-color: #2d2d2d;
 		}
 
 		/* style selected text */
 		&.cm-selectionBackground{
-			background-color: var(--accent) !important;
+			background-color: #264f78 !important;
 			 /* override default selection color */
 		}
 	}
@@ -201,7 +211,7 @@
 		position: absolute;
 		bottom: 0;
 		right: 0;
-		background-color: #3e474f;
+		background-color: #252526;
 		color: white;
 		border-radius: 0;
 		cursor: pointer;
@@ -238,17 +248,55 @@ editorlite{
 	vertical-align: top;
 	margin-top: 3rem;
 	overflow: hidden;
-    border: 1px solid var(--dark3);
+    border: 1px solid #3c3c3c;
     border-radius: 8px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+	position: relative;
+	top: -px;
 
 	.cm-content{
-		background-color: var(--dark2);
+		background-color: transparent;
 		padding: 2px !important;
 	}
 
+	.cm-content,
+	.cm-line,
+	.cm-scroller,
+	.cm-lineWrapping,
+	.cm-selectionLayer{
+		white-space: pre-wrap !important;
+		word-break: normal;
+		overflow-wrap: anywhere;
+		-webkit-user-select: text;
+		user-select: text;
+	}
+
+	.cm-line{
+		line-height: 1.5;
+	}
+
+	/* Disable active line highlighting for editorlite only */
+	.cm-line.cm-activeLine{
+		background-color: transparent !important;
+	}
+
+	.cm-activeLineGutter{
+		background-color: #181818 !important;
+	}
+
 	.cm-editor{
+		font-family: Inconsolata, monospace;
 		font-size: 1.5rem;
+		background-color: #1f1f1f;
+	}
+
+	.cm-scroller{
+		background-color: #1f1f1f;
+	}
+
+	.cm-gutters{
+		background-color: #181818;
+		border-right: 1px solid #2b2b2b;
 	}
 
 	& + p{

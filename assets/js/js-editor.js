@@ -7,8 +7,6 @@
 import {EditorView, basicSetup} from "https://esm.sh/codemirror";
 import {javascript} 			from "https://esm.sh/@codemirror/lang-javascript";
 import {html} 					from "https://esm.sh/@codemirror/lang-html";
-import {oneDark} 				from "https://esm.sh/@codemirror/theme-one-dark";
-import {vscodeDark} 			from "https://esm.sh/@uiw/codemirror-theme-vscode";
 import {autocompletion, 
 		completeFromList} 		from "https://esm.sh/@codemirror/autocomplete";
 import {keymap} 				from "https://esm.sh/@codemirror/view";
@@ -16,7 +14,8 @@ import {defaultKeymap,
 		historyKeymap, 
 		indentWithTab} 			from "https://esm.sh/@codemirror/commands";
 import {EditorState} 			from "https://esm.sh/@codemirror/state";
-import {indentUnit} 			from "https://esm.sh/@codemirror/language";
+import {indentUnit, syntaxHighlighting, HighlightStyle} from "https://esm.sh/@codemirror/language";
+import {tags} from "https://esm.sh/@lezer/highlight";
 import {parse} 					from "https://esm.sh/acorn";
 
 
@@ -30,9 +29,37 @@ var globalCompletions = completeFromList([
     {label: "window", 		type: "variable"},
     {label: "setTimeout", 	type: "function", apply: insertWithCursor("setTimeout(()=>{},1000)", 16)}
 ]);
+var darkModernSurface = EditorView.theme({
+    "&": { backgroundColor: "#1f1f1f", color: "#d4d4d4" },
+    ".cm-scroller": { backgroundColor: "#1f1f1f" },
+    ".cm-content": { caretColor: "#d4d4d4" },
+    ".cm-cursor, .cm-dropCursor": { borderLeftColor: "#d4d4d4" },
+    ".cm-selectionBackground, .cm-selectionLayer .cm-selectionBackground, &.cm-focused .cm-selectionBackground": { backgroundColor: "#264f78" },
+    ".cm-gutters": { backgroundColor: "#181818", color: "#858585", border: "none" },
+    ".cm-activeLine": { backgroundColor: "#2d2d2d" },
+    ".cm-activeLineGutter": { backgroundColor: "#2d2d2d" },
+    ".cm-tooltip": { backgroundColor: "#252526", color: "#d4d4d4", border: "1px solid #3c3c3c" }
+}, {dark: true});
+
+var darkModernSyntax = syntaxHighlighting(HighlightStyle.define([
+    {tag: tags.keyword, color: "#569cd6"},
+    {tag: [tags.atom, tags.bool, tags.null], color: "#569cd6"},
+    {tag: [tags.number, tags.integer, tags.float], color: "#b5cea8"},
+    {tag: [tags.string, tags.special(tags.string)], color: "#ce9178"},
+    {tag: [tags.comment, tags.lineComment, tags.blockComment], color: "#6a9955"},
+    {tag: [tags.variableName, tags.propertyName], color: "#9cdcfe"},
+    {tag: tags.function(tags.variableName), color: "#dcdcaa"},
+    {tag: [tags.tagName, tags.typeName], color: "#569cd6"},
+    {tag: tags.attributeName, color: "#9cdcfe"},
+    {tag: tags.attributeValue, color: "#ce9178"},
+    {tag: [tags.punctuation, tags.bracket], color: "#d4d4d4"},
+    {tag: tags.angleBracket, color: "#8b949e"}
+]));
+
 var baseExtensions = [
     basicSetup,
-    vscodeDark,
+    darkModernSurface,
+    darkModernSyntax,
     EditorState.tabSize.of(4),
     indentUnit.of("    "),
     EditorView.lineWrapping,
@@ -460,15 +487,7 @@ function getEditorExtensions(language, isReadOnly = false) {
 		: [autocompletion({override: [globalCompletions]})];
 
 	var readOnlyExtensions = isReadOnly ? [EditorState.readOnly.of(true)] : [];
-	var baseEditorExtensions = language === "html"
-		? [
-            vscodeDark,
-            EditorState.tabSize.of(4),
-            indentUnit.of("    "),
-			EditorView.lineWrapping,
-			keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab])
-		]
-		: baseExtensions;
+    var baseEditorExtensions = baseExtensions;
 
 	return [
 		...baseEditorExtensions,
@@ -479,24 +498,7 @@ function getEditorExtensions(language, isReadOnly = false) {
 }
 
 function applyEditorSelectionStyles(view) {
-	if (!view?.dom) return;
-
-	view.dom.style.fontFamily = "Inconsolata, monospace";
-	view.dom.style.fontSize = "1.3rem";
-    view.dom.style.backgroundColor = "#1f1f1f";
-    view.dom.style.color = "#d4d4d4";
-
-	var targets = view.dom.querySelectorAll?.(".cm-content, .cm-line, .cm-scroller, .cm-selectionLayer");
-	if (!targets) return;
-
-	targets.forEach((element) => {
-		element.style.setProperty("white-space", "pre", "important");
-		element.style.setProperty("user-select", "text", "important");
-		element.style.setProperty("-webkit-user-select", "text", "important");
-		element.style.setProperty("word-break", "normal", "important");
-		element.style.setProperty("overflow-wrap", "normal", "important");
-		element.style.setProperty("line-height", "1.5", "important");
-	});
+    if (!view?.dom) return;
 }
 
 
@@ -540,6 +542,8 @@ function insertWithCursor(text, cursorOffset) {
     };
 }
 
+
+
 function executeUserCode(code, fakeConsole, asyncTracker = createAsyncTracker()) {
     var wrapped = `"use strict";\n${code}\n//# sourceURL=student-code.js`;
     var restoreNameState = null;
@@ -576,6 +580,8 @@ function executeUserCode(code, fakeConsole, asyncTracker = createAsyncTracker())
         if (restoreNameState) restoreNameState();
     }
 }
+
+
 
 async function waitForAsyncLogs(executionResult, logs, asyncTracker, maxWaitMs = 4500, idleMs = 180) {
     var start = Date.now();

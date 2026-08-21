@@ -29,13 +29,11 @@
 		<h2>Basic structure</h2>
 		<p>This structure forms the basis of <strong>every HTML document</strong>.</p>
 
-		<!-- Escape the < and > characters in code examples -->
 		<ul class="empty spaced">
 			<li><code>&lt;!doctype html&gt;</code> → The document type. Absolutely necessary. If you don't use this, the browser might render the page in 'quirks mode' which could break your website.</li>
 			<li><code>&lt;html&gt;</code> → The root<span class="tooltip"><span><strong>Root (NL: wortel)</strong>: The top-level element in an HTML document. This is the beginning.</span></span> element. All your code goes inside of this element.</li>
 			<li><code>&lt;head&gt;</code> → Things in the head are not visible to other humans. Here comes document information that's mostly useful for machines, who somehow can read what's in your head. Here you load in different files such as CSS (styling) and JS (interactivity).</li>
-			<li><code>&lt;title&gt;</code> → The page title goes in here. Visible only in the 
-<span class="imageHover"><span class="text">browser tab</span><img src="/assets/img/page-title.jpg"></span>. If you leave it empty, it shows the file name. <nobr></nobre>This goes in the <code>&lt;head&gt;</code></nobr>.</li>
+			<li><code>&lt;title&gt;</code> → The page title goes in here. Visible only in the <span class="imageHover"><span class="text">browser tab</span><img src="/assets/img/page-title.jpg"></span>. If you leave it empty, it shows the file name. <nobr></nobre>This goes in the <code>&lt;head&gt;</code></nobr>.</li>
 			<li><code>&lt;body&gt;</code> → The way the body looks, that's what humans see! This is where you put <em>all</em> of your content.</li>
 			<li><code>&lt;!-- This is a comment --&gt;</code> → Only visible in the code, the browser doesn't render this.</li>
 		</ul>
@@ -59,6 +57,7 @@
 				</textarea>
 			</div>
 		</div>
+
 
 
 		<h3>Basic structure quiz</h3>
@@ -103,6 +102,7 @@
 		</div>
 
 
+
 		<h2>Basic elements/tags</h2>
 		<p>There are several basic elements/tags in HTML that you should be familiar with...</p>
 
@@ -119,6 +119,7 @@
 				</textarea>
 			</div>
 		</div>
+
 
 
 		<h3>Basic elements/tags quiz</h3>
@@ -141,6 +142,7 @@
 		</div>
 
 
+
 		<h2>Attributes</h2>
 		<p>As you might've noticed with the anchor, it's missing some data in order to function well. Lots of tags can receive attributes, which provide additional information about the element and what it should do. Attributes are <strong>always</strong> part of the opening tag and happen after the name of the tag and before the closing angle bracket (&gt;).</p>
 
@@ -152,6 +154,7 @@
 		<p>Let's try that again. Note how I'm using "../" to go "up" a folder. Then I tell the computer in which folders it needs to go. <editorlite>&lt;img src="../../assets/img/file-structure.jpg" alt="An example of a file structure"&gt;</editorlite> Which then looks like: <br><img src="../../assets/img/file-structure.jpg" class="nolink" alt="An example of a file structure"></p>
 
 
+
 		<h3>ID's and classes</h3>
 		<p>The above attributes are specific for the <code>&lt;a&gt;</code> and <code>&lt;img&gt;</code> tags. But there's also attributes that work for <em>every</em> tag. You can add a <code>class</code> or an <code>id</code> attribute to any element which is then used to target this element. Adding a class or an ID has three purposes:</p>
 		<ul>
@@ -159,7 +162,7 @@
 			<li>They're used <strong>to apply styles with CSS</strong>. <i>Don't quite understand it? inspect the red warning block under this.</i></li>
 			<li>They can be <strong>used by JavaScript to manipulate elements</strong>, such as changing the value or adding a visual effect.</li>
 		</ul>
-		
+
 		<p class="warning">You can use a class as often as you like, but an ID should be unique within a page. Both of these are often forgotten.</p>
 		
 		<div class="gridCorrector editorWrapper">
@@ -172,13 +175,14 @@
 			</div>
 		</div>
 		
-		
 		<p>For now we'll stick to using classes.</p>
 
 
 
 		<h3>Recap</h3>
 		<img src="../../assets/img/recap-html-attributes.jpg" class="nolink" alt="HTML attributes in Dutch">
+
+
 
 		<h3>HTML Attributes quiz</h3>
 		<div class="quiz" id="quiz">

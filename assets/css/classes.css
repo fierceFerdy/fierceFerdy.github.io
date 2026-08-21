@@ -9,6 +9,30 @@
 	min-width: 400px;
 }
 
+.notification{
+	position: fixed;
+	right: 1.5rem;
+	bottom: 1.5rem;
+	font-size: 1.5rem;
+	z-index: 100;
+	max-width: min(360px, calc(100vw - 3rem));
+	padding: 1.5rem 1.75rem;
+	background-color: var(--dark1);
+	border: 2px solid var(--lime);
+	border-radius: var(--radius);
+	color: white;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+
+	&:before{ 
+		/* checkmark icon */
+		content: "\f00c";
+		font-family: "FontAwesome";
+		font-size: 1em;
+		color: var(--lime);
+		margin-right: .6rem;
+	}
+}
+
 .center{
 	margin: 0 auto;
 	display: table;
@@ -450,13 +474,12 @@ button{
     }
 }
 
-
-.floatright{
+.floatright, .floatRight{
 	float: right;
 }
 
 
-.floatleft{
+.floatleft, .floatLeft{
 	float: left;
 	margin-left: 0;
 }

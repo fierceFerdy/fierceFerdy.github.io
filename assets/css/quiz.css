@@ -105,6 +105,12 @@
 		}
     }
 
+	.quiz-options{
+		button{
+			display: block;
+		}
+	}
+
 	cmd{
 		background-color: var(--dark2);
 	}
@@ -114,9 +120,9 @@
 	}
 
 	button{
-		display: inline-block;
+		display: block;
 		margin-top: 1rem;
-		margin-right: 2rem;
+		margin-right: 1rem;
 		border: none;
 		background-color: var(--dark2);
 		border: 3px solid transparent;
@@ -150,6 +156,8 @@
 		}
 
 		&.quiz-check, &.quiz-skip{
+			display: inline-block;
+
 			&:before{
 				content: none;
 			}
@@ -308,5 +316,9 @@
 			border-radius: 5px;
 			transition: width .3s ease-in-out;
 		}
+	}
+
+	editorlite{
+		display: inline-block !important;
 	}
 }

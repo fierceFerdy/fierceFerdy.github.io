@@ -166,6 +166,8 @@ function renderCurrentQuestion(body, footer, state) {
 		renderTextInputQuestion(body, footer, state, questionData, getQuestionPrompt(state, questionData.question));
 		renderFooter(footer, state, false);
 	}
+
+	document.dispatchEvent(new Event("quiz-rendered"));
 }
 
 
@@ -402,7 +404,7 @@ function renderGapTemplatePrompt(questionText, template, inputElements, question
 
 	template.items.forEach((item) => {
 		if (item.type === "text") {
-			questionText.appendChild(document.createTextNode(item.value));
+			appendQuestionPromptMarkup(questionText, item.value);
 			return;
 		}
 
@@ -416,11 +418,20 @@ function renderGapTemplatePrompt(questionText, template, inputElements, question
 		input.id = `quiz-answer-${questionIndex}-${item.fieldIndex}`;
 		input.setAttribute("aria-label", `Gap ${item.fieldIndex + 1}`);
 		input.size = getInputSizeForAnswers(field.answers);
-		input.style.width = `${getInputSizeForAnswers(field.answers) * .8}rem`;
+		input.style.width = `${getInputSizeForAnswers(field.answers)}rem`;
 
 		questionText.appendChild(input);
 		inputElements[item.fieldIndex] = input;
 	});
+}
+
+function appendQuestionPromptMarkup(target, text) {
+	var fragment = document.createElement("span");
+	setAllowedMarkup(fragment, text, {allowEditorLite: true});
+
+	while (fragment.firstChild) {
+		target.appendChild(fragment.firstChild);
+	}
 }
 
 function parseGapTemplate(text) {
@@ -589,12 +600,30 @@ function normalizeAnswerText(value) {
 }
 
 function setAllowedMarkup(target, rawText, options = {}) {
-	var decoded = decodeHtmlEntities(String(rawText ?? ""));
+	var sourceText = String(rawText ?? "");
+	var editorLiteSources = [];
+	var literalTags = [];
+
+	if (options.allowEditorLite) {
+		sourceText = sourceText.replace(/<editorlite\b[^>]*>([\s\S]*?)<\/editorlite>/gi, (match, content) => {
+			var marker = `QUIZ_EDITORLITE_${editorLiteSources.length}`;
+			editorLiteSources.push(decodeHtmlEntities(content));
+			return marker;
+		});
+	}
+
+	sourceText = sourceText.replace(/&lt;(\/?[a-z][^&<>]*)&gt;/gi, (match, tag) => {
+		var marker = `QUIZ_LITERAL_TAG_${literalTags.length}`;
+		literalTags.push(`<${tag}>`);
+		return marker;
+	});
+
+	var decoded = decodeHtmlEntities(sourceText);
 	var parserContainer = document.createElement("div");
 	parserContainer.innerHTML = decoded;
 
 	target.textContent = "";
-	appendAllowedNodes(parserContainer, target, options);
+	appendAllowedNodes(parserContainer, target, {...options, editorLiteSources, literalTags});
 
 	// If the safe parser stripped everything (e.g. literal tags like <html> or <!doctype html>),
 	// fall back to plain text so escaped code snippets are still visible.
@@ -606,7 +635,7 @@ function setAllowedMarkup(target, rawText, options = {}) {
 function appendAllowedNodes(sourceNode, targetNode, options) {
 	for (var child of sourceNode.childNodes) {
 		if (child.nodeType === Node.TEXT_NODE) {
-			targetNode.appendChild(document.createTextNode(child.textContent || ""));
+			appendAllowedText(child.textContent || "", targetNode, options);
 			continue;
 		}
 
@@ -619,7 +648,7 @@ function appendAllowedNodes(sourceNode, targetNode, options) {
 
 		if (options.allowEditorLite && child.nodeType === Node.ELEMENT_NODE && child.tagName === "EDITORLITE") {
 			var editorLite = document.createElement("editorlite");
-			editorLite.textContent = child.textContent || "";
+			editorLite.textContent = getEditorLiteSource(child);
 			targetNode.appendChild(editorLite);
 			continue;
 		}
@@ -628,6 +657,33 @@ function appendAllowedNodes(sourceNode, targetNode, options) {
 			appendAllowedNodes(child, targetNode, options);
 		}
 	}
+}
+
+function appendAllowedText(text, targetNode, options) {
+	var markerPattern = /QUIZ_EDITORLITE_(\d+)|QUIZ_LITERAL_TAG_(\d+)/g;
+	var lastIndex = 0;
+	var match;
+
+	while ((match = markerPattern.exec(text))) {
+		targetNode.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+
+		if (match[1] !== undefined) {
+			var editorLite = document.createElement("editorlite");
+			editorLite.textContent = options.editorLiteSources[Number(match[1])] || "";
+			targetNode.appendChild(editorLite);
+		} else {
+			targetNode.appendChild(document.createTextNode(options.literalTags[Number(match[2])] || ""));
+		}
+		lastIndex = markerPattern.lastIndex;
+	}
+
+	targetNode.appendChild(document.createTextNode(text.slice(lastIndex)));
+}
+
+function getEditorLiteSource(editorLiteNode) {
+	return Array.from(editorLiteNode.childNodes)
+		.map((node) => node.nodeType === Node.ELEMENT_NODE ? node.outerHTML : node.textContent || "")
+		.join("");
 }
 
 function decodeHtmlEntities(value) {

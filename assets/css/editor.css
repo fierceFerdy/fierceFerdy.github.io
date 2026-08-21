@@ -58,7 +58,7 @@
 	}
 
 	&.blurChildren{
-		.js-editor, .terminal, .allowed{
+		.js-editor, .terminal, .html-preview, .allowed{
 			filter: blur(10px);
 			pointer-events: none;
 			user-select: none;
@@ -406,4 +406,12 @@ p editorlite{
 		margin-left: 0;
 		margin-right: 0;
 	}
+}
+
+.html-preview{
+	margin-top: 2rem;
+	min-height: 240px;
+	border: 1px solid #3c3c3c;
+	background-color: white;
+	position: relative;
 }

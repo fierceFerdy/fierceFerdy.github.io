@@ -69,7 +69,14 @@ var baseExtensions = [
 
 // Init all editors on the page
 document.querySelectorAll(".js-editor").forEach(createEditor);
-document.querySelectorAll('editorlite').forEach(createLiteEditor);
+
+function initializeLiteEditors() {
+    document.querySelectorAll("editorlite").forEach(createLiteEditor);
+}
+
+initializeLiteEditors();
+document.addEventListener("DOMContentLoaded", initializeLiteEditors);
+document.addEventListener("quiz-rendered", initializeLiteEditors);
 
 
 
@@ -183,7 +190,8 @@ function createEditor(container) {
 			"docs <span class='" + (container.dataset.taskDocs === "true" ? "check" : "xmark") + "'></span> " +
 			"internet <span class='" + (container.dataset.taskInternet === "true" ? "check" : "xmark") + "'></span> " +
 			"teamwork <span class='" + (container.dataset.taskTeam === "true" ? "check" : "xmark") + "'></span> " +
-			"questions <span class='" + (container.dataset.taskQuestions === "true" ? "check" : "xmark") + "'></span>";
+			"questions <span class='" + (container.dataset.taskQuestions === "true" ? "check" : "xmark") + "'></span>" +
+			"notes <span class='" + (container.dataset.taskNotes === "true" ? "check" : "xmark") + "'></span> ";
 		if(container.dataset.paste === "false"){
 			allowed.innerHTML += " paste <span class='xmark'></span>";
 		}
@@ -220,16 +228,26 @@ function createEditor(container) {
 		container.appendChild(finishBtn);
 
 		finishBtn.addEventListener("click", () => {
+            var code = view.state.doc.toString();
 			document.body.classList.remove("blur");
 			container.parentElement.classList.remove("activeTask");
 			finishBtn.remove();
 			localStorage.removeItem("activeTask");
+            showAssignmentNotification();
+
+            if (container.dataset.download === "true") {
+                downloadEditorFile(container, code);
+            }
 
             addShowSolutionButton(container, editorHost);
 
-			(async () => {
-				await runCode(view.state.doc.toString(), terminal, container, 'finish');
-			})();
+            if (language === "html") {
+                updateHtmlPreview(preview, code);
+            } else {
+                (async () => {
+                    await runCode(code, terminal, container, "finish");
+                })();
+            }
 		});
 	}
 
@@ -256,8 +274,9 @@ function createEditor(container) {
 		// add width class
 		container.classList.add("w-3/5");
 
-		// add terminal
-		var terminal = drawTerminal(container);
+        // Add an HTML preview or JavaScript terminal.
+        var preview = language === "html" ? drawHtmlPreview(container) : null;
+        var terminal = language === "html" ? null : drawTerminal(container);
 
 		// add btn
 		var runBtn = document.createElement("button");
@@ -266,13 +285,23 @@ function createEditor(container) {
 		container.appendChild(runBtn);
 		
 		// add event listener
-        runBtn.addEventListener("click", async () => runCode(view.state.doc.toString(), terminal, container));
+        runBtn.addEventListener("click", async () => {
+            if (language === "html") {
+                updateHtmlPreview(preview, view.state.doc.toString());
+            } else {
+                await runCode(view.state.doc.toString(), terminal, container);
+            }
+        });
 		
 		// also run on ctrl+shift+enter
 		view.dom.addEventListener("keydown", async (e) => {
 			if(e.key === "Enter" && e.shiftKey && e.ctrlKey){
 				e.preventDefault();
-                await runCode(view.state.doc.toString(), terminal, container, 'run');
+                if (language === "html") {
+                    updateHtmlPreview(preview, view.state.doc.toString());
+                } else {
+                    await runCode(view.state.doc.toString(), terminal, container, "run");
+                }
 			}
 		});
     }else{
@@ -529,6 +558,59 @@ function drawTerminal(container) {
     terminal.appendChild(clearTerminal);
 
     return terminal;
+}
+
+function showAssignmentNotification() {
+    var notification = document.createElement("div");
+    notification.className = "notification";
+    notification.textContent = "Assignment sent to your teacher.";
+    document.body.appendChild(notification);
+
+    setTimeout(() => notification.remove(), 4000);
+}
+
+function downloadEditorFile(container, code) {
+    var extension = getEditorFileExtension(container.dataset.language);
+    var filename = container.dataset.filename || container.dataset.taskNumber || "assignment";
+    filename = filename.replace(/[^a-z0-9_-]+/gi, "-").replace(/^-+|-+$/g, "") || "assignment";
+
+    var blob = new Blob([code], {type: getEditorMimeType(extension)});
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = `${filename}.${extension}`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+}
+
+function getEditorFileExtension(language) {
+    if (String(language).toLowerCase() === "html") return "html";
+    if (String(language).toLowerCase() === "css") return "css";
+    return "js";
+}
+
+function getEditorMimeType(extension) {
+    if (extension === "html") return "text/html";
+    if (extension === "css") return "text/css";
+    return "text/javascript";
+}
+
+function drawHtmlPreview(container) {
+    var preview = document.createElement("iframe");
+    preview.className = "html-preview w-2/5";
+    preview.title = "HTML preview";
+    preview.setAttribute("sandbox", "allow-forms");
+    container.after(preview);
+    updateHtmlPreview(preview, "");
+
+    return preview;
+}
+
+function updateHtmlPreview(preview, code) {
+    if (!preview) return;
+    preview.srcdoc = normalizeEditorSource(code, "html");
 }
 
 

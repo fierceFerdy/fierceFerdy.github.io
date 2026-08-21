@@ -51,6 +51,7 @@
 			<li>Server can push data to the client</li>
 			<li>Stateful (the server remembers the connection)</li>
 		</ul>
+
 		<p>A WebSocket is like a phone call; the connection stays open and both parties can communicate in real-time. Built for instant updates.</p>
 		<h4>Great for:</h4>
 		<ul>
@@ -63,12 +64,9 @@
 	<h2>Let's build a basic WebSocket</h2>
 	<ol>
 		<li>Create a project folder</li>
-		<li>Initialize Node. Inside the project, run: <txt>npm init -y</txt> <i>a wild package.json appears!</i>
-		</li>
-		<li>Install WebSocket library, run: <txt>npm install ws</txt>
-		</li>
-		<li>Create your server file → <code>server.js</code>
-		</li>
+		<li>Initialize Node. Inside the project, run: <txt>npm init -y</txt> <i>a wild package.json appears!</i></li>
+		<li>Install WebSocket library, run: <txt>npm install ws</txt></li>
+		<li>Create your server file → <code>server.js</code></li>
 		<li><i>Follow the teacher's instructions concerning the server file</i></li>
 	</ol>
 
@@ -110,16 +108,12 @@ console.log("WebSocket server running on ws://localhost:3030");
 
 
 	<ol start="6">
-		<li>Edit package.json to enable ES modules
-			<code>"type": "module"</code>
-		</li>
-		<li>Run the server: <txt>node server.js</txt> You should see → Running on ws://localhost:3030
-		</li>
+		<li>Edit package.json to enable ES modules <code>"type": "module"</code></li>
+		<li>Run the server: <txt>node server.js</txt> You should see → Running on ws://localhost:3030</li>
 		<li>YAY!! <i>(We can already interact with it but let's make an interface instead)</i></li>
-		<li>Create your client files → <code>client.html</code> and <code>client.js</code>
-		</li>
+		<li>Create your client files → <code>client.html</code> and <code>client.js</code></li>
 		<li><i>Follow the teacher's instructions concerning the client files</i></li>
-		<li>When finished, open <code>client.html</code> in your browser in two separate tabs and open the console in each of them. Send messages between the tabs to see the WebSocket in action!</li>
+		<li>When finished, open <code>client.html</code> in your browser in two separate tabs and open the console in each of  them. Send messages between the tabs to see the WebSocket in action!</li>
 	</ol>
 
 	<div class="gridCorrector editorWrapper">

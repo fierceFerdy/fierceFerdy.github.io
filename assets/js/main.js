@@ -145,6 +145,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 				<a class="nested" href="/pages/html/overview.html">Overview</a>
 				<a class="nested" href="/pages/html/intro.html">Intro</a>
 				<a class="nested" href="/pages/html/basics.html">Basics</a>
+				<a class="nested" href="/pages/html/nesting-and-tables.html">Nesting + tables</a>
 			</div>
 		</div>
 

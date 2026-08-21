@@ -30,10 +30,10 @@ var globalCompletions = completeFromList([
     {label: "setTimeout", 	type: "function", apply: insertWithCursor("setTimeout(()=>{},1000)", 16)}
 ]);
 var darkModernSurface = EditorView.theme({
-    "&": { backgroundColor: "#1f1f1f", color: "#d4d4d4" },
+    "&": { backgroundColor: "#1f1f1f", color: "#ffffff" },
     ".cm-scroller": { backgroundColor: "#1f1f1f" },
-    ".cm-content": { caretColor: "#d4d4d4" },
-    ".cm-cursor, .cm-dropCursor": { borderLeftColor: "#d4d4d4" },
+    ".cm-content": { color: "#ffffff", caretColor: "#ffffff" },
+    ".cm-cursor, .cm-dropCursor": { borderLeftColor: "#ffffff" },
     ".cm-selectionBackground, .cm-selectionLayer .cm-selectionBackground, &.cm-focused .cm-selectionBackground": { backgroundColor: "#264f78" },
     ".cm-gutters": { backgroundColor: "#181818", color: "#858585", border: "none" },
     ".cm-activeLine": { backgroundColor: "#2d2d2d" },
@@ -493,7 +493,7 @@ function getEditorExtensions(language, isReadOnly = false) {
 		...baseEditorExtensions,
 		languageExtension,
 		...completionExtensions,
-		...readOnlyExtensions
+        ...readOnlyExtensions
 	];
 }
 

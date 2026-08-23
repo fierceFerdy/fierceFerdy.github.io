@@ -25,8 +25,17 @@ function initQuizBlock(block) {
 	var quizData;
 	try {
 		quizData = JSON.parse(dataScript.textContent);
-	} catch {
-		block.innerHTML = "<p>Quiz data is invalid.</p>";
+	} catch (error) {
+		block.innerHTML = "";
+
+		var errorTitle = document.createElement("p");
+		errorTitle.textContent = getQuizParseErrorMessage(error, dataScript.textContent);
+		block.appendChild(errorTitle);
+
+		var errorHint = document.createElement("p");
+		errorHint.textContent = "Common issues: missing comma, trailing comma, unescaped quote, or mismatched brackets/braces.";
+		block.appendChild(errorHint);
+
 		return;
 	}
 
@@ -42,7 +51,10 @@ function initQuizBlock(block) {
 		finalScore:      0,
 		playerName:      "",
 		savedAttemptId:  null,
-		questions:       quizData.questions || [],
+		sourceQuestions: Array.isArray(quizData.questions) ? quizData.questions : [],
+		randomizeOrder:  isTrueValue(quizData.randomizeOrder),
+		questions:       getPreparedQuestions(quizData.questions, isTrueValue(quizData.randomizeOrder)),
+		showHighscores:  quizData.showHighscores == null ? true : isTrueValue(quizData.showHighscores),
 		quizName:        quizData.name || "Unnamed Quiz",
 		quizInstanceId:  getQuizInstanceId(block, quizData),
 		blurPage:        isTrueValue(block.dataset.blur) || isTrueValue(block.dataset.blurPage) || isTrueValue(quizData.blur) || isTrueValue(quizData.blurPage)
@@ -734,10 +746,13 @@ function renderFinishedState(body, footer, state) {
 	}
 
 	// Leaderboard (loaded async)
-	var leaderboardWrap = document.createElement("div");
-	leaderboardWrap.className = "quiz-highscores";
-	body.appendChild(leaderboardWrap);
-	renderHighscoreLoading(leaderboardWrap);
+	var leaderboardWrap = null;
+	if (state.showHighscores) {
+		leaderboardWrap = document.createElement("div");
+		leaderboardWrap.className = "quiz-highscores";
+		body.appendChild(leaderboardWrap);
+		renderHighscoreLoading(leaderboardWrap);
+	}
 
 	// Retry button
 	var retryButton = document.createElement("button");
@@ -748,6 +763,7 @@ function renderFinishedState(body, footer, state) {
 
 	retryButton.addEventListener("click", (e) => {
 		e.preventDefault();
+		state.questions = getPreparedQuestions(state.sourceQuestions, state.randomizeOrder);
 		Object.assign(state, {
 			currentIndex: 0, answeredCount: 0, correctCount: 0,
 			started: false, startedAt: null, finishedAt: null,
@@ -759,7 +775,9 @@ function renderFinishedState(body, footer, state) {
 	// Keep per-user history for exports and offline fallback
 	saveQuizAttemptLocal(state);
 
-	saveAndLoadHighscores(leaderboardWrap, state);
+	if (state.showHighscores && leaderboardWrap) {
+		saveAndLoadHighscores(leaderboardWrap, state);
+	}
 }
 
 
@@ -915,6 +933,67 @@ function makeCheckbox(label, checked, onChange) {
 	labelEl.appendChild(input);
 	labelEl.append(` ${label}`);
 	return labelEl;
+}
+
+function getQuizParseErrorMessage(error, sourceText) {
+	var baseMessage = "Quiz data is invalid JSON.";
+	var rawMessage = String(error?.message || "").trim();
+
+	if (!rawMessage) return baseMessage;
+
+	var lineColumnMatch = rawMessage.match(/line\s+(\d+)\s+column\s+(\d+)/i);
+	if (lineColumnMatch) {
+		return `${baseMessage} ${rawMessage}.`;
+	}
+
+	var positionMatch = rawMessage.match(/position\s+(\d+)/i);
+	if (!positionMatch) {
+		return `${baseMessage} ${rawMessage}.`;
+	}
+
+	var index = Number(positionMatch[1]);
+	if (!Number.isFinite(index)) {
+		return `${baseMessage} ${rawMessage}.`;
+	}
+
+	var location = getLineAndColumnFromIndex(sourceText, index);
+	return `${baseMessage} ${rawMessage} (line ${location.line}, column ${location.column}).`;
+}
+
+function getLineAndColumnFromIndex(text, index) {
+	var source = String(text || "");
+	var safeIndex = Math.max(0, Math.min(source.length, index));
+	var line = 1;
+	var column = 1;
+
+	for (var i = 0; i < safeIndex; i++) {
+		var char = source[i];
+		if (char === "\n") {
+			line++;
+			column = 1;
+			continue;
+		}
+
+		if (char !== "\r") column++;
+	}
+
+	return { line, column };
+}
+
+function getPreparedQuestions(questions, randomizeOrder) {
+	var list = Array.isArray(questions) ? [...questions] : [];
+	if (!randomizeOrder) return list;
+	return shuffleArray(list);
+}
+
+function shuffleArray(list) {
+	for (var i = list.length - 1; i > 0; i--) {
+		var j = Math.floor(Math.random() * (i + 1));
+		var temp = list[i];
+		list[i] = list[j];
+		list[j] = temp;
+	}
+	return list;
 }
 
 function getTimeMultiplier(elapsedMs, questionCount) {

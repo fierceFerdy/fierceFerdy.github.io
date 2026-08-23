@@ -18,6 +18,208 @@
 		<h1>Nesting / Tables</h1>
 		
 		
+		<div class="advancedWrapper">
+			<h2>Recap of previous lesson <button class="toggle"></button></h2>
+
+			<div class="advancedContent">
+
+				<h3>A basic structure for every HTML page.</h3>
+				<div class="gridCorrector editorWrapper">
+					<div class="js-editor" data-run="false" data-edit="true" data-language="html">
+						<textarea class="title" hidden><p>Basic structure</p></textarea>
+						<textarea class="js-editor-doc" hidden>
+<!doctype html>
+<fakehtml lang="en"> 
+
+	<fakehead> 
+		<title>Page title</title>
+	</fakehead>
+
+	<fakebody>
+	</fakebody>
+
+</fakehtml>
+						</textarea>
+					</div>
+				</div>
+
+				<h3>Remember</h3>
+				<ul>
+					<li>What is inside the <code>&lt;head&gt;</code> is not visible to the visitor. Only for 'computers'.</li>
+					<li>What is inside the <code>&lt;body&gt;</code> is visible to the visitor.</li>
+					<li>All visible content should be inside the <code>&lt;body&gt;</code>.</li>
+				</ul>
+				
+				<img src="../../assets/img/recap-html-attributes.jpg" class="nolink" alt="HTML attributes in Dutch">
+
+				<h3>Recap quiz</h3>
+				<div class="quiz" id="quiz3">
+					<script type="application/json" class="quiz-data">{
+						"name": "HTML - Basic attributes Quiz",
+						"blur": true,
+						"randomizeOrder": true,
+						"showHighscores": true,
+						"questions": [
+							{
+								"question": "How do you define the document type?",
+								"options": [
+									"&lt;!doctype html&gt;",
+									"&lt;doctype html&gt;",
+									"&lt;doctype=html&gt;",
+									"&lt;html&gt;"
+								],
+								"answer": 0,
+								"explanation": "The correct way to define the document type is <!doctype html>."
+							},
+							{
+								"question": "What 3 basic structure tags does a html document need? (in order) _html/<html>_, _head/<head>_ and _body/<body>_."
+							},
+							{
+								"question": "What is the correct way to write a comment in HTML?",
+								"options": [
+									"&lt;!-- This is a comment --&gt;",
+									"&lt;comment&gt; This is a comment &lt;/comment&gt;",
+									"&lt;!comment&gt; This is a comment &lt;/!comment&gt;",
+									"&lt;# This is a comment #&gt;"
+								],
+								"answer": 0,
+								"explanation": "The correct way to write a comment in HTML is <!-- This is a comment -->."
+							},
+							{
+								"question": "How do you make a list?",
+								"options": [
+									"&lt;ul&gt;",
+									"&lt;list&gt;",
+									"&lt;ul&gt; or &lt;list&gt;",
+									"&lt;ol&gt;",
+									"&lt;ul&gt; or &lt;ol&gt;"
+								],
+								"answer": 4,
+								"explanation": "You can create a list using either the &lt;ul&gt; (unordered list) or &lt;ol&gt; (ordered list) tags."
+							},
+							{
+								"question": "How do you create a page title visible for the user? _h1/<h1>_",
+								"explanation": "The &lt;h1&gt; tag defines a top-level heading. Example: &lt;h1&gt;This is a heading&lt;/h1&gt;"
+							},
+							{
+								"question": "Where will 'My website' appear? <editorlite><title>My website</title></editorlite>",
+								"options": [
+									"As a large heading on the webpage",
+									"In the browser tab",
+									"It won't appear anywhere",
+									"As a small heading on the webpage"
+								],
+								"answer": 1,
+								"explanation": "The <title> tag defines the title of the document, which appears in the browser tab."
+							},
+							{
+								"question": "You should put all your visible content inside",
+								"options": [
+									"&lt;html&gt;",
+									"&lt;body&gt;",
+									"&lt;content&gt;",
+									"&lt;head&gt;"
+								],
+								"answer": 1,
+								"explanation": "All visible content should be placed inside the &lt;body&gt; tag."
+							},
+							{
+								"question": "What happens when you click 'Dogs'? <editorlite><a href='cats.html'>Dogs</a></editorlite>",
+								"options": [
+									"It opens dogs.html",
+									"It opens cats.html",
+									"It displays an image called cats.html",
+									"Nothing, because the text and filename don't match"
+								],
+								"answer": 1,
+								"explanation": "The href attribute defines the URL of the link."
+							},
+							{
+								"question": "What's the attribute to add a link to an anchor? _href_",
+								"explanation": "The attribute to add a link to an anchor is href. Example: <a href='https://example.com'>Link</a>"
+							},
+							{
+								"question": "What's missing in this code? <editorlite>&lt;a href='cats.html'&gt;Dogs&lt;a&gt;</editorlite> _/_",
+								"explanation": "The forward slash for the closing tag is missing. The correct code is: &lt;a href='cats.html'&gt;Dogs&lt;/a&gt;"
+							},
+							{
+								"question": "What's the attribute to add a description to an anchor? _title_",
+								"explanation": "The attribute to add a description to an anchor is title. Example: <a href='https://example.com' title='Description'>Link</a>"
+							},
+							{
+								"question": "What's the attribute to add a source to an image? _src_",
+								"explanation": "The attribute to add a source to an image is src. Example: <img src='image.jpg'>"
+							},
+							{
+								"question": "What's the attribute to add a description to an image? _alt_",
+								"explanation": "The attribute to add a description to an image is alt. Example: <img src='image.jpg' alt='Description'>"
+							},
+							{
+								"question": "What quotes can you use for attribute values?",
+								"options": [
+									"&quot;Double quotes&quot;",
+									"&apos;Single quotes&apos;",
+									"Both &apos;Single quotes&apos; and &quot;Double quotes&quot;",
+									"&grave;Backticks&grave;"
+								],
+								"answer": 2,
+								"explanation": "You can use both single and double quotes for attribute values. Example: <a href='https://example.com' title=\"Description\">Link</a>"
+							},
+							{
+								"question": "What attribute lets you identify and manipulate multiple elements? _class_",
+								"explanation": "The attribute to identify multiple elements is class. Example: <p class='class-name'>This is a paragraph.</p>"
+							},
+							
+							{
+								"question": "How do you create a paragraph? _p/<p>_",
+								"explanation": "The &lt;p&gt; tag defines a paragraph."
+							},
+							{
+								"question": "How do you create bold text? _strong/<strong>/b/<b>_",
+								"explanation": "The &lt;strong&gt; tag defines bold text. The &lt;b&gt; tag is the old way but still works."
+							},
+							{
+								"question": "How do you create an anchor? _a/<a>_",
+								"explanation": "The &lt;a&gt; tag defines a hyperlink. Example: &lt;a href='https://example.com'&gt;Link&lt;/a&gt;"
+							},
+							{
+								"question": "Where do you put document information that's mostly useful for machines? _head/<head>_",
+								"explanation": "The &lt;head&gt; tag contains metadata and links to scripts and stylesheets."
+							},
+							{
+								"question": "How do you make text italic/cursive? _em/<em>/i/<i>_",
+								"explanation": "The &lt;em&gt; tag defines emphasized text (usually italic). The &lt;i&gt; tag is the old way but still works."
+							},
+							{
+								"question": "What tag lets you add an image? _img/<img>_",
+								"explanation": "The &lt;img&gt; tag defines an image. Example: &lt;img src='image.jpg' alt='Description'&gt;"
+							},
+							{
+								"question": "What tag lets you add a line break (like pressing enter)? _br/<br>_",
+								"explanation": "The &lt;br&gt; tag defines a line break. It can be useful but use it sparingly. Example: &lt;p&gt;This is a paragraph.&lt;br&gt;This is a new line.&lt;/p&gt;"
+							},
+							{
+								"question": "How do you create a page title visible in the browser tab? _title/<title>_",
+								"explanation": "The &lt;title&gt; tag defines the title of the document, which appears in the browser tab. Example: &lt;title&gt;My Website&lt;/title&gt;"
+							},
+							{
+								"question": "In what tag do you put all your visible content? _body/<body>_",
+								"explanation": "The &lt;body&gt; tag contains all the contents of an HTML document, such as text, images, links, etc."
+							}
+						]
+					}</script>
+				</div>
+
+			</div>
+		</div>
+
+		
+
+
+		<h2>Tables</h2>
+
+		<h2>Nesting</h2>
+		
 		<p class="hint">It is important that we <strong>indent tags</strong> that are inside of each other for <strong>readability</strong>. This act is called nesting. <br>You can see that <code>&lt;title&gt;</code> is nested inside <code>&lt;head&gt;</code> which makes <code>&lt;head&gt;</code> the parent of <code>&lt;title&gt;</code>. And <code>&lt;title&gt;</code> is the child of <code>&lt;head&gt;</code>. Code is indented using <kbd>Tab</kbd>. You can un-indent using <kbd>Shift</kbd> + <kbd>Tab</kbd>. You can also select multiple lines and then indent. Try it out!</p>
 		
 		<a href="/pages/html/basics.html" class="nextPageTeaser">Next: HTML Basics <i class="fa-solid fa-arrow-right-long"></i></a>

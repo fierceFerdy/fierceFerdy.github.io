@@ -129,6 +129,18 @@ strong{
 a{
 	text-decoration: none;
 	color: inherit;
+
+	&.download{
+		&:after{
+			/* download icon */
+			content: "\f019" !important;
+			font-family: "FontAwesome";
+			font-size: 1em;
+			padding-left: .4rem;
+			position: relative;
+			top: 2px;
+		}
+	}
 }
 
 img{

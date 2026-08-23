@@ -46,14 +46,14 @@
 	margin-top: 2rem;
 	margin-bottom: 2rem;
 	border-radius: var(--radius);
-}
 
-.hint{
 	&.small{
 		padding: .6rem .8rem;
 		margin-top: 1rem;
-		margin-bottom: 0;
 	}
+}
+
+.hint{
 	
 	&.error{
 		background-color: var(--red);
